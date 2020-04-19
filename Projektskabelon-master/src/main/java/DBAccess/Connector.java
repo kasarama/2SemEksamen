@@ -1,5 +1,10 @@
+
 package DBAccess;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -31,6 +36,7 @@ public class Connector {
     }
 
     public static void setDBCredentials() {
+        String[] data= readData();
         String deployed = System.getenv("DEPLOYED");
         if (deployed != null){
             // Prod: hent variabler fra setenv.sh i Tomcats bin folder
@@ -40,9 +46,28 @@ public class Connector {
         } else {
             // Localhost
             URL = "jdbc:mysql://localhost:3306/useradmin?serverTimezone=CET&useSSL=false";
-            USERNAME = "root";
-            PASSWORD = "root";
+            USERNAME = data[0];
+            PASSWORD = data[1];
         }
+    }
+
+    public static String[] readData() {
+
+        String[] data = new String[2];
+        File file = new File("c:/dbAccess.txt");
+
+        try {
+            FileReader fr = new FileReader(file);
+            BufferedReader br = new BufferedReader(fr);
+            String line = br.readLine();
+            data = line.split(";");
+
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            System.out.println("File notfound: " + file.toString());
+        }
+        return data;
+
     }
 
 }
