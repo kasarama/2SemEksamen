@@ -46,8 +46,6 @@ public class Connector {
         } else {
             // Localhost
             URL = "jdbc:mysql://localhost:3306/fogDB?serverTimezone=CET&useSSL=false";
-            USERNAME = "root";
-            PASSWORD = "root";
             USERNAME = data[0];
             PASSWORD = data[1];
         }
@@ -56,7 +54,7 @@ public class Connector {
     public static String[] readData() {
 
         String[] data = new String[2];
-        File file = new File("c:/dbAccess.txt");
+        File file = new File("c:/dbAccess/dbAccess.txt");
 
         try {
             FileReader fr = new FileReader(file);
