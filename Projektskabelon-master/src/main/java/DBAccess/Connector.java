@@ -54,7 +54,7 @@ public class Connector {
     public static String[] readData() {
 
         String[] data = new String[2];
-        File file = new File("c:/dbAccess.txt");
+        File file = new File("c:/dbAccess/dbAccess.txt");
 
         try {
             FileReader fr = new FileReader(file);
