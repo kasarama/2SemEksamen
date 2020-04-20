@@ -91,6 +91,11 @@ Her kan du designe din Carport:
     </div>
 </div>
 
+<!-- ** Creating a button with sumbit type to sumbit the inputted data ** -->
+<div class="text-center"> <!--alligning the button to the center -->
+    <button type="submit" class="btn btn-primary">Sumbit data</button>
+</div>
+</form>
 
 </body>
 </html>
