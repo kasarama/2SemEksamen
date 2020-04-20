@@ -24,12 +24,19 @@
 </head>
 <body>
 
-Her kan du designe din Carport: 
+<h1 class="Design din Carport:"></h1>
+
+<!-- Go through "Frontcontroller" to reach "carport" page when 'sumbit' button is pressed -->
+<form action="FrontController" method="post">
+<input type="hidden" name="target" value="carport"/>
+
+<!-- ** Creating a button a dropdown to choose carport length ** -->
 
 <div class="col-md-2 school-options-dropdown text-center">
     <div class="form-group">
-        <label>Vælg længde:</label>
-        <select name="quantity" class="form-control">
+        <label for="length">Vælg længde:</label>
+        <select class="form-control" name="length" id="length">
+
             <option selected disabled>Vælg længde</option>
             <option value="1">240</option>
             <option value="2">270</option>
@@ -54,10 +61,13 @@ Her kan du designe din Carport:
     </div>
 </div>
 
+<!-- ** Creating a button a dropdown to choose carport width ** -->
+
 <div class="col-md-2 school-options-dropdown text-center">
     <div class="form-group">
-        <label>Vælg bredde:</label>
-        <select name="quantity" class="form-control">
+        <label for="width">Vælg bredde:</label>
+        <select class="form-control" name="width" id="width">
+
             <option selected disabled>Vælg bredde</option>
             <option value="1">240</option>
             <option value="2">270</option>
@@ -81,19 +91,22 @@ Her kan du designe din Carport:
     </div>
 </div>
 
+<!-- ** Creating a dropdown to choose carport roof ** -->
+
 <div class="col-md-2 school-options-dropdown text-center">
     <div class="form-group">
-        <label>Vælg tag:</label>
-        <select name="quantity" class="form-control">
+        <label for="roof">Vælg tag:</label>
+        <select class="form-control" name="roof" id="roof">
+
             <option selected disabled>Vælg tag</option>
             <option value="1">Plasttrapezplader</option>
         </select>
     </div>
 </div>
 
-<!-- ** Creating a button with sumbit type to sumbit the inputted data ** -->
+<!-- ** Creating a button with 'sumbit' type to sumbit the chosen carport data ** -->
 <div class="text-center"> <!--alligning the button to the center -->
-    <button type="submit" class="btn btn-primary">Sumbit data</button>
+    <button type="submit" class="btn btn-primary">Sumbit</button>
 </div>
 </form>
 
