@@ -11,9 +11,9 @@ import java.sql.SQLException;
  */
 public class Connector {
 
-    private static String URL;
-    private static String USERNAME;
-    private static String PASSWORD;
+    private static String URL = "jdbc:mysql://localhost:3306/fogDB?";
+    private static String USERNAME = "root";
+    private static String PASSWORD = "root";
 
     private static Connection singleton;
 
