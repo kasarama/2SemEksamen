@@ -1,57 +1,96 @@
-<%-- 
-    Document   : index
-    Created on : Aug 22, 2017, 2:01:06 PM
-    Author     : kasper
+<%--
+  Created by IntelliJ IDEA.
+  User: monajakobmeshal
+  Date: 4/20/20
+  Time: 12:22
+<%--
+  Created by IntelliJ IDEA.
+  User: monajakobmeshal
+  Date: 4/20/20
+  Time: 12:06
+  To change this template use File | Settings | File Templates.
 --%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-
-
-<!DOCTYPE html>
+<%--
+  Created by IntelliJ IDEA.
+  User: miade
+  Date: 20-04-2020
+  Time: 08:50
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Welcome page</title>
-    </head>
-    <body>
-        <h1>Welcome to Sem 2</h1>
-        
-        <table>
-            <tr><td>Login</td>
-                <td>
-                    <form name="login" action="FrontController" method="POST">
-                        <input type="hidden" name="target" value="login">
-                        Email:<br>
-                        <input type="text" name="email" value="someone@nowhere.com">
-                        <br>
-                        Password:<br>
-                        <input type="password" name="password" value="sesam">
-                        <br>
-                        <input type="submit" value="Submit">
-                    </form>
-                </td>
-                <td>Or Register</td>
-                <td>
-                    <form name="register" action="FrontController" method="POST">
-                        <input type="hidden" name="target" value="register">
-                        Email:<br>
-                        <input type="text" name="email" value="someone@nowhere.com">
-                        <br>
-                        Password:<br>
-                        <input type="password" name="password1" value="sesam">
-                        <br>
-                        Retype Password:<br>
-                        <input type="password" name="password2" value="sesam">
-                        <br>
-                        <input type="submit" value="Submit">
-                    </form>
-                </td>
-            </tr>
-        </table>
+<head>
+    <title>Design Carport</title>
+</head>
+<body>
 
-        <c:if test = "${requestScope.error!= null}" >
-           <h2>Error ! </h2>
-            ${requestScope.error}
-        </c:if>
-    </body>
+Her kan du designe din Carport: 
+
+<div class="col-md-2 school-options-dropdown text-center">
+    <div class="form-group">
+        <label>Vælg længde:</label>
+        <select name="quantity" class="form-control">
+            <option selected disabled>Vælg længde</option>
+            <option value="1">240</option>
+            <option value="2">270</option>
+            <option value="3">300</option>
+            <option value="4">330</option>
+            <option value="5">360</option>
+            <option value="6">390</option>
+            <option value="7">420</option>
+            <option value="8">450</option>
+            <option value="9">480</option>
+            <option value="10">510</option>
+            <option value="11">540</option>
+            <option value="12">570</option>
+            <option value="13">600</option>
+            <option value="14">630</option>
+            <option value="15">660</option>
+            <option value="16">690</option>
+            <option value="17">720</option>
+            <option value="18">750</option>
+            <option value="19">780</option>
+        </select>
+    </div>
+</div>
+
+<div class="col-md-2 school-options-dropdown text-center">
+    <div class="form-group">
+        <label>Vælg bredde:</label>
+        <select name="quantity" class="form-control">
+            <option selected disabled>Vælg bredde</option>
+            <option value="1">240</option>
+            <option value="2">270</option>
+            <option value="3">300</option>
+            <option value="4">330</option>
+            <option value="5">360</option>
+            <option value="6">390</option>
+            <option value="7">420</option>
+            <option value="8">450</option>
+            <option value="9">480</option>
+            <option value="10">510</option>
+            <option value="11">540</option>
+            <option value="12">570</option>
+            <option value="13">600</option>
+            <option value="14">630</option>
+            <option value="15">660</option>
+            <option value="16">690</option>
+            <option value="17">720</option>
+            <option value="18">750</option>
+        </select>
+    </div>
+</div>
+
+<div class="col-md-2 school-options-dropdown text-center">
+    <div class="form-group">
+        <label>Vælg tag:</label>
+        <select name="quantity" class="form-control">
+            <option selected disabled>Vælg tag</option>
+            <option value="1">Plasttrapezplader</option>
+        </select>
+    </div>
+</div>
+
+
+</body>
 </html>
