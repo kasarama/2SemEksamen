@@ -3,13 +3,14 @@ package FunctionLayer;
 import java.util.ArrayList;
 
 public class CarportBuilder {
+// SKAL EGENTLIG VÆRE CARPORTREQUEST OBJEkT
     Carport carport = new Carport();
+    int length = carport.getLength();
+    int width = carport.getWidth();
 
     // Stolper og Rem
     public int posts (){
         int numberOfPosts = 0;
-        int length = carport.getLength();
-        int width = carport.getWidth();
 
         if (length < 300 && width < 510){
             numberOfPosts = 4;
@@ -27,8 +28,6 @@ public class CarportBuilder {
     }
     public int rem (){
         int numberOfRem = 0;
-        int length = carport.getLength();
-        int width = carport.getWidth();
 
         if (length < 300 && width < 510){
             numberOfRem = 2;
@@ -52,16 +51,70 @@ public class CarportBuilder {
     }
 
     // Spær
-    //public int
+    public int raft (){
+        int rafts = Math.round(length/50);
+        return rafts;
+    }
 
     // Firkantskiver
+    public int squares(){
+        int squares = raft();
+        return squares;
+    }
+
     // Universalbeslag
+    public int universalBrackets(){
+        int universalBrackets = raft()*rem();
+        return universalBrackets;
+    }
+
     // Beslagskruer
+    public int bracketScrews(){
+        int bracketScrews = raft()*9;
+        return bracketScrews;
+    }
+
     // Hulbånd
+    public int perforatedBand = 2;
+
     // Understern- og over sternbrædder
+
+
     // Skruer
+    public int screws(){
+        int screws = universalBrackets()*2;
+        return screws;
+    }
+
     // Trapezplader
+    public int roof(){
+        int numberOfTrapezplader = 0;
+        int trapezpladeWidth = 1;
+        //int T600 = 1;
+
+        if (length <= 300){
+            numberOfTrapezplader = Math.round((trapezpladeWidth*width)/100);
+        }
+        if (length >300){
+            numberOfTrapezplader = Math.round((trapezpladeWidth*width + (trapezpladeWidth*100))/100);
+        }
+        /*
+            if (length >= 600){
+                numberOfTrapezplader = Math.round((T600*width + (T300*100)/100));
+            }
+        */
+
+        return numberOfTrapezplader;
+    }
+
     // Bundskruer
+    public int bottomScrews(){
+        // Plader fastgøres med plastmo bundskruer og skal anvendes 6 stk pr. meter på hver spær
+        // Men 8 per meter på den første og den sidste spær
+        int bottomScrews = (((raft()-2)*6)+16)*(width/100);
+        return bottomScrews;
+    }
+
     // Tætningsprofil
     // Vandbræt 360
     // Vandbræt540
