@@ -14,10 +14,16 @@ abstract class Command {
         commands.put( "login", new Login() );
         commands.put( "register", new Register() );
         commands.put( "redirect", new Redirect() );
-        commands.put( "shed", new ShedSizing() );
+        commands.put( "shed", new ShedSizingMia() );
         commands.put( "showRequests", new ShowRequests() );
         commands.put( "makerequest", new MakeRequest() );
         commands.put( "selectrooftype", new Selectrooftype() );
+        commands.put( "designshed", new DesignShed() );
+        commands.put( "designflatroof", new FlatRoof() );
+        commands.put( "designpitchedroof", new PitchedRoof() );
+        commands.put( "sendrequest", new SendRequest() );
+        commands.put( "showdrawing", new ShowDrowing() );
+        commands.put( "newrequest", new NewRequest() );
     }
 
     static Command from( HttpServletRequest request ) {
