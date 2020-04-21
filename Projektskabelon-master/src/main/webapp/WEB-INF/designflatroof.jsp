@@ -110,7 +110,8 @@
 </div>
 
 
-<a href="FrontController?target=redirect&destination=shed">Se skur dimensionerne</a>
 
-</body>
-</html>
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+
+<%@include file="../includes/footer.inc"%>
