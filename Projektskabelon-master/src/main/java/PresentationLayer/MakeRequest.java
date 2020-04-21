@@ -17,7 +17,7 @@ public class MakeRequest extends Command {
         CarportRequest carportRequest = new CarportRequest(length, width, isShed, roofType);
 
         if (isShed != 0) {
-            return "sheddisigner";
+            return "designshed";
         } else {
             if (roofType != 0) {
                 return "designpitchedroof";
