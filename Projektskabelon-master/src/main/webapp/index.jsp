@@ -5,27 +5,18 @@
 --%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
-
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Welcome page</title>
-    </head>
-    <body>
+<%@include file="includes/header.inc"%>
         <h1>Welcome to Sem 2</h1>
 
         <h2>
             <a href="FrontController?target=redirect&destination=carportrequest">Design din egen Carport</a>
         </h2>
 
-
-        <a href="FrontController?target=redirect&destination=flatroof">Test</a>
-
         <c:if test = "${requestScope.error!= null}" >
            <h2>Error ! </h2>
             ${requestScope.error}
         </c:if>
-    </body>
-</html>
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+
+<%@include file="includes/footer.inc"%>
