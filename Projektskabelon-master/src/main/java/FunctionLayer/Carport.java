@@ -7,8 +7,34 @@ public class Carport {
     private int length;
     private int shedDepth;
     private int angle;
-
     private ArrayList<Material> materialList;
+    private double cost;
+    private double salePrice;
+
+    public Carport() {
+        this.materialList= new ArrayList<>();
+
+    }
+
+    public void addMaterial (Material material){
+        materialList.add(material);
+    }
+
+    public double getCost() {
+        return cost;
+    }
+
+    public void setCost(double cost) {
+        this.cost = cost;
+    }
+
+    public double getSalePrice() {
+        return salePrice;
+    }
+
+    public void setSalePrice(double salePrice) {
+        this.salePrice = salePrice;
+    }
 
     public int getWidth() {
         return width;

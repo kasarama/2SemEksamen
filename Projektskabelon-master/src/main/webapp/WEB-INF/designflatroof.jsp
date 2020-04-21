@@ -5,12 +5,10 @@
   Time: 08:50
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-    <title>Design Carport</title>
-</head>
-<body>
+
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@include file="../includes/header.inc"%>
 
 <div class="col-md-2 school-options-dropdown text-center">
     <div class="form-group">
