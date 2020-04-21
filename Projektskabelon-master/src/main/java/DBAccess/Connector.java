@@ -1,8 +1,12 @@
 package DBAccess;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  The purpose of Connector is to...
@@ -38,11 +42,34 @@ public class Connector {
             USERNAME = System.getenv("JDBC_USER");
             PASSWORD = System.getenv("JDBC_PASSWORD");
         } else {
+            System.out.println("In else statement");
+            ArrayList<String> data=passwordReader();
             // Localhost
-            URL = "jdbc:mysql://localhost:3306/useradmin?serverTimezone=CET&useSSL=false";
-            USERNAME = "root";
-            PASSWORD = "root";
+            URL = "jdbc:mysql://localhost:3306/cupcake?serverTimezone=UTC";
+            USERNAME = data.get(0);
+            PASSWORD = data.get(1);
         }
     }
 
-}
+    public static ArrayList<String> passwordReader() {
+        ArrayList<String> data = new ArrayList();
+        System.out.println("In that wonderfull method");
+        try {
+            //  Projektskabelon-master/src/main/java/DBAccess/Connector.java
+            File myObj = new File("C:\\DBAccess\\dbAccess.txt");
+            Scanner myReader = new Scanner(myObj);
+
+            while (myReader.hasNextLine()) {
+                String linie = myReader.nextLine();
+                data.add(linie);
+                System.out.println(data);
+            }
+            myReader.close();
+
+        } catch (FileNotFoundException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+        return data;
+    }
+    }
