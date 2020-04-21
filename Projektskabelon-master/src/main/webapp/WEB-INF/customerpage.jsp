@@ -5,21 +5,20 @@
 --%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Customer home page</title>
-    </head>
-    <body>
+<%@include file="../includes/header.inc"%>
+<h1>Hello, world!</h1>
 
 
-        <h1>Hello ${sessionScope.email} </h1>
 
+<form name="showRequests" action="FrontController" method="POST">
+    <input type="hidden" name="target" value="showRequests">
+    <input type="submit" value="Vis Forespørgelser">
+</form>
 
 
 
 
-        You are now logged in as a customer of our wonderful site.
-    </body>
-</html>
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+
+<%@include file="../includes/footer.inc"%>

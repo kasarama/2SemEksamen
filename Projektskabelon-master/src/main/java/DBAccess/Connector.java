@@ -1,7 +1,11 @@
+
 package DBAccess;
 
+
+import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -35,6 +39,7 @@ public class Connector {
     }
 
     public static void setDBCredentials() {
+        String[] data = readData();
         String deployed = System.getenv("DEPLOYED");
         if (deployed != null){
             // Prod: hent variabler fra setenv.sh i Tomcats bin folder
@@ -43,33 +48,32 @@ public class Connector {
             PASSWORD = System.getenv("JDBC_PASSWORD");
         } else {
             System.out.println("In else statement");
-            ArrayList<String> data=passwordReader();
             // Localhost
-            URL = "jdbc:mysql://localhost:3306/cupcake?serverTimezone=UTC";
-            USERNAME = data.get(0);
-            PASSWORD = data.get(1);
+            URL = "jdbc:mysql://localhost:3306/fogDB?serverTimezone=CET&useSSL=false";
+            USERNAME = data[0];
+            PASSWORD = data[1];
         }
     }
 
-    public static ArrayList<String> passwordReader() {
-        ArrayList<String> data = new ArrayList();
-        System.out.println("In that wonderfull method");
+    public static String[] readData() {
+
+        String[] data = new String[2];
+        File file = new File("c:/dbAccess/dbAccess.txt");
+
         try {
-            //  Projektskabelon-master/src/main/java/DBAccess/Connector.java
-            File myObj = new File("C:\\DBAccess\\dbAccess.txt");
-            Scanner myReader = new Scanner(myObj);
+            FileReader fr = new FileReader(file);
+            BufferedReader br = new BufferedReader(fr);
+            String line = br.readLine();
+            data = line.split(";");
 
-            while (myReader.hasNextLine()) {
-                String linie = myReader.nextLine();
-                data.add(linie);
-                System.out.println(data);
-            }
-            myReader.close();
-
-        } catch (FileNotFoundException e) {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            System.out.println("File notfound: " + file.toString());
         }
         return data;
+
     }
-    }
+
+}
+
+

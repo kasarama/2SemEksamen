@@ -18,4 +18,9 @@ public class LogicFacade {
         return user;
     }
 
+    public static Shed shedSizing(int witdh, int depth){
+        Shed shed = new Shed(witdh, depth);
+        return shed;
+    }
+
 }
