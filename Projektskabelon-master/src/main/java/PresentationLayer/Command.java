@@ -16,6 +16,8 @@ abstract class Command {
         commands.put( "redirect", new Redirect() );
         commands.put( "shed", new ShedSizing() );
         commands.put( "showRequests", new ShowRequests() );
+        commands.put( "makerequest", new MakeRequest() );
+        commands.put( "selectrooftype", new Selectrooftype() );
     }
 
     static Command from( HttpServletRequest request ) {
