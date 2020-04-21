@@ -1,5 +1,6 @@
 package FunctionLayer;
 
+import DBAccess.MaterialMapper;
 import DBAccess.UserMapper;
 
 /**
@@ -21,6 +22,10 @@ public class LogicFacade {
     public static Shed shedSizing(int witdh, int depth){
         Shed shed = new Shed(witdh, depth);
         return shed;
+    }
+
+    public static Material getMaterial(String keyword) throws LoginSampleException {
+        return MaterialMapper.getMaterial(keyword);
     }
 
 }

@@ -18,6 +18,8 @@ abstract class Command {
         commands.put( "showRequests", new ShowRequests() );
         commands.put( "makerequest", new MakeRequest() );
         commands.put( "selectrooftype", new Selectrooftype() );
+        commands.put( "findmaterial", new FindMaterial() );
+
     }
 
     static Command from( HttpServletRequest request ) {
@@ -28,7 +30,7 @@ abstract class Command {
         return commands.getOrDefault(targetName, new UnknownCommand() );   // unknowncommand er default.
     }
 
-    abstract String execute( HttpServletRequest request, HttpServletResponse response ) 
-            throws LoginSampleException;
+    abstract String execute( HttpServletRequest request, HttpServletResponse response )
+            throws Exception;
 
 }

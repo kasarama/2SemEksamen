@@ -9,19 +9,16 @@ public class CarportBuilder {
     int width = carport.getWidth();
 
     // Stolper og Rem
-    public int posts (){
+    public int posts (int length, int width){
         int numberOfPosts = 0;
 
         if (length < 300 && width < 510){
             numberOfPosts = 4;
-        }
-        if (length < 300 && width > 510){
+        }else if (length < 300 && width > 510){
             numberOfPosts = 6;
-        }
-        if (length > 300 && width < 510){
+        } else if (length > 300 && width < 510){
             numberOfPosts = 6;
-        }
-        if (length > 300 && width > 510){
+        }else if (length > 300 && width > 510){
             numberOfPosts = 9;
         }
         return numberOfPosts;
@@ -46,7 +43,7 @@ public class CarportBuilder {
 
     // Bræddebolte
     public int carriageBolts() {
-        int carriageBolts = posts()*2;
+        int carriageBolts = posts(length, width)*2;
         return carriageBolts;
     }
 
@@ -153,7 +150,7 @@ public class CarportBuilder {
         return innerTimbering;
     }
 
-    // Skur:
+  // Skur:
     // Stolpe
     public int shedPosts = 2;
 
@@ -167,7 +164,7 @@ public class CarportBuilder {
     public int shedLath = 1;
 
     // Vinkelbeslag
-    løsholter gavle + løsholter sider
+       //løsholter gavle + løsholter sider
 
     // Beklædning
     public int shedTimbering(int shedWidth){
@@ -204,7 +201,7 @@ public class CarportBuilder {
         }
 
         for (int i = 0; i < (sidePost + shedPost); i++) {
-            materials.add(new Material("97x97mm.trykimp.Stolpe", 300));
+            materials.add(new Material("97x97mm.trykimp.Stolpe", 300, "cm"));
         }
     }
 
