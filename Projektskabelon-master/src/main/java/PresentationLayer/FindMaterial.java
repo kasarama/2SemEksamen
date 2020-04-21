@@ -3,6 +3,7 @@ package PresentationLayer;
 import FunctionLayer.CarportBuilder;
 import FunctionLayer.LogicFacade;
 import FunctionLayer.LoginSampleException;
+import FunctionLayer.Material;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,15 +23,14 @@ public class FindMaterial extends Command{
 
         // Stolper
         int posts = carportBuilder.posts(length, width);
+        Material stolpe = LogicFacade.getMaterial("Stolpe");
+        Material rem = LogicFacade.getMaterial("Rem");
 
-        String stolpe = String.valueOf(LogicFacade.getMaterial("Stolpe"));
-
-        System.out.println(stolpe);
 
         HttpSession session = request.getSession();
 
-        session.setAttribute( "posts", posts );
-        session.setAttribute( "stolpe", stolpe );
+        session.setAttribute( "stolpeAntal", posts );
+        session.setAttribute( "stolpeInfo", stolpe );
 
 
         return "finishedcarport";
