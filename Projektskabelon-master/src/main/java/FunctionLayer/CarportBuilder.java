@@ -116,19 +116,65 @@ public class CarportBuilder {
     }
 
     // Tætningsprofil
+    public int gasket(){
+        int gasket = Math.round((width/100)*2);
+        return gasket;
+    }
+
     // Vandbræt 360
     // Vandbræt540
-    // Skruer til vandbræt
+
+    // Skruer til vandbræt -- 1 pakke er nok til en stor carport
+    public int waterboardScrews = 200;
+
     // Skruer til ydrebeklædning
+    public int outherTimbering(){
+        int outherTimbering = 0;
+
+        if (length < 500 && width < 510){
+            outherTimbering = 200;
+        }
+        if (length > 500 && width > 510){
+            outherTimbering = 400;
+        }
+        return outherTimbering;
+    }
+
     // Skruer til inderbeklædning
+    public int innerTimbering(){
+        int innerTimbering = 0;
+
+        if (length < 500 && width < 510){
+            innerTimbering = 150;
+        }
+        if (length > 500 && width > 510){
+            innerTimbering = 300;
+        }
+        return innerTimbering;
+    }
 
     // Skur:
     // Stolpe
+    public int shedPosts = 2;
+
     // Lås
+    public int shedLock = 1;
+
     // Hængsel
+    public int shedHinge = 2;
+
     // Lægte
+    public int shedLath = 1;
+
     // Vinkelbeslag
+    løsholter gavle + løsholter sider
+
     // Beklædning
+    public int shedTimbering(int shedWidth){
+        int areal = shedWidth+carport.getShedDepth();
+        int shedTimbering = (int) Math.round(((areal/100)*12.5));
+        return shedTimbering;
+    }
 
 // algorytmer for calculation of needed materials
     public void buildCarport(CarportRequest carportRequest) {
