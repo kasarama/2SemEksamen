@@ -26,9 +26,10 @@ public class MakeRequest extends Command {
 
         String shedMsg="Der gik noget galt";
         int shedVersion=-1;
-        if (length<440 && width<300){
+        if (length<420 && width<560){
             shedMsg="De mål du har valgt er for små for at bygge en skur. Den mindste længde for en carport er 440 cm " +
-                    "og den mindst bredde er 560. Du kan gå tilbage for at redigire, eller fortsætte med carport uden skur";
+                    "og den mindste bredde er 300. Der skal beregnes mindst 120 cm for skur." +
+                    "Du kan gå tilbage for at redigire, eller fortsætte med carport uden skur";
             shedVersion=0;
 
         } else if (length<560 && width>=420){
