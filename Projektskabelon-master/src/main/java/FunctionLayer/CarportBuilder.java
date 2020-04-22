@@ -23,7 +23,7 @@ public class CarportBuilder {
         }
         return numberOfPosts;
     }
-    public int rem (){
+    public int rem (int length, int width){
         int numberOfRem = 0;
 
         if (length < 300 && width < 510){
@@ -61,7 +61,7 @@ public class CarportBuilder {
 
     // Universalbeslag
     public int universalBrackets(){
-        int universalBrackets = raft()*rem();
+        int universalBrackets = raft()*rem(length, width);
         return universalBrackets;
     }
 
@@ -86,21 +86,18 @@ public class CarportBuilder {
     // Trapezplader
     public int roof(){
         int numberOfTrapezplader = 0;
-        int trapezpladeWidth = 1;
-        //int T600 = 1;
+        int T300Areal = 3;
+        int T600Areal = 6;
+        int samletAreal = length*width;
+        int numberOfT300 = samletAreal/T300Areal;
+        int numberOfT600 = samletAreal/T600Areal;
 
-        if (length <= 300){
-            numberOfTrapezplader = Math.round((trapezpladeWidth*width)/100);
+     // Hvis antallet af T300 er mindre end T600 bruges T300
+        if (numberOfT300<numberOfT600){
+            numberOfTrapezplader = numberOfT300;
+        } else {
+            numberOfTrapezplader = numberOfT600;
         }
-        if (length >300){
-            numberOfTrapezplader = Math.round((trapezpladeWidth*width + (trapezpladeWidth*100))/100);
-        }
-        /*
-            if (length >= 600){
-                numberOfTrapezplader = Math.round((T600*width + (T300*100)/100));
-            }
-        */
-
         return numberOfTrapezplader;
     }
 
