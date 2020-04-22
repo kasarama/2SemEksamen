@@ -18,8 +18,6 @@
 --
 -- Table structure for table `customers`
 --
-CREATE DATABASE IF NOT EXISTS `fogDB`;
-USE `fogDB`;
 
 DROP TABLE IF EXISTS `customers`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -31,7 +29,7 @@ CREATE TABLE `customers` (
   `mail` varchar(45) DEFAULT NULL,
   `phoneNo` int(11) DEFAULT NULL,
   `adress` varchar(45) DEFAULT NULL,
-  `brugernavn` varchar(45) DEFAULT NULL,
+  `username` varchar(45) DEFAULT NULL,
   `password` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`customerID`),
   UNIQUE KEY `idcustomers_UNIQUE` (`customerID`)
@@ -73,6 +71,39 @@ INSERT INTO `elements` VALUES (1,'Tag'),(2,'Garage'),(3,'Skur');
 UNLOCK TABLES;
 
 --
+-- Table structure for table `itemlists`
+--
+
+DROP TABLE IF EXISTS `itemlists`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `itemlists` (
+  `itemlistID` int(11) NOT NULL AUTO_INCREMENT,
+  `partID` int(11) DEFAULT NULL,
+  `amount` int(11) DEFAULT NULL,
+  `elementID` int(11) DEFAULT NULL,
+  `materialID` int(11) DEFAULT NULL,
+  PRIMARY KEY (`itemlistID`),
+  UNIQUE KEY `itemlistID_UNIQUE` (`itemlistID`),
+  KEY `partID_idx` (`partID`),
+  KEY `elementID_idx` (`elementID`),
+  KEY `materialsID_idx` (`materialID`),
+  CONSTRAINT `elementID` FOREIGN KEY (`elementID`) REFERENCES `elements` (`elementsID`),
+  CONSTRAINT `materialsID` FOREIGN KEY (`materialID`) REFERENCES `tree` (`treeID`),
+  CONSTRAINT `partID` FOREIGN KEY (`partID`) REFERENCES `parts` (`partID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `itemlists`
+--
+
+LOCK TABLES `itemlists` WRITE;
+/*!40000 ALTER TABLE `itemlists` DISABLE KEYS */;
+/*!40000 ALTER TABLE `itemlists` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `materials`
 --
 
@@ -80,11 +111,12 @@ DROP TABLE IF EXISTS `materials`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `materials` (
-  `materialsID` int(11) NOT NULL AUTO_INCREMENT,
+  `materialID` int(11) NOT NULL,
   `name` varchar(45) DEFAULT NULL,
-  `color` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`materialsID`),
-  UNIQUE KEY `materialsID_UNIQUE` (`materialsID`)
+  `size` int(11) DEFAULT NULL,
+  `unit` varchar(45) DEFAULT NULL,
+  `keyword` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`materialID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -94,6 +126,7 @@ CREATE TABLE `materials` (
 
 LOCK TABLES `materials` WRITE;
 /*!40000 ALTER TABLE `materials` DISABLE KEYS */;
+INSERT INTO `materials` VALUES (1,'25x200 mm. trykimp. Brædt',360,'pcs','Understernbrædder360'),(2,'25x200 mm. trykimp. Brædt',540,'pcs','Understernbrædder540'),(3,'25x125 mm. trykimp. Brædt',360,'pcs','Oversternbrædder360'),(4,'25x125 mm. trykimp.	Brædt',540,'pcs','Oversternbrædder540'),(5,'38x73 mm. Lægte ubh.',420,'pcs','Lægte'),(6,'45x95 mm. Reglar ubh.',270,'pcs','Løsholter270'),(7,'45x95 mm. Reglar ubh.',240,'pcs','Løsholter240'),(8,'45x195 mm. spærtræ ubh.',600,'pcs','Rem/Spær'),(9,'45x195 mm. spærtræ ubh.',480,'pcs','Rem'),(10,'97x97 mm. trykimp. Stolpe',300,'pcs','Stolpe'),(11,'19x100	mm.	trykimp. Brædt',210,'pcs','SkurBeklædning'),(12,'19x100	mm. trykimp. Brædt',360,'pcs','Vandbræt360'),(13,'19x100	mm.	trykimp. Brædt',540,'pcs','Vandbræt540'),(14,'Plastmo Ecolite blåtonet',600,'pcs','T600'),(15,'Plastmo Ecolite blåtonet',360,'pcs','T300'),(16,'plastmo bundskruer',200,'pcs','Bundskruer'),(17,'hulbånd 1x20 mm',10,'rulle','Hulbånd'),(18,'universal 190 mm højre',NULL,'pcs','UniversalbeslagHøjre'),(19,'universal 190 mm venstre',NULL,'pcs','UniversalbeslagVenstre'),(20,'4,5x60	mm.	skruer',200,'pcs','SkruerStern&Vandbræt'),(21,'4,0x50	mm.	beslagskruer',250,'pcs','Beslagskruer'),(22,'bræddebolt	10x120 mm.',NULL,'pcs','Bræddebolt'),(23,'firkantskiver 40x40x11 mm',NULL,'pcs','Firkantskiver'),(24,'4,5x70 mm.	Skruer',400,'pk.','SkruerYdreBeklædning'),(25,'4,5x50 mm.	Skruer',300,'pk.','SkruerInnerBeklædning'),(26,'stalddørsgreb 50x75',NULL,'set','Lås'),(27,'t hængsel 390 mm',NULL,'pcs','Hængsel'),(28,'vinkelbeslag 35',NULL,'pcs','Vinkelbeslag');
 /*!40000 ALTER TABLE `materials` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -106,14 +139,14 @@ DROP TABLE IF EXISTS `orders`;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `orders` (
   `orderID` int(11) NOT NULL,
-  `styklisteID` int(11) DEFAULT NULL,
+  `itemlistID` int(11) DEFAULT NULL,
   `customerID` int(11) DEFAULT NULL,
-  `width` int(11) DEFAULT NULL,
-  `length` int(11) DEFAULT NULL,
-  `height` int(11) DEFAULT NULL,
+  `nettoPrice` double DEFAULT NULL,
+  `coverage` double DEFAULT NULL,
+  `salesPrice` double DEFAULT NULL,
   PRIMARY KEY (`orderID`),
-  KEY `styklisteID_idx` (`styklisteID`),
-  CONSTRAINT `styklisteID` FOREIGN KEY (`styklisteID`) REFERENCES `styklister` (`styklisteID`)
+  KEY `itemlistID_idx` (`itemlistID`),
+  CONSTRAINT `itemlistID` FOREIGN KEY (`itemlistID`) REFERENCES `itemlists` (`itemlistID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -134,10 +167,10 @@ DROP TABLE IF EXISTS `parts`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `parts` (
-  `partsID` int(11) NOT NULL,
+  `partID` int(11) NOT NULL,
   `name` varchar(45) NOT NULL,
-  PRIMARY KEY (`partsID`),
-  UNIQUE KEY `idparts_UNIQUE` (`partsID`)
+  PRIMARY KEY (`partID`),
+  UNIQUE KEY `idparts_UNIQUE` (`partID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -147,40 +180,8 @@ CREATE TABLE `parts` (
 
 LOCK TABLES `parts` WRITE;
 /*!40000 ALTER TABLE `parts` DISABLE KEYS */;
+INSERT INTO `parts` VALUES (1,'25x200 mm. trykimp. Brædt'),(2,'25x200	mm.	trykimp.	Brædt');
 /*!40000 ALTER TABLE `parts` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `styklister`
---
-
-DROP TABLE IF EXISTS `styklister`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
-CREATE TABLE `styklister` (
-  `styklisteID` int(11) NOT NULL AUTO_INCREMENT,
-  `partID` int(11) DEFAULT NULL,
-  `amount` int(11) DEFAULT NULL,
-  `elementID` int(11) DEFAULT NULL,
-  `materialID` int(11) DEFAULT NULL,
-  PRIMARY KEY (`styklisteID`),
-  UNIQUE KEY `styklisteID_UNIQUE` (`styklisteID`),
-  KEY `partID_idx` (`partID`),
-  KEY `elementID_idx` (`elementID`),
-  KEY `materialsID_idx` (`materialID`),
-  CONSTRAINT `elementID` FOREIGN KEY (`elementID`) REFERENCES `elements` (`elementsID`),
-  CONSTRAINT `materialsID` FOREIGN KEY (`materialID`) REFERENCES `materials` (`materialsID`),
-  CONSTRAINT `partID` FOREIGN KEY (`partID`) REFERENCES `parts` (`partsID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `styklister`
---
-
-LOCK TABLES `styklister` WRITE;
-/*!40000 ALTER TABLE `styklister` DISABLE KEYS */;
-/*!40000 ALTER TABLE `styklister` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -192,4 +193,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-04-19 18:00:43
+-- Dump completed on 2020-04-22 14:41:57
