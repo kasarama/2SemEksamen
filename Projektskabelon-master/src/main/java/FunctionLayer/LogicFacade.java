@@ -2,6 +2,8 @@ package FunctionLayer;
 
 import DBAccess.UserMapper;
 
+import java.util.ArrayList;
+
 /**
  * The purpose of LogicFacade is to...
  * @author kasper
@@ -18,9 +20,6 @@ public class LogicFacade {
         return user;
     }
 
-    public static Shed shedSizing(int witdh, int depth){
-        Shed shed = new Shed(witdh, depth);
-        return shed;
-    }
 
-}
+
+    }

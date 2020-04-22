@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-public class ShedSizing extends Command{
+public class ShedSizingMia extends Command{
 
     // VIRKER IKKE ENDNU
 
@@ -26,12 +26,12 @@ public class ShedSizing extends Command{
             }
         int depth = Integer.parseInt(request.getParameter( "sheddepth" ));
 
-        Shed shed = LogicFacade.shedSizing(shedWidth, depth);
+       // Shed shed = LogicFacade.shedSizing(shedWidth, depth);
 
         HttpSession session = request.getSession();
 
         session.setAttribute("shedwidth", shedWidth);
-        session.setAttribute("shed", shed);
+     //   session.setAttribute("shed", shed);
 
         return "flatroof";
     }

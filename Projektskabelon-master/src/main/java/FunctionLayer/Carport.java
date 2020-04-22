@@ -7,6 +7,8 @@ public class Carport {
     private int length;
     private int shedDepth;
     private int angle;
+    private Shed shed;
+    private Roof roof;
     private ArrayList<Material> materialList;
     private double cost;
     private double salePrice;
