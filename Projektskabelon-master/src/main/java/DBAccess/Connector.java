@@ -77,6 +77,7 @@ public class Connector {
     }
 
     // method that reads the MySQL password/username from an external txt file - Security
+
     public static void setDBCredentials() {
         String[] data= readData();
         String deployed = System.getenv("DEPLOYED");
