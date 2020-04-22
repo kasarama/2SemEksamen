@@ -9,6 +9,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@include file="../includes/header.inc"%>
 
+<!--TODO lav en forme for at gemme en færdig carportRequest -->
 
 <h1>Request saved for validation. Thanks mate!</h1>
 

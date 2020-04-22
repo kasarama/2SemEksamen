@@ -10,6 +10,9 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@include file="../includes/header.inc" %>
 
+<!--TODO lav en form for at tagne den valgt carport-->
+
+
 <h1>Her should be the drawing</h1>
 <form name="sendrequest" action="FrontController" method="POST">
     <input type="hidden" name="target" value="sendrequest">

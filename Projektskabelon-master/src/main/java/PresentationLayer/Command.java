@@ -17,7 +17,6 @@ abstract class Command {
         commands.put( "shed", new ShedSizingMia() );
         commands.put( "showRequests", new ShowRequests() );
         commands.put( "makerequest", new MakeRequest() );
-        commands.put( "selectrooftype", new Selectrooftype() );
         commands.put( "designshed", new DesignShed() );
         commands.put( "designflatroof", new FlatRoof() );
         commands.put( "designpitchedroof", new PitchedRoof() );

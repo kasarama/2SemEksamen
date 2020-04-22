@@ -10,6 +10,8 @@ public class NewRequest extends Command {
 
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException {
+        //todo sletter alle data fra carportRequest som er gemt på session
+
         HttpSession session = request.getSession();
         session.setAttribute("carportRequest", null);
         return "carportrequest";

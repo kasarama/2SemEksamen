@@ -11,7 +11,7 @@
 <%@include file="../includes/header.inc"%>
 
 <h3>Fladt tag design centre </h3>
-
+<!--TODO fyld dropdown menu med data from DB, skriv former til alle de atributter som skal tastes for at kunne designe en fladt tag-->
 
 <form name="makerequest" action="FrontController" method="POST">
     <input type="hidden" name="target" value="makerequest">

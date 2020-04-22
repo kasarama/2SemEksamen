@@ -9,6 +9,7 @@ public class ShowRequests extends Command{
 
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException {
+        //todo til employye for at kunne vise alle forespørgelse fra kunder
         return "requestsList";
     }
 }

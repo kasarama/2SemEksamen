@@ -21,7 +21,7 @@ public class ShedSizing {
     public static ArrayList<ArrayList> version1(CarportRequest carportRequest) {
         ArrayList<ArrayList> siezeLists = new ArrayList<>();
         ArrayList<Integer> widths = new ArrayList<>();
-        int minWidth = carportRequest.getWidth()-600;
+        int minWidth =100;
         int maxWidth = carportRequest.getWidth()-300-15;
         if (minWidth<10){
             for (int i = 10; i <= maxWidth/10 ; i++) {
@@ -34,6 +34,19 @@ public class ShedSizing {
             }
         }
         siezeLists.add(widths);
+
+        if (carportRequest.getWidth()<=715){
+            for (int i = 10; i <= maxWidth/10 ; i++) {
+                widths.add((i*10));
+            }
+            siezeLists.add(widths);
+        } else {
+            minWidth = carportRequest.getWidth()-600-15;
+            for (int i = minWidth/10; i <= maxWidth/10 ; i++) {
+                widths.add(i*10);
+            }
+            siezeLists.add(widths);
+        }
 
         ArrayList<Integer> depths = new ArrayList<>();
         for (int i = 10; i < (carportRequest.getLength()-30)/10; i++) {
