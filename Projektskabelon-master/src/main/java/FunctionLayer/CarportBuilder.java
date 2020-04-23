@@ -101,74 +101,77 @@ public class CarportBuilder {
 
     //////// Trapezplader
     //Hjælpemetode
-    public int roofLongsideHelper(boolean pitchedRoof) throws Exception{ //TODO lav en funktion så mman kan vælge type af tag som en boolean
-        int roofLongSide = roofCalculator.flatRoofCalcutatedSide(tiltAngle);
-            if (pitchedRoof)
-                roofLongSide = roofCalculator.pitchedRoofCalcutatedSide(pitchDegree);
-        return roofLongSide;
+    public int roofwidthHelper(boolean pitchedRoof) throws Exception{ //TODO lav en funktion så mman kan vælge type af tag som en boolean
+        int roofwidth = width;
+        if (pitchedRoof) {
+            roofwidth = roofCalculator.pitchedRoofCalcutatedSide(pitchDegree);
+        }
+        return roofwidth;
+    }
+
+    public int rooflenghtHelper(boolean pitchedRoof) throws Exception{ //TODO lav en funktion så mman kan vælge type af tag som en boolean
+        int roofLength = roofCalculator.flatRoofCalcutatedSide(tiltAngle);
+
+        if (pitchedRoof) {
+            roofLength = length;
+        }
+        return roofLength;
     }
 
     //Antal T600 Trapezplader
     public int quantityOfT600ForRoof(boolean pitchedRoof) throws Exception { //TODO lav en funktion så mman kan vælge type af tag som en boolean
-        int roofLongside = roofLongsideHelper(pitchedRoof);
-        int roofShortSide = width;
-
-        if (pitchedRoof){
-            roofLongside = length;
-            roofShortSide = roofLongsideHelper(false);
-        }
+        //Tag er fladt hvis man ikke aktivt vælger tag med spids
+        int roofwidth = roofwidthHelper(pitchedRoof);
+        int roofLength = rooflenghtHelper(pitchedRoof);
 
 
         //Beregning af første del-frikant af tag
-        for (int i = 0; i < roofShortSide; i = +trapezpladeWidth) {
-            for (int j = 0; j < roofLongside; j = +T600RoofPlateLength) {
+        for (int i = 0; i < roofwidth; i = +trapezpladeWidth) {
+            for (int j = 0; j < roofLength; j = +T600RoofPlateLength) {
                 square1numberOfT600Trapezplates++;
             }
         }
 
         //Beregning af anden del-frikant af tag
-        int restWidth = roofShortSide % trapezpladeWidth;
+        int restWidth = roofwidth % trapezpladeWidth;
 
-        for (int i = 0; i < roofLongside; i = +T600RoofPlateLength) {
+        for (int i = 0; i < roofLength; i = +T600RoofPlateLength) {
             square2numberOfT600Trapezplates++;
         }
 
-        int restPart = trapezpladeWidth / restWidth;
-        int T600ExtraFromRestMaterials = square2numberOfT600Trapezplates / restPart;
+        int restPart;
+
+        if(restWidth != 0) {
+            restPart = trapezpladeWidth / restWidth;
+            //TODO tjek om man kan dette!
+            square2numberOfT600Trapezplates = square2numberOfT600Trapezplates / restPart;
+        }
 
 
         //Beregning af tredje del-frikant af tag
-        for (int i = 0; i < roofShortSide; i = +trapezpladeWidth) {
+        for (int i = 0; i < roofwidth; i = +trapezpladeWidth) {
             square3numberOfT600Trapezplates++;
         }
 
-        int numberOfT600Trapezplates = square1numberOfT600Trapezplates + square2numberOfT600Trapezplates +
+        int QuantetyOfT600TrapezplatesTotal = square1numberOfT600Trapezplates + square2numberOfT600Trapezplates +
                 square3numberOfT600Trapezplates;
 
-        int T300Quantety = quantityOfT300ForRoof(pitchedRoof);
+        int T300Quantety = quantityOfT300ForRoof(pitchedRoof, roofLength);
         if (T300Quantety == 0 )
-            numberOfT600Trapezplates++;
+            QuantetyOfT600TrapezplatesTotal++;
 
         if(pitchedRoof)
-            numberOfT600Trapezplates = numberOfT600Trapezplates*2;
+            QuantetyOfT600TrapezplatesTotal = QuantetyOfT600TrapezplatesTotal*2;
 
-        return numberOfT600Trapezplates;
+        return QuantetyOfT600TrapezplatesTotal;
     }
 
     //Antal T300 Trapezplader
-    public int quantityOfT300ForRoof(boolean pitchedRoof) throws Exception {
+    public int quantityOfT300ForRoof(boolean pitchedRoof, int roofLength) throws Exception {
         //Beregning af fjerde og sidste del-firkant af tag
-        int roofLongside = roofLongsideHelper(pitchedRoof);
-        int roofShortSide = width;
-
-        if (pitchedRoof){
-            roofLongside = length;
-            roofShortSide = roofLongsideHelper(false);
-        }
-
-        int restOfLong = roofLongside % T600RoofPlateLength;
-        if (restOfLong > 0 && restOfLong <= T300RoofPlateLength)
-            numberOfT300Trapezplates = (restOfLong / T300RoofPlateLength) + 1;
+        int restOfLength = roofLength % T600RoofPlateLength;
+        if (restOfLength > 0 && restOfLength <= T300RoofPlateLength)
+            numberOfT300Trapezplates = (restOfLength / T300RoofPlateLength) + 1;
 
         if(pitchedRoof)
             numberOfT600Trapezplates = numberOfT600Trapezplates*2;

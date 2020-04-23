@@ -11,9 +11,9 @@ public class RoofCalculator {
         int roofLength;
         int roofHeight;
 
-        //Vi antager at tagets vinkel er mindst 2 grader eftersom pr meter den skal stige med mindst 3 cm,
+        //Vi antager at tagets hældning er mindst 2 grader eftersom pr meter den skal stige med mindst 3 cm,
         // som svarer til lidt under 2 grader
-        //Vi antager også at tagets vinkel er mindre end 45
+        //Vi antager også at tagets hældnning er mindre end 45
         //TODO undersøg om tagets maxhældning som fladt tag
         if (tiltAngle < 2 || tiltAngle > 45)
             throw new Exception("Hældningen på taget må ikke være mindre end 2 grader");
@@ -26,9 +26,9 @@ public class RoofCalculator {
 
     //Areal beregning af tag med spids
     public int pitchedRoofCalcutatedSide(int pitchDegrees){
-        int halfRaftWidth = carport.getWidth()/2;
+        int halfRaftWidthForPitchedRoof = carport.getWidth()/2;
 
-        int roofwidth = halfRaftWidth*((int) Math.cos((double) pitchDegrees));
+        int roofwidth = halfRaftWidthForPitchedRoof*((int) Math.cos((double) pitchDegrees));
 
         return roofwidth;
     }
