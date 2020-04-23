@@ -5,8 +5,20 @@ import java.util.ArrayList;
 public class CarportBuilder {
 // SKAL EGENTLIG VÆRE CARPORTREQUEST OBJEkT
     Carport carport = new Carport();
-    int length = carport.getLength();
-    int width = carport.getWidth();
+    private int length = carport.getLength();
+    private int width = carport.getWidth();
+
+    RoofCalculator roofCalculator = new RoofCalculator();
+    private int numberOfTrapezRows = 0;
+    private int trapezpladeWidth = 100;
+    private int T600RoofPlateLength = 600;
+    private int T300RoofPlateLength = 300;
+    private int numberOfT600Trapezplates = 0;
+    private int numberOfT300Trapezplates = 0;
+    private int tiltAngle = 40; //TODO Find ud af hvor metoden for beregning af trapeztag får det fra kunden
+    private int square1numberOfT600Trapezplates = 0;
+    private int square2numberOfT600Trapezplates = 0;
+    private int square3numberOfT600Trapezplates = 0;
 
     // Stolper og Rem
     public int posts (){
@@ -86,27 +98,79 @@ public class CarportBuilder {
         return screws;
     }
 
-    // Trapezplader
-    public int roof(){
-        int numberOfTrapezplader = 0;
-        int trapezpladeWidth = 1;
-        //int T600 = 1;
 
-        if (length <= 300){
-            numberOfTrapezplader = Math.round((trapezpladeWidth*width)/100);
+    // Trapezplader
+    public int rooflengthHelper() throws Exception{
+    int roofLength = roofCalculator.flatRoofLength(tiltAngle);
+    return roofLength;
+    }
+
+    public int AmountOfT600RoofArea() throws Exception {
+        int roofLength = rooflengthHelper();
+
+        //Beregning af første del-frikant af tag
+        for (int i = 0; i < width; i = +trapezpladeWidth) {
+            for (int j = 0; j < roofLength; j = +T600RoofPlateLength) {
+                square1numberOfT600Trapezplates++;
+            }
+        }
+
+        //Beregning af anden del-frikant af tag
+        int restWidth = width % trapezpladeWidth;
+
+        for (int i = 0; i < roofLength; i = +T600RoofPlateLength) {
+            square2numberOfT600Trapezplates++;
+        }
+
+        int restPart = trapezpladeWidth / restWidth;
+        int T600ExtraFromRestMaterials = square2numberOfT600Trapezplates / restPart;
+
+
+        //Beregning af tredje del-frikant af tag
+        for (int i = 0; i < width; i = +trapezpladeWidth) {
+            square3numberOfT600Trapezplates++;
+        }
+
+        int numberOfT600Trapezplates = square1numberOfT600Trapezplates + square2numberOfT600Trapezplates +
+                square3numberOfT600Trapezplates;
+
+        int T300Quantety = AmountOfT300RoofArea();
+        if (T300Quantety ==0 )
+            numberOfT600Trapezplates++;
+
+        return numberOfT600Trapezplates;
+    }
+
+
+    public int AmountOfT300RoofArea() throws Exception {
+        //Beregning af fjerde og sidste del-frikant af tag
+        int roofLength = rooflengthHelper();
+
+        int restLength = roofLength % T600RoofPlateLength;
+        if (restLength > 0 && restLength <= T300RoofPlateLength)
+            numberOfT300Trapezplates = (restLength / T300RoofPlateLength) + 1;
+        return numberOfT300Trapezplates;
+
+    }
+
+
+     /*   if (length <= 300){
+            numberOfTrapezRows = Math.round((trapezpladeWidth*width)/100);
         }
         if (length >300){
-            numberOfTrapezplader = Math.round((trapezpladeWidth*width + (trapezpladeWidth*100))/100);
+            numberOfTrapezRows = Math.round((trapezpladeWidth*width + (trapezpladeWidth*100))/100);
         }
-        /*
+        *//*
             if (length >= 600){
                 numberOfTrapezplader = Math.round((T600*width + (T300*100)/100));
             }
-        */
+        *//*
 
-        return numberOfTrapezplader;
+        return numberOfTrapezRows;
     }
+*/
 
+    
     // Bundskruer
     public int bottomScrews(){
         // Plader fastgøres med plastmo bundskruer og skal anvendes 6 stk pr. meter på hver spær
@@ -167,7 +231,7 @@ public class CarportBuilder {
     public int shedLath = 1;
 
     // Vinkelbeslag
-    løsholter gavle + løsholter sider
+   // TODO - løsholter gavle + løsholter sider
 
     // Beklædning
     public int shedTimbering(int shedWidth){
