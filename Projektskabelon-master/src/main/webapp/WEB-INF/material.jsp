@@ -19,6 +19,6 @@
 id: ${materialItems}</br>
 
 <!-- Creating a hyperlink that goes through back to 'index' page -->
-<a href="../index.jsp">Til Forsiden</a>
+<a href="../oldMaterial.jsp">Til Forsiden</a>
 </body>
 </html>

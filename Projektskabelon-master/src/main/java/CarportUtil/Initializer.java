@@ -25,7 +25,7 @@ public class Initializer {
         if (materialList == null)
         {
             try {
-            materialList = LogicFacade.getAllMaterials();
+            materialList = LogicFacade.getAllRoofMaterials();
             }
             catch (Exception e) {
                 e.printStackTrace();

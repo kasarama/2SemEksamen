@@ -15,45 +15,29 @@ import java.sql.SQLException;
  */
 public class Connector {
 
-    private static String URL = "jdbc:mysql://localhost:3306/fodDB?";
-    private static String USERNAME = "root";
-    private static String PASSWORD = "root";
+    public class Connector
+    {
+        private static final String URL = "jdbc:mysql://64.225.76.1:3306/useradmin?";
+        private static final String USERNAME = "bmi";
+        private static final String PASSWORD = "Bmi_Admin_#_12";
 
-    private static Connection singleton;
-
-    public static void setConnection( Connection con ) {
-        singleton = con;
-    }
-
-    public static Connection connection() throws ClassNotFoundException, SQLException {
-        if ((singleton == null) || singleton.isClosed()) {
-            setDBCredentials();
-            Class.forName( "com.mysql.cj.jdbc.Driver" );
-            singleton = DriverManager.getConnection( URL, USERNAME, PASSWORD );
+        private static Connection singleton;
+        public static void setConnection( Connection con ) {
+            singleton = con;
         }
-        return singleton;
-    }
-
-    public static void setDBCredentials() {
-        String deployed = System.getenv("DEPLOYED");
-        if (deployed != null){
-            // Prod: hent variabler fra setenv.sh i Tomcats bin folder
-            URL = System.getenv("JDBC_CONNECTION_STRING");
-            USERNAME = System.getenv("JDBC_USER");
-            PASSWORD = System.getenv("JDBC_PASSWORD");
-        } else {
-            // Localhost
-            URL = "jdbc:mysql://localhost:3306/useradmin?serverTimezone=CET&useSSL=false";
-            USERNAME = "root";
-            PASSWORD = "root";
+        public static Connection connection() throws ClassNotFoundException, SQLException {
+            if ( singleton == null ) {
+                Class.forName( "com.mysql.cj.jdbc.Driver" );
+                singleton = DriverManager.getConnection( URL, USERNAME, PASSWORD );
+            }
+            return singleton;
         }
-    }
 
+    }
 }
+// Contains method that reads MySql pwd/usr
 
-/*
-
--- Contains method that reads MySql pwd/usr
+    /*
 
 public class Connector {
 
@@ -113,5 +97,5 @@ public class Connector {
 
     }
 
-}
- */
+     */
+
