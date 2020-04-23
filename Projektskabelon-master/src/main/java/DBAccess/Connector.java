@@ -14,12 +14,9 @@ import java.sql.SQLException;
  @author kasper
  */
 public class Connector {
-
-    public class Connector
-    {
-        private static final String URL = "jdbc:mysql://64.225.76.1:3306/useradmin?";
-        private static final String USERNAME = "bmi";
-        private static final String PASSWORD = "Bmi_Admin_#_12";
+        private static final String URL = "jdbc:mysql://localhost:3306/fogDB?";
+        private static final String USERNAME = "root";
+        private static final String PASSWORD = "root";
 
         private static Connection singleton;
         public static void setConnection( Connection con ) {
@@ -32,9 +29,8 @@ public class Connector {
             }
             return singleton;
         }
+ }
 
-    }
-}
 // Contains method that reads MySql pwd/usr
 
     /*

@@ -33,7 +33,7 @@
         <option selected disabled>Vælg type:</option>
 
         <c:forEach var="roofMaterial" items="${applicationScope.materialList}">
-            <option value="${roofMaterial.materialID}">${roofMaterial.category}"></option>
+            <option value="${roofMaterial.materialID}">${roofMaterial.name}"></option>
         </c:forEach>
     </select>
     </div>
