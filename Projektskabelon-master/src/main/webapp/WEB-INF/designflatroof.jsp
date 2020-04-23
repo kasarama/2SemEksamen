@@ -1,16 +1,9 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: miade
-  Date: 20-04-2020
-  Time: 08:50
-  To change this template use File | Settings | File Templates.
---%>
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@include file="../includes/header.inc"%>
 
-<h3>Fladt tag design centre </h3>
+<h3>Fladt tag design </h3>
 <!--TODO fyld dropdown menu med data from DB, skriv former til alle de atributter som skal tastes for at kunne designe en fladt tag-->
 
 <form name="makerequest" action="FrontController" method="POST">

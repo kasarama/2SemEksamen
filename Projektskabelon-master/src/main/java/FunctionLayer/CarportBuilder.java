@@ -4,18 +4,20 @@ import java.util.ArrayList;
 
 public class CarportBuilder {
 // SKAL EGENTLIG VÆRE CARPORTREQUEST OBJEkT
-    Carport carport = new Carport();
+// TODO SPØRGMÅL: Skal vi ikke lave en Carport parent class? Så vi kan bruge enten requestCarport eller "result"Carport på sammme type objekt?
+    Carport carport;
     private int length = carport.getLength();
     private int width = carport.getWidth();
 
-    RoofCalculator roofCalculator = new RoofCalculator();
+    RoofCalculator roofCalculator = new RoofCalculator(carport);
     private int trapezpladeWidth = 100;
     private int T600RoofPlateLength = 600;
     private int T300RoofPlateLength = 300;
     private int numberOfT600Trapezplates = 0;
     private int numberOfT300Trapezplates = 0;
-    private int tiltAngle = 40; //TODO Find ud af hvor metoden for beregning af trapeztag får det fra kunden
-    private int pitchDegree = 80; //TODO Find ud af hvor metoden for beregning af trapeztag får det fra kunden
+    private int tiltAngle = carport.getRoof().getDegree();
+    private int pitchDegree = carport.getRoof().getDegree();
+    private boolean pitchedRoof = carport.getRoof().isPitchedRoof();
     private int square1numberOfT600Trapezplates = 0;
     private int square2numberOfT600Trapezplates = 0;
     private int square3numberOfT600Trapezplates = 0;
@@ -101,16 +103,16 @@ public class CarportBuilder {
 
 
     ////////////////// Trapezplader
-    //Hjælpemetode
-    public int roofwidthHelper(boolean pitchedRoof) throws Exception { //TODO Hent en funktion/knap så mman kan vælge type af tag som en boolean
+    //Hjælpemetode for bredde af tag afhægnigt af type
+    public int roofwidthHelper() throws Exception {
         int roofwidth = width;
         if (pitchedRoof) {
-            roofwidth = roofCalculator.pitchedRoofCalcutatedSide(pitchDegree);
+            roofwidth = roofCalculator.pitchedRoofCalcutatedWidth(pitchDegree);
         }
         return roofwidth;
     }
-    //Hjælpemetode
-    public int rooflenghtHelper(boolean pitchedRoof) throws Exception { //TODO Hent en funktion/knap så mman kan vælge type af tag som en boolean
+    //Hjælpemetode for længde af tag afhægnigt af type
+    public int rooflenghtHelper() throws Exception {
         int roofLength = roofCalculator.flatRoofCalcutatedSide(tiltAngle);
 
         if (pitchedRoof) {
@@ -120,13 +122,11 @@ public class CarportBuilder {
     }
 
     //Antal T600 Trapezplader
-    public int quantityOfT600ForRoof(boolean pitchedRoof) throws Exception { //TODO Hent en funktion/knap så mman kan vælge type af tag som en boolean
+    public int quantityOfT600ForRoof(int roofWidth, int roofLength) throws Exception {
         //Tag er fladt hvis man ikke aktivt vælger tag med spids
-        int roofwidth = roofwidthHelper(pitchedRoof);
-        int roofLength = rooflenghtHelper(pitchedRoof);
 
         ///////////////Beregning af første del af tag (hvor mange HELE T600 plader kan der være)
-        for (int i = 0; i < roofwidth; i = +trapezpladeWidth) {
+        for (int i = 0; i < roofWidth; i = +trapezpladeWidth) {
             for (int j = 0; j < roofLength; j = +T600RoofPlateLength) {
                 square1numberOfT600Trapezplates++;
             }
@@ -135,7 +135,7 @@ public class CarportBuilder {
         /////////////////////////////////////////////////////
 
        /////Beregning af anden del af tag (T600 plader inkl. T600 pladerester - hvor pladerne er delt på bredden)
-        int restWidth = roofwidth % trapezpladeWidth;
+        int restWidth = roofWidth % trapezpladeWidth;
 
         for (int i = 0; i < roofLength; i = +T600RoofPlateLength) {
             square2numberOfT600Trapezplates++;
@@ -152,10 +152,10 @@ public class CarportBuilder {
         /////////////////////////////////////////////////////
 
         ///////////////Beregning af tredje del af tag (om hvor mange antal T600 plader der er (delt i længden))
-        int quantityOfT300 = quantityOfT300ForRoof(pitchedRoof, roofLength, roofwidth);
+        int quantityOfT300 = quantityOfT300ForRoof(roofLength, roofWidth);
 
         if (quantityOfT300 != 0){
-            for (int i = 0; i < roofwidth; i = +trapezpladeWidth) {
+            for (int i = 0; i < roofWidth; i = +trapezpladeWidth) {
                 square3numberOfT600Trapezplates++;
                 }
             }
@@ -167,7 +167,7 @@ public class CarportBuilder {
                 square3numberOfT600Trapezplates;
 
         /////////////Beregning af fjerde og sidste del-firkant af tag (om den sidste plade skal være en T600)
-        int T300Quantety = quantityOfT300ForRoof(pitchedRoof, roofLength, roofwidth);
+        int T300Quantety = quantityOfT300ForRoof(roofLength, roofWidth);
 
         if (T300Quantety == 0 )
             QuantetyOfT600TrapezplatesTotal++;
@@ -181,7 +181,7 @@ public class CarportBuilder {
     }
 
     //Antal T300 Trapezplader
-    public int quantityOfT300ForRoof(boolean pitchedRoof, int roofLength, int roofWidth) throws Exception {
+    public int quantityOfT300ForRoof(int roofLength, int roofWidth) throws Exception {
         int restOfLength = roofLength % T600RoofPlateLength;
         if (restOfLength > 0 && restOfLength <= T300RoofPlateLength)
             numberOfT300Trapezplates = (roofWidth / trapezpladeWidth) + 1 ;
@@ -283,7 +283,7 @@ public class CarportBuilder {
 
 // algorytmer for calculation of needed materials
     public void buildCarport(CarportRequest carportRequest) {
-        Carport carport = new Carport();
+        carport = new Carport();
         ArrayList<Material> materials = new ArrayList<>();
 
         int length = carportRequest.getLength();
@@ -295,6 +295,7 @@ public class CarportBuilder {
         carport.setWidth(width);
         carport.setShedDepth(shedDepth);
         carport.setAngle(angle);
+        //carport.setRoof(new Roof(new RoofCalculator()); //TODO hvad med dette?
 
 
         int sidePost = ((length - (length % 300)) / 300 + 1) * 2;

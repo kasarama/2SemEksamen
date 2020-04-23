@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Carport {
     private int width;
     private int length;
-    private int shedDepth;
+    //private int shedDepth;
     private int angle;
     private Shed shed;
     private Roof roof;
@@ -55,11 +55,11 @@ public class Carport {
     }
 
     public int getShedDepth() {
-        return shedDepth;
+        return shed.getDepth();
     }
 
     public void setShedDepth(int shedDepth) {
-        this.shedDepth = shedDepth;
+        shed.setDepth(shedDepth);
     }
 
     public int getAngle() {
@@ -76,5 +76,21 @@ public class Carport {
 
     public void setMaterialList(ArrayList<Material> materialList) {
         this.materialList = materialList;
+    }
+
+    public Shed getShed() {
+        return shed;
+    }
+
+    public void setShed(Shed shed) {
+        this.shed = shed;
+    }
+
+    public Roof getRoof() {
+        return roof;
+    }
+
+    public void setRoof(Roof roof) {
+        this.roof = roof;
     }
 }

@@ -6,14 +6,15 @@ public class CarportRequest {
     private int shedDepth;
     private int angle;
     private int shedWidth;
+    private boolean pitchedRoof;
 
-    public CarportRequest(int length, int width,  int shedDepth, int angle, int shedWidth) {
+    public CarportRequest(int length, int width,  int shedDepth, int angle, int shedWidth, boolean pitchedRoof) {
         this.length = length;
         this.width = width;
         this.shedDepth = shedDepth;
         this.shedWidth = shedWidth;
-
         this.angle = angle;
+        this.pitchedRoof = pitchedRoof;
     }
 
     public int getLength() {
