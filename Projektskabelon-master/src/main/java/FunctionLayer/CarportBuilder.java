@@ -9,13 +9,13 @@ public class CarportBuilder {
     private int width = carport.getWidth();
 
     RoofCalculator roofCalculator = new RoofCalculator();
-    private int numberOfTrapezRows = 0;
     private int trapezpladeWidth = 100;
     private int T600RoofPlateLength = 600;
     private int T300RoofPlateLength = 300;
     private int numberOfT600Trapezplates = 0;
     private int numberOfT300Trapezplates = 0;
     private int tiltAngle = 40; //TODO Find ud af hvor metoden for beregning af trapeztag får det fra kunden
+    private int pitchDegree = 80; //TODO Find ud af hvor metoden for beregning af trapeztag får det fra kunden
     private int square1numberOfT600Trapezplates = 0;
     private int square2numberOfT600Trapezplates = 0;
     private int square3numberOfT600Trapezplates = 0;
@@ -99,26 +99,37 @@ public class CarportBuilder {
     }
 
 
-    // Trapezplader
-    public int rooflengthHelper() throws Exception{
-    int roofLength = roofCalculator.flatRoofLength(tiltAngle);
-    return roofLength;
+    //////// Trapezplader
+    //Hjælpemetode
+    public int roofLongsideHelper(boolean pitchedRoof) throws Exception{ //TODO lav en funktion så mman kan vælge type af tag som en boolean
+        int roofLongSide = roofCalculator.flatRoofCalcutatedSide(tiltAngle);
+            if (pitchedRoof)
+                roofLongSide = roofCalculator.pitchedRoofCalcutatedSide(pitchDegree);
+        return roofLongSide;
     }
 
-    public int AmountOfT600RoofArea() throws Exception {
-        int roofLength = rooflengthHelper();
+    //Antal T600 Trapezplader
+    public int quantityOfT600ForRoof(boolean pitchedRoof) throws Exception { //TODO lav en funktion så mman kan vælge type af tag som en boolean
+        int roofLongside = roofLongsideHelper(pitchedRoof);
+        int roofShortSide = width;
+
+        if (pitchedRoof){
+            roofLongside = length;
+            roofShortSide = roofLongsideHelper(false);
+        }
+
 
         //Beregning af første del-frikant af tag
-        for (int i = 0; i < width; i = +trapezpladeWidth) {
-            for (int j = 0; j < roofLength; j = +T600RoofPlateLength) {
+        for (int i = 0; i < roofShortSide; i = +trapezpladeWidth) {
+            for (int j = 0; j < roofLongside; j = +T600RoofPlateLength) {
                 square1numberOfT600Trapezplates++;
             }
         }
 
         //Beregning af anden del-frikant af tag
-        int restWidth = width % trapezpladeWidth;
+        int restWidth = roofShortSide % trapezpladeWidth;
 
-        for (int i = 0; i < roofLength; i = +T600RoofPlateLength) {
+        for (int i = 0; i < roofLongside; i = +T600RoofPlateLength) {
             square2numberOfT600Trapezplates++;
         }
 
@@ -127,28 +138,41 @@ public class CarportBuilder {
 
 
         //Beregning af tredje del-frikant af tag
-        for (int i = 0; i < width; i = +trapezpladeWidth) {
+        for (int i = 0; i < roofShortSide; i = +trapezpladeWidth) {
             square3numberOfT600Trapezplates++;
         }
 
         int numberOfT600Trapezplates = square1numberOfT600Trapezplates + square2numberOfT600Trapezplates +
                 square3numberOfT600Trapezplates;
 
-        int T300Quantety = AmountOfT300RoofArea();
-        if (T300Quantety ==0 )
+        int T300Quantety = quantityOfT300ForRoof(pitchedRoof);
+        if (T300Quantety == 0 )
             numberOfT600Trapezplates++;
+
+        if(pitchedRoof)
+            numberOfT600Trapezplates = numberOfT600Trapezplates*2;
 
         return numberOfT600Trapezplates;
     }
 
+    //Antal T300 Trapezplader
+    public int quantityOfT300ForRoof(boolean pitchedRoof) throws Exception {
+        //Beregning af fjerde og sidste del-firkant af tag
+        int roofLongside = roofLongsideHelper(pitchedRoof);
+        int roofShortSide = width;
 
-    public int AmountOfT300RoofArea() throws Exception {
-        //Beregning af fjerde og sidste del-frikant af tag
-        int roofLength = rooflengthHelper();
+        if (pitchedRoof){
+            roofLongside = length;
+            roofShortSide = roofLongsideHelper(false);
+        }
 
-        int restLength = roofLength % T600RoofPlateLength;
-        if (restLength > 0 && restLength <= T300RoofPlateLength)
-            numberOfT300Trapezplates = (restLength / T300RoofPlateLength) + 1;
+        int restOfLong = roofLongside % T600RoofPlateLength;
+        if (restOfLong > 0 && restOfLong <= T300RoofPlateLength)
+            numberOfT300Trapezplates = (restOfLong / T300RoofPlateLength) + 1;
+
+        if(pitchedRoof)
+            numberOfT600Trapezplates = numberOfT600Trapezplates*2;
+
         return numberOfT300Trapezplates;
 
     }
@@ -170,7 +194,7 @@ public class CarportBuilder {
     }
 */
 
-    
+
     // Bundskruer
     public int bottomScrews(){
         // Plader fastgøres med plastmo bundskruer og skal anvendes 6 stk pr. meter på hver spær
