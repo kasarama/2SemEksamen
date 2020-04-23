@@ -28,7 +28,7 @@ public class RoofCalculator {
     public int pitchedRoofCalcutatedSide(int pitchDegrees){
         int halfRaftWidthForPitchedRoof = carport.getWidth()/2;
 
-        int roofwidth = halfRaftWidthForPitchedRoof*((int) Math.cos((double) pitchDegrees));
+        int roofwidth = halfRaftWidthForPitchedRoof*((int) Math.cos((double) (pitchDegrees/2)));
 
         return roofwidth;
     }

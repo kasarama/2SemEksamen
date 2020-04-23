@@ -86,6 +86,7 @@ public class CarportBuilder {
         return bracketScrews;
     }
 
+    /////////////////TODO - Er det menningen at den ikke står i en metode og/eller er public variabel?????????????
     // Hulbånd
     public int perforatedBand = 2;
 
@@ -101,7 +102,7 @@ public class CarportBuilder {
 
     ////////////////// Trapezplader
     //Hjælpemetode
-    public int roofwidthHelper(boolean pitchedRoof) throws Exception{ //TODO Hent en funktion/knap så mman kan vælge type af tag som en boolean
+    public int roofwidthHelper(boolean pitchedRoof) throws Exception { //TODO Hent en funktion/knap så mman kan vælge type af tag som en boolean
         int roofwidth = width;
         if (pitchedRoof) {
             roofwidth = roofCalculator.pitchedRoofCalcutatedSide(pitchDegree);
@@ -109,7 +110,7 @@ public class CarportBuilder {
         return roofwidth;
     }
     //Hjælpemetode
-    public int rooflenghtHelper(boolean pitchedRoof) throws Exception{ //TODO Hent en funktion/knap så mman kan vælge type af tag som en boolean
+    public int rooflenghtHelper(boolean pitchedRoof) throws Exception { //TODO Hent en funktion/knap så mman kan vælge type af tag som en boolean
         int roofLength = roofCalculator.flatRoofCalcutatedSide(tiltAngle);
 
         if (pitchedRoof) {
@@ -184,8 +185,8 @@ public class CarportBuilder {
         int restOfLength = roofLength % T600RoofPlateLength;
         if (restOfLength > 0 && restOfLength <= T300RoofPlateLength)
             numberOfT300Trapezplates = (roofWidth / trapezpladeWidth) + 1 ;
-                                                                        //^(Beregning af fjerde og sidste del-firkant
-                                                                        // af tag betyder det når jeg skriver +1)
+                                                                        //^(Beregning af fjerde og sidste del
+                                                                        // af taget betyder det når jeg skriver +1)
         if(pitchedRoof)
             numberOfT600Trapezplates = numberOfT600Trapezplates*2;
 
