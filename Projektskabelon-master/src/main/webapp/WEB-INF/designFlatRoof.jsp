@@ -13,6 +13,11 @@
 <h3>Fladt tag design centre </h3>
 <!--TODO fyld dropdown menu med data from DB, skriv former til alle de atributter som skal tastes for at kunne designe en fladt tag-->
 
+<!-- Let this contain the material list from DB - the name columns should be displayed in dropdown -->
+<!-- make forms (fields) to type the data need to design a flat roof...height/angle? -->
+<!-- todo: material table in DB needs to be reconstructed, so that roof materials are in a separate table.-->
+<!-- make a button: videre til.. to go to next page -->
+
 <form name="makerequest" action="FrontController" method="POST">
     <input type="hidden" name="target" value="makerequest">
     <label>Vælg tagdækning:</label>
@@ -26,6 +31,7 @@
     <input class="btn btn-primary" type="submit" value="Videre" >
 </form>
 
+<!-- tag længde/bredde -->
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->

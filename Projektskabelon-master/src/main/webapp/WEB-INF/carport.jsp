@@ -38,7 +38,7 @@
 <!-- alligning the hyperlink to the center -->
 <div class="text-center">
     <!-- Creating a hyperlink that goes through back to 'index' page -->
-    <a href="index.jsp">Til Forsiden</a>
+    <a href="../index.jsp">Til Forsiden</a>
 </div>
 
 </body>

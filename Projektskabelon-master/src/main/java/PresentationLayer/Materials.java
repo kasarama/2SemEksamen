@@ -4,11 +4,16 @@ import FunctionLayer.LoginSampleException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Arrays;
+import java.util.List;
 
-public class DesignFlatRoof extends Command {
+public class Materials extends Command {
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException {
-        //todo læs data fra designeflatroof.jsp og brug dem for t designe fladt tag
-        return "designFlatRoof";
+
+       String[] materials = request.getParameterValues("material");
+       
+        List materialList = Arrays.asList(materials);
+        return "material";
     }
 }

@@ -1,6 +1,7 @@
 package DBAccess;
 
 import FunctionLayer.LoginSampleException;
+import FunctionLayer.Material;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -9,22 +10,21 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+// This class Connects to DB and gets the "material" data from it.
 public class MaterialMapper
 {
-    // This class Connects to DB and gets the "material" data from it.
-    public class InfoMapper {
-        //1. create a method that returns a list of Info objs - Info = Class from function Layer
-        public static List<Info> getAllInfos() throws LoginSampleException
+        //1. create a method that returns a list of Materials -  Material = Class from function Layer
+        public static List<Material> getAllMaterials() throws LoginSampleException
         {
-            List<Info> infoList = null; //create an empty list 'infoList'
+            List<Material> materialList = null; //create an empty list 'materialList'
 
             //try-catch block in case an error occurs.
             try
             {
                 //2. start the connection by calling ".connection()" method from the "Connector" class
                 Connection con = Connector.connection();
-                //3. create an SQL statement - select all from the 'info' table
-                String SQL = "SELECT * FROM info";
+                //3. create an SQL statement - select all from the 'material' table
+                String SQL = "SELECT * FROM materials";
                 //4. insert the SQL statement into the ".preparedStatment()" method - it sends the SQL statement to the DB
                 PreparedStatement ps = con.prepareStatement(SQL);
                 //5. call the ".executeQuery()" to execute the SQL statement and return the result (stored in ResultSet).
@@ -34,17 +34,19 @@ public class MaterialMapper
                 while (rs.next())
                 {
                     //if the 'infoList' is empty
-                    if (infoList == null) {
-                        infoList = new ArrayList<>(); //design choice - to easily switch to ArrayList implementation
+                    if (materialList == null) {
+                        materialList = new ArrayList<>(); //design choice - to easily switch to ArrayList implementation
 
                     }
                     //get the result of the 'info_id' and 'name' (the data rows)
-                    int info_id = rs.getInt("info_id");
+                    int materialID = rs.getInt("materialID");
                     String name = rs.getString("name");
-                    //create a new info obj of 'Info' class and pass the gotten data in it (info_id & name)
-                    Info info = new Info(info_id, name);// data gets stored in 'info'
+                    int size = rs.getInt("size");
+
+                    //create a new info obj of 'Material' class and pass the gotten data in it (materialID, name, size)
+                    Material material = new Material(materialID, name, size);// data gets stored in 'material'
                     //add the gotten 'info' data to the 'InfoList'
-                    infoList.add(info);
+                    materialList.add(material);
                 }
             }
             //catch the SQLException
@@ -52,8 +54,8 @@ public class MaterialMapper
             {
                 throw new LoginSampleException(ex.getMessage()); //get the error message
             }
-            // return the gotten 'info' data from the DB
-            return infoList;
+            // return the gotten 'material' data from the DB
+            return materialList;
         }
-    }
 }
+

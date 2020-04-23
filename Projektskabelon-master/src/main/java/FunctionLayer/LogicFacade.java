@@ -1,6 +1,9 @@
 package FunctionLayer;
 
+import DBAccess.MaterialMapper;
 import DBAccess.UserMapper;
+
+import java.util.List;
 
 /**
  * The purpose of LogicFacade is to...
@@ -16,6 +19,12 @@ public class LogicFacade {
         User user = new User(email, password, "customer");
         UserMapper.createUser( user );
         return user;
+    }
+
+    ////call the static method that gets the material data from DB - static = can be called without creating an obj.
+    public static List<Material> getAllMaterials() throws LoginSampleException
+    {
+       return MaterialMapper.getAllMaterials(); //return 'getAllMaterials()' method from MaterialMapper
     }
 
 }
