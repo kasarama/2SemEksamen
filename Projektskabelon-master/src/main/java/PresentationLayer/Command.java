@@ -23,6 +23,7 @@ abstract class Command {
         commands.put( "sendrequest", new SendRequest() );
         commands.put( "showdrawing", new ShowDrowing() );
         commands.put( "newrequest", new NewRequest() );
+        commands.put( "shedposition", new ShedPosition() );
     }
 
     static Command from( HttpServletRequest request ) {
