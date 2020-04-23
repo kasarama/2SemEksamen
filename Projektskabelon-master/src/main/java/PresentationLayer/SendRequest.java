@@ -5,11 +5,10 @@ import FunctionLayer.LoginSampleException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class ShowRequests extends Command{
-
+public class SendRequest extends Command {
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException {
-        //todo til employye for at kunne vise alle forespørgelse fra kunder
-        return "requestsList";
+        //todo metoder for at kunne gemme og sende carportRequest til validering
+        return "requestSent";
     }
 }
