@@ -11,7 +11,6 @@
 
 <h1>Her kan du designe din egen carport </h1>
 
-
 <form name="findmaterial" action="FrontController" method="POST">
     <input type="hidden" name="target" value="findmaterial">
     <label>Vælg længde:</label>
@@ -61,8 +60,33 @@
         <option value="750">750</option>
     </select>
     <br>
-    <input class="btn btn-primary" type="submit" value="Test" >
+    <label>Vælg tag type:</label>
+    <select name="roofType" class="form-control">
+        <option selected disabled>Vælg tag type</option>
+        <option value="0">Flat tag</option>
+        <option value="1">Tag med rejsning</option>
+    </select>
+    <br>
+    <label>Vil du have skur?</label>
+    <select name="isShed" class="form-control">
+        <option selected disabled> Vil du have skur? </option>
+        <option value="0">Uden skur</option>
+        <option value="1">Med skur</option>
+    </select>
+    <br>
+
+    <input class="btn btn-primary" type="submit" value="TEST" >
 </form>
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
+
+
+
 
 
 
@@ -70,7 +94,7 @@
 
 
 <form name="makerequest" action="FrontController" method="POST">
-    <input type="hidden" name="taget" value="makerequest">
+    <input type="hidden" name="target" value="makerequest">
     <label>Vælg længde:</label>
     <select name="length" class="form-control">
         <option selected disabled>Vælg længde</option>
@@ -128,12 +152,13 @@
     <label>Vil du have skur?</label>
     <select name="isShed" class="form-control">
         <option selected disabled> Vil du have skur? </option>
-        <option value="1">Med skur</option>
         <option value="0">Uden skur</option>
+        <option value="1">Med skur</option>
     </select>
     <br>
 
     <input class="btn btn-primary" type="submit" value="Videre til Tag" >
+
 </form>
 
 </div>

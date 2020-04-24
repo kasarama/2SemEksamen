@@ -9,19 +9,22 @@ import java.util.ArrayList;
 
 public class FindMaterial extends Command{
 
-
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException {
         // Her skal der findes de materialer og indsættes i DB i itemlist
 
         int length = Integer.parseInt(request.getParameter( "length" ));
         int width = Integer.parseInt(request.getParameter( "width" ));
+        int tag = Integer.parseInt(request.getParameter("roofType"));
+        int skur = Integer.parseInt(request.getParameter("isShed"));
 
-        CarportBuilder carportBuilder = new CarportBuilder();
+CarportBuilder carportBuilder = new CarportBuilder();
+
         WoodMaterialCalculator wCalculator = new WoodMaterialCalculator();
         OtherMaterialCalculator oCalculator = new OtherMaterialCalculator();
         Carport carport = new Carport();
 
+// TRÆ
         // Understernbrædder
         int under360Antal = wCalculator.understernboartU360(length, width);
         int under540Antal = wCalculator.understernboartU540(length, width);
@@ -65,7 +68,10 @@ public class FindMaterial extends Command{
                 stolpe.setComment("Stolpe");
 
         // Vandbræt
-/*
+
+
+// SKUR
+
         // Lægte:
         int lægteAntal = wCalculator.shedLath;
             Material lægte = LogicFacade.getMaterial("Lægte");
@@ -75,14 +81,17 @@ public class FindMaterial extends Command{
         // Løsholter
 
         // Skur beklædning:
-        int beklædningAntal = wCalculator.shedTimbering();
-            Material beklædning = LogicFacade.getMaterial("Lægte");
-                lægte.setAntal(lægteAntal);
-                lægte.setComment("Lægte til z på skur");
-*/
+        int beklædningAntal = wCalculator.shedTimbering(carport.getShedDepth());
+            Material beklædning = LogicFacade.getMaterial("SkurBeklædning");
+                beklædning.setAntal(beklædningAntal);
+                beklædning.setComment("Beklædning til skur");
+
+
+// TAG
 
 
 
+// SKRUER OG BESLAG
      // Bræddebolte
         int bræddebolteAntal = oCalculator.carriageBolts(length, width);
             Material bræddebolte = LogicFacade.getMaterial("Bræddebolt");
@@ -109,7 +118,7 @@ public class FindMaterial extends Command{
             beslagskruer.setAntal(beslagskruerAntal);
             beslagskruer.setComment("Beslagskruer");
      // Hulbånd
-        int hulbåndAntal = oCalculator.perforatedBand;
+        int hulbåndAntal = oCalculator.perforatedBand(length, width);
             Material hulbånd = LogicFacade.getMaterial("Hulbånd");
             hulbånd.setAntal(hulbåndAntal);
             hulbånd.setComment("Hulbånd");
@@ -120,23 +129,73 @@ public class FindMaterial extends Command{
             bundskruer.setAntal(antalBundskruer);
             bundskruer.setComment("Bundskruer til taget");
 
-// Materialerne bliver tilføjet materiale listerne:
-        carport.addWoodMaterial(stolpe);
-        carport.addWoodMaterial(rem600);
-        carport.addWoodMaterial(rem480);
-        carport.addWoodMaterial(spær);
-        carport.addWoodMaterial(under360);
-        carport.addWoodMaterial(under540);
-        carport.addWoodMaterial(over360);
-        carport.addWoodMaterial(over540);
 
-        carport.addOtherMaterial(bræddebolte);
-        carport.addOtherMaterial(firkantskiver);
-        carport.addOtherMaterial(universalbeslagLeft);
-        carport.addOtherMaterial(universalbeslagRight);
-        carport.addOtherMaterial(beslagskruer);
-        carport.addOtherMaterial(hulbånd);
-        carport.addOtherMaterial(bundskruer);
+        String jspSide;
+        // Flat tag, intet skur:
+        if (tag == 0 && skur == 0){
+            carport.addWoodMaterial(under360);
+            carport.addWoodMaterial(under540);
+            carport.addWoodMaterial(over360);
+            carport.addWoodMaterial(over540);
+            carport.addWoodMaterial(rem600);
+            carport.addWoodMaterial(rem480);
+            carport.addWoodMaterial(spær);
+            carport.addWoodMaterial(stolpe);
+            // Vandbrædt
+            // Tagplader
+
+            //carport.addTagMaterial(trapeztag);
+
+            carport.addOtherMaterial(bræddebolte);
+            carport.addOtherMaterial(firkantskiver);
+            carport.addOtherMaterial(universalbeslagLeft);
+            carport.addOtherMaterial(universalbeslagRight);
+            carport.addOtherMaterial(beslagskruer);
+            carport.addOtherMaterial(hulbånd);
+            carport.addOtherMaterial(bundskruer);
+            // Skruer til stern&vandbrædt
+            // Skruer til ydre beklædning
+            // Skruer til indre beklædning
+
+            jspSide = "styklisteFlatroof";
+        // Flat tag, med skur:
+        } else if (tag == 0 && skur == 1){
+            carport.addWoodMaterial(under360);
+            carport.addWoodMaterial(under540);
+            carport.addWoodMaterial(over360);
+            carport.addWoodMaterial(over540);
+            carport.addWoodMaterial(rem600);
+            carport.addWoodMaterial(rem480);
+            carport.addWoodMaterial(spær);
+            carport.addWoodMaterial(stolpe);
+            carport.addWoodMaterial(lægte);
+            carport.addWoodMaterial(beklædning);
+            // Løsholter
+            // Vandbrædt
+            // Tagplader
+
+            carport.addOtherMaterial(bræddebolte);
+            carport.addOtherMaterial(firkantskiver);
+            carport.addOtherMaterial(universalbeslagLeft);
+            carport.addOtherMaterial(universalbeslagRight);
+            carport.addOtherMaterial(beslagskruer);
+            carport.addOtherMaterial(hulbånd);
+            carport.addOtherMaterial(bundskruer);
+            // Skruer til stern&vandbrædt
+            // Skruer til ydre beklædning
+            // Skruer til indre beklædning
+            // Lås
+            // Hængsel
+            // vinkelbeslag
+
+            jspSide = "styklisteFlatroofSkur";
+        // Pitched tag, intet skur:
+        } else if (tag == 1 && skur == 0){
+            jspSide = "styklistePitchedroof";
+        // Pitched tag, med skur:
+        } else {
+            jspSide = "styklistePitchedroofSkur";
+        }
 
         HttpSession session = request.getSession();
 
@@ -144,6 +203,6 @@ public class FindMaterial extends Command{
         session.setAttribute("othermateriallist", carport.getOtherMaterialList());
 
 
-        return "finishedcarport";
+        return jspSide;
     }
 }

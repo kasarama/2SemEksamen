@@ -22,7 +22,18 @@ public class OtherMaterialCalculator {
     }
 
     // Hulbånd
-    public int perforatedBand = 2;
+    public int perforatedBand(int length, int width){
+        double band = Math.sqrt((Math.pow((length/100),2)) + (Math.pow((width/100),2)))*2;
+        int ruller;
+        if (band<1){
+            ruller = 1;
+        } else if (band<2){
+            ruller = 2;
+        } else {
+            ruller = 3;
+        }
+        return ruller;
+    }
 
     // UniversalHøjre
     public int universalBracketsRight(int length){

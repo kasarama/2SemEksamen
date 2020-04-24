@@ -27,6 +27,7 @@
 <div class="container mt-4">
 
     <h4>Din carport</h4>
+    <h6>Flat tag, uden skur</h6>
     <br>
     *** Billede ***
     <br>
@@ -86,13 +87,6 @@
 </div>
 <!-- Container -->
 
-
-Stykliste:
-Antal posts: ${sessionScope.posts}
-<br>
-Der skal bruges:
-<br>
-- ${sessionScope.stolpe} cm
 
 </body>
 </html>

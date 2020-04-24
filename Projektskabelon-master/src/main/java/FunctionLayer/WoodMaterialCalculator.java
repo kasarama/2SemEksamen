@@ -107,7 +107,7 @@ public class WoodMaterialCalculator {
 
     // Skur beklædning
     public int shedTimbering(int shedWidth){
-        int areal = shedWidth+carport.getShedDepth();
+        int areal = shedWidth*carport.getShedDepth();
         int shedTimbering = (int) Math.round(((areal/100)*12.5));
         return shedTimbering;
     }
