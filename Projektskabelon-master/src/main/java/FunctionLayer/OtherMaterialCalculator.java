@@ -1,7 +1,6 @@
 package FunctionLayer;
 
 public class OtherMaterialCalculator {
-    Carport carport = new Carport();
     WoodMaterialCalculator w = new WoodMaterialCalculator();
 
     // Bundskruer

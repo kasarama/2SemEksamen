@@ -129,6 +129,38 @@ CarportBuilder carportBuilder = new CarportBuilder();
             bundskruer.setAntal(antalBundskruer);
             bundskruer.setComment("Bundskruer til taget");
 
+        //Skruer til vandbræt
+        int antalVSkruer = oCalculator.waterboardScrews;
+            Material vSkruer = LogicFacade.getMaterial("SkruerStern&Vandbræt");
+                vSkruer.setAntal(antalVSkruer);
+                vSkruer.setComment("Skruer til stern og vandbræt");
+
+        //Skruer til ydre beklædning
+        int antalYSkruer = oCalculator.outherTimbering(length, width);
+            Material ySkruer = LogicFacade.getMaterial("SkruerYdreBeklædning");
+                ySkruer.setAntal(antalYSkruer);
+                ySkruer.setComment("Skruer til ydre beklædning");
+        //Skruer til indre beklædning
+        int antalISkruer = oCalculator.innerTimbering(length, width);
+            Material iSkruer = LogicFacade.getMaterial("SkruerInnerBeklædning");
+                iSkruer.setAntal(antalISkruer);
+                iSkruer.setComment("Skruer til indre beklædning");
+
+        // Lås
+        Material lås = LogicFacade.getMaterial("Lås");
+            lås.setAntal(oCalculator.shedLock);
+            lås.setComment("Lås til skur");
+
+        // Hængsel
+        Material hængsel = LogicFacade.getMaterial("Hængsel");
+            hængsel.setAntal(oCalculator.shedHinge);
+            hængsel.setComment("Hængsler til skurdør");
+
+        // Tætningsprofil
+        int antalTætningsprofil = oCalculator.gasket(width);
+            Material tætningsprofil = LogicFacade.getMaterial("SkruerInnerBeklædning");
+                iSkruer.setAntal(antalISkruer);
+                iSkruer.setComment("Skruer til indre beklædning");
 
         String jspSide;
         // Flat tag, intet skur:
@@ -142,9 +174,10 @@ CarportBuilder carportBuilder = new CarportBuilder();
             carport.addWoodMaterial(spær);
             carport.addWoodMaterial(stolpe);
             // Vandbrædt
-            // Tagplader
+            // Beklædning af carport
 
             //carport.addTagMaterial(trapeztag);
+            // Tagplader
 
             carport.addOtherMaterial(bræddebolte);
             carport.addOtherMaterial(firkantskiver);
@@ -153,9 +186,9 @@ CarportBuilder carportBuilder = new CarportBuilder();
             carport.addOtherMaterial(beslagskruer);
             carport.addOtherMaterial(hulbånd);
             carport.addOtherMaterial(bundskruer);
-            // Skruer til stern&vandbrædt
-            // Skruer til ydre beklædning
-            // Skruer til indre beklædning
+            carport.addOtherMaterial(vSkruer);
+            carport.addOtherMaterial(ySkruer);
+            carport.addOtherMaterial(iSkruer);
 
             jspSide = "styklisteFlatroof";
         // Flat tag, med skur:
@@ -173,6 +206,8 @@ CarportBuilder carportBuilder = new CarportBuilder();
             // Løsholter
             // Vandbrædt
             // Tagplader
+            // Beklædning af carport
+            // Skur bund
 
             carport.addOtherMaterial(bræddebolte);
             carport.addOtherMaterial(firkantskiver);
@@ -181,11 +216,11 @@ CarportBuilder carportBuilder = new CarportBuilder();
             carport.addOtherMaterial(beslagskruer);
             carport.addOtherMaterial(hulbånd);
             carport.addOtherMaterial(bundskruer);
-            // Skruer til stern&vandbrædt
-            // Skruer til ydre beklædning
-            // Skruer til indre beklædning
-            // Lås
-            // Hængsel
+            carport.addOtherMaterial(vSkruer);
+            carport.addOtherMaterial(ySkruer);
+            carport.addOtherMaterial(iSkruer);
+            carport.addOtherMaterial(lås);
+            carport.addOtherMaterial(hængsel);
             // vinkelbeslag
 
             jspSide = "styklisteFlatroofSkur";
