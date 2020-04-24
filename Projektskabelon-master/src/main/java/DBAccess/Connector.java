@@ -45,6 +45,7 @@ public class Connector {
             PASSWORD = System.getenv("JDBC_PASSWORD");
         } else {
             // Localhost
+            System.out.println("usernam: ."+data[0]+ ". password: ."+ data[1]+".");
             URL = "jdbc:mysql://localhost:3306/fogDB?serverTimezone=CET&useSSL=false";
             USERNAME = data[0];
             PASSWORD = data[1];
