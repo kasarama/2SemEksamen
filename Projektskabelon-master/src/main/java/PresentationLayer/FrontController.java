@@ -46,7 +46,7 @@ public class FrontController extends HttpServlet {
             }
         } catch (Exception ex ) {
             request.setAttribute( "error", ex.getMessage() );
-            request.getRequestDispatcher( "index.jsp" ).forward( request, response );
+            request.getRequestDispatcher( "/WEB-INF/login.jsp" ).forward( request, response );
         }
     }
 

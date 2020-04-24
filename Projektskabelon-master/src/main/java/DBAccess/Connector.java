@@ -1,6 +1,5 @@
-
-
 package DBAccess;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -44,7 +43,6 @@ public class Connector {
             USERNAME = System.getenv("JDBC_USER");
             PASSWORD = System.getenv("JDBC_PASSWORD");
         } else {
-
             // Localhost
             URL = "jdbc:mysql://localhost:3306/fogDB?serverTimezone=CET&allowPublicKeyRetrieval=true&useSSL=false";
             USERNAME = data[0];
@@ -72,4 +70,3 @@ public class Connector {
     }
 
 }
-

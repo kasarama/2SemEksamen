@@ -1,6 +1,7 @@
 package FunctionLayer;
 
 public class Material {
+
     private int id;
     private String name;
     private int size;
@@ -8,19 +9,24 @@ public class Material {
     private int antal;
     private double price;
     private String comment;
+    private String keyword;
+    private String category;
 
-    public Material(String name, int size, String unit) {
+    public Material(int id, String name, int size, String unit, String keyword, String category) {
+        this.id = id;
         this.name = name;
         this.size = size;
         this.unit = unit;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+        this.keyword = keyword;
+        this.category = category;
     }
 
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -47,6 +53,14 @@ public class Material {
         this.unit = unit;
     }
 
+    public int getAntal() {
+        return antal;
+    }
+
+    public void setAntal(int antal) {
+        this.antal = antal;
+    }
+
     public double getPrice() {
         return price;
     }
@@ -63,12 +77,20 @@ public class Material {
         this.comment = comment;
     }
 
-    public int getAntal() {
-        return antal;
+    public String getKeyword() {
+        return keyword;
     }
 
-    public void setAntal(int antal) {
-        this.antal = antal;
+    public void setKeyword(String keyword) {
+        this.keyword = keyword;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     @Override
