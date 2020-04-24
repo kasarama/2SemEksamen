@@ -23,6 +23,8 @@ abstract class Command {
         commands.put( "sendrequest", new SendRequest() );
         commands.put( "showdrawing", new ShowDrowing() );
         commands.put( "newrequest", new NewRequest() );
+        commands.put( "findmaterial", new FindMaterial() );
+
     }
 
     static Command from( HttpServletRequest request ) {
@@ -33,7 +35,7 @@ abstract class Command {
         return commands.getOrDefault(targetName, new UnknownCommand() );   // unknowncommand er default.
     }
 
-    abstract String execute( HttpServletRequest request, HttpServletResponse response ) 
-            throws LoginSampleException;
+    abstract String execute( HttpServletRequest request, HttpServletResponse response )
+            throws Exception;
 
 }

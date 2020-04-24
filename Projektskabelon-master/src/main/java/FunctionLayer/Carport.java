@@ -5,21 +5,29 @@ import java.util.ArrayList;
 public class Carport {
     private int width;
     private int length;
-    //private int shedDepth;
-    private int angle;
     private Shed shed;
     private Roof roof;
     private ArrayList<Material> materialList;
+    private ArrayList<Material> woodMaterialList;
+    private ArrayList<Material> otherMaterialList;
+    private ArrayList<Material> tagMaterialList;
     private double cost;
     private double salePrice;
 
     public Carport() {
-        this.materialList= new ArrayList<>();
-
+        this.woodMaterialList= new ArrayList<>();
+        this.otherMaterialList = new ArrayList<>();
+        this.tagMaterialList = new ArrayList<>();
     }
 
-    public void addMaterial (Material material){
-        materialList.add(material);
+    public void addWoodMaterial (Material material){
+        woodMaterialList.add(material);
+    }
+    public void addOtherMaterial (Material material){
+        otherMaterialList.add(material);
+    }
+    public void addTagMaterial (Material material){
+        tagMaterialList.add(material);
     }
 
     public double getCost() {
@@ -62,20 +70,19 @@ public class Carport {
         shed.setDepth(shedDepth);
     }
 
-    public int getAngle() {
-        return angle;
+    public ArrayList<Material> getWoodMaterialList() {
+        return woodMaterialList;
     }
 
-    public void setAngle(int angle) {
-        this.angle = angle;
+    public void setMaterialList(ArrayList<Material> woodMaterialList) {
+        this.woodMaterialList = woodMaterialList;
     }
 
-    public ArrayList<Material> getMaterialList() {
-        return materialList;
+    public ArrayList<Material> getOtherMaterialList() {
+        return otherMaterialList;
     }
-
-    public void setMaterialList(ArrayList<Material> materialList) {
-        this.materialList = materialList;
+    public ArrayList<Material> getTagMaterialList() {
+        return tagMaterialList;
     }
 
     public Shed getShed() {

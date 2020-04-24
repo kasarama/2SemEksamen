@@ -1,5 +1,6 @@
 package FunctionLayer;
 
+import DBAccess.MaterialMapper;
 import DBAccess.UserMapper;
 
 import java.util.ArrayList;
@@ -20,6 +21,8 @@ public class LogicFacade {
         return user;
     }
 
-
-
+    public static Material getMaterial(String keyword) throws LoginSampleException {
+        return MaterialMapper.getMaterial(keyword);
     }
+
+}
