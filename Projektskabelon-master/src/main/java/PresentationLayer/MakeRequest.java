@@ -1,5 +1,6 @@
 package PresentationLayer;
 
+import FunctionLayer.Carport;
 import FunctionLayer.CarportRequest;
 import FunctionLayer.LoginSampleException;
 import FunctionLayer.ShedSizing;
@@ -18,7 +19,7 @@ public class MakeRequest extends Command {
         int isShed = Integer.parseInt(request.getParameter("isShed"));
 
         HttpSession session = request.getSession();
-        CarportRequest carportRequest = new CarportRequest(length, width, isShed, roofType, 0);
+        Carport carportRequest = new Carport();
         if(session.getAttribute("carportRequest")==null) {
             session.setAttribute("carportRequest", carportRequest);
 

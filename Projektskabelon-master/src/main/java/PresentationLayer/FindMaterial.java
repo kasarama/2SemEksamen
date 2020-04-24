@@ -80,11 +80,13 @@ CarportBuilder carportBuilder = new CarportBuilder();
 
         // Løsholter
 
-        // Skur beklædning:
+
+        // TODO - Mia - kig på shed-depth
+        /*// Skur beklædning:
         int beklædningAntal = wCalculator.shedTimbering(carport.getShedDepth());
             Material beklædning = LogicFacade.getMaterial("SkurBeklædning");
                 beklædning.setAntal(beklædningAntal);
-                beklædning.setComment("Beklædning til skur");
+                beklædning.setComment("Beklædning til skur");*/
 
 
 // TAG
@@ -202,7 +204,7 @@ CarportBuilder carportBuilder = new CarportBuilder();
             carport.addWoodMaterial(spær);
             carport.addWoodMaterial(stolpe);
             carport.addWoodMaterial(lægte);
-            carport.addWoodMaterial(beklædning);
+            // TODO Mia - carport.addWoodMaterial(beklædning);
             // Løsholter
             // Vandbrædt
             // Tagplader

@@ -17,7 +17,7 @@ public class RoofCalculator {
     public int roofHeight(boolean pitchedRoof){
         roofHeight = (carport.getLength())*1;
         if (pitchedRoof)
-            roofHeight = (int) (Math.tan((double) carport.getAngle()))*(carport.getWidth()/2);
+            roofHeight = (int) (Math.tan((double) carport.getRoof().getDegree()))*(carport.getWidth()/2); //TODO se om det virker
         return roofHeight;
     }
 

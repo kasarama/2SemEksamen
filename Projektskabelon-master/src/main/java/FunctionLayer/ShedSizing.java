@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class ShedSizing {
 
-    public static ArrayList<ArrayList> possibleSizes (CarportRequest carportRequest, int version) {
+    public static ArrayList<ArrayList> possibleSizes (Carport carportRequest, int version) {
 
         if(version==1){
             return version1(carportRequest);
@@ -18,11 +18,11 @@ public class ShedSizing {
     }
 
 
-    public static ArrayList<ArrayList> version1(CarportRequest carportRequest) {
+    public static ArrayList<ArrayList> version1(Carport carport) {
         ArrayList<ArrayList> siezeLists = new ArrayList<>();
         ArrayList<Integer> widths = new ArrayList<>();
         int minWidth =100;
-        int maxWidth = carportRequest.getWidth()-300-15;
+        int maxWidth = carport.getWidth()-300-15;
         if (minWidth<10){
             for (int i = 10; i <= maxWidth/10 ; i++) {
                 widths.add(i*10);
@@ -35,13 +35,13 @@ public class ShedSizing {
         }
         siezeLists.add(widths);
 
-        if (carportRequest.getWidth()<=715){
+        if (carport.getWidth()<=715){
             for (int i = 10; i <= maxWidth/10 ; i++) {
                 widths.add((i*10));
             }
             siezeLists.add(widths);
         } else {
-            minWidth = carportRequest.getWidth()-600-15;
+            minWidth = carport.getWidth()-600-15;
             for (int i = minWidth/10; i <= maxWidth/10 ; i++) {
                 widths.add(i*10);
             }
@@ -49,7 +49,7 @@ public class ShedSizing {
         }
 
         ArrayList<Integer> depths = new ArrayList<>();
-        for (int i = 10; i < (carportRequest.getLength()-30)/10; i++) {
+        for (int i = 10; i < (carport.getLength()-30)/10; i++) {
             depths.add(i*10);
 
         }
@@ -57,13 +57,13 @@ public class ShedSizing {
         return siezeLists;
     }
 
-    public static ArrayList<ArrayList> version2(CarportRequest carportRequest) {
+    public static ArrayList<ArrayList> version2(Carport carportRequest) {
         ArrayList<ArrayList> siezeLists = new ArrayList<>();
 
         return siezeLists;
     }
 
-    public static ArrayList<ArrayList> version3(CarportRequest carportRequest) {
+    public static ArrayList<ArrayList> version3(Carport carportRequest) {
         ArrayList<ArrayList> siezeLists = new ArrayList<>();
 
         return siezeLists;
