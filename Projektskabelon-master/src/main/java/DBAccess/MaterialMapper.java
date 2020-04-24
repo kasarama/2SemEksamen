@@ -12,7 +12,8 @@ import java.util.List;
 
 import java.sql.*;
 
-public class MaterialMapper {
+public class MaterialMapper
+{
 
     // Skal have fat i et materiale ud fra note
 
