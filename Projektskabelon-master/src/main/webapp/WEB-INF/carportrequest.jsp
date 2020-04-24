@@ -136,8 +136,8 @@
     <label>Vælg tag type:</label>
     <select name="roofType" class="form-control" required>
         <option selected disabled>Vælg tag type</option>
-        <option value="flat">Fladt tag</option>
-        <option value="pitched">Tag med rejsning </option>
+        <option value="0">Fladt tag</option>
+        <option value="1">Tag med rejsning </option>
     </select>
     <br>
     <label>Vil du have skur?</label>

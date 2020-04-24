@@ -20,13 +20,19 @@ public class MakeRequest extends Command {
     String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException {
         int length = Integer.parseInt(request.getParameter("length"));
         int width = Integer.parseInt(request.getParameter("width"));
-        String roofType = request.getParameter("roofType");
+        int roofType = Integer.parseInt(request.getParameter("roofType"));
         int isShed = Integer.parseInt(request.getParameter("isShed"));
         Carport carportRequest= new Carport();
+        boolean pitchedRoof;
+        if(roofType==1){
+            pitchedRoof=true;
+        } else {
+            pitchedRoof=false;
+        }
 
         carportRequest.setLength(length);
         carportRequest.setWidth(width);
-        carportRequest.setRoof(new Roof(0, 0, roofType));
+        carportRequest.setRoof(new Roof(0, 0, pitchedRoof));
         carportRequest.setShed(new Shed(0,0));
 
         HttpSession session = request.getSession();
@@ -62,7 +68,7 @@ public class MakeRequest extends Command {
         if (isShed != 0) {
             return "shedposition";
         } else {
-            if (roofType.equals("pitched") && isShed == 0) {
+            if (roofType==1 && isShed == 0) {
                 return "designpitchedroof";
             } else {
                 return "designflatroof";

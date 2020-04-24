@@ -24,9 +24,9 @@ public class DesignShed extends Command {
         carportRequest.getShed().setDepth(depth);
         session.setAttribute("carportRequest", carportRequest);
         String page = "";
-        if (carportRequest.getRoof().getType().equals("pitched")) {
+        if (carportRequest.getRoof().isPitchedRoof()) {
             page = "designpitchedroof";
-        } else if (carportRequest.getRoof().getType().equals("flat")) {
+        } else {
             page = "designflatroof";
         }
         return page;

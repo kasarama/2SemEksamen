@@ -19,7 +19,7 @@ public class ShedPosition extends Command {
     String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException {
         HttpSession session = request.getSession();
         Carport carportRequest = (Carport) session.getAttribute("carportRequest");
-        String roofType = carportRequest.getRoof().getType();
+        boolean roofType = carportRequest.getRoof().isPitchedRoof();
         String position = request.getParameter("position");
         carportRequest.getShed().setSide(position);
         String possitionMsg="";
@@ -48,9 +48,9 @@ public class ShedPosition extends Command {
         request.setAttribute("possibleSizes", possibleSizes);
 
         String page="";
-        if(position.equals("null") && roofType.equals("flat")){
+        if(position.equals("null") && !roofType){
             page="designflatroof";
-        } else if(position.equals("null") && roofType.equals("pitched")) {
+        } else if(position.equals("null") && roofType) {
         } else {
             page="designshed";
         }
