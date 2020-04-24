@@ -276,25 +276,24 @@ public class CarportBuilder {
 
     // Beklædning
     public int shedTimbering(int shedWidth){
-        int areal = shedWidth+carport.getShedDepth();
+        int areal = shedWidth+carport.getShed().getDepth();
         int shedTimbering = (int) Math.round(((areal/100)*12.5));
         return shedTimbering;
     }
 
 // algorytmer for calculation of needed materials
-    public void buildCarport(CarportRequest carportRequest) {
-        carport = new Carport();
+    public void buildCarport(Carport carport) {
+
         ArrayList<Material> materials = new ArrayList<>();
 
-        int length = carportRequest.getLength();
-        int width = carportRequest.getWidth();
-        int shedDepth = carportRequest.getShedDepth();
-        int angle = carportRequest.getAngle();
+        int length = carport.getLength();
+        int width = carport.getWidth();
+        int shedDepth = carport.getShed().getDepth();
 
+        Shed shed = new Shed(shedDepth)
         carport.setLength(length);
         carport.setWidth(width);
-        carport.setShedDepth(shedDepth);
-        carport.setAngle(angle);
+        carport.setShed().setDepth()(shedDepth);
         //carport.setRoof(new Roof(new RoofCalculator()); //TODO hvad med dette?
 
 

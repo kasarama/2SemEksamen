@@ -2,20 +2,18 @@ package FunctionLayer;
 
 import java.util.ArrayList;
 
-public class Carport {
+public abstract class Carport {
     private int width;
     private int length;
-    //private int shedDepth;
-    private int angle;
     private Shed shed;
     private Roof roof;
     private ArrayList<Material> materialList;
     private double cost;
     private double salePrice;
 
-    public Carport() {
-        this.materialList= new ArrayList<>();
-
+    public Carport(int width, int length) {
+        this.width = width;
+        this.length = length;
     }
 
     public void addMaterial (Material material){
@@ -52,22 +50,6 @@ public class Carport {
 
     public void setLength(int length) {
         this.length = length;
-    }
-
-    public int getShedDepth() {
-        return shed.getDepth();
-    }
-
-    public void setShedDepth(int shedDepth) {
-        shed.setDepth(shedDepth);
-    }
-
-    public int getAngle() {
-        return angle;
-    }
-
-    public void setAngle(int angle) {
-        this.angle = angle;
     }
 
     public ArrayList<Material> getMaterialList() {
