@@ -289,8 +289,10 @@ public class CarportBuilder {
         int length = carport.getLength();
         int width = carport.getWidth();
         int shedDepth = carport.getShed().getDepth();
+        int shedWidth = carport.getShed().getWidth();
 
-        Shed shed = new Shed(shedDepth)
+        Carport carportTemp;
+        Shed shed = new Shed(,shedDepth)
         carport.setLength(length);
         carport.setWidth(width);
         carport.setShed().setDepth()(shedDepth);
