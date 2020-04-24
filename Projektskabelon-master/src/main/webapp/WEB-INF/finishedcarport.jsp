@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
 
@@ -33,8 +34,8 @@
         <table class="table table-striped ">
             <thead>
             <tr>
-                <th>Beskrivelse</th>
-                <th>Længde</th>
+                <th>Træ & Tagplader</th>
+                <th>Længde (cm)</th>
                 <th>Antal</th>
                 <th>Enhed</th>
                 <th>Note</th>
@@ -42,17 +43,45 @@
             </thead>
             <tbody>
 
+
+            <c:forEach var="material" items="${sessionScope.woodmateriallist}">
                 <tr>
-                    <td>${sessionScope.stolpeInfo.name}</td>
-                    <td>${sessionScope.stolpeInfo.size}</td>
-                    <td>${sessionScope.stolpeAntal}</td>
-                    <td>${sessionScope.stolpeInfo.unit}</td>
-                    <td>${sessionScope.stolpeInfo.comment}</td>
+                    <td>${material.name}</td>
+                    <td>${material.size}</td>
+                    <td>${material.antal}</td>
+                    <td>${material.unit}</td>
+                    <td>${material.comment}</td>
                 </tr>
+            </c:forEach>
 
             </tbody>
         </table>
-    </form>
+
+<br>
+
+        <table class="table table-striped ">
+            <thead>
+            <tr>
+                <th>Beslag & Skruer</th>
+                <th>Antal</th>
+                <th>Enhed</th>
+                <th>Note</th>
+            </tr>
+            </thead>
+            <tbody>
+
+
+            <c:forEach var="material" items="${sessionScope.othermateriallist}">
+                <tr>
+                    <td>${material.name}</td>
+                    <td>${material.antal}</td>
+                    <td>${material.unit}</td>
+                    <td>${material.comment}</td>
+                </tr>
+            </c:forEach>
+
+            </tbody>
+        </table>
 
 </div>
 <!-- Container -->

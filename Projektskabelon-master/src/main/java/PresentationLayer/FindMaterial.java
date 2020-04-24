@@ -1,9 +1,6 @@
 package PresentationLayer;
 
-import FunctionLayer.CarportBuilder;
-import FunctionLayer.LogicFacade;
-import FunctionLayer.LoginSampleException;
-import FunctionLayer.Material;
+import FunctionLayer.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,47 +18,130 @@ public class FindMaterial extends Command{
         int width = Integer.parseInt(request.getParameter( "width" ));
 
         CarportBuilder carportBuilder = new CarportBuilder();
-        ArrayList<Material> materials = new ArrayList<>();
+        WoodMaterialCalculator wCalculator = new WoodMaterialCalculator();
+        OtherMaterialCalculator oCalculator = new OtherMaterialCalculator();
+        Carport carport = new Carport();
 
-     // Stolper
-        int stolpeAntal = carportBuilder.posts(length, width);
-            Material stolpe = LogicFacade.getMaterial("Stolpe");
-     // Rem
-        int remAntal = carportBuilder.rem(length, width);
-            Material rem = LogicFacade.getMaterial("Rem");
-     // Bræddebolte
-        int bræddebolteAntal = carportBuilder.carriageBolts();
-            Material bræddebolte = LogicFacade.getMaterial("Bræddebolte");
-     // Spær
-        int spærAntal = carportBuilder.raft();
+        // Understernbrædder
+        int under360Antal = wCalculator.understernboartU360(length, width);
+        int under540Antal = wCalculator.understernboartU540(length, width);
+            Material under360 = LogicFacade.getMaterial("Understernbrædder360");
+                under360.setAntal(under360Antal);
+                under360.setComment("Understernbrædder 360 cm");
+            Material under540 = LogicFacade.getMaterial("Understernbrædder540");
+                under540.setAntal(under540Antal);
+                under540.setComment("Understernbrædder 540 cm");
+
+        // Oversternbrædder
+        int over360Antal = wCalculator.oversternboartU360(length, width);
+        int over540Antal = wCalculator.oversternboartU540(length, width);
+            Material over360 = LogicFacade.getMaterial("Oversternbrædder360");
+                over360.setAntal(over360Antal);
+                over360.setComment("Oversternbrædder 360 cm");
+            Material over540 = LogicFacade.getMaterial("Oversternbrædder540");
+                over540.setAntal(over540Antal);
+                over540.setComment("Oversternbrædder 540 cm");
+
+        // Rem
+        int rem600Antal = wCalculator.rem600(length, width);
+        int rem480Antal = wCalculator.rem480(length, width);
+            Material rem600 = LogicFacade.getMaterial("Rem600");
+                rem600.setAntal(rem600Antal);
+                rem600.setComment("Rem 600 cm");
+            Material rem480 = LogicFacade.getMaterial("Rem480");
+                rem480.setAntal(rem480Antal);
+                rem480.setComment("Rem 480 cm");
+
+        // Spær
+        int spærAntal = wCalculator.raft(length);
             Material spær = LogicFacade.getMaterial("Spær");
-     // Firkantskiver
-        int firkantskiverAntal = carportBuilder.squares();
-            Material firkantskiver = LogicFacade.getMaterial("Firkantskiver");
-     // Universalbeslag
-        int universalbeslagAntal = carportBuilder.universalBrackets();
-            Material universalbeslag = LogicFacade.getMaterial("Universalbeslag");
-     // Beslagskruer
-        int beslagskruerAntal = carportBuilder.bracketScrews();
-            Material beslagskruer = LogicFacade.getMaterial("Beslagskruer");
-     // Hulbånd
-        int hulbåndAntal = carportBuilder.perforatedBand;
-            Material hulbånd = LogicFacade.getMaterial("Hulbånd");
-     // Skruer
-        int skrueAntal = carportBuilder.screws();
-            Material skruer = LogicFacade.getMaterial("Skruer");
-     // Trapezplader
-        int tagpladerAntal = carportBuilder.roof();
-            Material tagplader = LogicFacade.getMaterial("Trapezplader");
-     // Bundskruer
-        int bundskruerAntal = carportBuilder.roof();
-            //Material tagplader = LogicFacade.getMaterial("Trapezplader");
+                spær.setAntal(spærAntal);
+                spær.setComment("Spær");
 
+        // Stolper
+        int stolpeAntal = wCalculator.posts(length, width);
+            Material stolpe = LogicFacade.getMaterial("Stolpe");
+                stolpe.setAntal(stolpeAntal);
+                stolpe.setComment("Stolpe");
+
+        // Vandbræt
+/*
+        // Lægte:
+        int lægteAntal = wCalculator.shedLath;
+            Material lægte = LogicFacade.getMaterial("Lægte");
+                lægte.setAntal(lægteAntal);
+                lægte.setComment("Lægte til z på skur");
+
+        // Løsholter
+
+        // Skur beklædning:
+        int beklædningAntal = wCalculator.shedTimbering();
+            Material beklædning = LogicFacade.getMaterial("Lægte");
+                lægte.setAntal(lægteAntal);
+                lægte.setComment("Lægte til z på skur");
+*/
+
+
+
+     // Bræddebolte
+        int bræddebolteAntal = oCalculator.carriageBolts(length, width);
+            Material bræddebolte = LogicFacade.getMaterial("Bræddebolt");
+            bræddebolte.setAntal(bræddebolteAntal);
+            bræddebolte.setComment("Bræddebolt");
+
+     // Firkantskiver
+        int firkantskiverAntal = oCalculator.squares(length, width);
+            Material firkantskiver = LogicFacade.getMaterial("Firkantskiver");
+            firkantskiver.setAntal(firkantskiverAntal);
+            firkantskiver.setComment("Firkantskiver");
+     // Universalbeslag
+        int universalbeslagAntalLeft = oCalculator.universalBracketsLeft(length);
+        int universalbeslagAntalRight = oCalculator.universalBracketsRight(length);
+            Material universalbeslagLeft = LogicFacade.getMaterial("UniversalbeslagVenstre");
+                universalbeslagLeft.setAntal(universalbeslagAntalLeft);
+                universalbeslagLeft.setComment("UniversalbeslagVenstre");
+            Material universalbeslagRight = LogicFacade.getMaterial("UniversalbeslagHøjre");
+                universalbeslagRight.setAntal(universalbeslagAntalRight);
+                universalbeslagRight.setComment("UniversalbeslagHøjre");
+     // Beslagskruer
+        int beslagskruerAntal = oCalculator.bracketScrews(length);
+            Material beslagskruer = LogicFacade.getMaterial("Beslagskruer");
+            beslagskruer.setAntal(beslagskruerAntal);
+            beslagskruer.setComment("Beslagskruer");
+     // Hulbånd
+        int hulbåndAntal = oCalculator.perforatedBand;
+            Material hulbånd = LogicFacade.getMaterial("Hulbånd");
+            hulbånd.setAntal(hulbåndAntal);
+            hulbånd.setComment("Hulbånd");
+
+        //Bundskruer (til tag)
+        int antalBundskruer = oCalculator.bottomScrews(length, width);
+            Material bundskruer = LogicFacade.getMaterial("Bundskruer");
+            bundskruer.setAntal(antalBundskruer);
+            bundskruer.setComment("Bundskruer til taget");
+
+// Materialerne bliver tilføjet materiale listerne:
+        carport.addWoodMaterial(stolpe);
+        carport.addWoodMaterial(rem600);
+        carport.addWoodMaterial(rem480);
+        carport.addWoodMaterial(spær);
+        carport.addWoodMaterial(under360);
+        carport.addWoodMaterial(under540);
+        carport.addWoodMaterial(over360);
+        carport.addWoodMaterial(over540);
+
+        carport.addOtherMaterial(bræddebolte);
+        carport.addOtherMaterial(firkantskiver);
+        carport.addOtherMaterial(universalbeslagLeft);
+        carport.addOtherMaterial(universalbeslagRight);
+        carport.addOtherMaterial(beslagskruer);
+        carport.addOtherMaterial(hulbånd);
+        carport.addOtherMaterial(bundskruer);
 
         HttpSession session = request.getSession();
 
-        session.setAttribute( "stolpeAntal", stolpeAntal );
-        session.setAttribute( "stolpeInfo", stolpe );
+        session.setAttribute("woodmateriallist", carport.getWoodMaterialList());
+        session.setAttribute("othermateriallist", carport.getOtherMaterialList());
 
 
         return "finishedcarport";

@@ -5,6 +5,7 @@ public class Material {
     private String name;
     private int size;
     private String unit;
+    private int antal;
     private double price;
     private String comment;
 
@@ -62,8 +63,16 @@ public class Material {
         this.comment = comment;
     }
 
+    public int getAntal() {
+        return antal;
+    }
+
+    public void setAntal(int antal) {
+        this.antal = antal;
+    }
+
     @Override
     public String toString() {
-        return "Stolpe: " + name + " " + size;
+        return "Materiale: " + name + " " + size;
     }
 }
