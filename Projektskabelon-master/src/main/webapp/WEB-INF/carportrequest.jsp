@@ -12,12 +12,10 @@
 <h1>Her kan du designe din egen carport </h1>
 
 
-
-
 <form name="makerequest" action="FrontController" method="POST">
     <input type="hidden" name="target" value="makerequest">
     <label>Vælg længde:</label>
-    <select name="length" class="form-control">
+    <select name="length" class="form-control" required>
         <option selected disabled>Vælg længde</option>
         <option value="240">240</option>
         <option value="270">270</option>
@@ -40,7 +38,7 @@
         <option value="780">780</option>
     </select>
     <label>Vælg bredde:</label>
-    <select name="width" class="form-control">
+    <select name="width" class="form-control" required>
         <option selected disabled>Vælg bredde</option>
         <option value="240">240</option>
         <option value="270">270</option>
@@ -63,21 +61,21 @@
     </select>
     <br>
     <label>Vælg tag type:</label>
-    <select name="roofType" class="form-control">
+    <select name="roofType" class="form-control" required>
         <option selected disabled>Vælg tag type</option>
-        <option value="0">Flat tag</option>
-        <option value="1">Tag med rejsning </option>
+        <option value="flat">Fladt tag</option>
+        <option value="pitched">Tag med rejsning </option>
     </select>
     <br>
     <label>Vil du have skur?</label>
-    <select name="isShed" class="form-control">
+    <select name="isShed" class="form-control" required>
         <option selected disabled> Vil du have skur? </option>
         <option value="1">Med skur</option>
         <option value="0">Uden skur</option>
     </select>
     <br>
 
-    <input class="btn btn-primary" type="submit" value="Videre" >
+    <input type="submit" value="Videre" >
 </form>
 
 </div>

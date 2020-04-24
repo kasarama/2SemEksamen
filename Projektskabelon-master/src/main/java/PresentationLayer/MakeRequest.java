@@ -1,24 +1,31 @@
 package PresentationLayer;
 
-import FunctionLayer.CarportRequest;
-import FunctionLayer.LoginSampleException;
-import FunctionLayer.ShedSizing;
+import FunctionLayer.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 
+/**
+ * Purpose is to read and save data chosen by Customer user on carportrequest.jsp as attributes of a Carport object
+ * @author Magdalena
+ */
 public class MakeRequest extends Command {
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException {
         int length = Integer.parseInt(request.getParameter("length"));
         int width = Integer.parseInt(request.getParameter("width"));
-        int roofType = Integer.parseInt(request.getParameter("roofType"));
+        String roofType = request.getParameter("roofType");
         int isShed = Integer.parseInt(request.getParameter("isShed"));
+        Carport carportRequest= new Carport();
+
+        carportRequest.setLength(length);
+        carportRequest.setWidth(width);
+        carportRequest.setRoof(new Roof(roofType));
+        carportRequest.setShed(new Shed(0,0));
 
         HttpSession session = request.getSession();
-        CarportRequest carportRequest = new CarportRequest(length, width, isShed, roofType, 0);
         if(session.getAttribute("carportRequest")==null) {
             session.setAttribute("carportRequest", carportRequest);
 
@@ -42,26 +49,21 @@ public class MakeRequest extends Command {
                     "Du kan gå tilbage for at redigire, eller vælge skurens mål";
             shedVersion=2;
         } else {
-            shedMsg="Din carport er står nok til at bygge skur på bagsiden eller siden. ";
+            shedMsg="Din carport er ståre nok til at bygge skur på bagsiden eller på siden. ";
             shedVersion=3;
         }
         request.setAttribute("shedMsg", shedMsg);
         request.setAttribute("shedVersion", shedVersion);
 
-        ArrayList<ArrayList> possibleSizes = ShedSizing.possibleSizes(carportRequest, shedVersion);
-
-        request.setAttribute("possibleSizes", possibleSizes);
-
-
         if (isShed != 0) {
-            return "designshed";
+            return "shedposition";
         } else {
-            if (roofType != 0 && isShed == 0) {
+            if (roofType.equals("pitched") && isShed == 0) {
                 return "designpitchedroof";
             } else {
-                    return "designflatroof";
-                }
+                return "designflatroof";
             }
         }
-
     }
+
+}
