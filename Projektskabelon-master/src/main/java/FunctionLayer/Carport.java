@@ -14,6 +14,22 @@ public class Carport {
     private double cost;
     private double salePrice;
 
+    public Shed getShed() {
+        return shed;
+    }
+
+    public void setShed(Shed shed) {
+        this.shed = shed;
+    }
+
+    public Roof getRoof() {
+        return roof;
+    }
+
+    public void setRoof(Roof roof) {
+        this.roof = roof;
+    }
+
     public Carport() {
         this.woodMaterialList= new ArrayList<>();
         this.otherMaterialList = new ArrayList<>();

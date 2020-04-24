@@ -24,10 +24,14 @@ abstract class Command {
         commands.put( "sendrequest", new SendRequest() );
         commands.put( "showdrawing", new ShowDrowing() );
         commands.put( "newrequest", new NewRequest() );
+<<<<<<< HEAD
         commands.put( "findmaterial", new FindMaterial() );
         commands.put("carport", new Carport() );
         commands.put("FlatRoof", new FlatRoof());
         commands.put("materiale", new Materials());
+=======
+        commands.put( "shedposition", new ShedPosition() );
+>>>>>>> employee
     }
 
     static Command from( HttpServletRequest request ) {

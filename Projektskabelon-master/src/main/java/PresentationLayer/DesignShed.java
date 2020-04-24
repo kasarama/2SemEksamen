@@ -1,6 +1,6 @@
 package PresentationLayer;
 
-import FunctionLayer.CarportRequest;
+import FunctionLayer.Carport;
 import FunctionLayer.LoginSampleException;
 import FunctionLayer.Shed;
 
@@ -8,16 +8,27 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+/**
+ * Purpose  to read and save data chosen by Customer user on designshed.jsp as attributes of a Shed object of a Carport
+ * @author Magdalena
+ */
 public class DesignShed extends Command {
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException {
         HttpSession session = request.getSession();
-        CarportRequest carportRequest = (CarportRequest) session.getAttribute("carportRequest");
-        int width=0;
-        int depth=0;
-        Shed shed = new Shed(width, depth);
+        Carport carportRequest = (Carport) session.getAttribute("carportRequest");
 
-
-        return null;
+        int width = Integer.parseInt(request.getParameter("shedWidth"));
+        int depth = Integer.parseInt(request.getParameter("shedDepth"));
+        carportRequest.getShed().setWidth(width);
+        carportRequest.getShed().setDepth(depth);
+        session.setAttribute("carportRequest", carportRequest);
+        String page = "";
+        if (carportRequest.getRoof().getType().equals("pitched")) {
+            page = "designpitchedroof";
+        } else if (carportRequest.getRoof().getType().equals("flat")) {
+            page = "designflatroof";
+        }
+        return page;
     }
 }

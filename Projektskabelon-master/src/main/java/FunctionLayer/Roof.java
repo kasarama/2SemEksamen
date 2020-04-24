@@ -21,5 +21,6 @@ public class Roof {
 
     public boolean isPitchedRoof() {
         return pitchedRoof;
+
     }
 }
