@@ -3,11 +3,23 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@include file="../includes/header.inc"%>
 
-<h3>Fladt tag design </h3>
+<h3>Fladt tag design</h3>
 <!--TODO fyld dropdown menu med data from DB, skriv former til alle de atributter som skal tastes for at kunne designe en fladt tag-->
 
-<form name="makerequest" action="FrontController" method="POST">
-    <input type="hidden" name="target" value="makerequest">
+<form name="FlatRoof" action="FrontController" method="POST">
+    <input type="hidden" name="target" value="FlatRoof">
+    <label>Hvor meget skal taghældningen være på?:</label>
+    <select name="tilt" class="form-control">
+        <option selected disabled>Vælg antal grader</option>
+        <c:forEach var="tilt" items="${requestScope.tilt}">
+            <option value="${tiltOptions}">${tiltOptions}</option>
+        </c:forEach>
+    </select>
+    <input class="btn btn-primary" type="submit" value="Videre" >
+</form>
+
+<form name="FlatRoof" action="FrontController" method="POST">
+    <input type="hidden" name="target" value="FlatRoof">
     <label>Vælg tagdækning:</label>
     <select name="length" class="form-control">
         <option selected disabled>Vælg type</option>

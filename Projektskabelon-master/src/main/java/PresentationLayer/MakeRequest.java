@@ -1,7 +1,6 @@
 package PresentationLayer;
 
 import FunctionLayer.Carport;
-import FunctionLayer.CarportRequest;
 import FunctionLayer.LoginSampleException;
 import FunctionLayer.ShedSizing;
 
@@ -18,22 +17,27 @@ import java.util.ArrayList;
 public class MakeRequest extends Command {
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException {
+
         int length = Integer.parseInt(request.getParameter("length"));
         int width = Integer.parseInt(request.getParameter("width"));
         int roofType = Integer.parseInt(request.getParameter("roofType"));
         int isShed = Integer.parseInt(request.getParameter("isShed"));
-        Carport carportRequest= new Carport();
-        boolean pitchedRoof;
-        if(roofType==1){
-            pitchedRoof=true;
-        } else {
-            pitchedRoof=false;
-        }
 
+        Carport carportRequest= new Carport();
+
+        carportRequest.setShed(new Shed(0,0));
         carportRequest.setLength(length);
         carportRequest.setWidth(width);
-        carportRequest.setRoof(new Roof(0, 0, pitchedRoof));
-        carportRequest.setShed(new Shed(0,0));
+
+        int roofLength = length + carportRequest.getShed().getDepth();
+        if(roofType==1){
+            carportRequest.setRoof(new RoofPitched(0, roofLength, width, 0));
+            //// TODO - Cath note: int height, int length, int width, int degree (skal hentes fra?)
+        } else {
+            carportRequest.setRoof(new RoofFlat(0, roofLength, width, 0));
+            //// TODO - Cath note: int height, int length, int width, int degree (skal hentes fra?)
+        }
+
 
         HttpSession session = request.getSession();
         if(session.getAttribute("carportRequest")==null) {
@@ -56,7 +60,7 @@ public class MakeRequest extends Command {
             shedVersion=1;
         } else if (length>=560 && width<420){
             shedMsg="Med de mål du har valgt kan du kun bygge din skur på bagsiden af carport. " +
-                    "Du kan gå tilbage for at redigire, eller vælge skurens mål";
+                    "Du kan gå tilbage for at redigere, eller vælge skurens mål";
             shedVersion=2;
         } else {
             shedMsg="Din carport er ståre nok til at bygge skur på bagsiden eller på siden. ";

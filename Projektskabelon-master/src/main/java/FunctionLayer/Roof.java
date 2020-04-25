@@ -18,6 +18,26 @@ public abstract class Roof {
         tagMaterialList = new ArrayList();
     }
 
+    public int getHeight() {
+        return height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
+    public void setDegree(int degree) {
+        this.degree = degree;
+    }
+
+    public void setTagMaterialList(ArrayList<Material> tagMaterialList) {
+        this.tagMaterialList = tagMaterialList;
+    }
+
+    public void setPitched(boolean pitched) {
+        this.pitched = pitched;
+    }
+
     public int getLength() {
         return length;
     }

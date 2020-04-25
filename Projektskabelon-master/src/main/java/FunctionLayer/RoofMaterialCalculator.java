@@ -6,7 +6,7 @@ public class RoofMaterialCalculator {
     private int length = carport.getLength();
     private int width = carport.getWidth();
 
-    RoofCalculator roofCalculator = new RoofCalculator(carport);
+    RoofSizing roofSizing = new RoofSizing(carport);
     private int trapezpladeWidth = 100;
     private int T600RoofPlateLength = 600;
     private int T300RoofPlateLength = 300;

@@ -19,7 +19,7 @@ public class ShedPosition extends Command {
     String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException {
         HttpSession session = request.getSession();
         Carport carportRequest = (Carport) session.getAttribute("carportRequest");
-        boolean roofType = carportRequest.getRoof().isPitchedRoof();
+        boolean roofType = carportRequest.getRoof().isPitched();
         String position = request.getParameter("position");
         carportRequest.getShed().setSide(position);
         String possitionMsg="";

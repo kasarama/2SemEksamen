@@ -3,21 +3,21 @@ package FunctionLayer;
 import java.security.PrivateKey;
 
 //Beregner
-public class RoofCalculator {
+public class RoofSizing {
 
     private Carport carport;
 
     private int roofLength;
     private int roofHeight;
 
-    public RoofCalculator(Carport carport) {
+    public RoofSizing(Carport carport) {
         this.carport = carport;
     }
 
     public int roofHeight(boolean pitchedRoof){
         roofHeight = (carport.getLength())*1;
         if (pitchedRoof)
-            roofHeight = (int) (Math.tan((double) carport.getRoof().getDegree()))*(carport.getWidth()/2); //TODO se om det virker
+            roofHeight = (int) (Math.tan((double) carport.getRoof().getDegree()))*((carport.getWidth()/2)); //TODO se om det virker
         return roofHeight;
     }
 
@@ -44,18 +44,18 @@ public class RoofCalculator {
 
     //Beregning af vinklen af tagryggen på et tag med rejsning
     public int[] pitchDegreesOptionsForCostumerToChoose(){
-        int minDegreeOption = 90; //TODO slå det op i tegning/beskrivelse
-        int maxDegreeOption = 180-1; //TODO slå det op i tegning/beskrivelse
+        int minDegreeOption = 20; //TODO slå det op i tegning/beskrivelse
+        int maxDegreeOption = 45-1; //TODO slå det op i tegning/beskrivelse
         int deltaDegreeOption = maxDegreeOption-minDegreeOption;
         int[] pitchDegreeOptions = new int[deltaDegreeOption];
-        for (int i = 0; i < (deltaDegreeOption-1); i++) {
-            pitchDegreeOptions[i] = minDegreeOption++;
+        for (int i = 0; i < (deltaDegreeOption-1); i=+5) {
+            pitchDegreeOptions[i] = minDegreeOption+5;
         }
         return pitchDegreeOptions;
     }
 
     //Hjælpemetode for bredde af tag afhægnigt af type
-    public int roofwidthHelper() throws Exception {
+    public int roofWidthSurface() throws Exception {
         int roofwidth = carport.getWidth();
         if (carport.getRoof().isPitched()) {
             roofwidth = pitchedRoofCalcutatedWidth(carport.getRoof().getDegree());
@@ -63,7 +63,7 @@ public class RoofCalculator {
         return roofwidth;
     }
     //Hjælpemetode for længde af tag afhægnigt af type
-    public int rooflenghtHelper() throws Exception {
+    public int roofLengthSurface() throws Exception {
         int roofLength = flatRoofCalcutatedSide(carport.getRoof().getDegree());
 
         if (carport.getRoof().isPitched()) {
