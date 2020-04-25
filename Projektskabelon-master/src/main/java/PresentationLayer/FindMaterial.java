@@ -18,8 +18,8 @@ public class FindMaterial extends Command{
         int tag = Integer.parseInt(request.getParameter("roofType"));
         int skur = Integer.parseInt(request.getParameter("isShed"));
 
-CarportBuilder carportBuilder = new CarportBuilder();
-
+//CarportBuilder carportBuilder = new CarportBuilder();
+        RoofMaterialCalculator rCalculator = new RoofMaterialCalculator();
         WoodMaterialCalculator wCalculator = new WoodMaterialCalculator();
         OtherMaterialCalculator oCalculator = new OtherMaterialCalculator();
         Carport carport = new Carport();

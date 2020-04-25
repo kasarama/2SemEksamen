@@ -114,7 +114,9 @@ public class WoodMaterialCalculator {
 
     // Vandbræt
 
-    // Tagplader
+
+    // TODO Skal dette være her?
+    /*// Tagplader
     public int roofAntal(int length, int width){
         int numberOfTrapezplader = 0;
         int T300Areal = 3;
@@ -146,7 +148,7 @@ public class WoodMaterialCalculator {
             trapezplader = "T600";
         }
         return trapezplader;
-    }
+    }*/
 
     // Skur stolpe
     public int shedPosts(boolean shed, int length, int width){

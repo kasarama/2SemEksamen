@@ -54,4 +54,22 @@ public class RoofCalculator {
         return pitchDegreeOptions;
     }
 
+    //Hjælpemetode for bredde af tag afhægnigt af type
+    public int roofwidthHelper() throws Exception {
+        int roofwidth = carport.getWidth();
+        if (carport.getRoof().isPitched()) {
+            roofwidth = pitchedRoofCalcutatedWidth(carport.getRoof().getDegree());
+        }
+        return roofwidth;
+    }
+    //Hjælpemetode for længde af tag afhægnigt af type
+    public int rooflenghtHelper() throws Exception {
+        int roofLength = flatRoofCalcutatedSide(carport.getRoof().getDegree());
+
+        if (carport.getRoof().isPitched()) {
+            roofLength = carport.getLength();
+        }
+        return roofLength;
+    }
+
 }

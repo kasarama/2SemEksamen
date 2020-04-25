@@ -7,33 +7,16 @@ public class Carport {
     private int length;
     private Shed shed;
     private Roof roof;
-    private ArrayList<Material> materialList;
+    private ArrayList<Material> tagMaterialList;
     private ArrayList<Material> woodMaterialList;
     private ArrayList<Material> otherMaterialList;
-    private ArrayList<Material> tagMaterialList;
     private double cost;
     private double salePrice;
-
-    public Shed getShed() {
-        return shed;
-    }
-
-    public void setShed(Shed shed) {
-        this.shed = shed;
-    }
-
-    public Roof getRoof() {
-        return roof;
-    }
-
-    public void setRoof(Roof roof) {
-        this.roof = roof;
-    }
 
     public Carport() {
         this.woodMaterialList= new ArrayList<>();
         this.otherMaterialList = new ArrayList<>();
-        this.tagMaterialList = new ArrayList<>();
+        this.tagMaterialList = roof.getTagMaterialList();
     }
 
     public void addWoodMaterial (Material material){
@@ -97,8 +80,25 @@ public class Carport {
     public ArrayList<Material> getOtherMaterialList() {
         return otherMaterialList;
     }
+
     public ArrayList<Material> getTagMaterialList() {
         return tagMaterialList;
+    }
+
+    public Shed getShed() {
+        return shed;
+    }
+
+    public void setShed(Shed shed) {
+        this.shed = shed;
+    }
+
+    public Roof getRoof() {
+        return roof;
+    }
+
+    public void setRoof(Roof roof) {
+        this.roof = roof;
     }
 
 
