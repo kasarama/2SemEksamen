@@ -5,12 +5,11 @@ public class Shed {
     private int width;
     private int depth;
     private String side;
-    private String corner;
 
-    public Shed(int width, int depth) {
+    public Shed(int width, int depth, String side) {
         this.width = width;
         this.depth = depth;
-
+        this.side = side;
     }
 
     public String getSide() {
@@ -21,15 +20,7 @@ public class Shed {
         this.side = side;
     }
 
-    public String getCorner() {
-        return corner;
-    }
-
-    public void setCorner(String corner) {
-        this.corner = corner;
-    }
-
-    public int getWidth() {
+     public int getWidth() {
         return width;
     }
 

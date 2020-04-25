@@ -6,6 +6,8 @@
 
 <h3>Tag med rejsning design</h3>
 
+${requestScope.cearportToString}
+
 <form name="showdrawing" action="FrontController" method="POST">
     <input type="hidden" name="target" value="showdrawing">
     <label>Vælg tagdækning:</label>

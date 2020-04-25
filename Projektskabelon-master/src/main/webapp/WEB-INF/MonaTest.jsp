@@ -1,4 +1,4 @@
-<%--
+<%@ page import="CarportUtil.Initializer" %><%--
   Created by IntelliJ IDEA.
   User: Bruger
   Date: 24-04-2020

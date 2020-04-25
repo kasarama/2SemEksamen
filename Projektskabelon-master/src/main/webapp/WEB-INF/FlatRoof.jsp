@@ -8,7 +8,7 @@
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@include file="../Includes/header.inc" %>
+<%@include file="../includes/header.inc" %>
 
 <h3>Fladt tag design centre </h3>
 <!--TODO fyld dropdown menu med data from DB, skriv former til alle de atributter som skal tastes for at kunne designe en fladt tag-->
@@ -36,4 +36,4 @@
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 
-<%@include file=" ../Includes/footer.inc"%>
+<%@include file=" ../includes/footer.inc"%>
