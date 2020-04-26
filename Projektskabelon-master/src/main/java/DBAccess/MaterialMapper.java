@@ -102,16 +102,19 @@ public class MaterialMapper
         try
         {
             Connection con = Connector.connection();
-            String SQL = "SELECT name, picture FROM materials WHERE category='overlay'";
+            String SQL = "SELECT materialID, name, picture FROM materials WHERE category='overlay'";
             PreparedStatement ps = con.prepareStatement(SQL);
             ResultSet rs = ps.executeQuery();
             while (rs.next())
             {
                 String name = rs.getString("name");
                 String picture = rs.getString("picture");
-
+                int materialID = rs.getInt("materialID");
 
                 Material material = new Material();
+                material.setName(name);
+                material.setPicture(picture);
+                material.setId(materialID);
                 materialList.add(material);
             }
         }

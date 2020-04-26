@@ -1,6 +1,7 @@
 package CarportUtil;
 
 import FunctionLayer.LogicFacade;
+import FunctionLayer.LoginSampleException;
 import FunctionLayer.Material;
 
 import java.util.List;
@@ -34,9 +35,13 @@ public class Initializer {
         }
         return materialList;
     }
-    private static List<Material> getOverlayList(){
+    public static List<Material> getOverlayList() throws LoginSampleException {
         if (overlayList == null){
-            overlayList = LogicFacade.getAllOverlayMaterials();
+            try {
+                overlayList = LogicFacade.getAllOverlayMaterials();
+            } catch (LoginSampleException e) {
+                throw new LoginSampleException("Overlay list could not load");
+            }
         }
         return overlayList;
 

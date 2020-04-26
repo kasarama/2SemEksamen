@@ -24,6 +24,13 @@ public class CarportBase extends Command {
             shedSide = request.getParameter("shedSide");
         }
 
+        if (request.getParameter("tooverlay") != null) {
+
+            shedWidthParameter = Integer.parseInt(request.getParameter("shedWidthParameter"));
+            shedDepth = Integer.parseInt(request.getParameter("shedDepth"));
+            shedSide = request.getParameter("shedSide");
+        }
+
         Carport carportBase = new Carport();
         boolean pitchedRoof;
         if (roofType == 1) {
