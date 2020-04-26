@@ -32,6 +32,6 @@ public class FlatRoof extends Command {
 
         session.setAttribute("carportRequest", carportRequest);
 
-        return "showdrawing";
+        return "designflatroof";
     }
 }
