@@ -94,6 +94,7 @@ public class MaterialMapper
             return materialList;
         }
 
+
     // This class Connects to DB and gets the "Overlay material" data from it.
 
     public static List<Material> getAllOverlayMaterials() throws LoginSampleException {
@@ -121,6 +122,30 @@ public class MaterialMapper
         return materialList;
     }
 
+
+    public static void addMatDB(Material material) throws LoginSampleException {
+        try {
+            Connection con = Connector.connection();
+            String SQL = "INSERT INTO materials (name,size,unit,keyword,category,price,picture) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ps.setString(1, material.getName());
+            ps.setInt(2, material.getSize());
+            ps.setString(3, material.getUnit());
+            ps.setString(4, material.getKeyword());
+            ps.setString(5, material.getCategory());
+            ps.setDouble(6, material.getPrice());
+            ps.setString(7, material.getPicture());
+            ps.executeUpdate();
+        }catch (SQLException ex){
+            ex.printStackTrace();
+            throw new LoginSampleException("Problem while saving in database");
+        }catch (ClassNotFoundException ex){
+            ex.printStackTrace();
+            throw  new LoginSampleException(ex.getMessage());
+        }
+
     }
+
+
 }
 

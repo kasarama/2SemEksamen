@@ -51,7 +51,7 @@ public class FrontController extends HttpServlet {
             if (origin!=null) {
                 request.getRequestDispatcher("/WEB-INF/" + origin + ".jsp").forward(request, response);
             }else {
-                request.getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
+                request.getRequestDispatcher("/index.jsp").forward(request, response);
             }
         }
     }
