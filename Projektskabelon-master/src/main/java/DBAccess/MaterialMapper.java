@@ -93,5 +93,34 @@ public class MaterialMapper
             // return the gotten 'material' data from the DB
             return materialList;
         }
+
+    // This class Connects to DB and gets the "Overlay material" data from it.
+
+    public static List<Material> getAllOverlayMaterials() throws LoginSampleException {
+        List<Material> materialList=new ArrayList<>();
+        try
+        {
+            Connection con = Connector.connection();
+            String SQL = "SELECT name, picture FROM materials WHERE category='overlay'";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next())
+            {
+                String name = rs.getString("name");
+                String picture = rs.getString("picture");
+
+
+                Material material = new Material();
+                materialList.add(material);
+            }
+        }
+        catch(ClassNotFoundException | SQLException ex )
+        {
+            throw new LoginSampleException(ex.getMessage());
+        }
+        return materialList;
+    }
+
+    }
 }
 

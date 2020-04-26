@@ -32,5 +32,8 @@ public class LogicFacade {
        return MaterialMapper.getAllRoofMaterials(); //return 'getAllRoofMaterials()' method from MaterialMapper
     }
 
+    public static List<Material> getAllOverlayMaterials() {
+        return MaterialMapper.getAllOverlayMaterials();
+    }
 }
 

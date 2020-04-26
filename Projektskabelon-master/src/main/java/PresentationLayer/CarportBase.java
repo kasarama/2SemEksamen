@@ -45,6 +45,9 @@ public class CarportBase extends Command {
         }
         request.setAttribute("cearportToString", carportBase.toString());
 
+        if(request.getParameter("tooverlay")!=null){
+            return "overlay";
+        } else
         if (roofType == 1) {
             return "designpitchedroof";
         } else {

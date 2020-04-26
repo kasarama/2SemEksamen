@@ -19,6 +19,7 @@ NOTE 2: what's exactly being returned?
 public class Initializer {
 
     private static List<Material> materialList = null;
+    private static List<Material> overlayList = null;
 
     //Getters
     public static List<Material> getMaterialList() {
@@ -32,5 +33,12 @@ public class Initializer {
             }
         }
         return materialList;
+    }
+    private static List<Material> getOverlayList(){
+        if (overlayList == null){
+            overlayList = LogicFacade.getAllOverlayMaterials();
+        }
+        return overlayList;
+
     }
 }
