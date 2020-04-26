@@ -93,5 +93,30 @@ public class MaterialMapper
             // return the gotten 'material' data from the DB
             return materialList;
         }
+
+    public static void addMatDB(Material material) throws LoginSampleException {
+        try {
+            Connection con = Connector.connection();
+            String SQL = "INSERT INTO materials (name,size,unit,keyword,category,price,picture) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ps.setString(1, material.getName());
+            ps.setInt(2, material.getSize());
+            ps.setString(3, material.getUnit());
+            ps.setString(4, material.getKeyword());
+            ps.setString(5, material.getCategory());
+            ps.setDouble(6, material.getPrice());
+            ps.setString(7, material.getPicture());
+            ps.executeUpdate();
+        }catch (SQLException ex){
+            ex.printStackTrace();
+            throw new LoginSampleException("Problem while saving in database");
+        }catch (ClassNotFoundException ex){
+            ex.printStackTrace();
+            throw  new LoginSampleException(ex.getMessage());
+        }
+
+    }
+
+
 }
 

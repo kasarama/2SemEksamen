@@ -21,7 +21,7 @@
     <a href="FrontController?target=redirect&destination=carportbase">New Designe Center</a>
 </h2>
 <br>
-<br>
+<br><a href="FrontController?target=redirect&destination=addmaterial">Add Material</a>
 <br>
 <br>
 

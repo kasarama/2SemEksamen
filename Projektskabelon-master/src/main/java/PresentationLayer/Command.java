@@ -29,6 +29,7 @@ abstract class Command {
         commands.put("materiale", new Materials());
         commands.put( "shedposition", new ShedPosition() );
         commands.put( "carportbase", new CarportBase() );
+        commands.put( "addmaterial", new AddMaterial() );
 
     }
 
