@@ -9,6 +9,58 @@ public class RoofSizing {
 
     private int roofLength;
     private int roofHeight;
+    private int minpitchDegreeOption = 20; //TODO slå det op i tegning/beskrivelse
+    private int maxpitchDegreeOption = 45-1; //TODO slå det op i tegning/beskrivelse
+    private int minTiltDegreeOption = 2; //TODO slå det op i tegning/beskrivelse
+    private int maxTiltDegreeOption = 10; //TODO slå det op i tegning/beskrivelse
+
+    public int getRoofLength() {
+        return roofLength;
+    }
+
+    public void setRoofLength(int roofLength) {
+        this.roofLength = roofLength;
+    }
+
+    public int getRoofHeight() {
+        return roofHeight;
+    }
+
+    public void setRoofHeight(int roofHeight) {
+        this.roofHeight = roofHeight;
+    }
+
+    public int getMinpitchDegreeOption() {
+        return minpitchDegreeOption;
+    }
+
+    public void setMinpitchDegreeOption(int minpitchDegreeOption) {
+        this.minpitchDegreeOption = minpitchDegreeOption;
+    }
+
+    public int getMaxpitchDegreeOption() {
+        return maxpitchDegreeOption;
+    }
+
+    public void setMaxpitchDegreeOption(int maxpitchDegreeOption) {
+        this.maxpitchDegreeOption = maxpitchDegreeOption;
+    }
+
+    public int getMinTiltDegreeOption() {
+        return minTiltDegreeOption;
+    }
+
+    public void setMinTiltDegreeOption(int minTiltDegreeOption) {
+        this.minTiltDegreeOption = minTiltDegreeOption;
+    }
+
+    public int getMaxTiltDegreeOption() {
+        return maxTiltDegreeOption;
+    }
+
+    public void setMaxTiltDegreeOption(int maxTiltDegreeOption) {
+        this.maxTiltDegreeOption = maxTiltDegreeOption;
+    }
 
     public RoofSizing(Carport carport) {
         this.carport = carport;
@@ -44,12 +96,20 @@ public class RoofSizing {
 
     //Beregning af vinklen af tagryggen på et tag med rejsning
     public int[] pitchDegreesOptionsForCostumerToChoose(){
-        int minDegreeOption = 20; //TODO slå det op i tegning/beskrivelse
-        int maxDegreeOption = 45-1; //TODO slå det op i tegning/beskrivelse
-        int deltaDegreeOption = maxDegreeOption-minDegreeOption;
+        int deltaDegreeOption = maxpitchDegreeOption-minpitchDegreeOption;
         int[] pitchDegreeOptions = new int[deltaDegreeOption];
         for (int i = 0; i < (deltaDegreeOption-1); i=+5) {
-            pitchDegreeOptions[i] = minDegreeOption+5;
+            pitchDegreeOptions[i] = minpitchDegreeOption+5;
+        }
+        return pitchDegreeOptions;
+    }
+
+    //Beregning af vinklen af tagryggen på et tag med rejsning
+    public int[] tiltDegreesOptionsForCostumerToChoose(){
+        int deltaDegreeOption = maxTiltDegreeOption-minTiltDegreeOption;
+        int[] pitchDegreeOptions = new int[deltaDegreeOption];
+        for (int i = 0; i < (deltaDegreeOption-1); i++) {
+            pitchDegreeOptions[i] = minTiltDegreeOption+5;
         }
         return pitchDegreeOptions;
     }

@@ -4,6 +4,10 @@ import java.util.ArrayList;
 
 public class ShedSizing {
 
+    public static int shedWidth(int carportWidth, int shedWidthParameter){
+        return carportWidth/shedWidthParameter-15*2/shedWidthParameter;
+    }
+
     public static ArrayList<ArrayList> possibleSizes (Carport carportRequest, String position) throws LoginSampleException {
 
 

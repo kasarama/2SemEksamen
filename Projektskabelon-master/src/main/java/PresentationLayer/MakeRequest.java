@@ -1,14 +1,10 @@
 package PresentationLayer;
 
-import FunctionLayer.Carport;
-import FunctionLayer.LoginSampleException;
-import FunctionLayer.ShedSizing;
-
 import FunctionLayer.*;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
 
 /**
  * Purpose is to read and save data chosen by Customer user on carportrequest.jsp as attributes of a Carport object
@@ -25,7 +21,7 @@ public class MakeRequest extends Command {
 
         Carport carportRequest= new Carport();
 
-        carportRequest.setShed(new Shed(0,0));
+        carportRequest.setShed(new Shed(0,0, null));
         carportRequest.setLength(length);
         carportRequest.setWidth(width);
 
@@ -38,6 +34,10 @@ public class MakeRequest extends Command {
             //// TODO - Cath note: int height, int length, int width, int degree (skal hentes fra?)
         }
 
+        /*carportRequest.setLength(length);
+        carportRequest.setWidth(width);
+        carportRequest.setRoof(new Roof(0, 0, pitchedRoof));
+        carportRequest.setShed(new Shed(0,0,""));*/
 
         HttpSession session = request.getSession();
         if(session.getAttribute("carportRequest")==null) {

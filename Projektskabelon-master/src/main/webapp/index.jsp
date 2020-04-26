@@ -14,11 +14,34 @@
         <h2>
             <a href="FrontController?target=redirect&destination=carportrequest">Design din egen Carport</a>
         </h2>
+<br>
+<br>
+<br>
+<h2>
+    <a href="FrontController?target=redirect&destination=carportbase">New Designe Center</a>
+</h2>
+<br>
+<br>
+<br>
+<br>
+
+
 
 <h2>
     <a href="FrontController?target=redirect&destination=MonaTest">Mona Test</a>
 </h2>
 
+
+<br>
+<br>
+<br>
+<h2>
+    <a href="FrontController?target=redirect&destination=CathrineTest">Cathrine Test</a>
+</h2>
+<br>
+<br>
+<br>
+<br>
 
         <c:if test = "${requestScope.error!= null}" >
            <h2>Error ! </h2>

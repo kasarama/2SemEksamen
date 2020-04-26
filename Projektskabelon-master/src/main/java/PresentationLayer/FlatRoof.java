@@ -1,8 +1,6 @@
 package PresentationLayer;
 
-import FunctionLayer.Carport;
-import FunctionLayer.LoginSampleException;
-import FunctionLayer.RoofSizing;
+import FunctionLayer.*;
 import sun.net.dns.ResolverConfiguration;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,16 +14,17 @@ public class FlatRoof extends Command {
 
         HttpSession session = request.getSession();
         Carport carportRequest = (Carport) session.getAttribute("carportRequest");
-        RoofSizing roofSizing = new RoofSizing(carportRequest);
+
 
         int height = Integer.parseInt(request.getParameter("height"));
         int tilt = Integer.parseInt(request.getParameter("tilt"));
+
+        RoofSizing roofSizing = new RoofSizing(carportRequest);
+
         int[] tiltOptions = roofSizing.pitchDegreesOptionsForCostumerToChoose();
 
         request.setAttribute("height", height);
         request.setAttribute("tilt", tilt);
-        request.setAttribute("tiltOptions", tiltOptions);
-
 
         carportRequest.getRoof().setHeight(height);
         carportRequest.getRoof().setDegree(tilt);
