@@ -72,12 +72,11 @@ public class MakeRequest extends Command {
         if (isShed != 0) {
             return "shedposition";
         } else {
-            if (roofType==1 && isShed == 0) {
+            if (roofType == 1 && isShed == 0) {
                 return "designpitchedroof";
-            } else {
-                return "designflatroof";
             }
         }
-    }
 
-}
+        return "designflatroof";
+        }
+    }

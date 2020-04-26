@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="Projektskabelon-master:war2">
+    <output-path>$PROJECT_DIR$/out/artifacts/Projektskabelon_master_war2</output-path>
+    <root id="archive" name="Projektskabelon-master_war.war">
+      <element id="artifact" artifact-name="Projektskabelon-master:war exploded" />
+    </root>
+  </artifact>
+</component>
