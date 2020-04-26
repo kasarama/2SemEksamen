@@ -19,6 +19,10 @@
     <a href="FrontController?target=redirect&destination=MonaTest">Mona Test</a>
 </h2>
 
+<h2>
+    <a href="FrontController?target=redirect&destination=MiaTest">Mia Test</a>
+</h2>
+
 
         <c:if test = "${requestScope.error!= null}" >
            <h2>Error ! </h2>

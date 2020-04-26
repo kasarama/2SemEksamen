@@ -17,9 +17,7 @@ public class FindMaterial extends Command{
         int width = Integer.parseInt(request.getParameter( "width" ));
         int tag = Integer.parseInt(request.getParameter("roofType"));
         int skur = Integer.parseInt(request.getParameter("isShed"));
-
-CarportBuilder carportBuilder = new CarportBuilder();
-
+        
         WoodMaterialCalculator wCalculator = new WoodMaterialCalculator();
         OtherMaterialCalculator oCalculator = new OtherMaterialCalculator();
         Carport carport = new Carport();
@@ -34,7 +32,6 @@ CarportBuilder carportBuilder = new CarportBuilder();
             Material under540 = LogicFacade.getMaterial("Understernbrædder540");
                 under540.setAntal(under540Antal);
                 under540.setComment("Understernbrædder 540 cm");
-
         // Oversternbrædder
         int over360Antal = wCalculator.oversternboartU360(length, width);
         int over540Antal = wCalculator.oversternboartU540(length, width);
@@ -44,7 +41,6 @@ CarportBuilder carportBuilder = new CarportBuilder();
             Material over540 = LogicFacade.getMaterial("Oversternbrædder540");
                 over540.setAntal(over540Antal);
                 over540.setComment("Oversternbrædder 540 cm");
-
         // Rem
         int rem600Antal = wCalculator.rem600(length, width);
         int rem480Antal = wCalculator.rem480(length, width);
@@ -54,13 +50,11 @@ CarportBuilder carportBuilder = new CarportBuilder();
             Material rem480 = LogicFacade.getMaterial("Rem480");
                 rem480.setAntal(rem480Antal);
                 rem480.setComment("Rem 480 cm");
-
         // Spær
         int spærAntal = wCalculator.raft(length);
             Material spær = LogicFacade.getMaterial("Spær");
                 spær.setAntal(spærAntal);
                 spær.setComment("Spær");
-
         // Stolper
         int stolpeAntal = wCalculator.posts(length, width);
             Material stolpe = LogicFacade.getMaterial("Stolpe");
@@ -163,7 +157,6 @@ CarportBuilder carportBuilder = new CarportBuilder();
             Material tætningsprofil = LogicFacade.getMaterial("SkruerInnerBeklædning");
                 iSkruer.setAntal(antalISkruer);
                 iSkruer.setComment("Skruer til indre beklædning");
-
         String jspSide;
         // Flat tag, intet skur:
         if (tag == 0 && skur == 0){
@@ -191,7 +184,6 @@ CarportBuilder carportBuilder = new CarportBuilder();
             carport.addOtherMaterial(vSkruer);
             carport.addOtherMaterial(ySkruer);
             carport.addOtherMaterial(iSkruer);
-
             jspSide = "styklisteFlatroof";
         // Flat tag, med skur:
         } else if (tag == 0 && skur == 1){
