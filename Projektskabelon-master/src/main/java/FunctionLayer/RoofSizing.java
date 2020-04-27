@@ -4,7 +4,7 @@ package FunctionLayer;
 public class RoofSizing {
 
     Carport carport;
-    private int roofLength;
+    private int roofLength = carport.getLength() + carport.getShed().getDepth();
     private int roofHeight;
     private int minpitchDegreeOption = 15;
     private int maxpitchDegreeOption = 45 - 1; //Vi har valgt ud fra hvad produktowneren fra Fog har sagt
@@ -17,7 +17,7 @@ public class RoofSizing {
 
     //Beregning af taget højde
     public int roofHeight(boolean pitchedRoof) {
-        roofHeight = (int) Math.tan((double)(carport.getRoof().getDegree()))/carport.getLength();
+        roofHeight = (int) Math.tan((double)(carport.getRoof().getDegree()))*carport.getLength();//TODO - skriv evt gange x pr meter * carport.length
         if (pitchedRoof)
             roofHeight = (int) (Math.tan(carport.getRoof().getDegree()) * ((carport.getWidth() / 2))); //TODO se om det virker
         return roofHeight;
@@ -25,7 +25,7 @@ public class RoofSizing {
 
     //Beregning af max vinkel på tagryg (spisds tag)
     public int tilltAngleMaxCal() {
-    int tiltAnglemax = (int) Math.tan((double) (20 / 100));
+    int tiltAnglemax = (int) Math.tanh((double) (20 / 100)); //Todo ret metode
     return tiltAnglemax;
     }
 

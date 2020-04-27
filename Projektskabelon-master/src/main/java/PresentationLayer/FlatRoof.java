@@ -14,17 +14,16 @@ public class FlatRoof extends Command {
 
         HttpSession session = request.getSession();
         Carport carportRequest = (Carport) session.getAttribute("carportRequest");
+        RoofSizing roofSizing = new RoofSizing(carportRequest);
 
 
         int height = Integer.parseInt(request.getParameter("height"));
         int tilt = Integer.parseInt(request.getParameter("tilt"));
-
-        RoofSizing roofSizing = new RoofSizing(carportRequest);
-
-        int[] tiltOptions = roofSizing.pitchDegreesOptionsForCostumerToChoose();
+        int maxOptionTiltDegree = roofSizing.tilltAngleMaxCal();
 
         request.setAttribute("height", height);
         request.setAttribute("tilt", tilt);
+        request.setAttribute("maxtilt" , maxOptionTiltDegree);
 
         carportRequest.getRoof().setHeight(height);
         carportRequest.getRoof().setDegree(tilt);

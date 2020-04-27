@@ -7,6 +7,4 @@
 <h2>
     <a href="FrontController?target=redirect&destination=designflatroof">Tryk for fladt tag</a>
 </h2>
-
-
-<%@include file=" ../includes/footer.inc"%>
+<%@include file="../includes/footer.inc" %>
