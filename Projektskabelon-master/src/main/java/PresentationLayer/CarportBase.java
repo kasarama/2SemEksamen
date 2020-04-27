@@ -6,6 +6,8 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.File;
+import java.io.IOException;
 
 public class CarportBase extends Command {
     @Override
@@ -51,6 +53,8 @@ public class CarportBase extends Command {
 
         }
         request.setAttribute("cearportToString", carportBase.toString());
+
+
 
         if(request.getParameter("tooverlay")!=null){
             return "overlay";
