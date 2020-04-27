@@ -1,4 +1,5 @@
-<%@ page import="CarportUtil.Initializer" %><%--
+<%@ page import="CarportUtil.Initializer" %>
+<%@ page import="FunctionLayer.LoginSampleException" %><%--
   Created by IntelliJ IDEA.
   User: monajakobmeshal
   Date: 4/22/20
@@ -9,6 +10,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%@include file="includes/header.inc"%>
+
         <h1>Welcome to Sem 2</h1>
 
         <h2>

@@ -1,5 +1,6 @@
 package CarportUtil;
 
+import DBAccess.MaterialMapper;
 import FunctionLayer.LogicFacade;
 import FunctionLayer.Material;
 
@@ -33,4 +34,6 @@ public class Initializer {
         }
         return materialList;
     }
+
+
 }

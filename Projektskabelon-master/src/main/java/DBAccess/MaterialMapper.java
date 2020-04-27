@@ -41,8 +41,6 @@ public class MaterialMapper
         }
     }
 
-
-
 // This class Connects to DB and gets the "Roof material" data from it.
 
         //1. create a method that returns a list of ROOF Materials -  Material = Class from function Layer
@@ -56,7 +54,7 @@ public class MaterialMapper
                 //2. start the connection by calling ".connection()" method from the "Connector" class
                 Connection con = Connector.connection();
                 //3. create an SQL statement - select only 'tag' from the 'material' table
-                String SQL = "SELECT * FROM materials WHERE category = 'tag'";
+                String SQL = "SELECT * FROM materials WHERE category = 'Tag'";
                 //4. insert the SQL statement into the ".preparedStatement()" method - it sends the SQL statement to the DB
                 PreparedStatement ps = con.prepareStatement(SQL);
                 //5. call the ".executeQuery()" to execute the SQL statement and return the result (stored in ResultSet).
