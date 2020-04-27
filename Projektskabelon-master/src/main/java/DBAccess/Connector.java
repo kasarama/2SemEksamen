@@ -59,10 +59,10 @@ public class Connector {
             FileReader fr;
             try {
                 fr = new FileReader(new File(windows));
-                System.out.println("Looking for a file describet as:" + windows);
+                System.out.println("Looking for a file described as:" + windows);
             } catch (FileNotFoundException ex) {
                 fr = new FileReader(new File(mac));
-                System.out.println("Looking for a file describet as: " + mac);
+                System.out.println("Looking for a file described as: " + mac);
             }
 
             BufferedReader br = new BufferedReader(fr);

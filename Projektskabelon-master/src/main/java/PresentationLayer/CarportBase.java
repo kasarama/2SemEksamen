@@ -23,15 +23,22 @@ public class CarportBase extends Command {
             shedSide = request.getParameter("shedSide");
         }
 
+        if (request.getParameter("tooverlay") != null) {
+
+            shedWidthParameter = Integer.parseInt(request.getParameter("shedWidthParameter"));
+            shedDepth = Integer.parseInt(request.getParameter("shedDepth"));
+            shedSide = request.getParameter("shedSide");
+        }
+
         Carport carportBase = new Carport();
         Roof roofBase;
         if (roofType == 1) {
-            roofBase = new RoofPitched(0,carportLength,carportWidth,0);
+            roofBase = new RoofPitched(0, carportLength, carportWidth, 0);
         } else {
-            roofBase = new RoofFlat(0,carportLength,carportWidth,0);
+            roofBase = new RoofFlat(0, carportLength, carportWidth, 0);
         }
 
-        int shedWidth = ShedSizing.shedWidth(carportWidth,shedWidthParameter);
+        int shedWidth = ShedSizing.shedWidth(carportWidth, shedWidthParameter);
         carportBase.setLength(carportLength);
         carportBase.setWidth(carportWidth);
         carportBase.setRoof(roofBase);
@@ -44,12 +51,14 @@ public class CarportBase extends Command {
         }
         request.setAttribute("carportToString", carportBase.toString());
 
-        if (roofType == 1)
+
+        if (request.getParameter("tooverlay") != null) {
+            return "overlay";
+        }else if (roofType == 1) {
             return "designpitchedroof";
-        if (request.getParameter("withShed") != null)
-            return "designshed";
+        }else if (request.getParameter("withShed") != null)
+                return "designshed";
 
-            return "designflatroof";
+        return "designflatroof";
     }
-
 }

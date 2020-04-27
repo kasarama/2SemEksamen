@@ -61,14 +61,13 @@
         <p1>eller</p1>
         <input type="submit" name="noShed" value="Fortsæt uden redskabsrummet">
     </div>
+        <p1>eller</p1>
+        <input type="submit" name="tooverlaynoshed" value="No shed / Vælg beklædning">
+        <input type="submit" name="tooverlay" value="With shed / Vælg beklædning">
+    </div>
 
 </form>
 
-
-<c:if test = "${requestScope.error!= null}" >
-    <h2>Error ! </h2>
-    ${requestScope.error}
-</c:if>
 
 
 <!-- Optional JavaScript -->
