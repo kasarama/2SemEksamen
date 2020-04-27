@@ -1,10 +1,6 @@
-
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-    <title>TestCath</title>
-    <%@include file="../includes/header.inc" %>
-</head>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page contentType="text/html" pageEncoding="UTF-8" %>
+<%@include file="../includes/header.inc" %>
 
 <h1>Tryk videre for tag:</h1>
 <br>
@@ -13,5 +9,4 @@
 </h2>
 
 
-</body>
-</html>
+<%@include file=" ../includes/footer.inc"%>

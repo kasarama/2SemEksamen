@@ -46,8 +46,10 @@ public class CarportBase extends Command {
 
         if (roofType == 1)
             return "designpitchedroof";
+        if (request.getParameter("withShed") != null)
+            return "designshed";
 
-        return "designflatroof";
+            return "designflatroof";
     }
 
 }
