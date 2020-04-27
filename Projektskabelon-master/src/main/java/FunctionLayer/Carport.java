@@ -101,5 +101,13 @@ public class Carport {
         return tagMaterialList;
     }
 
-
+    @Override
+    public String toString() {
+        return "Carport{" +
+                "width=" + width +
+                ", length=" + length +
+                ", shed=" + shed.getWidth()+"x"+shed.getDepth()+shed.getSide() +
+                ", pitchedroof? :" + roof.isPitchedRoof() +
+                '}';
+    }
 }

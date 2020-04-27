@@ -11,6 +11,12 @@ public class Material {
     private String comment;
     private String keyword;
     private String category;
+    private String picture;
+
+
+    public Material() {
+
+    }
 
     public Material(int id, String name, int size, String unit, String keyword, String category) {
         this.id = id;
@@ -19,6 +25,13 @@ public class Material {
         this.unit = unit;
         this.keyword = keyword;
         this.category = category;
+    }
+    public String getPicture() {
+        return picture;
+    }
+
+    public void setPicture(String picture) {
+        this.picture = picture;
     }
 
     public int getId() {

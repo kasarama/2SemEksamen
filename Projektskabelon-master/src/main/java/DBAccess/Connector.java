@@ -52,16 +52,24 @@ public class Connector {
 
         String[] data = new String[2];
 
-        String path = "dbAccess/dbAccess.txt";
-
+        String windows = "c:/dbAccess/dbAccess.txt";
+        String mac = "";
 
         try {
-            FileReader fr = new FileReader(new File(path));
+            FileReader fr;
+            try {
+                fr = new FileReader(new File(windows));
+                System.out.println("Looking for a file described as:" + windows);
+            } catch (FileNotFoundException ex) {
+                fr = new FileReader(new File(mac));
+                System.out.println("Looking for a file described as: " + mac);
+            }
+
             BufferedReader br = new BufferedReader(fr);
             String line = br.readLine();
             data = line.split(";");
         }catch (FileNotFoundException ex){
-            System.out.println("File not found "+path);
+            System.out.println("File not found anyways...");
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
             ex.printStackTrace();

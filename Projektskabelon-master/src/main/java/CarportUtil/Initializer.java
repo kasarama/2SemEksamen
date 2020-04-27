@@ -2,6 +2,7 @@ package CarportUtil;
 
 import DBAccess.MaterialMapper;
 import FunctionLayer.LogicFacade;
+import FunctionLayer.LoginSampleException;
 import FunctionLayer.Material;
 
 import java.util.List;
@@ -20,6 +21,7 @@ NOTE 2: what's exactly being returned?
 public class Initializer {
 
     private static List<Material> materialList = null;
+    private static List<Material> overlayList = null;
 
     //Getters
     public static List<Material> getMaterialList() {
@@ -36,4 +38,15 @@ public class Initializer {
     }
 
 
+    public static List<Material> getOverlayList() throws LoginSampleException {
+        if (overlayList == null){
+            try {
+                overlayList = LogicFacade.getAllOverlayMaterials();
+            } catch (LoginSampleException e) {
+                throw new LoginSampleException("Overlay list could not load");
+            }
+        }
+        return overlayList;
+
+    }
 }

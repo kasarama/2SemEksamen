@@ -91,5 +91,62 @@ public class MaterialMapper
             // return the gotten 'material' data from the DB
             return materialList;
         }
+
+
+    // This class Connects to DB and gets the "Overlay material" data from it.
+
+    public static List<Material> getAllOverlayMaterials() throws LoginSampleException {
+        List<Material> materialList=new ArrayList<>();
+        try
+        {
+            Connection con = Connector.connection();
+            String SQL = "SELECT materialID, name, picture FROM materials WHERE category='overlay'";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next())
+            {
+                String name = rs.getString("name");
+                String picture = rs.getString("picture");
+                int materialID = rs.getInt("materialID");
+
+                Material material = new Material();
+                material.setName(name);
+                material.setPicture(picture);
+                material.setId(materialID);
+                materialList.add(material);
+            }
+        }
+        catch(ClassNotFoundException | SQLException ex )
+        {
+            throw new LoginSampleException(ex.getMessage());
+        }
+        return materialList;
+    }
+
+
+    public static void addMatDB(Material material) throws LoginSampleException {
+        try {
+            Connection con = Connector.connection();
+            String SQL = "INSERT INTO materials (name,size,unit,keyword,category,price,picture) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ps.setString(1, material.getName());
+            ps.setInt(2, material.getSize());
+            ps.setString(3, material.getUnit());
+            ps.setString(4, material.getKeyword());
+            ps.setString(5, material.getCategory());
+            ps.setDouble(6, material.getPrice());
+            ps.setString(7, material.getPicture());
+            ps.executeUpdate();
+        }catch (SQLException ex){
+            ex.printStackTrace();
+            throw new LoginSampleException("Problem while saving in database");
+        }catch (ClassNotFoundException ex){
+            ex.printStackTrace();
+            throw  new LoginSampleException(ex.getMessage());
+        }
+
+    }
+
+
 }
 

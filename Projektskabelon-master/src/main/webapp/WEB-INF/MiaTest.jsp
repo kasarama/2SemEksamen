@@ -1,13 +1,8 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: miade
-  Date: 26-04-2020
-  Time: 16:32
-  To change this template use File | Settings | File Templates.
---%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@include file="../includes/header.inc"%>
+
+<h1>Her kan du designe din egen carport </h1>
 
 <form name="findmaterial" action="FrontController" method="POST">
     <input type="hidden" name="target" value="findmaterial">
@@ -76,5 +71,9 @@
     <input class="btn btn-primary" type="submit" value="TEST" >
 </form>
 
-</body>
-</html>
+
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+
+<%@include file="../includes/footer.inc"%>
