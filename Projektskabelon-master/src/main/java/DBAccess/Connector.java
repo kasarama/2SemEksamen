@@ -1,12 +1,10 @@
 package DBAccess;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.SQLOutput;
 
 /**
  * The purpose of Connector is to...
@@ -53,20 +51,25 @@ public class Connector {
     public static String[] readData() {
 
         String[] data = new String[2];
-        File file = new File("c:/dbAccess/dbAccess.txt");
+
+        String path = "dbAccess/dbAccess.txt";
+
 
         try {
-            FileReader fr = new FileReader(file);
+            FileReader fr = new FileReader(new File(path));
             BufferedReader br = new BufferedReader(fr);
             String line = br.readLine();
             data = line.split(";");
-
+        }catch (FileNotFoundException ex){
+            System.out.println("File not found "+path);
         } catch (IOException ex) {
+            System.out.println(ex.getMessage());
             ex.printStackTrace();
-            System.out.println("File notfound: " + file.toString());
         }
+
         return data;
 
     }
+
 
 }
