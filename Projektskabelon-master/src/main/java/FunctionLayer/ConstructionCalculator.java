@@ -51,9 +51,9 @@ public class ConstructionCalculator {
         int brancketScrewPk = 0;
         if (forskel<=1){
             brancketScrewPk = 1;
-        } else if (forskel>1 && forskel<=2){
+        } else if (forskel<=2){
             brancketScrewPk = 2;
-        } else if (forskel>2 && forskel<=3){
+        } else if (forskel<=3){
             brancketScrewPk = 3;
         } else {
             brancketScrewPk = 4;
