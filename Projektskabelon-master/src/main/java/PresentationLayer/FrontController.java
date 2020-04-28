@@ -14,13 +14,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ @author kasper
+ */
 @WebServlet( name = "FrontController", urlPatterns = { "/FrontController" } )
 public class FrontController extends HttpServlet {
 
     /**
      Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      methods.
-
      @param request servlet request
      @param response servlet response
      @throws ServletException if a servlet-specific error occurs
@@ -40,7 +42,6 @@ public class FrontController extends HttpServlet {
             } else {
                 request.getRequestDispatcher("/WEB-INF/" + view + ".jsp").forward(request, response);
             }
-            System.out.println(view);
         } catch (Exception ex ) {
             request.setAttribute( "error", ex.getMessage() );
 

@@ -29,6 +29,16 @@
 
     <form name="makerequest" action="FrontController" method="post">
         <input type="hidden" name="target" value="makerequest">
+        Vælg beklædning
+        <select name="overlayID" class="form-control">
+            <c:forEach var="material" items="${applicationScope.materialList}">
+                <option value="${material.id}">${material.name}</option>
+            </c:forEach>
+        </select>
+    </form>
+
+    <form name="makerequest" action="FrontController" method="post">
+        <input type="hidden" name="target" value="makerequest">
 
         <div class="form-group">
             <label for="roof"> Vælg tagdækning:</label>
@@ -36,7 +46,7 @@
                 <option selected disabled>Vælg type:</option>
 
                 <c:forEach var="roofMaterial" items="${applicationScope.materialList}">
-                    <option value="${roofMaterial.materialID}">${roofMaterial.name}"></option>
+                    <option value="${roofMaterial.id}"${roofMaterial.name}"></option>
                 </c:forEach>
             </select>
         </div>
