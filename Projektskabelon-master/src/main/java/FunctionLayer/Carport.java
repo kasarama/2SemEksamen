@@ -7,10 +7,10 @@ public class Carport {
     private int length;
     private Shed shed;
     private Roof roof;
-    private ArrayList<Material> materialList;
-    private ArrayList<Material> woodMaterialList;
-    private ArrayList<Material> otherMaterialList;
-    private ArrayList<Material> tagMaterialList;
+    private ArrayList<Material> constructionMaterials;
+    private ArrayList<Material> roofMaterials;
+    private ArrayList<Material> shedMaterials;
+    private ArrayList<Material> overlayMaterials;
     private double cost;
     private double salePrice;
 
@@ -31,19 +31,23 @@ public class Carport {
     }
 
     public Carport() {
-        this.woodMaterialList= new ArrayList<>();
-        this.otherMaterialList = new ArrayList<>();
-        this.tagMaterialList = new ArrayList<>();
+        this.constructionMaterials= new ArrayList<>();
+        this.roofMaterials = new ArrayList<>();
+        this.shedMaterials = new ArrayList<>();
+        this.overlayMaterials = new ArrayList<>();
     }
 
-    public void addWoodMaterial (Material material){
-        woodMaterialList.add(material);
+    public void addConstructionMaterial (Material material){
+        constructionMaterials.add(material);
     }
-    public void addOtherMaterial (Material material){
-        otherMaterialList.add(material);
+    public void addRoofMaterial (Material material){
+        roofMaterials.add(material);
     }
-    public void addTagMaterial (Material material){
-        tagMaterialList.add(material);
+    public void addShedMaterial (Material material){
+        shedMaterials.add(material);
+    }
+    public void addOverlayMaterials (Material material){
+        overlayMaterials.add(material);
     }
 
     public double getCost() {
@@ -86,20 +90,22 @@ public class Carport {
         shed.setDepth(shedDepth);
     }
 
-    public ArrayList<Material> getWoodMaterialList() {
-        return woodMaterialList;
+    public ArrayList<Material> getConstructionMaterials() {
+        return constructionMaterials;
     }
 
-    public void setMaterialList(ArrayList<Material> woodMaterialList) {
-        this.woodMaterialList = woodMaterialList;
+    public ArrayList<Material> getRoofMaterials() {
+        return roofMaterials;
     }
 
-    public ArrayList<Material> getOtherMaterialList() {
-        return otherMaterialList;
+    public ArrayList<Material> getShedMaterials() {
+        return shedMaterials;
     }
-    public ArrayList<Material> getTagMaterialList() {
-        return tagMaterialList;
+
+    public ArrayList<Material> getOverlayMaterials() {
+        return overlayMaterials;
     }
+
 
     @Override
     public String toString() {

@@ -116,7 +116,9 @@ CREATE TABLE `materials` (
   `size` int(11) DEFAULT NULL,
   `unit` varchar(45) DEFAULT NULL,
   `keyword` varchar(100) DEFAULT NULL,
-  `category` varchar(45) DEFAULT NULL,
+  `category` varchar(45),
+  `price` double default null,
+  `picture` varchar(100),
   PRIMARY KEY (`materialID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -124,12 +126,68 @@ CREATE TABLE `materials` (
 --
 -- Dumping data for table `materials`
 --
-
 LOCK TABLES `materials` WRITE;
 /*!40000 ALTER TABLE `materials` DISABLE KEYS */;
-INSERT INTO `materials` VALUES (1,'25x200 mm. trykimp. Brædt',360,'stk','Understernbrædder360','Konstruktion'),(2,'25x200 mm. trykimp. Brædt',540,'stk','Understernbrædder540','Konstruktion'),(3,'25x125 mm. trykimp. Brædt',360,'stk','Oversternbrædder360','Konstruktion'),(4,'25x125 mm. trykimp.	Brædt',540,'stk','Oversternbrædder540','Konstruktion'),(5,'38x73 mm. Lægte ubh.',420,'stk','Lægte','Skur'),(6,'45x95 mm. Reglar ubh.',270,'stk','Løsholter270','Skur'),(7,'45x95 mm. Reglar ubh.',240,'stk','Løsholter240','Skur'),(8,'45x195 mm. spærtræ ubh.',600,'stk','Spær','Konstruktion'),(9,'45x195 mm. spærtræ ubh.',600,'stk','Rem600','Konstruktion'),(10,'45x195 mm. spærtræ ubh.',480,'stk','Rem480','Konstruktion'),(11,'97x97 mm. trykimp. Stolpe',300,'stk','Stolpe','Konstruktion'),(12,'19x100	mm.	trykimp. Brædt',210,'stk','SkurBeklædning','Skur'),(13,'19x100	mm. trykimp. Brædt',360,'stk','Vandbræt360','Konstruktion'),(14,'19x100	mm.	trykimp. Brædt',540,'stk','Vandbræt540','Konstruktion'),(15,'Plastmo Ecolite blåtonet',300,'stk','T300','Tag'),(16,'Plastmo Ecolite blåtonet',600,'stk','T600','Tag'),(17,'Plastmo JumboLite opal',300,'stk','TJumboOpal300','Tag'),(18,'Plastmo JumboLite opal',600,'stk','TJumboOpal600','Tag'),(19,'Plastmo JärboPro opal',300,'stk','TJarboOpal300','Tag'),(20,'Plastmo JärboPro opal',600,'stk','TJarboOpal600','Tag'),(21,'Plastmo Ecolite klar',300,'stk','TKlar300','Tag'),(22,'Plastmo Ecolite klar',600,'stk','TKlar600','Tag'),(23,'Plastmo JumboLite klar',300,'stk','TJumboKlar300','Tag'),(24,'Plastmo JumboLite klar',600,'stk','TJumboKlar600','Tag'),(25,'Plastmo JärboPro klar',300,'stk','TJarboKlar300','Tag'),(26,'Plastmo JärboPro klar',600,'stk','TJarboKlar600','Tag'),(27,'Betontagsten rød',NULL,'stk','BetontagstenRød','Tag'),(28,'Betontagsten teglrød',NULL,'stk','BetontagstenTeglrød','Tag'),(29,'Betontagsten brun',NULL,'stk','BetontagstenBrun','Tag'),(30,'Betontagsten sort',NULL,'stk','BetontagstenSort','Tag'),(31,'Eternittag B6 grå',NULL,'stk','EternittagB6Grå','Tag'),(32,'Eternittag B6 sort',NULL,'stk','EternittagB6Sort','Tag'),(33,'Eternittag B6 mokka(brun)',NULL,'stk','EternittagB6Mokka','Tag'),(34,'Eternittag B6 rødbrun',NULL,'stk','EternittagB6Rødbrun','Tag'),(35,'Eternittag B6 teglrød',NULL,'stk','EternittagB6Teglrød','Tag'),(36,'Eternittag B7 grå',NULL,'stk','EternittagB7Grå','Tag'),(37,'Eternittag B7 sort',NULL,'stk','EternittagB7Sort','Tag'),(38,'Eternittag B7 mokka(brun)',NULL,'stk','EternittagB7Mokka','Tag'),(39,'Eternittag B7 rødbrun',NULL,'stk','EternittagB7Rødbrun','Tag'),(40,'Eternittag B7 teglrød',NULL,'stk','EternittagB7Teglrød','Tag'),(41,'Eternittag B7 rødflammet',NULL,'stk','EternittagB7Rødflammet','Tag'),(42,'plastmo bundskruer 200 stk',NULL,'pk.','Bundskruer','Beslag&Skruer'),(43,'hulbånd 1x20 mm. 10 mtr.',NULL,'ruller','Hulbånd','Beslag&Skruer'),(44,'universal 190 mm højre',NULL,'stk','UniversalbeslagHøjre','Beslag&Skruer'),(45,'universal 190 mm venstre',NULL,'stk','UniversalbeslagVenstre','Beslag&Skruer'),(46,'4,5x60	mm.	skruer 200 stk',NULL,'pk.','SkruerStern&Vandbræt','Beslag&Skruer'),(47,'4,0x50	mm.	beslagskruer 250 stk',NULL,'pk.','Beslagskruer','Beslag&Skruer'),(48,'bræddebolt	10x120 mm.',NULL,'stk','Bræddebolt','Beslag&Skruer'),(49,'firkantskiver 40x40x11 mm',NULL,'stk','Firkantskiver','Beslag&Skruer'),(50,'4,5x70 mm.	Skruer 400 stk',NULL,'pk.','SkruerYdreBeklædning','Beslag&Skruer'),(51,'4,5x50 mm.	Skruer 300 stk',NULL,'pk.','SkruerInnerBeklædning','Beslag&Skruer'),(52,'stalddørsgreb 50x75',NULL,'sæt','Lås','Beslag&Skruer'),(53,'t hængsel 390 mm',NULL,'stk','Hængsel','Beslag&Skruer'),(54,'vinkelbeslag 35',NULL,'stk','Vinkelbeslag','Beslag&Skruer');
+INSERT INTO `materials` VALUES (1,'25x200 mm. trykimp. Brædt',360,'stk','Understernbrædder360','Konstruktion',NULL,NULL),
+(2,'25x200 mm. trykimp. Brædt',540,'stk','Understernbrædder540','Konstruktion',NULL,NULL),
+(3,'25x125 mm. trykimp. Brædt',360,'stk','Oversternbrædder360','Konstruktion',NULL,NULL),
+(4,'25x125 mm. trykimp.	Brædt',540,'stk','Oversternbrædder540','Konstruktion',NULL,NULL),
+(5,'38x73 mm. Lægte ubh.',420,'stk','Lægte','Skur',NULL,NULL),
+(6,'45x95 mm. Reglar ubh.',270,'stk','Løsholter270','Skur',NULL,NULL),
+(7,'45x95 mm. Reglar ubh.',240,'stk','Løsholter240','Skur',NULL,NULL),
+(8,'45x195 mm. spærtræ ubh.',600,'stk','Spær','Konstruktion',NULL,NULL),
+(9,'45x195 mm. spærtræ ubh.',600,'stk','Rem600','Konstruktion',NULL,NULL),
+(10,'45x195 mm. spærtræ ubh.',480,'stk','Rem480','Konstruktion',NULL,NULL),
+(11,'97x97 mm. trykimp. Stolpe',300,'stk','Stolpe','Konstruktion',NULL,NULL),
+(12,'19x100	mm.	trykimp. Brædt',210,'stk','SkurBeklædning','Skur',NULL,NULL),
+(13,'19x100	mm. trykimp. Brædt',360,'stk','Vandbræt360','Konstruktion',NULL,NULL),
+(14,'19x100	mm.	trykimp. Brædt',540,'stk','Vandbræt540','Konstruktion',NULL,NULL),
+(15,'Plastmo Ecolite blåtonet',300,'stk','T300','Tag',NULL,NULL),
+(16,'Plastmo Ecolite blåtonet',600,'stk','T600','Tag',NULL,NULL),
+(17,'Plastmo JumboLite opal',300,'stk','TJumboOpal300','Tag',NULL,NULL),
+(18,'Plastmo JumboLite opal',600,'stk','TJumboOpal600','Tag',NULL,NULL),
+(19,'Plastmo JärboPro opal',300,'stk','TJarboOpal300','Tag',NULL,NULL),
+(20,'Plastmo JärboPro opal',600,'stk','TJarboOpal600','Tag',NULL,NULL),
+(21,'Plastmo Ecolite klar',300,'stk','TKlar300','Tag',NULL,NULL),
+(22,'Plastmo Ecolite klar',600,'stk','TKlar600','Tag',NULL,NULL),
+(23,'Plastmo JumboLite klar',300,'stk','TJumboKlar300','Tag',NULL,NULL),
+(24,'Plastmo JumboLite klar',600,'stk','TJumboKlar600','Tag',NULL,NULL),
+(25,'Plastmo JärboPro klar',300,'stk','TJarboKlar300','Tag',NULL,NULL),
+(26,'Plastmo JärboPro klar',600,'stk','TJarboKlar600','Tag',NULL,NULL),
+(27,'Betontagsten rød',NULL,'stk','BetontagstenRød','Tag',NULL,NULL),
+(28,'Betontagsten teglrød',NULL,'stk','BetontagstenTeglrød','Tag',NULL,NULL),
+(29,'Betontagsten brun',NULL,'stk','BetontagstenBrun','Tag',NULL,NULL),
+(30,'Betontagsten sort',NULL,'stk','BetontagstenSort','Tag',NULL,NULL),
+(31,'Eternittag B6 grå',NULL,'stk','EternittagB6Grå','Tag',NULL,NULL),
+(32,'Eternittag B6 sort',NULL,'stk','EternittagB6Sort','Tag',NULL,NULL),
+(33,'Eternittag B6 mokka(brun)',NULL,'stk','EternittagB6Mokka','Tag',NULL,NULL),
+(34,'Eternittag B6 rødbrun',NULL,'stk','EternittagB6Rødbrun','Tag',NULL,NULL),
+(35,'Eternittag B6 teglrød',NULL,'stk','EternittagB6Teglrød','Tag',NULL,NULL),
+(36,'Eternittag B7 grå',NULL,'stk','EternittagB7Grå','Tag',NULL,NULL),
+(37,'Eternittag B7 sort',NULL,'stk','EternittagB7Sort','Tag',NULL,NULL),
+(38,'Eternittag B7 mokka(brun)',NULL,'stk','EternittagB7Mokka','Tag',NULL,NULL),
+(39,'Eternittag B7 rødbrun',NULL,'stk','EternittagB7Rødbrun','Tag',NULL,NULL),
+(40,'Eternittag B7 teglrød',NULL,'stk','EternittagB7Teglrød','Tag',NULL,NULL),
+(41,'Eternittag B7 rødflammet',NULL,'stk','EternittagB7Rødflammet','Tag',NULL,NULL),
+(42,'plastmo bundskruer 200 stk',NULL,'pk.','Bundskruer','Beslag&Skruer',NULL,NULL),
+(43,'hulbånd 1x20 mm. 10 mtr.',NULL,'ruller','Hulbånd','Beslag&Skruer',NULL,NULL),
+(44,'universal 190 mm højre',NULL,'stk','UniversalbeslagHøjre','Beslag&Skruer',NULL,NULL),
+(45,'universal 190 mm venstre',NULL,'stk','UniversalbeslagVenstre','Beslag&Skruer',NULL,NULL),
+(46,'4,5x60	mm.	skruer 200 stk',NULL,'pk.','SkruerStern&Vandbræt','Beslag&Skruer',NULL,NULL),
+(47,'4,0x50	mm.	beslagskruer 250 stk',NULL,'pk.','Beslagskruer','Beslag&Skruer',NULL,NULL),
+(48,'bræddebolt	10x120 mm.',NULL,'stk','Bræddebolt','Beslag&Skruer',NULL,NULL),
+(49,'firkantskiver 40x40x11 mm',NULL,'stk','Firkantskiver','Beslag&Skruer',NULL,NULL),
+(50,'4,5x70 mm.	Skruer 400 stk',NULL,'pk.','SkruerYdreBeklædning','Beslag&Skruer',NULL,NULL),
+(51,'4,5x50 mm.	Skruer 300 stk',NULL,'pk.','SkruerInnerBeklædning','Beslag&Skruer',NULL,NULL),
+(52,'stalddørsgreb 50x75',NULL,'sæt','Lås','Beslag&Skruer',NULL,NULL),
+(53,'t hængsel 390 mm',NULL,'stk','Hængsel','Beslag&Skruer',NULL,NULL),
+(54,'vinkelbeslag 35',NULL,'stk','Vinkelbeslag','Beslag&Skruer',NULL,NULL)
+(55,'Plastmo tætningsprofil jumbolite hvis',105,'stk','TætningsprofilJumbo','Tag',44.95,NULL),
+(56,'Plastmo tætningsprofil ecolite hvis',105,'stk','TætningsprofilEcolite','Tag',44.95,NULL);
+/*!40000 ALTER TABLE `materials` ENABLE KEYS */;
 /*!40000 ALTER TABLE `materials` ENABLE KEYS */;
 UNLOCK TABLES;
+
 
 --
 -- Table structure for table `orders`
@@ -194,4 +252,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-04-23 17:04:41
+-- Dump completed on 2020-04-23 14:49:27
