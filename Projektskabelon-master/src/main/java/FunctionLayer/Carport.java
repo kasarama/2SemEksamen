@@ -8,7 +8,7 @@ public class Carport {
     private Shed shed;
     private Roof roof;
     private ArrayList<Material> constructionMaterials;
-    private ArrayList<Material> roofMaterials;
+    private ArrayList<Material> roofMaterials = roof.getTagMaterialList();
     private ArrayList<Material> shedMaterials;
     private ArrayList<Material> overlayMaterials;
     private double cost;
@@ -32,7 +32,6 @@ public class Carport {
 
     public Carport() {
         this.constructionMaterials= new ArrayList<>();
-        this.roofMaterials = new ArrayList<>();
         this.shedMaterials = new ArrayList<>();
         this.overlayMaterials = new ArrayList<>();
     }
@@ -106,5 +105,13 @@ public class Carport {
         return overlayMaterials;
     }
 
-
+    @Override
+    public String toString() {
+        return "Carport{" +
+                "width=" + width +
+                ", length=" + length +
+                ", shed=" + shed.getWidth()+"x"+shed.getDepth()+shed.getSide() +
+                ", pitchedroof? :" + roof.isPitched() +
+                '}';
+    }
 }
