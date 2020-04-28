@@ -170,7 +170,7 @@ public class RoofMaterialCalculator {
         }
 
         // Skruer til vandbræt -- 1 pakke er nok til en stor carport
-        public int waterboardScrews = 200;
+        public int waterboardScrews = 1;
 
         // Beslagskruer
         public int bracketScrewsRoof(int length){
