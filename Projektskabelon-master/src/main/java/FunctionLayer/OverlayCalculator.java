@@ -40,7 +40,10 @@ public class OverlayCalculator {
     //Materials for horizontal framing
     public static ArrayList<Material> framingH(Carport carport){
         ArrayList<Material>framingH = new ArrayList<>();
-        //todo list of materials needed to montage horizontal framing
+        //todo list of materials needed to montage horizontal framing :
+        // spær+, beslag-, tape-
+        //b
+
         //sides:
         int sidePost=shedSidePostsAmount(carport);
         Material spaereSide = new Material();
