@@ -16,6 +16,12 @@
         request.getServletContext().setAttribute("overlayList", Initializer.getOverlayList());
     }
 %>
+<%
+    // if i'm the first user on this application, then set the overlayMaterialsList. (else the list already exists)
+    if (request.getServletContext().getAttribute("overlayMaterialsList") == null) {
+        request.getServletContext().setAttribute("overlayMaterialsList", Initializer.getOverlayList());
+    }
+%>
 
 
 <h1>Beklædning</h1>

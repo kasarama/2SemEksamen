@@ -21,6 +21,8 @@ public class Initializer {
 
     private static List<Material> materialList = null;
     private static List<Material> overlayList = null;
+    private static List<Material> overlayMaterialsList = null;
+
 
     //Getters
     public static List<Material> getMaterialList() {
@@ -38,7 +40,18 @@ public class Initializer {
     public static List<Material> getOverlayList() throws LoginSampleException {
         if (overlayList == null){
             try {
-                overlayList = LogicFacade.getAllOverlayMaterials();
+                overlayList = LogicFacade.getAllOverlays();
+            } catch (LoginSampleException e) {
+                throw new LoginSampleException("Overlay list could not load");
+            }
+        }
+        return overlayList;
+    }
+
+    public static List<Material> getAllOverlayMaterials() throws LoginSampleException {
+        if (overlayMaterialsList == null){
+            try {
+                overlayMaterialsList = LogicFacade.getAllOverlays();
             } catch (LoginSampleException e) {
                 throw new LoginSampleException("Overlay list could not load");
             }
@@ -46,4 +59,5 @@ public class Initializer {
         return overlayList;
 
     }
+
 }
