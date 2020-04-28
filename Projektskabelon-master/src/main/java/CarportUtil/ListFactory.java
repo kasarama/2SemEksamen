@@ -12,7 +12,7 @@ import java.net.URL;
 public class ListFactory {
     public static void saveInFile(Material material) throws LoginSampleException {
         //todo save material in text file
-        String windows = "c:/dbAccess/materials.txt";
+        String windows = "dbAccess/materials.txt";
         String mac = "";
         String path=windows;
         File file = new File(path);
