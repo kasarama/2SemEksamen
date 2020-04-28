@@ -8,14 +8,22 @@ public class ConstructionCalculator {
     public int posts (int length, int width){
         int numberOfPosts = 0;
 
-        if (length <= 300 && width < 510){
-            numberOfPosts = 4;
-        }else if (length <= 300 && width > 510){
-            numberOfPosts = 6;
-        } else if (length > 300 && width < 510){
-            numberOfPosts = 6;
-        }else if (length > 300 && width > 510){
-            numberOfPosts = 9;
+        if (width < 600){
+            if (length <=300){
+                numberOfPosts = 4;
+            } else if (length < 600){
+                numberOfPosts = 6;
+            } else {
+                numberOfPosts = 8;
+            }
+        } else if (width > 600){
+            if (length <=300){
+                numberOfPosts = 6;
+            } else if (length < 600){
+                numberOfPosts = 9;
+            } else {
+                numberOfPosts = 12;
+            }
         }
         return numberOfPosts;
     }
