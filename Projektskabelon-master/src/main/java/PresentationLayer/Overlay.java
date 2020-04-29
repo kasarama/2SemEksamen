@@ -3,12 +3,17 @@ package PresentationLayer;
 import FunctionLayer.Carport;
 import FunctionLayer.Material;
 import FunctionLayer.OverlayCalculator;
+import FunctionLayer.PostCalculator;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 
+
+/**
+ * @author Magdalena
+ */
 public class Overlay extends Command {
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -26,7 +31,7 @@ public class Overlay extends Command {
 
         Carport carport = (Carport) session.getAttribute("carportBase");
 
-        ArrayList<Material> ovarlayMaterialList=OverlayCalculator.materialList(carport);
+        ArrayList<Material> ovarlayMaterialList= OverlayCalculator.materialList(carport);
         return null;
     }
 }

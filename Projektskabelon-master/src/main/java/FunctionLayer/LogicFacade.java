@@ -36,7 +36,7 @@ public class LogicFacade {
     }
 
     public static List<Material> getAllOverlayMaterials() throws LoginSampleException {
-        return MaterialMapper.getAllOverlayMaterials();
+        return MaterialMapper.getAllOverlayMaterials( );
     }
 }
 

@@ -7,6 +7,16 @@ public class Carport {
     private int length;
     private Shed shed;
     private Roof roof;
+    private int constructionHeight;
+
+    public int getConstructionHeight() {
+        return constructionHeight;
+    }
+
+    public void setConstructionHeight(int constructionHeight) {
+        this.constructionHeight = constructionHeight;
+    }
+
     private ArrayList<Material> tagMaterialList;
     private ArrayList<Material> woodMaterialList;
     private ArrayList<Material> otherMaterialList;
@@ -16,7 +26,7 @@ public class Carport {
     public Carport() {
         this.woodMaterialList= new ArrayList<>();
         this.otherMaterialList = new ArrayList<>();
-        this.tagMaterialList = roof.getTagMaterialList();
+//        this.tagMaterialList = roof.getTagMaterialList();
     }
 
     public void addWoodMaterial (Material material){

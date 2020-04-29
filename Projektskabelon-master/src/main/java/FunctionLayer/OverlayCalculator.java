@@ -1,193 +1,119 @@
 package FunctionLayer;
 
-import PresentationLayer.Materials;
-
 import java.util.ArrayList;
 
-public class OverlayCalculator {
 
+/**
+ * @author Magdalena
+ */
+public class OverlayCalculator {
     //gets list with materials of all the elements of overlay and sets them on one list of materials
     public static ArrayList<Material> materialList(Carport carport) {
-        ArrayList<Material> materialList= new ArrayList<>();
+        ArrayList<Material> materialList = new ArrayList<>();
         ArrayList<ArrayList> listsOfElements = new ArrayList<>();
 
-        listsOfElements.add(framingH(carport));
         //todo add the list of all the other elemnts
 
-
-
-
-        for (ArrayList<Material> list: listsOfElements ) {
-            for (Material material : list ) {
+        for (ArrayList<Material> list : listsOfElements) {
+            for (Material material : list) {
                 materialList.add(material);
             }
-
         }
 
-        return  materialList;
+        return materialList;
     }
 
 
-    public void framingV(){
-        /*
-        todo list of materials needed to montage vertical framing
-         */
-        /*
-        belka pozioma, max dlugosc
-         */
+    //calculates spaer needed for one of the chosen sides of shed/carport/construction
+    // max distance between spaer is 100 cm - counts number of spar after each post
+    public static int spaersNumberOnSide(int length, int minHeight, int angle, boolean isPitched) {
+        int sparsAmount = 0;
+        Integer[] postsheights = PostCalculator.postsHeights(minHeight, angle, length, isPitched);
+        for (int i = 0; i < postsheights.length - 1; i++) {
+            int tmp = sparsAmount;
+            sparsAmount = tmp + postsheights[i] / 100;
+
+        }
+        return sparsAmount;
+
     }
 
-    //Materials for horizontal framing
-    public static ArrayList<Material> framingH(Carport carport){
-        ArrayList<Material>framingH = new ArrayList<>();
-        //todo list of materials needed to montage horizontal framing :
-        // spær+, beslag-, tape-
-        //b
+    //calculates number of screws for spar (6cm)
+    public static int screwSpaer(int spaernumber) {
+        return spaernumber * 2 * 2; //2 screws on each side of spaer
+    }
 
-        //sides:
-        int sidePost=shedSidePostsAmount(carport);
-        Material spaereSide = new Material();
-        int spaereSidesLength = shedSidePostDistance(carport);
-        spaereSide.setName("RAW Spærtræ C18 47x100 mm");
-        spaereSide.setUnit("cm");
-        spaereSide.setSize(countWoodLength(spaereSidesLength));
-        int spaereSideAmount= 3*(sidePost-1)*2; // there is 3of them between every two posts, on both sides of shed
+    public static int numberOfFyrOnDistance(int distance){
+        int numberOfFyrOnDistance;
+        if (distance % 60 == 0) {
+            numberOfFyrOnDistance = distance / 60 - 1;
+        } else {
+            numberOfFyrOnDistance = (distance - distance % 60) / 60;
+        }
+        return numberOfFyrOnDistance;
+    }
 
-        for (int i = 0; i < spaereSideAmount; i++) {
-            framingH.add(spaereSide);
+    //counts number of fyr on each distance and in total on chosen side
+    public static int fyrNumberOnSide(int length) {
+        int distance = PostCalculator.postDistanceMax300(length);
+        int distancesNumber = PostCalculator.sidePostAmount(length) - 1;
+        int numberOfFyrOnDistance=numberOfFyrOnDistance(distance);
+
+        return numberOfFyrOnDistance * distancesNumber;
+    }
+
+    //calculates number of screws for fyr (4cm)
+    public static int screwFyr(int fyrnumber, int spaernumber) {
+        return fyrnumber * spaernumber; //1 screws on each  spaer
+    }
+
+    //returns array with length of each fyr used on chosen side
+    public static ArrayList<Integer> fyrLengths(int height, int angle, int size, boolean isPitched, int fyrnumber){
+        ArrayList<Integer> fyrLengths = new ArrayList<>();
+        int postNumber=PostCalculator.sidePostAmount(size);
+        int distance = size/(postNumber+fyrnumber-1);
+        int distanceOfPosts=PostCalculator.postDistanceMax300(size);
+        int numberOfFyrOnDistance = numberOfFyrOnDistance(distanceOfPosts);
+        int fyrPlusPost=fyrnumber+postNumber;
+        if (isPitched){
+            for (int i = 0; i < fyrPlusPost; i++) {
+                fyrLengths.add(height);
+            }
+        } else {
+            for (int i = 0; i < fyrPlusPost; i++) {
+                int tmp = height;
+                height = tmp + PostCalculator.raising(angle, distance) * i;
+                fyrLengths.add(height);
+            }
         }
 
-        int backPost=shedBackPostsAmount(carport);
-        Material spaereBack = new Material();
-        int spaereBackLength = shedBackPostDistance(carport);
-        spaereSide.setName("RAW Spærtræ C18 47x100 mm");
-        spaereSide.setUnit("cm");
-        spaereSide.setSize(countWoodLength(spaereBackLength));
-        int spaereBackAmount= 3*(backPost-1); // there is 3of them between every two posts
-
-        for (int i = 0; i < spaereBackAmount; i++) {
-            framingH.add(spaereBack);
+        //on the list there are also posts that need to by now removed. I take number of posts and
+        // set every n-th element as 0 , where n=numberOfFyrOnDistance+1
+        for (int i = 0; i < postNumber; i++) {
+            fyrLengths.add(i*(1+numberOfFyrOnDistance), 0);
         }
 
+        return fyrLengths;
+    }
+
+    //Materials for  Shed framing
+    public static ArrayList<Material> shedFramingMaterials(int width, int length, int minHeight, int angle, boolean isPitched){
+        ArrayList<Material>framingMaterials =new ArrayList<>();
+        int sideSpaerNumber=spaersNumberOnSide( length,  minHeight,  angle,  isPitched);
+        
 
 
-        return framingH;
+        return framingMaterials;
     }
 
     //wood delivers in chosen length with cuts every 20 cm. Pricing is pr. meter. We order not shorter piece with
     // minimal possible length
-    public static int countWoodLength(int needed){
-        if (needed%20==0){
+    public static int countWoodLength(int needed) {
+        if (needed % 20 == 0) {
             return needed;
         } else
-            return (needed- (needed%20) +20);
+            return (needed - (needed % 20) + 20);
     }
-
-
-
-    //............CARPORT WALLS.............//
-
-    // counts number of post on the side
-    public static int carportSidePosts (Carport carport){
-        int numberOfPost;
-        if(carport.getLength()%300==0){
-            numberOfPost=carport.getLength()/300+1;
-        } else {
-            numberOfPost= ( carport.getLength() - carport.getLength() % 300)/300+2;
-        }
-        return numberOfPost;
-    }
-
-    //counts distance between posts of carport
-    public static int carportPostDistance(Carport carport){
-        return (carport.getLength()-10)/(carportSidePosts(carport)-1);
-
-    }
-
-    //counts how many rows of post should there be because max distans between posts is 600 cm from side to side
-    public static int postRows (Carport carport){
-        int rows;
-        if(carport.getWidth()%600==0){
-            rows=carport.getLength()/600+1;
-        } else {
-            rows=(carport.getWidth() - carport.getWidth()%600)/600 +2;
-        }
-        return  rows;
-    }
-
-
-
-    //............SHED WALLS.............//
-
-    //counts number of post for shed on the side
-    public static int shedSidePostsAmount(Carport carport){
-        int depth= carport.getShed().getDepth();
-        int numberOfPosts;
-            if (depth % 300 == 0) {
-                numberOfPosts = (depth - 10) / 300 +1;
-            } else {
-                numberOfPosts =(depth - depth%300)/300 + 2;
-            }
-            //todo some of the post are common for carport and the shed - remember that when drowing or making itemlist
-        return numberOfPosts;
-    }
-
-
-    //counts distance between posts of shed's sides
-    public static int shedSidePostDistance(Carport carport){
-
-        return (carport.getShed().getDepth()-10)/(shedSidePostsAmount(carport)-1);
-    }
-
-
-    //counts number of post on the back side of the shed
-    public static int shedBackPostsAmount(Carport carport) {
-        int width = carport.getShed().getWidth();
-        int numberOfPosts;
-        if (width % 300 == 0) {
-            numberOfPosts = (width - 10) / 300 + 1;
-        } else {
-            numberOfPosts = (width - width % 300) / 300 + 2;
-        }
-        return numberOfPosts;
-        //todo some of the post are common for sides and the back - remember that when drowing or making itemlist
-
-    }
-
-
-    //counts distance between posts of shed's backside
-    public static int shedBackPostDistance(Carport carport){
-
-        return (carport.getShed().getWidth()-10)/(shedBackPostsAmount(carport)-1);
-    }
-
-
-    //counts number of post on the back side of the shed
-    public static int shedFrontPostsAmount(Carport carport) {
-        int width = carport.getShed().getWidth();
-        int numberOfPosts;
-        if ((width-100) % 300 == 0) {
-            numberOfPosts = (width - 10) / 300 + 1;
-        } else {
-            numberOfPosts = (width - width % 300) / 300 + 2;
-        }
-        return numberOfPosts;
-        //todo some of the post are common for sides and the back - remember that when drowing or making itemlist
-
-    }
-
-
-    //counts distance between posts of shed's front side
-    public static int shedFrontSidePostDistance(Carport carport){
-
-        return (carport.getShed().getWidth()-100-10)/(shedFrontPostsAmount(carport)-1);
-    }
-
-
-
-
-
-
 
 
 }
