@@ -5,6 +5,7 @@ package FunctionLayer;
  */
 public class PostCalculator {
     //todo some of the post are common for sides and the back - remember that when drowing or making itemlist
+    //todo method counting shared posts
 
     //counts how many posts should there be on one side of a carport or a shed
     public  static int sidePostAmount(int size){
