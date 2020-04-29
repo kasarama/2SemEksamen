@@ -45,8 +45,8 @@ public class OverlayCalculatorTest {
     }
 
     @Test
-    public void sideSpaer() {
-        int result = OverlayCalculator.sideSpaer(1100, 200, 22,false);
+    public void spaersNumberOnSide() {
+        int result = OverlayCalculator.spaersNumberOnSide(1100, 200, 22,false);
         int expected= 14;
     }
 }

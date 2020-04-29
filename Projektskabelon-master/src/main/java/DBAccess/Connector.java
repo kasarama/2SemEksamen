@@ -52,18 +52,10 @@ public class Connector {
 
         String[] data = new String[2];
 
-        String windows = "c:/dbAccess/dbAccess.txt";
-        String mac = "";
+        String path = "dbAccess/dbAccess.txt";
 
         try {
-            FileReader fr;
-            try {
-                fr = new FileReader(new File(windows));
-                System.out.println("Looking for a file described as:" + windows);
-            } catch (FileNotFoundException ex) {
-                fr = new FileReader(new File(mac));
-                System.out.println("Looking for a file described as: " + mac);
-            }
+            FileReader fr = new FileReader(new File(path));
 
             BufferedReader br = new BufferedReader(fr);
             String line = br.readLine();
