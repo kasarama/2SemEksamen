@@ -9,4 +9,4 @@
 </h2>
 
 
-<%@include file=" ../includes/footer.inc"%>
+<%@include file="../includes/footer.inc"%>

@@ -2,7 +2,7 @@ package FunctionLayer;
 
 import java.util.ArrayList;
 
-public abstract class Roof {
+public class Roof {
     private int height;
     private int length;
     private int width;
@@ -10,12 +10,17 @@ public abstract class Roof {
     ArrayList<Material> tagMaterialList;
     private boolean pitched;
 
+
     public Roof(int height, int length, int width, int degree) {
         this.height = height;
         this.length = length;
         this.width = width;
         this.degree = degree;
         tagMaterialList = new ArrayList();
+
+    }
+
+    public Roof() {
     }
 
     public int getHeight() {

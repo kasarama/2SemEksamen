@@ -14,6 +14,7 @@ public class CarportBase extends Command {
         int roofType = Integer.parseInt(request.getParameter("roofType"));
         int shedWidthParameter = 1;
         int shedDepth = 0;
+        int constructionHeight = Integer.parseInt(request.getParameter("constructionHeight"));
         String shedSide = "";
 
         if (request.getParameter("withShed") != null) {
@@ -43,6 +44,7 @@ public class CarportBase extends Command {
         carportBase.setWidth(carportWidth);
         carportBase.setRoof(roofBase);
         carportBase.setShed(new Shed(shedWidth, shedDepth, shedSide));
+        carportBase.setConstructionHeight(constructionHeight);
 
         HttpSession session = request.getSession();
         if (session.getAttribute("carportBase") == null) {
@@ -52,7 +54,8 @@ public class CarportBase extends Command {
         request.setAttribute("carportToString", carportBase.toString());
 
 
-        if (request.getParameter("tooverlay") != null) {
+        if(request.getParameter("tooverlay")!=null || request.getParameter("tooverlaynoshed")!=null){
+
             return "overlay";
         }else if (roofType == 1) {
             return "designpitchedroof";

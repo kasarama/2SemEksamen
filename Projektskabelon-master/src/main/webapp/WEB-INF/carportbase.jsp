@@ -14,6 +14,7 @@
 <form name="carportbase" action="FrontController" method="POST">
     <input type="hidden" name="origin" value="carportbase">
     <input type="hidden" name="target" value="carportbase">
+    <input type="hidden" name="constructionHeight" value=200>
     <label>Vælg længde:</label>
     <select name="carportLength" class="form-control" >
         <c:forEach var="i" begin="24" end="75">

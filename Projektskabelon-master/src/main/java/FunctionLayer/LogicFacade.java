@@ -3,7 +3,6 @@ package FunctionLayer;
 import DBAccess.MaterialMapper;
 import DBAccess.UserMapper;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -32,8 +31,12 @@ public class LogicFacade {
        return MaterialMapper.getAllRoofMaterials(); //return 'getAllRoofMaterials()' method from MaterialMapper
     }
 
+    public static List<Material> getAllOverlays() throws LoginSampleException {
+        return MaterialMapper.getAllOverlays();
+    }
+
     public static List<Material> getAllOverlayMaterials() throws LoginSampleException {
-        return MaterialMapper.getAllOverlayMaterials();
+        return MaterialMapper.getAllOverlayMaterials( );
     }
 }
 

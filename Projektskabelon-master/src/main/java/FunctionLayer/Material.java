@@ -26,6 +26,10 @@ public class Material {
         this.keyword = keyword;
         this.category = category;
     }
+
+    public double cost(){
+       return this.size*this.price;
+    }
     public String getPicture() {
         return picture;
     }
