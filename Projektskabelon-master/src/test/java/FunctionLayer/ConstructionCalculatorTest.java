@@ -21,6 +21,14 @@ public class ConstructionCalculatorTest {
         int expected = 6;
         assertEquals(expected, result);
     }
+    @Test
+    public void posts2() {
+        int length = 480;
+        int width = 610;
+        int result = c.posts(length, width);
+        int expected = 6;
+        assertEquals(expected, result);
+    }
 
     @Test
     public void perforatedBand() {
