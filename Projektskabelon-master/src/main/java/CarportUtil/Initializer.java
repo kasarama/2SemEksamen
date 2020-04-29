@@ -1,5 +1,6 @@
 package CarportUtil;
 
+import DBAccess.MaterialMapper;
 import FunctionLayer.LogicFacade;
 import FunctionLayer.LoginSampleException;
 import FunctionLayer.Material;
@@ -37,6 +38,8 @@ public class Initializer {
         }
         return materialList;
     }
+
+
     public static List<Material> getOverlayList() throws LoginSampleException {
         if (overlayList == null){
             try {

@@ -32,10 +32,11 @@
     *** Billede ***
     <br>
     <br>
+
         <table class="table table-striped ">
             <thead>
             <tr>
-                <th>Træ & Tagplader</th>
+                <th>Konstruktion</th>
                 <th>Længde (cm)</th>
                 <th>Antal</th>
                 <th>Enhed</th>
@@ -45,7 +46,7 @@
             <tbody>
 
 
-            <c:forEach var="material" items="${sessionScope.woodmateriallist}">
+            <c:forEach var="material" items="${sessionScope.constuctionList}">
                 <tr>
                     <td>${material.name}</td>
                     <td>${material.size}</td>
@@ -63,7 +64,8 @@
         <table class="table table-striped ">
             <thead>
             <tr>
-                <th>Beslag & Skruer</th>
+                <th>Beklædning</th>
+                <th>Længde (cm)</th>
                 <th>Antal</th>
                 <th>Enhed</th>
                 <th>Note</th>
@@ -72,7 +74,7 @@
             <tbody>
 
 
-            <c:forEach var="material" items="${sessionScope.othermateriallist}">
+            <c:forEach var="material" items="${sessionScope.overlayList}">
                 <tr>
                     <td>${material.name}</td>
                     <td>${material.antal}</td>
@@ -83,6 +85,34 @@
 
             </tbody>
         </table>
+
+
+    <table class="table table-striped ">
+        <thead>
+        <tr>
+            <th>Tag</th>
+            <th>Længde (cm)</th>
+            <th>Antal</th>
+            <th>Enhed</th>
+            <th>Note</th>
+        </tr>
+        </thead>
+        <tbody>
+
+
+        <c:forEach var="material" items="${sessionScope.roofList}">
+            <tr>
+                <td>${material.name}</td>
+                <td>${material.size}</td>
+                <td>${material.antal}</td>
+                <td>${material.unit}</td>
+                <td>${material.comment}</td>
+            </tr>
+        </c:forEach>
+
+        </tbody>
+    </table>
+
 
 </div>
 <!-- Container -->
