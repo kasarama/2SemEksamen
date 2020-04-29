@@ -23,10 +23,9 @@ public class FlatRoof extends Command {
 
         request.setAttribute("height", height);
         request.setAttribute("tilt", tilt);
-        request.setAttribute("maxtilt" , maxOptionTiltDegree);
 
-        carportRequest.getRoof().setHeight(height);
         carportRequest.getRoof().setDegree(tilt);
+        carportRequest.getRoof().setHeight(height);
 
         session.setAttribute("carportRequest", carportRequest);
 

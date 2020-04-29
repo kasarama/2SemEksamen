@@ -3,20 +3,20 @@ package FunctionLayer;
 
 public class RoofSizing {
 
-    Carport carport;
+    private static Carport carport;
     private int roofLength = carport.getLength() + carport.getShed().getDepth();
-    private int roofHeight;
-    private int minpitchDegreeOption = 15;
-    private int maxpitchDegreeOption = 45 - 1; //Vi har valgt ud fra hvad produktowneren fra Fog har sagt
+    private static int roofHeight;
+    private static int minpitchDegreeOption = 15;
+    private static int maxpitchDegreeOption = 45 - 1; //Vi har valgt ud fra hvad produktowneren fra Fog har sagt
     //"45 grader vil blive et tårn" - men man kan fælge det på fogs hjemmeside, så vi har derfor sagt 45-1
-    private int minTiltDegreeOption = 2;
+    private static int minTiltDegreeOption = 2;
 
     public RoofSizing(Carport carport) {
         this.carport = carport;
     }
 
-    //Beregning af taget højde
-    public int roofHeight(boolean pitchedRoof) {
+    //Beregning af taget højde afhængigt af tagtype
+    public static int roofHeight(boolean pitchedRoof) {
         roofHeight = (int) Math.tan((double)(carport.getRoof().getDegree()))*carport.getLength();//TODO - skriv evt gange x pr meter * carport.length
         if (pitchedRoof)
             roofHeight = (int) (Math.tan(carport.getRoof().getDegree()) * ((carport.getWidth() / 2))); //TODO se om det virker
@@ -24,7 +24,7 @@ public class RoofSizing {
     }
 
     //Beregning af max vinkel på tagryg (spisds tag)
-    public int tilltAngleMaxCal() {
+    public static int tilltAngleMaxCal() {
     int tiltAnglemax = (int) Math.tanh((double) (20 / 100)); //Todo ret metode
     return tiltAnglemax;
     }
@@ -48,26 +48,6 @@ public class RoofSizing {
         int roofWidth = halfRaftWidthForPitchedRoof*((int) Math.sin((double) (pitchDegrees)));
 
         return roofWidth;
-    }
-
-    //Beregning af vinklen af tagryggen på et tag med rejsning
-    public int[] pitchDegreesOptionsForCostumerToChoose(){
-        int deltaDegreeOption = maxpitchDegreeOption-minpitchDegreeOption;
-        int[] pitchDegreeOptions = new int[deltaDegreeOption];
-        for (int i = 0; i < (deltaDegreeOption-1); i=+5) {
-            pitchDegreeOptions[i] = minpitchDegreeOption+5;
-        }
-        return pitchDegreeOptions;
-    }
-
-    //Beregning af vinklen af tagryggen på et tag med rejsning
-    public int[] tiltDegreesOptionsForCostumerToChoose(){
-        int deltaDegreeOption = tilltAngleMaxCal()-minTiltDegreeOption;
-        int[] pitchDegreeOptions = new int[deltaDegreeOption];
-        for (int i = 0; i < (deltaDegreeOption-1); i++) {
-            pitchDegreeOptions[i] = minTiltDegreeOption+5;
-        }
-        return pitchDegreeOptions;
     }
 
     //Hjælpemetode for bredde af tag afhægnig af type
@@ -104,7 +84,7 @@ public class RoofSizing {
         this.roofHeight = roofHeight;
     }
 
-    public int getMinpitchDegreeOption() {
+    public static int getMinpitchDegreeOption() {
         return minpitchDegreeOption;
     }
 
@@ -112,7 +92,7 @@ public class RoofSizing {
         this.minpitchDegreeOption = minpitchDegreeOption;
     }
 
-    public int getMaxpitchDegreeOption() {
+    public static int getMaxpitchDegreeOption() {
         return maxpitchDegreeOption;
     }
 
@@ -128,5 +108,8 @@ public class RoofSizing {
         this.minTiltDegreeOption = minTiltDegreeOption;
     }
 
+    public static Carport getCarport() {
+        return carport;
+    }
 
 }
