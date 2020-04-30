@@ -12,12 +12,8 @@
 
         <h1>Welcome to Sem 2</h1>
 
-        <h2>
-            <a href="FrontController?target=redirect&destination=carportrequest">Design din egen Carport</a>
-        </h2>
-<br>
-<br>
-<br>
+
+
 <h2>
     <a href="FrontController?target=redirect&destination=carportbase">New Designe Center</a>
 </h2>
@@ -37,7 +33,7 @@
 <br>
 <br>
 <h2>
-    <a href="FrontController?target=redirect&destination=CathrineTest">Cathrine Test</a>
+ <!--   <a href="FrontController?target=redirect&destination=CathrineTest">Cathrine Test</a> -->
 </h2>
 <br>
 <br>
