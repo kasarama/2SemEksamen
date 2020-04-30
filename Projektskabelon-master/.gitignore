@@ -12,7 +12,7 @@
 .idea/**/usage.statistics.xml
 .idea/**/dictionaries
 .idea/**/shelf
-
+.idea/**/compiler.xml
 # Generated files
 .idea/**/contentModel.xml
 
@@ -152,4 +152,4 @@ $RECYCLE.BIN/
 
 
 # End of https://www.gitignore.io/api/maven,macos,windows,java-web,intellij# Created by .ignore support plugin (hsz.mobi)
-!/src/main/java/DBAccess/Connector.java
+
