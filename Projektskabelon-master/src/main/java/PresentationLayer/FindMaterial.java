@@ -24,6 +24,7 @@ public class FindMaterial extends Command{
         RoofMaterialCalculator rc = new RoofMaterialCalculator();
         ShedCalculator sc = new ShedCalculator();
         OverlayCalculator oc = new OverlayCalculator();
+
         Carport carport = new Carport();
 
     // CONSTRUCTION:

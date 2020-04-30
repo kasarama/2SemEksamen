@@ -14,10 +14,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
-
- @author kasper
- */
 @WebServlet( name = "FrontController", urlPatterns = { "/FrontController" } )
 public class FrontController extends HttpServlet {
 
@@ -44,6 +40,7 @@ public class FrontController extends HttpServlet {
             } else {
                 request.getRequestDispatcher("/WEB-INF/" + view + ".jsp").forward(request, response);
             }
+            System.out.println(view);
         } catch (Exception ex ) {
             request.setAttribute( "error", ex.getMessage() );
 
@@ -59,7 +56,6 @@ public class FrontController extends HttpServlet {
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      Handles the HTTP <code>GET</code> method.
-
      @param request servlet request
      @param response servlet response
      @throws ServletException if a servlet-specific error occurs
@@ -73,7 +69,6 @@ public class FrontController extends HttpServlet {
 
     /**
      Handles the HTTP <code>POST</code> method.
-
      @param request servlet request
      @param response servlet response
      @throws ServletException if a servlet-specific error occurs
@@ -87,7 +82,6 @@ public class FrontController extends HttpServlet {
 
     /**
      Returns a short description of the servlet.
-
      @return a String containing servlet description
      */
     @Override

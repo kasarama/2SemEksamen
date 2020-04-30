@@ -3,6 +3,8 @@ package FunctionLayer;
 import java.util.ArrayList;
 
 public class Carport {
+
+    //todo slet arraylister og deres usages og getter og setter
     private int width;
     private int length;
     private Shed shed;
@@ -14,27 +16,26 @@ public class Carport {
     private double cost;
     private double salePrice;
 
-    public Shed getShed() {
-        return shed;
+    private int constructionHeight;
+
+
+    public int getConstructionHeight() {
+        return constructionHeight;
     }
 
-    public void setShed(Shed shed) {
-        this.shed = shed;
+    public void setConstructionHeight(int constructionHeight) {
+        this.constructionHeight = constructionHeight;
     }
 
-    public Roof getRoof() {
-        return roof;
-    }
-
-    public void setRoof(Roof roof) {
-        this.roof = roof;
-    }
 
     public Carport() {
+
         this.constructionMaterials= new ArrayList<>();
         this.roofMaterials = new ArrayList<>();
         this.shedMaterials = new ArrayList<>();
         this.overlayMaterials = new ArrayList<>();
+
+
     }
 
     public void addConstructionMaterial (Material material){
@@ -107,13 +108,31 @@ public class Carport {
     }
 
 
+
+    public Shed getShed() {
+        return shed;
+    }
+
+    public void setShed(Shed shed) {
+        this.shed = shed;
+    }
+
+    public Roof getRoof() {
+        return roof;
+    }
+
+    public void setRoof(Roof roof) {
+        this.roof = roof;
+    }
+
+
     @Override
     public String toString() {
         return "Carport{" +
                 "width=" + width +
                 ", length=" + length +
                 ", shed=" + shed.getWidth()+"x"+shed.getDepth()+shed.getSide() +
-                ", pitchedroof? :" + roof.isPitchedRoof() +
+                ", pitchedroof? :" + roof.isPitched() +
                 '}';
     }
 }

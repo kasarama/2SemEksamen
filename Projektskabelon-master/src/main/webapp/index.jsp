@@ -37,10 +37,16 @@
 </h2>
 
 
-        <c:if test = "${requestScope.error!= null}" >
-           <h2>Error ! </h2>
-            ${requestScope.error}
-        </c:if>
+<br>
+<br>
+<br>
+<h2>
+ <!--   <a href="FrontController?target=redirect&destination=CathrineTest">Cathrine Test</a>-->
+</h2>
+<br>
+<br>
+<br>
+<br>
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->

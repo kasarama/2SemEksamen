@@ -2,7 +2,6 @@ package PresentationLayer;
 
 import FunctionLayer.*;
 
-import javax.persistence.criteria.CriteriaBuilder;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -15,6 +14,7 @@ public class CarportBase extends Command {
         int roofType = Integer.parseInt(request.getParameter("roofType"));
         int shedWidthParameter = 1;
         int shedDepth = 0;
+        int constructionHeight = Integer.parseInt(request.getParameter("constructionHeight"));
         String shedSide = "";
 
         if (request.getParameter("withShed") != null) {
@@ -32,34 +32,36 @@ public class CarportBase extends Command {
         }
 
         Carport carportBase = new Carport();
-        boolean pitchedRoof;
+        Roof roofBase;
         if (roofType == 1) {
-            pitchedRoof = true;
+            roofBase = new RoofPitched(0, carportLength, carportWidth, 0);
         } else {
-            pitchedRoof = false;
+            roofBase = new RoofFlat(0, carportLength, carportWidth, 0);
         }
 
-        int shedWidth = ShedSizing.shedWidth(carportWidth,shedWidthParameter);
+        int shedWidth = ShedSizing.shedWidth(carportWidth, shedWidthParameter);
         carportBase.setLength(carportLength);
         carportBase.setWidth(carportWidth);
-        carportBase.setRoof(new Roof(0, 0, pitchedRoof));
+        carportBase.setRoof(roofBase);
         carportBase.setShed(new Shed(shedWidth, shedDepth, shedSide));
+        carportBase.setConstructionHeight(constructionHeight);
 
         HttpSession session = request.getSession();
         if (session.getAttribute("carportBase") == null) {
             session.setAttribute("carportBase", carportBase);
 
         }
-        request.setAttribute("cearportToString", carportBase.toString());
+        request.setAttribute("carportToString", carportBase.toString());
 
-        if(request.getParameter("tooverlay")!=null){
+
+        if(request.getParameter("tooverlay")!=null || request.getParameter("tooverlaynoshed")!=null){
+
             return "overlay";
-        } else
-        if (roofType == 1) {
+        }else if (roofType == 1) {
             return "designpitchedroof";
-        } else {
-            return "designflatroof";
-        }
-    }
+        }else if (request.getParameter("withShed") != null)
+                return "designshed";
 
+        return "designflatroof";
+    }
 }

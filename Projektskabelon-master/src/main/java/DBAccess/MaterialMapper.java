@@ -95,12 +95,12 @@ public class MaterialMapper {
 
     // This class Connects to DB and gets the "Overlay material" data from it.
 
-    public static List<Material> getAllOverlayMaterials() throws LoginSampleException {
+    public static List<Material> getAllOverlays() throws LoginSampleException {
         List<Material> materialList=new ArrayList<>();
         try
         {
             Connection con = Connector.connection();
-            String SQL = "SELECT materialID, name, picture FROM materials WHERE category='overlay'";
+            String SQL = "SELECT materialID, name, picture FROM materials WHERE category='overlay' and keyword='overlay'";
             PreparedStatement ps = con.prepareStatement(SQL);
             ResultSet rs = ps.executeQuery();
             while (rs.next())
@@ -148,5 +148,40 @@ public class MaterialMapper {
     }
 
 
+    public static List<Material> getAllOverlayMaterials() throws LoginSampleException {
+        List<Material> materialList=new ArrayList<>();
+        try
+        {
+            Connection con = Connector.connection();
+            String SQL = "SELECT materialID, name, size, unit, price, picture FROM materials WHERE category='overlay'";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next())
+            {
+
+                int materialID = rs.getInt("materialID");
+                String name = rs.getString("name");
+                String picture = rs.getString("picture");
+                int size = rs.getInt("size");
+                String unit = rs.getString("unit");
+                double price = rs.getDouble("price");
+
+
+                Material material = new Material();
+                material.setId(materialID);
+                material.setName(name);
+                material.setSize(size);
+                material.setUnit(unit);
+                material.setPrice(price);
+                material.setPicture(picture);
+                materialList.add(material);
+            }
+        }
+        catch(ClassNotFoundException | SQLException ex )
+        {
+            throw new LoginSampleException(ex.getMessage());
+        }
+        return materialList;
+    }
 }
 

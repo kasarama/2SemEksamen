@@ -10,10 +10,11 @@
 <%@include file="../includes/header.inc" %>
 
 <h1>Alt starter her!</h1>
-<h2>Her er nogle basele informationer du skal angive om din carport</h2>
+<h2>Her er nogle basale informationer du skal angive om din carport</h2>
 <form name="carportbase" action="FrontController" method="POST">
     <input type="hidden" name="origin" value="carportbase">
     <input type="hidden" name="target" value="carportbase">
+    <input type="hidden" name="constructionHeight" value=200>
     <label>Vælg længde:</label>
     <select name="carportLength" class="form-control" >
         <c:forEach var="i" begin="24" end="75">

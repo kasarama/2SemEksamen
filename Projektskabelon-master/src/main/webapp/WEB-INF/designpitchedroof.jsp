@@ -6,7 +6,7 @@
 
 <h3>Tag med rejsning design</h3>
 
-${requestScope.cearportToString}
+${requestScope.carportToString}
 
 <form name="showdrawing" action="FrontController" method="POST">
     <input type="hidden" name="target" value="showdrawing">

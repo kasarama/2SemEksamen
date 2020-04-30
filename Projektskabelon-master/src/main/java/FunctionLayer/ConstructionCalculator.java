@@ -1,6 +1,9 @@
 package FunctionLayer;
 
 public class ConstructionCalculator {
+    public ConstructionCalculator() {
+    }
+
     public static RoofMaterialCalculator r = new RoofMaterialCalculator();
 
 // TRÆ OG ANDET:
