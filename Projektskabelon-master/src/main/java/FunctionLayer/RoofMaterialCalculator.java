@@ -204,7 +204,7 @@ public class RoofMaterialCalculator {
             return squares;
         }
 
-    Carport carport;
+    public static Carport carport = new Carport();
     private int length = carport.getLength();
     private int width = carport.getWidth();
 
