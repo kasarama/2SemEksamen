@@ -1,12 +1,12 @@
 package PresentationLayer;
 
-import FunctionLayer.*;
-import sun.net.dns.ResolverConfiguration;
+import FunctionLayer.Carport;
+import FunctionLayer.LoginSampleException;
+import FunctionLayer.RoofSizing;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
 
 public class FlatRoof extends Command {
     @Override
@@ -31,6 +31,10 @@ public class FlatRoof extends Command {
 
         session.setAttribute("carportRequest", carportRequest);
 
-        return "login";
+
+        //todo læs data fra designeflatroof.jsp og brug dem for t designe fladt tag
+
+        return "designflatroof";
+
     }
 }

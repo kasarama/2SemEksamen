@@ -17,7 +17,7 @@ public class CarportBase extends Command {
         int constructionHeight = Integer.parseInt(request.getParameter("constructionHeight"));
         String shedSide = "";
 
-        if (request.getParameter("withShed") != null) {
+        if (request.getParameter("withShed") != null || request.getParameter("MiaTest")!=null) {
 
             shedWidthParameter = Integer.parseInt(request.getParameter("shedWidthParameter"));
             shedDepth = Integer.parseInt(request.getParameter("shedDepth"));
@@ -53,6 +53,9 @@ public class CarportBase extends Command {
         }
         request.setAttribute("carportToString", carportBase.toString());
 
+        if(request.getParameter("MiaTest")!=null){
+            return "MiaTest";
+        }
 
         if(request.getParameter("tooverlay")!=null || request.getParameter("tooverlaynoshed")!=null){
 

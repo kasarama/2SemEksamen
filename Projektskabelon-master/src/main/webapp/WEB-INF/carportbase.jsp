@@ -65,6 +65,7 @@
         <p1>eller</p1>
         <input type="submit" name="tooverlaynoshed" value="No shed / Vælg beklædning">
         <input type="submit" name="tooverlay" value="With shed / Vælg beklædning">
+        <input type="submit" name="MiaTest" value="MIA TEST">
     </div>
 
 </form>

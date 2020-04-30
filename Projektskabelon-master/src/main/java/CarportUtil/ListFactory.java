@@ -21,18 +21,18 @@ public class ListFactory {
         }
 
 
-       try {
-           FileWriter fw = new FileWriter(path, true);
-           BufferedWriter out = new BufferedWriter(fw);
-           String linie = String.format("%s;%d;%s;%s;%s;%.2f;%s",material.getName(), material.getSize(),
-                   material.getUnit(), material.getKeyword(), material.getCategory(), material.getPrice(),
-                   material.getPicture());
-           out.newLine();
-           out.write(linie);
-           out.close();
-       }catch (IOException ex) {
-           ex.printStackTrace();
-           throw new LoginSampleException(ex.getMessage());
-       }
+        try {
+            FileWriter fw = new FileWriter(path, true);
+            BufferedWriter out = new BufferedWriter(fw);
+            String linie = String.format("%s;%d;%s;%s;%s;%.2f;%s",material.getName(), material.getSize(),
+                    material.getUnit(), material.getKeyword(), material.getCategory(), material.getPrice(),
+                    material.getPicture());
+            out.newLine();
+            out.write(linie);
+            out.close();
+        }catch (IOException ex) {
+            ex.printStackTrace();
+            throw new LoginSampleException(ex.getMessage());
+        }
     }
 }
