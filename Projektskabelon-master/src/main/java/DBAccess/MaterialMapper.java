@@ -12,8 +12,7 @@ import java.util.List;
 
 import java.sql.*;
 
-public class MaterialMapper
-{
+public class MaterialMapper {
 
     // Skal have fat i et materiale ud fra note
 
@@ -31,7 +30,8 @@ public class MaterialMapper
                 String name = rs.getString( "name" );
                 int size = rs.getInt( "size" );
                 String unit = rs.getString( "unit" );
-                Material material = new Material(0, name, size, unit,null ,null);
+                Material material = new Material(0, name, size, unit,keyword ,null);
+                System.out.println(material);
                 return material;
             } else {
                 throw new LoginSampleException( "Could not find the material" );
