@@ -31,7 +31,6 @@ public class MaterialMapper {
                 int size = rs.getInt( "size" );
                 String unit = rs.getString( "unit" );
                 Material material = new Material(0, name, size, unit,keyword ,null);
-                System.out.println(material);
                 return material;
             } else {
                 throw new LoginSampleException( "Could not find the material" );

@@ -44,15 +44,16 @@ public class FindMaterial extends Command{
         }
 
         // Hulbånd
-        int hulbåndAntal = cc.perforatedBand(length, width);
-            Material hulbånd = LogicFacade.getMaterial("Hulbånd");
-                hulbånd.setAntal(hulbåndAntal);
-                hulbånd.setComment("Hulbånd");
+        int perNumber = cc.perforatedBand(length, width);
+            Material perforatedBand = LogicFacade.getMaterial("Hulbånd");
+                perforatedBand.setAntal(perNumber);
+                perforatedBand.setComment("Hulbånd");
+
         // Beslagskruer
-        int beslagskruerHulAntal = cc.bracketScrewsCon(length);
-            Material beslagskruerHulbånd = LogicFacade.getMaterial("Beslagskruer");
-                beslagskruerHulbånd.setAntal(beslagskruerHulAntal);
-                beslagskruerHulbånd.setComment("Beslagskruer (BLIVER GENTAGET)");
+        int bracketScrewsHulAntal = cc.bracketScrewsCon(length);
+            Material brackeScrews = LogicFacade.getMaterial("Beslagskruer");
+                brackeScrews.setAntal(bracketScrewsHulAntal);
+                brackeScrews.setComment("Beslagskruer (BLIVER GENTAGET)");
 
 
 /*
@@ -97,6 +98,7 @@ public class FindMaterial extends Command{
             Material under540 = LogicFacade.getMaterial("Understernbrædder540");
                 under540.setAntal(under540Antal);
                 under540.setComment("Understernbrædder 540 cm");
+
         // Oversternbrædder
         int over360Antal = rc.oversternboartU360(length, width);
         int over540Antal = rc.oversternboartU540(length, width);
@@ -106,6 +108,7 @@ public class FindMaterial extends Command{
             Material over540 = LogicFacade.getMaterial("Oversternbrædder540");
                 over540.setAntal(over540Antal);
                 over540.setComment("Oversternbrædder 540 cm");
+
         // Rem
         int rem600Antal = rc.rem600(length, width);
         int rem480Antal = rc.rem480(length, width);
@@ -115,27 +118,28 @@ public class FindMaterial extends Command{
             Material rem480 = LogicFacade.getMaterial("Rem480");
                 rem480.setAntal(rem480Antal);
                 rem480.setComment("Rem 480 cm");
+
         // Spær
-        int spærAntal = rc.raft(length);
-            Material spær = LogicFacade.getMaterial("Spær");
-                spær.setAntal(spærAntal);
-                spær.setComment("Spær");
+        int raftNumber = rc.raft(length);
+            Material raft = LogicFacade.getMaterial("Spær");
+                raft.setAntal(raftNumber);
+                raft.setComment("Spær");
 
         // Vandbræt
-        int vandbræt360Antal = rc.vandbræt360(length, width);
-        int vandbræt540Antal = rc.vandbræt540(length, width);
-            Material vandbræt360 = LogicFacade.getMaterial("Vandbræt360");
-                vandbræt360.setAntal(vandbræt360Antal);
-                vandbræt360.setComment("Drypnæse 360 cm");
-            Material vandbræt540 = LogicFacade.getMaterial("Vandbræt540");
-                vandbræt540.setAntal(vandbræt540Antal);
-                vandbræt540.setComment("Drypnæse 540 cm");
+        int waterboard360Antal = rc.vandbræt360(length, width);
+        int waterboard540Antal = rc.vandbræt540(length, width);
+            Material waterboard360 = LogicFacade.getMaterial("Vandbræt360");
+                waterboard360.setAntal(waterboard360Antal);
+                waterboard360.setComment("Drypnæse 360 cm");
+            Material waterboard540 = LogicFacade.getMaterial("Vandbræt540");
+                waterboard540.setAntal(waterboard540Antal);
+                waterboard540.setComment("Drypnæse 540 cm");
 
         // Tætningsprofil
-        int antalTætningsprofil = rc.gasket(width);
-            Material tætningsprofil = LogicFacade.getMaterial("TætningsprofilJumbo");
-                tætningsprofil.setAntal(antalTætningsprofil);
-                tætningsprofil.setComment("Tætningsprofil til tag");
+        int sealingNumber = rc.gasket(width);
+            Material sealing = LogicFacade.getMaterial("TætningsprofilJumbo");
+                sealing.setAntal(sealingNumber);
+                sealing.setComment("Tætningsprofil til tag");
 
         //Bundskruer (til tag)
         int antalBundskruer = rc.bottomScrews(length, width);
@@ -199,6 +203,7 @@ public class FindMaterial extends Command{
                 Material løsholter360 = LogicFacade.getMaterial("Løsholter360");
                 løsholterSide = løsholter360;
             }
+
             String typeGavl = sc.løsholterTypeGavl(shedWidth);
             Material løsholterGavl;
             if (typeGavl.equals("Løsholter240")){
@@ -211,6 +216,7 @@ public class FindMaterial extends Command{
                 Material løsholter360 = LogicFacade.getMaterial("Løsholter360");
                 løsholterGavl = løsholter360;
             }
+
             // Hvis løsholterGavlTypen er den samme som løsholterSideTypen så skal den lægge antallet sammen til
             // 1 samlet løsholter:
             Material løsholter1;
@@ -253,7 +259,7 @@ public class FindMaterial extends Command{
         // Flat tag, intet skur:
         if (tag == 0 && skur == 0){
             carport.addConstructionMaterial(stolpe);
-            carport.addConstructionMaterial(hulbånd);
+            carport.addConstructionMaterial(perforatedBand);
             carport.addConstructionMaterial(beslagskruer);
 
             // TODO beklædning skal være her
@@ -264,10 +270,10 @@ public class FindMaterial extends Command{
             carport.addRoofMaterial(over540);
             carport.addRoofMaterial(rem480);
             carport.addRoofMaterial(rem600);
-            carport.addRoofMaterial(spær);
-            carport.addRoofMaterial(vandbræt360);
-            carport.addRoofMaterial(vandbræt540);
-            carport.addRoofMaterial(tætningsprofil);
+            carport.addRoofMaterial(raft);
+            carport.addRoofMaterial(waterboard360);
+            carport.addRoofMaterial(waterboard540);
+            carport.addRoofMaterial(sealing);
             carport.addRoofMaterial(bundskruer);
             carport.addRoofMaterial(universalbeslagLeft);
             carport.addRoofMaterial(universalbeslagRight);
@@ -281,7 +287,7 @@ public class FindMaterial extends Command{
         } else if (tag == 0 && skur == 1){
 
             carport.addConstructionMaterial(stolpe);
-            carport.addConstructionMaterial(hulbånd);
+            carport.addConstructionMaterial(perforatedBand);
             carport.addConstructionMaterial(beslagskruer);
 
             // TODO beklædning skal være her
@@ -303,14 +309,14 @@ public class FindMaterial extends Command{
             if (rem600Antal>0){
                 carport.addRoofMaterial(rem600);
             }
-            carport.addRoofMaterial(spær);
-            if (vandbræt360Antal>0){
-                carport.addRoofMaterial(vandbræt360);
+            carport.addRoofMaterial(raft);
+            if (waterboard360Antal>0){
+                carport.addRoofMaterial(waterboard360);
             }
-            if (vandbræt540Antal>0){
-                carport.addRoofMaterial(vandbræt540);
+            if (waterboard540Antal>0){
+                carport.addRoofMaterial(waterboard540);
             }
-            carport.addRoofMaterial(tætningsprofil);
+            carport.addRoofMaterial(sealing);
             carport.addRoofMaterial(bundskruer);
             carport.addRoofMaterial(universalbeslagLeft);
             carport.addRoofMaterial(universalbeslagRight);
