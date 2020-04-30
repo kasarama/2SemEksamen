@@ -54,14 +54,14 @@ public class Connector {
 
         String path = "dbAccess/dbAccess.txt";
 
+
         try {
             FileReader fr = new FileReader(new File(path));
-
             BufferedReader br = new BufferedReader(fr);
             String line = br.readLine();
             data = line.split(";");
         }catch (FileNotFoundException ex){
-            System.out.println("File not found anyways...");
+            System.out.println("File not found "+path);
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
             ex.printStackTrace();
