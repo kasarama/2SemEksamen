@@ -37,7 +37,7 @@
 <br>
 <br>
 <h2>
-    <a href="FrontController?target=redirect&destination=CathrineTest">Cathrine Test</a>
+ <!--   <a href="FrontController?target=redirect&destination=CathrineTest">Cathrine Test</a>-->
 </h2>
 <br>
 <br>
