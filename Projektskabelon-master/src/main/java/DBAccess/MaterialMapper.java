@@ -48,6 +48,7 @@ public class MaterialMapper
         //1. create a method that returns a list of ROOF Materials -  Material = Class from function Layer
         public static List<Material> getAllRoofMaterials() throws LoginSampleException
         {
+            System.out.println("reached: MaterialMapper.getAllRoofMaterials()");
             List<Material> materialList = null;
 
             //try-catch block in case an error occurs.
@@ -82,6 +83,7 @@ public class MaterialMapper
                     //create a new material obj of 'Material' class and pass the gotten data in it (materialID, name, size etc)
                     Material material = new Material(materialID, name, size, unit, keyword, category);// data gets stored in 'material'
                     //add the gotten 'info' data to the 'InfoList'
+                    System.out.println("id: "+ material.getId()+"name "+material.getName());
                     materialList.add(material);
                 }
             }

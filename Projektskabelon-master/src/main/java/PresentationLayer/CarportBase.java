@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 public class CarportBase extends Command {
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException {
+        System.out.println("I've reached CarportBase");
         int carportLength = Integer.parseInt(request.getParameter("carportLength"));
         int carportWidth = Integer.parseInt(request.getParameter("carportWidth"));
         int roofType = Integer.parseInt(request.getParameter("roofType"));
@@ -52,13 +53,15 @@ public class CarportBase extends Command {
         request.setAttribute("carportToString", carportBase.toString());
 
 
-        if (request.getParameter("tooverlay") != null) {
+        if (request.getParameter("tooverlay") != null || request.getParameter("tooverlaynoshed")!=null) {
             return "overlay";
         }else if (roofType == 1) {
             return "designpitchedroof";
-        }else if (request.getParameter("withShed") != null)
-                return "designshed";
+        }else if (roofType != 1) {
+            System.out.println();
+            return "designflatroof";
+        } else return "index";
 
-        return "designflatroof";
+
     }
 }

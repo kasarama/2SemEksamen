@@ -26,8 +26,10 @@ public class Initializer {
     public static List<Material> getMaterialList() {
         if (materialList == null)
         {
+            System.out.println("CarportUtil.Initializer.getMaterialList()");
             try {
             materialList = LogicFacade.getAllRoofMaterials();
+                System.out.println("there is :"+materialList.size()+ "elements on the list");
             }
             catch (Exception e) {
                 e.printStackTrace();

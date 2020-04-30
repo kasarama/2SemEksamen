@@ -14,6 +14,7 @@
 <form name="carportbase" action="FrontController" method="POST">
     <input type="hidden" name="origin" value="carportbase">
     <input type="hidden" name="target" value="carportbase">
+    <input type="hidden" name="constructionHeight" value=200>
     <label>Vælg længde:</label>
     <select name="carportLength" class="form-control" >
         <c:forEach var="i" begin="24" end="75">
@@ -36,7 +37,7 @@
     Redskabsrum:
     NB! Der skal beregnes 15 cm tagudhæng på hver side af redskabsrummet
 
-    <div>
+
         Fortel os om redskabsrummet:
         <br>
         <label>Vælg bredde:</label>
@@ -61,10 +62,10 @@
         <p1>eller</p1>
         <input type="submit" name="noShed" value="Fortsæt uden redskabsrummet">
     </div>
-        <p1>eller</p1>
-        <input type="submit" name="tooverlaynoshed" value="No shed / Vælg beklædning">
-        <input type="submit" name="tooverlay" value="With shed / Vælg beklædning">
-    </div>
+    <p1>eller</p1>
+    <input type="submit" name="tooverlaynoshed" value="No shed / Vælg beklædning">
+    <input type="submit" name="tooverlay" value="With shed / Vælg beklædning">
+
 
 </form>
 

@@ -11,31 +11,28 @@
 
 <%
     // if i'm the first user on this application, then set the materialList. (else the list already exists)
-    if (request.getServletContext().getAttribute("materialList")== null){
-        request.getServletContext().setAttribute("materialList", Initializer.getMaterialList());
-
+    if (request.getServletContext().getAttribute("materialList") == null) {
+        System.out.println("initializing materiallis");
+    }
+    request.getServletContext().setAttribute("materialList", Initializer.getMaterialList());
 
 
 %>
-<c:forEach var="roofMaterial" items="${applicationScope.materialList}">
-    ${roofMaterial.name}
-</c:forEach>
 
 
 <form name="makerequest" action="FrontController" method="post">
     <input type="hidden" name="target" value="makerequest">
+    <label for="roof"> Vælg tagdækning:</label>
+    <select class="form-control" name="roof" id="roof">
+        <option selected disabled>Vælg type:</option>
 
-    <div class="form-group">
-        <label for="roof"> Vælg tagdækning:</label>
-        <select class="form-control" name="roof" id="roof">
-            <option selected disabled>Vælg type:</option>
+        <c:forEach var="roofMaterial" items="${applicationScope.materialList}">
+            <option value="${roofMaterial.id}">${roofMaterial.name}</option>
+        </c:forEach>
 
-            <c:forEach var="roofMaterial" items="${applicationScope.materialList}">
-                <option value=${roofMaterial.materialID}>${roofMaterial.name}</option>
-            </c:forEach>
-        </select> </div>
+    </select>
 
-    <input class="btn btn-primary" type="submit" value="Videre" >
+    <input class="btn btn-primary" type="submit" value="Videre">
 </form>
 
 <%@include file="../includes/footer.inc" %>
