@@ -57,14 +57,12 @@ public class CarportBase extends Command {
             return "MiaTest";
         }
 
-        if(request.getParameter("tooverlay")!=null || request.getParameter("tooverlaynoshed")!=null){
-
+        if (request.getParameter("tooverlay") != null || request.getParameter("tooverlaynoshed")!=null) {
             return "overlay";
         }else if (roofType == 1) {
             return "designpitchedroof";
-        }else if (request.getParameter("withShed") != null)
-                return "designshed";
-
-        return "designflatroof";
+        }else if (roofType != 1) {
+            return "designflatroof";
+        } else return "index";
     }
 }

@@ -13,18 +13,11 @@ abstract class Command {
         commands.put( "login", new Login() );
         commands.put( "register", new Register() );
         commands.put( "redirect", new Redirect() );
-        commands.put( "shed", new ShedSizingMia() );
-        commands.put( "showRequests", new ShowRequests() );
-        commands.put( "makerequest", new MakeRequest() );
-        commands.put( "designshed", new DesignShed() );
         commands.put( "designflatroof", new FlatRoof() );
         commands.put( "designpitchedroof", new PitchedRoof() );
-        commands.put( "sendrequest", new SendRequest() );
-        commands.put( "showdrawing", new ShowDrawing() );
         commands.put( "newrequest", new NewRequest() );
         commands.put( "findmaterial", new FindMaterial() );
         commands.put("materiale", new Materials());
-        commands.put( "shedposition", new ShedPosition() );
         commands.put( "carportbase", new CarportBase() );
         commands.put( "addmaterial", new AddMaterial() );
 
