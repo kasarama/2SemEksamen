@@ -30,21 +30,18 @@ public class PostCalculator {
     }
 
     // fills up the array with heights of posts on the one side of the shed or carport starting from the shortest one
-    public static Integer[] postsHeights(int height, int angle, int size, boolean isPitched){
+    public static Integer[] postsHeights(int height, int angle, int size){
+        //todo when calculating postHeights of carport, int height should be the heighest one of shed posts
         int postNumber=sidePostAmount(size);
         int distance = postDistanceMax300(size);
         Integer[] postHeights = new Integer[postNumber];
 
-        if (isPitched){
-            for (int i = 0; i <postHeights.length ; i++) {
-                postHeights[i]=height;
-            } }else {
             for (int i = 0; i < postHeights.length ; i++) {
                 int tmp = height;
                 height= tmp+ raising(angle, distance)*i;
                 postHeights[i]=height;
             }
-        }
+
         return postHeights;
     }
 

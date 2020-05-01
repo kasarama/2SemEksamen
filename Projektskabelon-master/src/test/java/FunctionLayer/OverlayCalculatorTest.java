@@ -12,13 +12,17 @@ public class OverlayCalculatorTest {
 
     int numberOfPost;
     Carport carport = new Carport();
-
+    Shed shed = new Shed((carport.getWidth()/2),460,"left");
+    Roof roof = new Roof();
 
     @Before
     public void setUp() throws Exception {
         carport.setLength(910);
         carport.setWidth(1230);
-        Shed shed = new Shed((carport.getWidth()/2),460,"left");
+        carport.setShed(shed);
+        roof.setDegree(3);
+        carport.setRoof(roof);
+        shed.setWalls(WallBuilder.addShedWalls(carport));
         carport.setShed(shed);
 
     }
@@ -46,7 +50,16 @@ public class OverlayCalculatorTest {
 
     @Test
     public void spaersNumberOnSide() {
-        int result = OverlayCalculator.spaersNumberOnSide(1100, 200, 22,false);
+        int result = OverlayCalculator.spaersNumberOnSide(1100, 200, 22);
         int expected= 14;
+    }
+
+    @Test
+    public void materials() {
+        System.out.println("there is "+ OverlayCalculator.Materials(carport.getShed().getWalls()).size()+" materials on the list");
+        for (Material ma: OverlayCalculator.Materials(carport.getShed().getWalls())
+             ) {
+            System.out.println(ma.getName());
+        }
     }
 }

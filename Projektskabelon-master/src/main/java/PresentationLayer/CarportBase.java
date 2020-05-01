@@ -39,7 +39,7 @@ public class CarportBase extends Command {
             roofBase = new RoofFlat(0, carportLength, carportWidth, 0);
         }
 
-        int shedWidth = ShedSizing.shedWidth(carportWidth, shedWidthParameter);
+        int shedWidth = (carportWidth*shedWidthParameter);
         carportBase.setLength(carportLength);
         carportBase.setWidth(carportWidth);
         carportBase.setRoof(roofBase);
