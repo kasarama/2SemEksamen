@@ -1,5 +1,7 @@
 package FunctionLayer;
 
+import org.omg.CORBA.MARSHAL;
+
 import java.util.ArrayList;
 
 
@@ -24,16 +26,58 @@ public class OverlayCalculator {
     }
 
 
+    public static ArrayList<Material> materialsForWall(Wall wall){
+        ArrayList<Material> materials = new ArrayList<>();
+
+        Material spaer = new Material();
+        spaer.setName("47X100 MM SPÆRTRÆ");
+        int spaers = spaersNumberOnSide(wall.getLength(),wall.getMinHeight(),wall.getRaising());
+        int spaerlength=PostCalculator.postDistanceMax300(wall.getLength());
+        spaer.setSize(spaerlength);
+        spaer.setKeyword("Horizontal framing");
+        for (int i = 0; i < spaers; i++) {
+            materials.add(spaer);
+        }
+        Material screwSpaer = new Material();
+        screwSpaer.setName("5X80 MM RUST FRI SKRUER");
+        screwSpaer.setKeyword("til montering af horizontal framing");
+        int screwSpaeramount = screwSpaer(spaers);
+        screwSpaer.setSize(screwSpaeramount);
+        materials.add(screwSpaer);
+        Material fyr = new Material();
+        fyr.setName("19X50 MM BRÆDDER FYR");
+        fyr.setKeyword("Vertical framing");
+        int fyrsnumber= fyrNumberOnSide(wall.getLength());
+        ArrayList<Integer> fyrHeights=fyrLengths(wall.getMinHeight(),wall.getRaising(),wall.getLength(),fyrsnumber);
+        for (Integer height:fyrHeights
+             ) {
+            fyr.setSize(height);
+            materials.add(fyr);
+        }
+        Material screwFyr  = new Material();
+        screwFyr.setSize(screwFyr(fyrsnumber,spaers));
+        screwFyr.setKeyword("Til montering af vertical framing");
+        materials.add(screwFyr);
+
+
+
+
+
+
+        return materials;
+    }
+
     //calculates spaer needed for one of the chosen sides of shed/carport/construction
     // max distance between spaer is 100 cm - counts number of spar after each post
-    public static int spaersNumberOnSide(int length, int minHeight, int angle, boolean isPitched) {
+    public static int spaersNumberOnSide(int length, int minHeight, int angle) {
         int sparsAmount = 0;
-        Integer[] postsheights = PostCalculator.postsHeights(minHeight, angle, length, isPitched);
+        Integer[] postsheights = PostCalculator.postsHeights(minHeight, angle, length);
         for (int i = 0; i < postsheights.length - 1; i++) {
             int tmp = sparsAmount;
             sparsAmount = tmp + postsheights[i] / 100;
-
         }
+
+
         return sparsAmount;
 
     }
@@ -68,23 +112,19 @@ public class OverlayCalculator {
     }
 
     //returns array with length of each fyr used on chosen side
-    public static ArrayList<Integer> fyrLengths(int height, int angle, int size, boolean isPitched, int fyrnumber){
+    public static ArrayList<Integer> fyrLengths(int height, int angle, int size, int fyrnumber){
         ArrayList<Integer> fyrLengths = new ArrayList<>();
         int postNumber=PostCalculator.sidePostAmount(size);
         int distance = size/(postNumber+fyrnumber-1);
         int distanceOfPosts=PostCalculator.postDistanceMax300(size);
         int numberOfFyrOnDistance = numberOfFyrOnDistance(distanceOfPosts);
         int fyrPlusPost=fyrnumber+postNumber;
-        if (isPitched){
-            for (int i = 0; i < fyrPlusPost; i++) {
-                fyrLengths.add(height);
-            }
-        } else {
+
             for (int i = 0; i < fyrPlusPost; i++) {
                 int tmp = height;
                 height = tmp + PostCalculator.raising(angle, distance) * i;
                 fyrLengths.add(height);
-            }
+
         }
 
         //on the list there are also posts that need to by now removed. I take number of posts and
@@ -97,13 +137,14 @@ public class OverlayCalculator {
     }
 
     //Materials for  Shed framing
-    public static ArrayList<Material> shedFramingMaterials(int width, int length, int minHeight, int angle, boolean isPitched){
-        ArrayList<Material>framingMaterials =new ArrayList<>();
-        int sideSpaerNumber=spaersNumberOnSide( length,  minHeight,  angle,  isPitched);
-        
+    public static ArrayList<Material> Materials(ArrayList<Wall> walls){
+        ArrayList<Material> materials = new ArrayList<>();
 
-
-        return framingMaterials;
+        for (Wall wall:walls) {
+            ArrayList wallMaterials = materialsForWall(wall);
+            materials.addAll(wallMaterials);
+        }
+        return materials;
     }
 
     //wood delivers in chosen length with cuts every 20 cm. Pricing is pr. meter. We order not shorter piece with

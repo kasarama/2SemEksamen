@@ -17,6 +17,7 @@ public class CarportBase extends Command {
         int constructionHeight = Integer.parseInt(request.getParameter("constructionHeight"));
         String shedSide = "";
 
+
         if (request.getParameter("withShed") != null || request.getParameter("MiaTest")!=null) {
 
             shedWidthParameter = Integer.parseInt(request.getParameter("shedWidthParameter"));
@@ -38,8 +39,8 @@ public class CarportBase extends Command {
         } else {
             roofBase = new RoofFlat(0, carportLength, carportWidth, 0);
         }
-
-        int shedWidth = ShedSizing.shedWidth(carportWidth, shedWidthParameter);
+        roofBase.setDegree(3);
+        int shedWidth = (carportWidth*shedWidthParameter);
         carportBase.setLength(carportLength);
         carportBase.setWidth(carportWidth);
         carportBase.setRoof(roofBase);

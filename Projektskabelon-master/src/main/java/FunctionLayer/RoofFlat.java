@@ -12,4 +12,5 @@ public class RoofFlat extends Roof {
         tagMaterialList = new ArrayList();
         pitched = false;
     }
+
 }

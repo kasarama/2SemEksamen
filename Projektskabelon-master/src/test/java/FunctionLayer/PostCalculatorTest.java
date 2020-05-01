@@ -64,4 +64,11 @@ Carport carport = new Carport();
     @Test
     public void shedFrontSidePostDistance() {
     }
+
+    @Test
+    public void postsHeights() {
+        Integer[]heights=PostCalculator.postsHeights(200,0,500);
+        int rsult = heights[1];
+        assertEquals(200,rsult);
+    }
 }
