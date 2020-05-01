@@ -3,7 +3,7 @@ package FunctionLayer;
 
 public class RoofSizing {
 
-    Carport carport;
+    Construction construction;
     private int roofLength;
     private int roofHeight;
     private int minpitchDegreeOption = 15;
@@ -11,15 +11,15 @@ public class RoofSizing {
     //"45 grader vil blive et tårn" - men man kan fælge det på fogs hjemmeside, så vi har derfor sagt 45-1
     private int minTiltDegreeOption = 2;
 
-    public RoofSizing(Carport carport) {
-        this.carport = carport;
+    public RoofSizing(Construction construction) {
+        this.construction = construction;
     }
 
     //Beregning af taget højde
     public int roofHeight(boolean pitchedRoof) {
-        roofHeight = (int) Math.tan((double)(carport.getRoof().getDegree()))/carport.getLength();
+        roofHeight = (int) Math.tan((double)(construction.getRoof().getDegree()))/ construction.getCarportLength();
         if (pitchedRoof)
-            roofHeight = (int) (Math.tan(carport.getRoof().getDegree()) * ((carport.getWidth() / 2))); //TODO se om det virker
+            roofHeight = (int) (Math.tan(construction.getRoof().getDegree()) * ((construction.getCarportWidth() / 2))); //TODO se om det virker
         return roofHeight;
     }
 
@@ -38,13 +38,13 @@ public class RoofSizing {
         if (tiltAngle < 2 || tiltAngle > tilltAngleMaxCal())
             throw new Exception("Hældningen på taget må ikke være mindre end 2 grader");
         roofHeight = roofHeight(false);
-        roofLength = (int) Math.hypot((double)carport.getLength(), (double) roofHeight);
+        roofLength = (int) Math.hypot((double) construction.getCarportLength(), (double) roofHeight);
         return roofLength;
     }
 
     //Areal beregning af tag med spids
     public int pitchedRoofCalcutatedWidth(int pitchDegrees){
-        int halfRaftWidthForPitchedRoof = carport.getWidth();
+        int halfRaftWidthForPitchedRoof = construction.getCarportWidth();
         int roofWidth = halfRaftWidthForPitchedRoof*((int) Math.sin((double) (pitchDegrees)));
 
         return roofWidth;
@@ -72,18 +72,18 @@ public class RoofSizing {
 
     //Hjælpemetode for bredde af tag afhægnig af type
     public int roofWidthSurface() throws Exception {
-        int roofwidth = carport.getWidth();
-        if (carport.getRoof().isPitched()) {
-            roofwidth = pitchedRoofCalcutatedWidth(carport.getRoof().getDegree());
+        int roofwidth = construction.getCarportWidth();
+        if (construction.getRoof().isPitched()) {
+            roofwidth = pitchedRoofCalcutatedWidth(construction.getRoof().getDegree());
         }
         return roofwidth;
     }
     //Hjælpemetode for længde af tag afhægnig af type
     public int roofLengthSurface() throws Exception {
-        int roofLength = flatRoofCalcutatedSide(carport.getRoof().getDegree());
+        int roofLength = flatRoofCalcutatedSide(construction.getRoof().getDegree());
 
-        if (carport.getRoof().isPitched()) {
-            roofLength = carport.getLength();
+        if (construction.getRoof().isPitched()) {
+            roofLength = construction.getCarportLength();
         }
         return roofLength;
     }

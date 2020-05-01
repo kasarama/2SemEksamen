@@ -1,26 +1,23 @@
 package FunctionLayer;
 
-import PresentationLayer.FlatRoof;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.ArrayList;
-
 import static org.junit.Assert.*;
 
-public class PostCalculatorTest {
-Carport carport = new Carport();
+public class ConstructionSizeCalculatorTest {
+Construction construction = new Construction();
 
 
     @Before
     public void setUp() throws Exception {
-        carport.setLength(910);
-        carport.setWidth(1230);
-        Shed shed = new Shed((carport.getWidth()/2),760,"left");
-        carport.setShed(shed);
+        construction.setCarportLength(910);
+        construction.setCarportWidth(1230);
+        Shed shed = new Shed((construction.getCarportWidth()/2),760,"left");
+        construction.setShed(shed);
         Roof roof = new Roof();
         roof.setDegree(3);
-        carport.setRoof(roof);
+        construction.setRoof(roof);
 
 
     }
@@ -37,27 +34,27 @@ Carport carport = new Carport();
 
     @Test
     public void postRows() {
-        int rows= PostCalculator.postRows(carport.getWidth());
+        int rows= ConstructionSizeCalculator.postRows(construction.getCarportWidth());
         assertEquals(4,rows);
     }
 
 
     @Test
     public void sidePostAmount() {
-        int actual=PostCalculator.sidePostAmount(850);
+        int actual= ConstructionSizeCalculator.sidePostAmount(850);
         int expected = 4;
         assertEquals(expected,actual);
     }
 
     @Test
     public void postDistanceMax300() {
-        int actual=PostCalculator.postDistanceMax300(850);
+        int actual= ConstructionSizeCalculator.postDistanceMax300(850);
         int exp =280;
     }
 
     @Test
     public void shedFrontPostsAmount() {
-        int actual = PostCalculator.shedFrontPostsAmount(1400);
+        int actual = ConstructionSizeCalculator.shedFrontPostsAmount(1400);
         int expected=5;
     }
 
@@ -67,7 +64,7 @@ Carport carport = new Carport();
 
     @Test
     public void postsHeights() {
-        Integer[]heights=PostCalculator.postsHeights(200,0,500);
+        Integer[]heights= ConstructionSizeCalculator.postsHeights(200,0,500);
         int rsult = heights[1];
         assertEquals(200,rsult);
     }

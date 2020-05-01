@@ -1,6 +1,6 @@
 package PresentationLayer;
 
-import FunctionLayer.Carport;
+import FunctionLayer.Construction;
 import FunctionLayer.LoginSampleException;
 import FunctionLayer.RoofSizing;
 
@@ -13,23 +13,23 @@ public class FlatRoof extends Command {
     String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException {
 
         HttpSession session = request.getSession();
-        Carport carportRequest = (Carport) session.getAttribute("carportRequest");
+        Construction constructionRequest = (Construction) session.getAttribute("carportRequest");
 
 
         int height = Integer.parseInt(request.getParameter("height"));
         int tilt = Integer.parseInt(request.getParameter("tilt"));
 
-        RoofSizing roofSizing = new RoofSizing(carportRequest);
+        RoofSizing roofSizing = new RoofSizing(constructionRequest);
 
         int[] tiltOptions = roofSizing.pitchDegreesOptionsForCostumerToChoose();
 
         request.setAttribute("height", height);
         request.setAttribute("tilt", tilt);
 
-        carportRequest.getRoof().setHeight(height);
-        carportRequest.getRoof().setDegree(tilt);
+        constructionRequest.getRoof().setHeight(height);
+        constructionRequest.getRoof().setDegree(tilt);
 
-        session.setAttribute("carportRequest", carportRequest);
+        session.setAttribute("carportRequest", constructionRequest);
 
 
         //todo læs data fra designeflatroof.jsp og brug dem for t designe fladt tag

@@ -35,7 +35,7 @@
     <form name="overlay" action="FrontController" method="POST">
         <input type="hidden" name="target" value="overlay">
         <input type="hidden" name="origin" value="overlay">
-        <c:set var="shed" value="${sessionScope.carportBase.shed.depth}"/>
+        <c:set var="shed" value="${sessionScope.constructionBase.shed.depth}"/>
         <c:choose>
             <c:when test="${shed != 0}">
                 Vælg beklædning
@@ -44,7 +44,7 @@
                         <option value="${material.id}">${material.name}</option>
                     </c:forEach>
                 </select>
-                Du kan også vælge at beklæde vægger af carport:
+                Du kan også vælge at beklæde vægger af construction:
                 <div class="form-check">
                     <input class="form-check-input" type="checkbox" name="left" value="left" id="left1">
                     <label class="form-check-label" for="left1">

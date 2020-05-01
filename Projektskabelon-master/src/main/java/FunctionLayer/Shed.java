@@ -8,13 +8,28 @@ public class Shed {
     private int depth;
     private String side;
     private ArrayList<Wall> walls;
+    private ArrayList<Material> materials;
+
 
     public Shed(int width, int depth, String side) {
         this.width = width;
         this.depth = depth;
         this.side = side;
         this.walls= new ArrayList<>();
+        this.materials= new ArrayList<>();
+
     }
+
+
+    public ArrayList<Material> getMaterials() {
+        return materials;
+    }
+
+    public void setMaterials(ArrayList<Material> materials) {
+        this.materials = materials;
+    }
+
+
 
     public ArrayList<Wall> getWalls() {
         return walls;

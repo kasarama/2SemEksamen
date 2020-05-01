@@ -1,7 +1,5 @@
 package FunctionLayer;
 
-import org.omg.CORBA.MARSHAL;
-
 import java.util.ArrayList;
 
 
@@ -10,7 +8,7 @@ import java.util.ArrayList;
  */
 public class OverlayCalculator {
     //gets list with materials of all the elements of overlay and sets them on one list of materials
-    public static ArrayList<Material> materialList(Carport carport) {
+    public static ArrayList<Material> materialList(Construction construction) {
         ArrayList<Material> materialList = new ArrayList<>();
         ArrayList<ArrayList> listsOfElements = new ArrayList<>();
 
@@ -32,7 +30,7 @@ public class OverlayCalculator {
         Material spaer = new Material();
         spaer.setName("47X100 MM SPÆRTRÆ");
         int spaers = spaersNumberOnSide(wall.getLength(),wall.getMinHeight(),wall.getRaising());
-        int spaerlength=PostCalculator.postDistanceMax300(wall.getLength());
+        int spaerlength= ConstructionSizeCalculator.postDistanceMax300(wall.getLength());
         spaer.setSize(spaerlength);
         spaer.setKeyword("Horizontal framing");
         for (int i = 0; i < spaers; i++) {
@@ -71,7 +69,7 @@ public class OverlayCalculator {
     // max distance between spaer is 100 cm - counts number of spar after each post
     public static int spaersNumberOnSide(int length, int minHeight, int angle) {
         int sparsAmount = 0;
-        Integer[] postsheights = PostCalculator.postsHeights(minHeight, angle, length);
+        Integer[] postsheights = ConstructionSizeCalculator.postsHeights(minHeight, angle, length);
         for (int i = 0; i < postsheights.length - 1; i++) {
             int tmp = sparsAmount;
             sparsAmount = tmp + postsheights[i] / 100;
@@ -99,8 +97,8 @@ public class OverlayCalculator {
 
     //counts number of fyr on each distance and in total on chosen side
     public static int fyrNumberOnSide(int length) {
-        int distance = PostCalculator.postDistanceMax300(length);
-        int distancesNumber = PostCalculator.sidePostAmount(length) - 1;
+        int distance = ConstructionSizeCalculator.postDistanceMax300(length);
+        int distancesNumber = ConstructionSizeCalculator.sidePostAmount(length) - 1;
         int numberOfFyrOnDistance=numberOfFyrOnDistance(distance);
 
         return numberOfFyrOnDistance * distancesNumber;
@@ -114,15 +112,15 @@ public class OverlayCalculator {
     //returns array with length of each fyr used on chosen side
     public static ArrayList<Integer> fyrLengths(int height, int angle, int size, int fyrnumber){
         ArrayList<Integer> fyrLengths = new ArrayList<>();
-        int postNumber=PostCalculator.sidePostAmount(size);
+        int postNumber= ConstructionSizeCalculator.sidePostAmount(size);
         int distance = size/(postNumber+fyrnumber-1);
-        int distanceOfPosts=PostCalculator.postDistanceMax300(size);
+        int distanceOfPosts= ConstructionSizeCalculator.postDistanceMax300(size);
         int numberOfFyrOnDistance = numberOfFyrOnDistance(distanceOfPosts);
         int fyrPlusPost=fyrnumber+postNumber;
 
             for (int i = 0; i < fyrPlusPost; i++) {
                 int tmp = height;
-                height = tmp + PostCalculator.raising(angle, distance) * i;
+                height = tmp + ConstructionSizeCalculator.raising(angle, distance) * i;
                 fyrLengths.add(height);
 
         }

@@ -2,19 +2,19 @@ package FunctionLayer;
 
 public class RoofMaterialCalculator {
 
-    Carport carport;
-    private int length = carport.getLength();
-    private int width = carport.getWidth();
+    Construction construction;
+    private int length = construction.getCarportLength();
+    private int width = construction.getCarportWidth();
 
-    RoofSizing roofSizing = new RoofSizing(carport);
+    RoofSizing roofSizing = new RoofSizing(construction);
     private int trapezpladeWidth = 100;
     private int T600RoofPlateLength = 600;
     private int T300RoofPlateLength = 300;
     private int numberOfT600Trapezplates = 0;
     private int numberOfT300Trapezplates = 0;
-    private int tiltAngle = carport.getRoof().getDegree();
-    private int pitchDegree = carport.getRoof().getDegree();
-    private boolean pitchedRoof = carport.getRoof().isPitched();
+    private int tiltAngle = construction.getRoof().getDegree();
+    private int pitchDegree = construction.getRoof().getDegree();
+    private boolean pitchedRoof = construction.getRoof().isPitched();
     private int square1numberOfT600Trapezplates = 0;
     private int square2numberOfT600Trapezplates = 0;
     private int square3numberOfT600Trapezplates = 0;
@@ -286,13 +286,13 @@ public class RoofMaterialCalculator {
 
         // Bræddebolte
         public static int carriageBolts(int length, int width) {
-            int carriageBolts = ConstructionCalculator.posts(length, width)*2;
+            int carriageBolts = ConstructionMaterialCalculator.posts(length, width)*2;
             return carriageBolts;
         }
 
         // Firkantskiver
         public static int squares(int length, int width){
-            int squares = ConstructionCalculator.posts(length, width);
+            int squares = ConstructionMaterialCalculator.posts(length, width);
             return squares;
         }
 

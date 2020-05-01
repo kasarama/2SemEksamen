@@ -1,9 +1,8 @@
 package PresentationLayer;
 
-import FunctionLayer.Carport;
+import FunctionLayer.Construction;
 import FunctionLayer.Material;
 import FunctionLayer.OverlayCalculator;
-import FunctionLayer.PostCalculator;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -29,9 +28,9 @@ public class Overlay extends Command {
         }
         HttpSession session= request.getSession();
 
-        Carport carport = (Carport) session.getAttribute("carportBase");
+        Construction construction = (Construction) session.getAttribute("carportBase");
 
-        ArrayList<Material> ovarlayMaterialList= OverlayCalculator.materialList(carport);
+        ArrayList<Material> ovarlayMaterialList= OverlayCalculator.materialList(construction);
         return null;
     }
 }

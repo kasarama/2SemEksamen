@@ -3,25 +3,25 @@ package FunctionLayer;
 import java.util.ArrayList;
 
 public class WallBuilder {
-    public static ArrayList<Wall> addShedWalls(Carport carport){
+    public static ArrayList<Wall> addShedWalls(Construction construction){
         ArrayList<Wall> walls = new ArrayList<>();
         Wall side = new Wall();
         side.setSide("side");
-        side.setLength(carport.getShed().getDepth());
-        side.setRaising(carport.getRoof().getDegree());
-        side.setMinHeight(carport.getConstructionHeight());
+        side.setLength(construction.getShed().getDepth());
+        side.setRaising(construction.getRoof().getDegree());
+        side.setMinHeight(construction.getConstructionHeight());
 
         Wall back = new Wall();
         back.setSide("back");
-        back.setLength(carport.getShed().getWidth());
+        back.setLength(construction.getShed().getWidth());
         back.setRaising(0);
-        back.setMinHeight(carport.getConstructionHeight());
+        back.setMinHeight(construction.getConstructionHeight());
 
         Wall front = new Wall();
         front.setSide("front");
-        front.setLength(carport.getShed().getWidth()-100);
+        front.setLength(construction.getShed().getWidth()-100);
         front.setRaising(0);
-        front.setMinHeight(carport.getConstructionHeight());
+        front.setMinHeight(construction.getConstructionHeight());
         walls.add(side);
         walls.add(side);
         walls.add(front);

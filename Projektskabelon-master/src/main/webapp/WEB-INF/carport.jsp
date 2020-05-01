@@ -13,7 +13,7 @@
 <body>
 
 <h1 class="Du har valgt:"></h1>
-<!-- ** Creating a table that will contain rows/columns to display the chosen carport ** -->
+<!-- ** Creating a table that will contain rows/columns to display the chosen construction ** -->
 <!-- "table"  puts the table in a table form (with dividers) -->
 <!-- "table-striped" makes the table grey and white (stripes-pattern) -->
 <table class="table table-striped">

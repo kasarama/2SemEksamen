@@ -3,17 +3,17 @@ package FunctionLayer;
 /**
  * @author Magdalena
  */
-public class PostCalculator {
+public class ConstructionSizeCalculator {
     //todo some of the post are common for sides and the back - remember that when drowing or making itemlist
     //todo method counting shared posts
 
     //counts how many posts should there be on one side of a carport or a shed
     public  static int sidePostAmount(int size){
         int numberOfPost;
-        if(size%300==0){
+        if(size%300==0){ // 900cm -(3*300) =0
             numberOfPost=size/300+1;
         } else {
-            numberOfPost= ( size - size % 300)/300+2;
+            numberOfPost= ( size - size % 300)/300+2; //(750cm -(3*300) =0) 750%300=2 2*300=600 (150????)
         }
         return numberOfPost;
     }
@@ -26,6 +26,7 @@ public class PostCalculator {
 
     //counts how much the roof drops/raises on the given distance
     public static int raising(int angle, int distance){
+
         return (int) angle*distance/100;
     }
 
@@ -66,12 +67,6 @@ public class PostCalculator {
 
         return sidePostAmount(width);
     }
-
-
-
-
-
-
 
 
 }
