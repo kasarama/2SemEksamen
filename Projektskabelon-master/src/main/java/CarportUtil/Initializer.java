@@ -20,23 +20,36 @@ NOTE 2: what's exactly being returned?
 */
 public class Initializer {
 
-    private static List<Material> materialList = null;
+    private static List<Material> pitchedRoofMateriallist = null;
+    private static List<Material> flatRoofMateriallist = null;
     private static List<Material> overlayList = null;
     private static List<Material> overlayMaterialsList = null;
 
 
     //Getters
-    public static List<Material> getMaterialList() {
-        if (materialList == null)
+    public static List<Material> getPitchedRoofMateriallist() {
+        if (pitchedRoofMateriallist == null)
         {
             try {
-            materialList = LogicFacade.getAllRoofMaterials();
+                pitchedRoofMateriallist = LogicFacade.getAllPitchedRoofMaterials();
             }
             catch (Exception e) {
                 e.printStackTrace();
             }
         }
-        return materialList;
+        return pitchedRoofMateriallist;
+    }
+    public static List<Material> getFlatRoofMateriallist() {
+        if (flatRoofMateriallist == null)
+        {
+            try {
+                flatRoofMateriallist = LogicFacade.getAllFlatRoofMaterials();
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return flatRoofMateriallist;
     }
 
 

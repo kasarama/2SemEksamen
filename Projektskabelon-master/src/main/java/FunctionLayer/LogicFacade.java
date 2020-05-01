@@ -26,9 +26,11 @@ public class LogicFacade {
     }
 
     //call the static method that gets the ROOF materials data from DB - static = can be called without creating an obj.
-    public static List<Material> getAllRoofMaterials() throws LoginSampleException
-    {
-       return MaterialMapper.getAllRoofMaterials(); //return 'getAllRoofMaterials()' method from MaterialMapper
+    public static List<Material> getAllPitchedRoofMaterials() throws LoginSampleException {
+       return MaterialMapper.getAllPitchedRoofMaterials(); //return 'getAllRoofMaterials()' method from MaterialMapper
+    }
+    public static List<Material> getAllFlatRoofMaterials() throws LoginSampleException {
+        return MaterialMapper.getAllFlatRoofMaterials(); //return 'getAllRoofMaterials()' method from MaterialMapper
     }
 
     public static List<Material> getAllOverlays() throws LoginSampleException {

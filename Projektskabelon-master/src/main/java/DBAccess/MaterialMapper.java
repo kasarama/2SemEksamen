@@ -47,7 +47,7 @@ public class MaterialMapper {
 // This class Connects to DB and gets the "Roof material" data from it.
 
     //1. create a method that returns a list of ROOF Materials -  Material = Class from function Layer
-    public static List<Material> getAllRoofMaterials() throws LoginSampleException {
+    public static List<Material> getAllPitchedRoofMaterials() throws LoginSampleException {
         List<Material> materialList = null;
 
         //try-catch block in case an error occurs.
@@ -55,7 +55,7 @@ public class MaterialMapper {
             //2. start the connection by calling ".connection()" method from the "Connector" class
             Connection con = Connector.connection();
             //3. create an SQL statement - select only 'tag' from the 'material' table
-            String SQL = "SELECT * FROM materials WHERE category = 'Tag'";
+            String SQL = "SELECT * FROM materials WHERE category = 'TagPitched'";
             //4. insert the SQL statement into the ".preparedStatement()" method - it sends the SQL statement to the DB
             PreparedStatement ps = con.prepareStatement(SQL);
             //5. call the ".executeQuery()" to execute the SQL statement and return the result (stored in ResultSet).
@@ -90,7 +90,34 @@ public class MaterialMapper {
         // return the gotten 'material' data from the DB
         return materialList;
     }
+    public static List<Material> getAllFlatRoofMaterials() throws LoginSampleException {
+        List<Material> materialList = null;
 
+        try {
+            Connection con = Connector.connection();
+            String SQL = "SELECT * FROM materials WHERE category = 'TagFladt'";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                if (materialList == null) {
+                    materialList = new ArrayList<>();
+                }
+                int materialID = rs.getInt("materialID");
+                String name = rs.getString("name");
+                int size = rs.getInt("size");
+                String unit = rs.getString("unit");
+                String keyword = rs.getString("keyword");
+                String category = rs.getString("category");
+
+                Material material = new Material(materialID, name, size, unit, keyword, category);
+                materialList.add(material);
+            }
+        }
+        catch (ClassNotFoundException | SQLException ex) {
+            throw new LoginSampleException(ex.getMessage());
+        }
+        return materialList;
+    }
 
     // This class Connects to DB and gets the "Overlay material" data from it.
 

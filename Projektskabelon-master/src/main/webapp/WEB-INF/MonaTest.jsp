@@ -17,28 +17,46 @@
     <!-- make a button: videre til.. to go to next page -->
         <%
     // if i'm the first user on this application, then set the materialList. (else the list already exists)
-    if (request.getServletContext().getAttribute("materialList") == null) {
+    if (request.getServletContext().getAttribute("pitchedMaterialList") == null) {
         System.out.println("initializing materiallis");
     }
-    request.getServletContext().setAttribute("materialList", Initializer.getMaterialList());
+    request.getServletContext().setAttribute("pitchedMaterialList", Initializer.getPitchedRoofMateriallist());
 
-
+    if (request.getServletContext().getAttribute("flatMaterialList") == null) {
+        System.out.println("initializing materiallis");
+    }
+    request.getServletContext().setAttribute("flatMaterialList", Initializer.getFlatRoofMateriallist());
 %>
 
 
     <form name="makerequest" action="FrontController" method="post">
         <input type="hidden" name="target" value="makerequest">
-        <label for="roof"> Vælg tagdækning:</label>
-        <select class="form-control" name="roof" id="roof">
-            <option selected disabled>Vælg type:</option>
+        <label for="pitchedroof"> Vælg tagdækning for tag med hældning:</label>
+        <select class="form-control" name="pitchedroof" id="pitchedroof">
+            <option selected disabled>Vælg tag type (pitched):</option>
 
-            <c:forEach var="roofMaterial" items="${applicationScope.materialList}">
+            <c:forEach var="roofMaterial" items="${applicationScope.pitchedMaterialList}">
                 <option value="${roofMaterial.id}">${roofMaterial.name}</option>
             </c:forEach>
 
         </select>
 
         <input class="btn btn-primary" type="submit" value="Videre">
+    </form>
+<br>
+    <form name="makerequest" action="FrontController" method="post">
+      <input type="hidden" name="target" value="makerequest">
+      <label for="flatroof"> Vælg tagdækning for fladt tag:</label>
+      <select class="form-control" name="flatroof" id="flatroof">
+          <option selected disabled>Vælg tag type (flat):</option>
+
+          <c:forEach var="roofMaterial" items="${applicationScope.flatMaterialList}">
+              <option value="${roofMaterial.id}">${roofMaterial.name}</option>
+          </c:forEach>
+
+      </select>
+
+      <input class="btn btn-primary" type="submit" value="Videre">
     </form>
 
 <%@include file="../includes/footer.inc" %>
