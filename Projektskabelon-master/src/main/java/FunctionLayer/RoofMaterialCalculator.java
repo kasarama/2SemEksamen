@@ -12,8 +12,6 @@ public class RoofMaterialCalculator {
     private int T300RoofPlateLength = 300;
     private int numberOfT600Trapezplates = 0;
     private int numberOfT300Trapezplates = 0;
-    private int tiltAngle = construction.getRoof().getDegree();
-    private int pitchDegree = construction.getRoof().getDegree();
     private boolean pitchedRoof = construction.getRoof().getIsPitched();
     private int square1numberOfT600Trapezplates = 0;
     private int square2numberOfT600Trapezplates = 0;
@@ -190,7 +188,7 @@ public class RoofMaterialCalculator {
             return vandbrætAntal;
         }
 
-        // Tagplader
+        /*// Tagplader
         public static int roofAntal(int length, int width){
             int numberOfTrapezplader = 0;
             int T300Areal = 3;
@@ -207,6 +205,7 @@ public class RoofMaterialCalculator {
             }
             return numberOfTrapezplader;
         }
+
         public static String roofType(int length, int width){
             String trapezplader = "";
             int T300Areal = 3;
@@ -222,9 +221,9 @@ public class RoofMaterialCalculator {
                 trapezplader = "T600";
             }
             return trapezplader;
-        }
+        }*/
 
-        // Tætningsprofil
+    // Tætningsprofil
         public static int gasket(int width){
             int gasket = Math.round((width/100)*2);
             return gasket;

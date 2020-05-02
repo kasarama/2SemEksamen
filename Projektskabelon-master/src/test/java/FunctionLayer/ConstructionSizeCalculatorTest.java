@@ -25,13 +25,13 @@ Construction construction = new Construction();
 
 
     //TODO - denne test er unødvendig
-    @Test
+    /*@Test
     public void doubleTOint() {
         double a = 2.75;
         int b = (int) a;
         assertEquals(3,b);
 
-    }
+    }*/
 
 
 
