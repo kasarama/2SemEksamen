@@ -15,13 +15,16 @@ Construction construction = new Construction();
         construction.setCarportWidth(1230);
         Shed shed = new Shed((construction.getCarportWidth()/2),760,"left");
         construction.setShed(shed);
-        Roof roof = new Roof();
-        roof.setDegree(3);
-        construction.setRoof(roof);
+        Roof pitchedRoof = new RoofFlat(construction.getConstructionHeight(), construction.getConstructionLength(),
+                construction.getConstructionWidth());
+        pitchedRoof.setDegree(3);
+        construction.setRoof(pitchedRoof);
 
 
     }
 
+
+    //TODO - denne test er unødvendig
     @Test
     public void doubleTOint() {
         double a = 2.75;

@@ -37,7 +37,7 @@ public class CarportBase extends Command {
         if (roofType == 1) {
             roofBase = new RoofPitched(0, carportLength, carportWidth, 0);
         } else {
-            roofBase = new RoofFlat(0, carportLength, carportWidth, 0);
+            roofBase = new RoofFlat(0, carportLength, carportWidth);
         }
         roofBase.setDegree(3);
         int shedWidth = (carportWidth*shedWidthParameter);

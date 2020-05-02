@@ -2,8 +2,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@include file="../includes/header.inc" %>
 
-<h1>Fladt tag design</h1>
-<!--TODO fyld dropdown menu med data from DB, skriv former til alle de atributter som skal tastes for at kunne designe en fladt tag-->
+<%--<h1>Fladt tag design</h1>
+<!--TODO -  SKAL DENNE SIDE OVERHOVEDET VÆRE HER? xD -->
 
 <br>
 <form name="designflatroof" action="FrontController" method="POST">
@@ -16,5 +16,5 @@
     </select>
 
 
-</form>
+</form>--%>
 <%@include file="../includes/footer.inc"%>

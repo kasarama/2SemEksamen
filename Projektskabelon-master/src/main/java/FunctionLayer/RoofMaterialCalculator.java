@@ -14,7 +14,7 @@ public class RoofMaterialCalculator {
     private int numberOfT300Trapezplates = 0;
     private int tiltAngle = construction.getRoof().getDegree();
     private int pitchDegree = construction.getRoof().getDegree();
-    private boolean pitchedRoof = construction.getRoof().isPitched();
+    private boolean pitchedRoof = construction.getRoof().getIsPitched();
     private int square1numberOfT600Trapezplates = 0;
     private int square2numberOfT600Trapezplates = 0;
     private int square3numberOfT600Trapezplates = 0;

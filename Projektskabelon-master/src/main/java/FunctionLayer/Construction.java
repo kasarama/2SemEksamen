@@ -115,7 +115,7 @@ public class Construction {
                 "width=" + carportWidth +
                 ", length=" + carportLength +
                 ", shed=" + shed.getWidth()+"x"+shed.getDepth()+shed.getSide() +
-                ", pitchedroof? :" + roof.isPitched() +
+                ", pitchedroof? :" + roof.getIsPitched() +
                 '}';
     }
 }

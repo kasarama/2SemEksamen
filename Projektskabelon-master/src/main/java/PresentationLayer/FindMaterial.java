@@ -24,7 +24,7 @@ public class FindMaterial extends Command{
 Construction construction = (Construction) request.getSession().getAttribute("carportBase");
         int length = construction.getCarportLength();
         int width = construction.getCarportWidth();
-        boolean tag =  construction.getRoof().isPitched();
+        boolean tag =  construction.getRoof().getIsPitched();
         int skur = construction.getShed().getDepth();
         int shedDepth =  construction.getShed().getDepth();
         int shedWidth = construction.getShed().getWidth();

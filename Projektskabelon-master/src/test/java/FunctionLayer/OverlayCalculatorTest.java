@@ -10,15 +10,15 @@ public class OverlayCalculatorTest {
     int numberOfPost;
     Construction construction = new Construction();
     Shed shed = new Shed((construction.getCarportWidth()/2),460,"left");
-    Roof roof = new Roof();
+    Roof roofPitched = new RoofPitched(construction.getConstructionHeight(), construction.getConstructionLength(), construction.getConstructionWidth(), 0 );
 
     @Before
     public void setUp() throws Exception {
         construction.setCarportLength(910);
         construction.setCarportWidth(1230);
         construction.setShed(shed);
-        roof.setDegree(3);
-        construction.setRoof(roof);
+        roofPitched.setDegree(3);
+        construction.setRoof(roofPitched);
         shed.setWalls(WallBuilder.addShedWalls(construction));
         construction.setShed(shed);
 
@@ -38,10 +38,9 @@ public class OverlayCalculatorTest {
 
     @Test
     public void sideSpaers() {
-        Roof roof = new Roof();
-        roof.setDegree(50);
+        roofPitched.setDegree(50);
         Shed shed = new Shed((construction.getCarportWidth()/2),860,"left");
-        construction.setRoof(roof);
+        construction.setRoof(roofPitched);
 
     }
 
