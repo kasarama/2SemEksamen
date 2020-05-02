@@ -59,9 +59,6 @@ public class OverlayCalculator {
 
 
 
-
-
-
         return materials;
     }
 
@@ -110,13 +107,13 @@ public class OverlayCalculator {
     }
 
     //returns array with length of each fyr used on chosen side
-    public static ArrayList<Integer> fyrLengths(int height, int angle, int size, int fyrnumber){
+    public static ArrayList<Integer> fyrLengths(int height, int angle, int size){
         ArrayList<Integer> fyrLengths = new ArrayList<>();
         int postNumber= ConstructionSizeCalculator.sidePostAmount(size);
-        int distance = size/(postNumber+fyrnumber-1);
+        int distance = size/(postNumber+fyrNumberOnSide(size)-1);
         int distanceOfPosts= ConstructionSizeCalculator.postDistanceMax300(size);
         int numberOfFyrOnDistance = numberOfFyrOnDistance(distanceOfPosts);
-        int fyrPlusPost=fyrnumber+postNumber;
+        int fyrPlusPost=fyrNumberOnSide(size)+postNumber;
 
             for (int i = 0; i < fyrPlusPost; i++) {
                 int tmp = height;
@@ -135,7 +132,7 @@ public class OverlayCalculator {
     }
 
     //Materials for  Shed framing
-    public static ArrayList<Material> Materials(ArrayList<Wall> walls){
+    public static ArrayList<Material> wallMaterials(ArrayList<Wall> walls){
         ArrayList<Material> materials = new ArrayList<>();
 
         for (Wall wall:walls) {
