@@ -63,7 +63,6 @@ public class Roof {
         return degree;
     }
 
-
     public ArrayList<Material> getTagMaterialList() {
         return tagMaterialList;
     }
@@ -71,6 +70,10 @@ public class Roof {
 
     public boolean isPitched() {
         return pitched;
+    }
+
+    public void calculateWidth(Construction construction){
+        this.width=construction.getConstructionWidth();
     }
 
 }

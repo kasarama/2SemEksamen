@@ -1,7 +1,6 @@
 package PresentationLayer;
 
 import FunctionLayer.*;
-import org.w3c.dom.ls.LSOutput;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,13 +21,13 @@ public class FindMaterial extends Command{
         int shedWidth = Integer.parseInt(request.getParameter("shedWidth"));
 */
 
-Carport carport= (Carport) request.getSession().getAttribute("carportBase");
-        int length = carport.getLength();
-        int width = carport.getWidth();
-        boolean tag =  carport.getRoof().isPitched();
-        int skur = carport.getShed().getDepth();
-        int shedDepth =  carport.getShed().getDepth();
-        int shedWidth = carport.getShed().getWidth();
+Construction construction = (Construction) request.getSession().getAttribute("carportBase");
+        int length = construction.getCarportLength();
+        int width = construction.getCarportWidth();
+        boolean tag =  construction.getRoof().isPitched();
+        int skur = construction.getShed().getDepth();
+        int shedDepth =  construction.getShed().getDepth();
+        int shedWidth = construction.getShed().getWidth();
 
 
 
@@ -38,7 +37,7 @@ Carport carport= (Carport) request.getSession().getAttribute("carportBase");
         int stolpeAntal;
         Material stolpe;
         if (skur == 0){
-            stolpeAntal = FunctionLayer.ConstructionCalculator.posts(length, width);
+            stolpeAntal = ConstructionMaterialCalculator.posts(length, width);
                 stolpe = LogicFacade.getMaterial("Stolpe");
                     stolpe.setAntal(stolpeAntal);
                     stolpe.setComment("Stolpe");
@@ -51,13 +50,13 @@ Carport carport= (Carport) request.getSession().getAttribute("carportBase");
         }
 
         // Hulbånd
-        int perNumber = FunctionLayer.ConstructionCalculator.perforatedBand(length, width);
+        int perNumber = ConstructionMaterialCalculator.perforatedBand(length, width);
             Material perforatedBand = LogicFacade.getMaterial("Hulbånd");
                 perforatedBand.setAntal(perNumber);
                 perforatedBand.setComment("Hulbånd");
 
         // Beslagskruer
-        int bracketScrewsHulAntal = FunctionLayer.ConstructionCalculator.bracketScrewsCon(length);
+        int bracketScrewsHulAntal = ConstructionMaterialCalculator.bracketScrewsCon(length);
             Material brackeScrews = LogicFacade.getMaterial("Beslagskruer");
                 brackeScrews.setAntal(bracketScrewsHulAntal);
                 brackeScrews.setComment("Beslagskruer (BLIVER GENTAGET)");
@@ -266,82 +265,82 @@ Carport carport= (Carport) request.getSession().getAttribute("carportBase");
         // Flat tag, intet skur:
         if (!tag && skur == 0){
             System.out.println("Flat tag, intet skur. - pitchedroof:"+tag+"shed depth :"+skur);
-            carport.addConstructionMaterial(stolpe);
-            carport.addConstructionMaterial(perforatedBand);
-            carport.addConstructionMaterial(beslagskruer);
+            construction.addConstructionMaterial(stolpe);
+            construction.addConstructionMaterial(perforatedBand);
+            construction.addConstructionMaterial(beslagskruer);
 
             // TODO beklædning skal være her
 
-            carport.addRoofMaterial(under360);
-            carport.addRoofMaterial(under540);
-            carport.addRoofMaterial(over360);
-            carport.addRoofMaterial(over540);
-            carport.addRoofMaterial(rem480);
-            carport.addRoofMaterial(rem600);
-            carport.addRoofMaterial(raft);
-            carport.addRoofMaterial(waterboard360);
-            carport.addRoofMaterial(waterboard540);
-            carport.addRoofMaterial(sealing);
-            carport.addRoofMaterial(bundskruer);
-            carport.addRoofMaterial(universalbeslagLeft);
-            carport.addRoofMaterial(universalbeslagRight);
-            carport.addRoofMaterial(vSkruer);
-            carport.addRoofMaterial(beslagskruer);
-            carport.addRoofMaterial(bræddebolte);
-            carport.addRoofMaterial(firkantskiver);
-
+         /*   construction.addRoofMaterial(under360);
+            construction.addRoofMaterial(under540);
+            construction.addRoofMaterial(over360);
+            construction.addRoofMaterial(over540);
+            construction.addRoofMaterial(rem480);
+            construction.addRoofMaterial(rem600);
+            construction.addRoofMaterial(raft);
+            construction.addRoofMaterial(waterboard360);
+            construction.addRoofMaterial(waterboard540);
+            construction.addRoofMaterial(sealing);
+            construction.addRoofMaterial(bundskruer);
+            construction.addRoofMaterial(universalbeslagLeft);
+            construction.addRoofMaterial(universalbeslagRight);
+            construction.addRoofMaterial(vSkruer);
+            construction.addRoofMaterial(beslagskruer);
+            construction.addRoofMaterial(bræddebolte);
+            construction.addRoofMaterial(firkantskiver);
+*/
             jspSide = "styklisteFlatroof";
         // Flat tag, med skur:
         } else if (!tag && skur != 0){
             System.out.println("Flat tag, med skur. - pitchedroof:"+tag+"shed depth :"+skur);
 
 
-            carport.addConstructionMaterial(stolpe);
-            carport.addConstructionMaterial(perforatedBand);
-            carport.addConstructionMaterial(beslagskruer);
+            construction.addConstructionMaterial(stolpe);
+            construction.addConstructionMaterial(perforatedBand);
+            construction.addConstructionMaterial(beslagskruer);
 
             // TODO beklædning skal være her
-            if (under360Antal>0){
-                carport.addRoofMaterial(under360);
+          /*  if (under360Antal>0){
+                construction.addRoofMaterial(under360);
             }
             if (under540Antal>0){
-                carport.addRoofMaterial(under540);
+                construction.addRoofMaterial(under540);
             }
             if (over360Antal>0){
-                carport.addRoofMaterial(over360);
+                construction.addRoofMaterial(over360);
             }
             if (over540Antal>0){
-                carport.addRoofMaterial(over540);
+                construction.addRoofMaterial(over540);
             }
             if (rem480Antal>0){
-                carport.addRoofMaterial(rem480);
+                construction.addRoofMaterial(rem480);
             }
             if (rem600Antal>0){
-                carport.addRoofMaterial(rem600);
+                construction.addRoofMaterial(rem600);
             }
-            carport.addRoofMaterial(raft);
+            construction.addRoofMaterial(raft);
             if (waterboard360Antal>0){
-                carport.addRoofMaterial(waterboard360);
+                construction.addRoofMaterial(waterboard360);
             }
             if (waterboard540Antal>0){
-                carport.addRoofMaterial(waterboard540);
+                construction.addRoofMaterial(waterboard540);
             }
-            carport.addRoofMaterial(sealing);
-            carport.addRoofMaterial(bundskruer);
-            carport.addRoofMaterial(universalbeslagLeft);
-            carport.addRoofMaterial(universalbeslagRight);
-            carport.addRoofMaterial(vSkruer);
-            carport.addRoofMaterial(beslagskruer);
-            carport.addRoofMaterial(bræddebolte);
-            carport.addRoofMaterial(firkantskiver);
+            construction.addRoofMaterial(sealing);
+            construction.addRoofMaterial(bundskruer);
+            construction.addRoofMaterial(universalbeslagLeft);
+            construction.addRoofMaterial(universalbeslagRight);
+            construction.addRoofMaterial(vSkruer);
+            construction.addRoofMaterial(beslagskruer);
+            construction.addRoofMaterial(bræddebolte);
+            construction.addRoofMaterial(firkantskiver);
 
-            carport.addShedMaterial(lægte);
+            construction.addShedMaterial(lægte);
             if (løsholter1.getAntal()>0){
-                carport.addShedMaterial(løsholter1);
+                construction.addShedMaterial(løsholter1);
             }
-            carport.addShedMaterial(lås);
-            carport.addShedMaterial(hængsel);
-            carport.addShedMaterial(vinkelbeslag);
+            construction.addShedMaterial(lås);
+            construction.addShedMaterial(hængsel);
+            construction.addShedMaterial(vinkelbeslag);*/
 
             jspSide = "styklisteFlatroofSkur";
         // Pitched tag, intet skur:
@@ -358,12 +357,12 @@ Carport carport= (Carport) request.getSession().getAttribute("carportBase");
 
         HttpSession session = request.getSession();
 
-        session.setAttribute("constuctionList", carport.getConstructionMaterials());
+        session.setAttribute("constuctionList", construction.getFundamentMaterials());
         //session.setAttribute("overlayList", carport.getOverlayMaterials());
-        session.setAttribute("roofList", carport.getRoofMaterials());
-        session.setAttribute("shedList", carport.getShedMaterials());
+      /*  session.setAttribute("roofList", construction.getRoofMaterials());
+        session.setAttribute("shedList", construction.getShedMaterials());
 
-
+*/
         return jspSide;
     }
 

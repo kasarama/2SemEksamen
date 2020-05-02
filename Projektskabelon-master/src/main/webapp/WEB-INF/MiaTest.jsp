@@ -2,14 +2,14 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@include file="../includes/header.inc"%>
 
-<h1>Her kan du designe din egen carport </h1>
+<h1>Her kan du designe din egen construction </h1>
 
     You have chosen:
-    length :${sessionScope.carportBase.length}
-    width :${sessionScope.carportBase.width}
-    pitched roof? :${sessionScope.carportBase.roof.pitched}
-    shed depth :${sessionScope.carportBase.shed.depth}
-    shed width :${sessionScope.carportBase.shed.width}
+    length :${sessionScope.constructionBase.length}
+    width :${sessionScope.constructionBase.width}
+    pitched roof? :${sessionScope.constructionBase.roof.pitched}
+    shed depth :${sessionScope.constructionBase.shed.depth}
+    shed width :${sessionScope.constructionBase.shed.width}
 
 
 

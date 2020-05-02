@@ -17,6 +17,7 @@ public class CarportBase extends Command {
         int constructionHeight = Integer.parseInt(request.getParameter("constructionHeight"));
         String shedSide = "";
 
+
         if (request.getParameter("withShed") != null || request.getParameter("MiaTest")!=null) {
 
             shedWidthParameter = Integer.parseInt(request.getParameter("shedWidthParameter"));
@@ -31,27 +32,27 @@ public class CarportBase extends Command {
             shedSide = request.getParameter("shedSide");
         }
 
-        Carport carportBase = new Carport();
+        Construction constructionBase = new Construction();
         Roof roofBase;
         if (roofType == 1) {
             roofBase = new RoofPitched(0, carportLength, carportWidth, 0);
         } else {
             roofBase = new RoofFlat(0, carportLength, carportWidth, 0);
         }
-
-        int shedWidth = ShedSizing.shedWidth(carportWidth, shedWidthParameter);
-        carportBase.setLength(carportLength);
-        carportBase.setWidth(carportWidth);
-        carportBase.setRoof(roofBase);
-        carportBase.setShed(new Shed(shedWidth, shedDepth, shedSide));
-        carportBase.setConstructionHeight(constructionHeight);
+        roofBase.setDegree(3);
+        int shedWidth = (carportWidth*shedWidthParameter);
+        constructionBase.setCarportLength(carportLength);
+        constructionBase.setCarportWidth(carportWidth);
+        constructionBase.setRoof(roofBase);
+        constructionBase.setShed(new Shed(shedWidth, shedDepth, shedSide));
+        constructionBase.setConstructionHeight(constructionHeight);
 
         HttpSession session = request.getSession();
         if (session.getAttribute("carportBase") == null) {
-            session.setAttribute("carportBase", carportBase);
+            session.setAttribute("carportBase", constructionBase);
 
         }
-        request.setAttribute("carportToString", carportBase.toString());
+        request.setAttribute("carportToString", constructionBase.toString());
 
         if(request.getParameter("MiaTest")!=null){
             return "MiaTest";

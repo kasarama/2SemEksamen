@@ -21,7 +21,7 @@ ${requestScope.carportToString}
     <input class="btn btn-primary" type="submit" value="Videre" >
 </form>
 
-<c:set var="roof" value="${sessionScope.carportRequest.angle}"/>
+<c:set var="roof" value="${sessionScope.constructionRequest.angle}"/>
 <c:choose>
     <c:when test="${val == '0'}">
 
