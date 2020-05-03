@@ -1,5 +1,6 @@
 package FunctionLayer;
 
+import DBAccess.MaterialMapper;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -8,23 +9,6 @@ import java.util.ArrayList;
 import static org.junit.Assert.*;
 
 public class OverlayCalculatorTest {
-
-    int numberOfPost;
-    Construction construction = new Construction();
-    Shed shed = new Shed((construction.getCarportWidth()/2),460,"left");
-    Roof roofPitched = new RoofPitched(construction.getConstructionHeight(), construction.getConstructionLength(), construction.getConstructionWidth(), 0 );
-
-    @Before
-    public void setUp() throws Exception {
-        construction.setCarportLength(910);
-        construction.setCarportWidth(1230);
-        construction.setShed(shed);
-        roofPitched.setDegree(3);
-        construction.setRoof(roofPitched);
-        shed.setWalls(WallBuilder.addShedWalls(construction));
-        construction.setShed(shed);
-
-    }
 
 
     @Test
@@ -35,31 +19,15 @@ public class OverlayCalculatorTest {
     }
 
 
-
-
-
-    @Test
-    public void sideSpaers() {
-        roofPitched.setDegree(50);
-        Shed shed = new Shed((construction.getCarportWidth()/2),860,"left");
-        construction.setRoof(roofPitched);
-
-    }
-
     @Test
     public void spaersNumberOnSide() {
-        int result = OverlayCalculator.spaersNumberOnSide(910, 200, 17);
+        int result = OverlayCalculator.spaersNumberOnSide(9100, 2000, 17);
         int expected= 10;
+        assertEquals(result,expected);
     }
-
 
     @Test
     public void materials() {
-
-        for (Material ma: OverlayCalculator.wallMaterials(construction.getShed().getWalls())
-             ) {
-
-        }
     }
 
 
@@ -105,13 +73,13 @@ public class OverlayCalculatorTest {
 
     @Test
     public void FyrLengths() {
-        ArrayList<Integer> fyrLengths= OverlayCalculator.fyrLengths(200,10,910);
-        int distance= ConstructionSizeCalculator.postDistanceMax300(910);
-        int numberOfdistances= ConstructionSizeCalculator.sidePostAmount(910)-1;
+        ArrayList<Integer> fyrLengths= OverlayCalculator.fyrLengths(2000,10,9100);
+        int distance= ConstructionSizeCalculator.postDistanceMax300(9100);
+        int numberOfdistances= ConstructionSizeCalculator.sidePostAmount(9100)-1;
         int numberOfFyr= OverlayCalculator.numberOfFyrOnDistance(distance)*numberOfdistances;
 
         int lengthOfeight=fyrLengths.get(7);
-        int expectedLength=ConstructionSizeCalculator.raising(10,540)+200;
+        int expectedLength=ConstructionSizeCalculator.raising(10,5400)+2000;
         assertEquals(fyrLengths.size(),numberOfFyr);
         assertEquals(expectedLength,lengthOfeight);
 
@@ -119,6 +87,26 @@ public class OverlayCalculatorTest {
 
 
     @Test
-    public void testCountWoodLength() {
+    public void areal() {
+        double actual=OverlayCalculator.areal(3300,5000, 3);
+        double expected = 34.45;
+        assertEquals(expected,actual, 0.01);
+    }
+
+    @Test
+    public void overlaySpending() {
+        int result;
+        double spending=7.7;
+        double actual = spending*34.52;
+        actual=actual+0.05*actual; //5 % extra material for cuts
+
+        if ( ((actual*10)%10) ==0 ){
+            result= (int) actual;
+        }
+        else {
+            result= (int) actual+1;
+        }
+        int expected = 280;
+        assertEquals(result,expected);
     }
 }

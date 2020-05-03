@@ -4,7 +4,8 @@ public class Material {
 
     private int id;
     private String name;
-    private int size;
+    private int size;//actual
+    private int availablesize; //beregned fra Katarzyna metode
     private String unit;
     private int amount;
     private double price;
@@ -12,6 +13,9 @@ public class Material {
     private String keyword;
     private String category;
     private String picture;
+ //189 200
+    // 254 100 500 skre
+    //120  374
 
 
     public Material() {
@@ -25,6 +29,7 @@ public class Material {
         this.unit = unit;
         this.keyword = keyword;
         this.category = category;
+
     }
 
     public double cost(){

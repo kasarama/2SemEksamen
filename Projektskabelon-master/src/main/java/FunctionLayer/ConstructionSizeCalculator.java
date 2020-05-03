@@ -6,6 +6,7 @@ package FunctionLayer;
 public class ConstructionSizeCalculator {
     //todo some of the post are common for sides and the back - remember that when drowing or making itemlist
     //todo method counting shared posts
+    //todo we need to decide if the height of construction is counted to the lower edge of rem or the upper one.
 
     //counts how many posts should there be on one side of a carport or a shed
     public  static int sidePostAmount(int size){
@@ -25,10 +26,10 @@ public class ConstructionSizeCalculator {
         return (size-10)/(sidePostAmount(size)-1);
     }
 
-    //counts how much the roof drops/raises on the given distance
+    //counts how much the roof drops/raises on the given distance in mm
     public static int raising(int angle, int distance){
 
-        return (int) angle*distance/100;
+        return (int) angle*10*distance/1000;
     }
 
     // fills up the array with heights of posts on the one side of the shed or carport starting from the shortest one
