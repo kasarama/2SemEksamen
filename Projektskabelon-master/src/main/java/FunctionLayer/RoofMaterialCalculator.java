@@ -61,11 +61,11 @@ public class RoofMaterialCalculator {
 
         /////////////////////////////////////////////////////
 
-        //Mellemregning
+        //Mellemregning til samlet antal plader
         int QuantetyOfT600TrapezplatesTotal = square1numberOfT600Trapezplates + square2numberOfT600Trapezplates +
                 square3numberOfT600Trapezplates;
 
-        /////////////Beregning af fjerde og sidste del-firkant af tag (om den sidste plade skal være en T600)
+        /////////////Beregning af fjerde og sidste del af tag (om den sidste plade skal være en T600 eller T300)
         int T300Quantety = quantityOfT300ForRoof(roofLength, roofWidth);
 
         if (T300Quantety == 0 )
