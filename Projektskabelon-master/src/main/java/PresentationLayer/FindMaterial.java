@@ -39,26 +39,26 @@ Construction construction = (Construction) request.getSession().getAttribute("ca
         if (skur == 0){
             stolpeAntal = ConstructionMaterialCalculator.posts(length, width);
                 stolpe = LogicFacade.getMaterial("Stolpe");
-                    stolpe.setAntal(stolpeAntal);
+                    stolpe.setAmount(stolpeAntal);
                     stolpe.setComment("Stolpe");
         } else {
             // Stolper med skur stolper
             stolpeAntal = ShedCalculator.shedPosts(length, width, shedWidth);
                 stolpe = LogicFacade.getMaterial("Stolpe");
-                    stolpe.setAntal(stolpeAntal);
+                    stolpe.setAmount(stolpeAntal);
                     stolpe.setComment("Stolpe");
         }
 
         // Hulbånd
         int perNumber = ConstructionMaterialCalculator.perforatedBand(length, width);
             Material perforatedBand = LogicFacade.getMaterial("Hulbånd");
-                perforatedBand.setAntal(perNumber);
+                perforatedBand.setAmount(perNumber);
                 perforatedBand.setComment("Hulbånd");
 
         // Beslagskruer
         int bracketScrewsHulAntal = ConstructionMaterialCalculator.bracketScrewsCon(length);
             Material brackeScrews = LogicFacade.getMaterial("Beslagskruer");
-                brackeScrews.setAntal(bracketScrewsHulAntal);
+                brackeScrews.setAmount(bracketScrewsHulAntal);
                 brackeScrews.setComment("Beslagskruer (BLIVER GENTAGET)");
 
 
@@ -99,92 +99,92 @@ Construction construction = (Construction) request.getSession().getAttribute("ca
         int under360Antal = FunctionLayer.RoofMaterialCalculator.understernboartU360(length, width);
         int under540Antal = FunctionLayer.RoofMaterialCalculator.understernboartU540(length, width);
             Material under360 = LogicFacade.getMaterial("Understernbrædder360");
-                under360.setAntal(under360Antal);
+                under360.setAmount(under360Antal);
                 under360.setComment("Understernbrædder 360 cm");
             Material under540 = LogicFacade.getMaterial("Understernbrædder540");
-                under540.setAntal(under540Antal);
+                under540.setAmount(under540Antal);
                 under540.setComment("Understernbrædder 540 cm");
 
         // Oversternbrædder
         int over360Antal = FunctionLayer.RoofMaterialCalculator.oversternboartU360(length, width);
         int over540Antal = FunctionLayer.RoofMaterialCalculator.oversternboartU540(length, width);
             Material over360 = LogicFacade.getMaterial("Oversternbrædder360");
-                over360.setAntal(over360Antal);
+                over360.setAmount(over360Antal);
                 over360.setComment("Oversternbrædder 360 cm");
             Material over540 = LogicFacade.getMaterial("Oversternbrædder540");
-                over540.setAntal(over540Antal);
+                over540.setAmount(over540Antal);
                 over540.setComment("Oversternbrædder 540 cm");
 
         // Rem
         int rem600Antal = FunctionLayer.RoofMaterialCalculator.rem600(length, width);
         int rem480Antal = FunctionLayer.RoofMaterialCalculator.rem480(length, width);
             Material rem600 = LogicFacade.getMaterial("Rem600");
-                rem600.setAntal(rem600Antal);
+                rem600.setAmount(rem600Antal);
                 rem600.setComment("Rem 600 cm");
             Material rem480 = LogicFacade.getMaterial("Rem480");
-                rem480.setAntal(rem480Antal);
+                rem480.setAmount(rem480Antal);
                 rem480.setComment("Rem 480 cm");
 
         // Spær
         int raftNumber = FunctionLayer.RoofMaterialCalculator.raft(length);
             Material raft = LogicFacade.getMaterial("Spær");
-                raft.setAntal(raftNumber);
+                raft.setAmount(raftNumber);
                 raft.setComment("Spær");
 
         // Vandbræt
         int waterboard360Antal = FunctionLayer.RoofMaterialCalculator.vandbræt360(length, width);
         int waterboard540Antal = FunctionLayer.RoofMaterialCalculator.vandbræt540(length, width);
             Material waterboard360 = LogicFacade.getMaterial("Vandbræt360");
-                waterboard360.setAntal(waterboard360Antal);
+                waterboard360.setAmount(waterboard360Antal);
                 waterboard360.setComment("Drypnæse 360 cm");
             Material waterboard540 = LogicFacade.getMaterial("Vandbræt540");
-                waterboard540.setAntal(waterboard540Antal);
+                waterboard540.setAmount(waterboard540Antal);
                 waterboard540.setComment("Drypnæse 540 cm");
 
         // Tætningsprofil
         int sealingNumber = FunctionLayer.RoofMaterialCalculator.gasket(width);
             Material sealing = LogicFacade.getMaterial("TætningsprofilJumbo");
-                sealing.setAntal(sealingNumber);
+                sealing.setAmount(sealingNumber);
                 sealing.setComment("Tætningsprofil til tag");
 
         //Bundskruer (til tag)
         int antalBundskruer = FunctionLayer.RoofMaterialCalculator.bottomScrews(length, width);
             Material bundskruer = LogicFacade.getMaterial("Bundskruer");
-                bundskruer.setAntal(antalBundskruer);
+                bundskruer.setAmount(antalBundskruer);
                 bundskruer.setComment("Bundskruer til taget");
 
         // Universalbeslag
         int universalbeslagAntalLeft = FunctionLayer.RoofMaterialCalculator.universalBracketsLeft(length);
         int universalbeslagAntalRight = FunctionLayer.RoofMaterialCalculator.universalBracketsRight(length);
             Material universalbeslagLeft = LogicFacade.getMaterial("UniversalbeslagVenstre");
-                universalbeslagLeft.setAntal(universalbeslagAntalLeft);
+                universalbeslagLeft.setAmount(universalbeslagAntalLeft);
                 universalbeslagLeft.setComment("UniversalbeslagVenstre");
             Material universalbeslagRight = LogicFacade.getMaterial("UniversalbeslagHøjre");
-                universalbeslagRight.setAntal(universalbeslagAntalRight);
+                universalbeslagRight.setAmount(universalbeslagAntalRight);
                 universalbeslagRight.setComment("UniversalbeslagHøjre");
 
         //Skruer til vandbræt
         int antalVSkruer = FunctionLayer.RoofMaterialCalculator.waterboardScrews;
             Material vSkruer = LogicFacade.getMaterial("SkruerStern&Vandbræt");
-                vSkruer.setAntal(antalVSkruer);
+                vSkruer.setAmount(antalVSkruer);
                 vSkruer.setComment("Skruer til stern og vandbræt");
 
         // Beslagskruer
         int beslagskruerAntal = FunctionLayer.RoofMaterialCalculator.bracketScrewsRoof(length);
             Material beslagskruer = LogicFacade.getMaterial("Beslagskruer");
-                beslagskruer.setAntal(beslagskruerAntal);
+                beslagskruer.setAmount(beslagskruerAntal);
                 beslagskruer.setComment("Beslagskruer (BLIVER GENTAGET)");
 
         // Bræddebolte
         int bræddebolteAntal = FunctionLayer.RoofMaterialCalculator.carriageBolts(length, width);
             Material bræddebolte = LogicFacade.getMaterial("Bræddebolt");
-                bræddebolte.setAntal(bræddebolteAntal);
+                bræddebolte.setAmount(bræddebolteAntal);
                 bræddebolte.setComment("Bræddebolt");
 
         // Firkantskiver
         int firkantskiverAntal = FunctionLayer.RoofMaterialCalculator.squares(length, width);
             Material firkantskiver = LogicFacade.getMaterial("Firkantskiver");
-                firkantskiver.setAntal(firkantskiverAntal);
+                firkantskiver.setAmount(firkantskiverAntal);
                 firkantskiver.setComment("Firkantskiver");
 
 
@@ -192,7 +192,7 @@ Construction construction = (Construction) request.getSession().getAttribute("ca
         // Lægte:
         int lægteAntal = ShedCalculator.shedLath;
             Material lægte = LogicFacade.getMaterial("Lægte");
-                lægte.setAntal(lægteAntal);
+                lægte.setAmount(lægteAntal);
                 lægte.setComment("Lægte til z på skur");
 
         // Løsholter
@@ -232,33 +232,33 @@ Construction construction = (Construction) request.getSession().getAttribute("ca
             int antalLøsholter;
             if (løsholterGavl.getSize()!=løsholterSide.getSize()){
                 løsholter1 = løsholterGavl;
-                    løsholter1.setAntal(antalGavl);
+                    løsholter1.setAmount(antalGavl);
                     løsholter1.setComment("Løsholter til skurets gavl");
                 løsholter2 = løsholterSide;
-                    løsholter2.setAntal(antalSide);
+                    løsholter2.setAmount(antalSide);
                     løsholter2.setComment("Løsholter til skurets side");
             } else {
                 løsholter1 = løsholterGavl;
                 løsholter2 = null;
                     antalLøsholter = antalGavl + antalSide;
-                    løsholter1.setAntal(antalLøsholter);
+                    løsholter1.setAmount(antalLøsholter);
                     løsholter1.setComment("Løsholter til skurets sider og gavle");
             }
 
         // Lås
         Material lås = LogicFacade.getMaterial("Lås");
-            lås.setAntal(ShedCalculator.shedLock);
+            lås.setAmount(ShedCalculator.shedLock);
             lås.setComment("Lås til skur");
 
         // Hængsel
         Material hængsel = LogicFacade.getMaterial("Hængsel");
-            hængsel.setAntal(ShedCalculator.shedHinge);
+            hængsel.setAmount(ShedCalculator.shedHinge);
             hængsel.setComment("Hængsler til skurdør");
 
         // Vinkelbeslag
         int antalVinkelbeslag = ShedCalculator.vinkelbeslag(shedWidth, shedDepth);
             Material vinkelbeslag = LogicFacade.getMaterial("Vinkelbeslag");
-                vinkelbeslag.setAntal(antalVinkelbeslag);
+                vinkelbeslag.setAmount(antalVinkelbeslag);
                 vinkelbeslag.setComment("Vinkelbeslag");
 
         String jspSide;

@@ -10,17 +10,18 @@ public class ConstructionSizeCalculator {
     //counts how many posts should there be on one side of a carport or a shed
     public  static int sidePostAmount(int size){
         int numberOfPost;
+        size=size-10;
         if(size%300==0){ // 900cm -(3*300) =0
             numberOfPost=size/300+1;
         } else {
-            numberOfPost= ( size - size % 300)/300+2; //(750cm -(3*300) =0) 750%300=2 2*300=600 (150????)
+            numberOfPost= ( size - size%300)/300+2; //(750cm -(3*300) =0) 750%300=2 2*300=600 (150????)
         }
         return numberOfPost;
     }
 
 
     //counts distance between posts on the side
-    public static int postDistanceMax300(int size){
+    public static int postDistanceMax300(int size) {
         return (size-10)/(sidePostAmount(size)-1);
     }
 

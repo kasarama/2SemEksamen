@@ -44,8 +44,12 @@ public class CarportBase extends Command {
         constructionBase.setCarportLength(carportLength);
         constructionBase.setCarportWidth(carportWidth);
         constructionBase.setRoof(roofBase);
-        constructionBase.setShed(new Shed(shedWidth, shedDepth, shedSide));
+        Shed shed = new Shed(shedWidth, shedDepth, shedSide);
         constructionBase.setConstructionHeight(constructionHeight);
+        constructionBase.setShed(shed);
+        shed.setWalls(WallBuilder.addShedWalls(constructionBase));
+        constructionBase.setShed(shed);
+
 
         HttpSession session = request.getSession();
         if (session.getAttribute("carportBase") == null) {
