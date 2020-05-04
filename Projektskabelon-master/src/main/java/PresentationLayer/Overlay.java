@@ -17,7 +17,9 @@ public class Overlay extends Command {
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-        int overlayID = Integer.parseInt(request.getParameter("overlayID"));
+        String overlayName=request.getParameter("overlayName");
+        System.out.println(overlayName);
+
 
         ArrayList<String> coveredWalls = new ArrayList<>();
         String[] walls = {"left", "right", "back"};

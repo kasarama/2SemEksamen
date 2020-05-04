@@ -8,7 +8,11 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 
+/**
+ * @author Magdalena
+ */
 public class ListFactory {
     public static void saveInFile(Material material) throws LoginSampleException {
         //todo save material in text file
@@ -34,5 +38,10 @@ public class ListFactory {
             ex.printStackTrace();
             throw new LoginSampleException(ex.getMessage());
         }
+    }
+    public static ArrayList<Material> readFromFile(){
+        //todo read data from textfile to send them to DB
+        ArrayList<Material> materials= new ArrayList<>();
+        return materials;
     }
 }

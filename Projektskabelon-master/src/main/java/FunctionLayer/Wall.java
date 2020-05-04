@@ -2,6 +2,9 @@ package FunctionLayer;
 
 import java.util.ArrayList;
 
+/**
+ * @author Magdalena
+ */
 public class Wall {
     private String side;
     private int raising;

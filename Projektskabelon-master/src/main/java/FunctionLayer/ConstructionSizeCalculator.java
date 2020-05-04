@@ -14,7 +14,7 @@ public class ConstructionSizeCalculator {
     public  static int sidePostAmount(int size){
         int numberOfPost;
         size=size-100;
-        if(size%3000==0){ // 900cm -(3*300) =0
+        if(size%3000==0){ //
             numberOfPost=size/3000+1;
         } else {
             numberOfPost= ( size - size%3000)/3000+2; //(750cm -(3*300) =0) 750%300=2 2*300=600 (150????)
@@ -70,6 +70,11 @@ public class ConstructionSizeCalculator {
         width = width - 1050;
 
         return sidePostAmount(width);
+    }
+
+    public static int carportMinHeight(int constuctionsMinHeight,int length, int raising) {
+        //todo returns length of the lowest post of carport
+        return constuctionsMinHeight+raising(raising,length);
     }
 
 

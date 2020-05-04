@@ -39,15 +39,10 @@
         <c:choose>
             <c:when test="${shed != 0}">
                 Vælg beklædning
-                <select name="overlayID" class="form-control">
-                    <option value="1">aaaall</option>
-                    <option value="2">bbbbbbeauty</option>
-                    <option value="3">ccccccom on!</option>
-                    <!--
+                <select name="overlayName" class="form-control">
                     <c:forEach var="material" items="${applicationScope.overlayList}">
-                        <option value="${material.id}">${material.name}</option>
+                        <option value="${material.name}">${material.name}</option>
                     </c:forEach>
--->
                 </select>
                 Du kan også vælge at beklæde vægger af construction:
                 <div class="form-check">
@@ -90,7 +85,7 @@
                         Bagvæg
                     </label>
                 </div>
-                <select name="overlayID" class="form-control">
+                <select name="overlayName" class="form-control">
                     <c:forEach var="material" items="${applicationScope.overlayList}">
                         <option value="${material.name}">${material.name}</option>
                     </c:forEach>

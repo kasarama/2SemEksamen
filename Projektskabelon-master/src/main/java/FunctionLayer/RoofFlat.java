@@ -15,11 +15,6 @@ public class RoofFlat extends Roof {
     }
 
 
-    //Constructor used by Magda
-    public RoofFlat(int height, int length, int width, int degree, boolean pitched) {
-        super(height, length, width, degree, pitched);
-    }
-
     //Beregner af fladt tags hældning i grader
     public int flatRoofDegreeCalculator() {
         roofTiltDegree = (int) Math.atan(roofRaisedCmPrCmLength);
@@ -40,6 +35,9 @@ public class RoofFlat extends Roof {
         this.tagMaterialList = tagMaterialList;
     }
 
-
+    //Constructor used by Magda
+    public RoofFlat(int height, int length, int width, int degree, boolean pitched) {
+        super(height, length, width, degree, pitched);
+    }
 
 }
