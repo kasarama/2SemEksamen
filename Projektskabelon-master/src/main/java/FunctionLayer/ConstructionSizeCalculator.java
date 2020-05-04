@@ -7,6 +7,8 @@ public class ConstructionSizeCalculator {
     //todo some of the post are common for sides and the back - remember that when drowing or making itemlist
     //todo method counting shared posts
     //todo we need to decide if the height of construction is counted to the lower edge of rem or the upper one.
+    //todo we need to update postHights with data about the length to be berried in the ground. We can also ask Tu if
+    // the posts could be chosen to be set on a surface instead of in the ground
 
     //counts how many posts should there be on one side of a carport or a shed
     public  static int sidePostAmount(int size){
@@ -70,5 +72,47 @@ public class ConstructionSizeCalculator {
         return sidePostAmount(width);
     }
 
+
+    public void remPieces (Construction construction){
+        //todo count witch lengths of "rem" tree chould be used so the connections ar in the right places if "rem"
+        // should be compoused of more than one piece and return them in Integer[]
+        //todo in ConstrucionMaterialCalculator implement method that will return Material object for each of pieces
+    }
+
+    public void remScrewsNumner (Construction construction){
+        //todo return number of screw used to montage of rem on the posts. Use the method remPieces
+        //todo in ConstrucionMaterialCalculator implement method that will return a material of that screw with size that equals this number
+
+    }
+
+    public void roofSpaerLength (Construction construction) {
+        //todo return lengths of spaer
+    }
+    public void roofSpaernumber (Construction construction){
+        //todo return number of spaer needed for whole construction length
+        //todo in ConstrucionMaterialCalculator implement method that will return  2 Materials of beslag
+        // - one for left and one for right with amount of number of spaer and one Material that is the beslag skruer where the amount is roofSpaernumber x2x3x3
+
+    }
+    public void holeTapeSkrews (Construction construction) {
+        //todo implement a method in ConstructionMaterialCalculator that returns hulbånd material , make sure that it is not possible that the crossing piece is longer than 10 m
+        //todo return amount of screw needed for montage of that tape
+
+    }
+    public void underSternLengths(Construction construction) {
+        //todo caount pieces needet to build a under stern take to consideration that they might need to be connected on the certain length
+        //todo in ConstrucionMaterialCalculator implement method that will return Materials of that tree for each piece
+    }
+
+    public void sternScrewNumber(Construction construction) {
+        //todo count number of screws needet for montage of both Sterns
+        //todo in ConstrucionMaterialCalculator implement method that will return Material of that screw with its size that equals this number
+    }
+
+
+    public void overSternLengths(Construction construction) {
+        //todo caount pieces needet to build a under stern take to consideration that they might need to be connected on the certain length
+        //todo in ConstrucionMaterialCalculator implement method that will return Materials of that tree for each piece
+    }
 
 }
