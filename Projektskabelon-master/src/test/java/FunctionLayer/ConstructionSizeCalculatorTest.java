@@ -7,6 +7,7 @@ import static org.junit.Assert.*;
 
 public class ConstructionSizeCalculatorTest {
 Construction construction = new Construction();
+ConstructionSizeCalculator constructionSizeCalculator = new ConstructionSizeCalculator();
 
 
     @Before
@@ -71,4 +72,5 @@ Construction construction = new Construction();
         int rsult = heights[1];
         assertEquals(200,rsult);
     }
+
 }
