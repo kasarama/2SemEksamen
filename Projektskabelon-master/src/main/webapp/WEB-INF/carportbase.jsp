@@ -66,6 +66,9 @@
         <input type="submit" name="tooverlaynoshed" value="No shed / Vælg beklædning">
         <input type="submit" name="tooverlay" value="With shed / Vælg beklædning">
         <input type="submit" name="MiaTest" value="MIA TEST">
+        <!--vælg tagtype til flatRoof eller picthedRoof -->
+        <input type="submit" name="tagtype" value="vælg tagtype">
+
     </div>
 
 </form>
