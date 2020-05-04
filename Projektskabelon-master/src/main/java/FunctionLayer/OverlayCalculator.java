@@ -29,11 +29,12 @@ public class OverlayCalculator {
     //................................materialsForOneWallFraming............................//
     //for given wall calculates all the materials needed for framing for horizontal overlay
     public static ArrayList<Material> materialsForOneWallFraming(Wall wall){
+
         ArrayList<Material> materials = new ArrayList<>();
         Material spaer = new Material();
         spaer.setName("47X100 MM SPÆRTRÆ");
         int spaers = spaersNumberOnSide(wall.getLength(),wall.getMinHeight(),wall.getRaising());
-        int spaerlength= ConstructionSizeCalculator.postDistanceMax300(wall.getLength());
+        int spaerlength= ConstructionSizeCalculator.postDistanceMax3000(wall.getLength());
         spaer.setSize(spaerlength);
         spaer.setComment("Horizontal framing");
         for (int i = 0; i < spaers; i++) {
@@ -61,9 +62,11 @@ screwSpear.setAvailabke (available)
             fyr.setSize(height);
             materials.add(fyr);
         }
+
         Material screwFyr  = new Material();
         screwFyr.setName("BASIC SKRUE 5,0X40MM");
         screwFyr.setSize(screwFyr(fyrsnumber,spaers));
+
         screwFyr.setComment("Til montering af vertical framing");
         materials.add(screwFyr);
         return materials;
@@ -91,22 +94,22 @@ screwSpear.setAvailabke (available)
 
     public static int numberOfFyrOnDistance(int distance){
         int numberOfFyrOnDistance;
-        if (distance % 60 == 0) {
-            numberOfFyrOnDistance = distance / 60 - 1;
+        if (distance % 600 == 0) {
+            numberOfFyrOnDistance = (distance / 600) - 1;
         } else {
-            numberOfFyrOnDistance = (distance - distance % 60) / 60;
+            numberOfFyrOnDistance = (distance - distance % 600) / 600;
         }
         return numberOfFyrOnDistance;
     }
 
     //counts number of fyr on each distance and in total on chosen side
     public static int fyrNumberOnSide(int length) {
-        int distance = ConstructionSizeCalculator.postDistanceMax300(length);
+        int distance = ConstructionSizeCalculator.postDistanceMax3000(length);
         int distancesNumber = ConstructionSizeCalculator.sidePostAmount(length) - 1;
         int numberOfFyrOnDistance=numberOfFyrOnDistance(distance);
-
         return numberOfFyrOnDistance * distancesNumber;
     }
+
 
     //calculates number of screws for fyr (4cm)
     public static int screwFyr(int fyrnumber, int spaernumber) {
@@ -119,17 +122,17 @@ screwSpear.setAvailabke (available)
      */
     public static ArrayList<Integer> fyrLengths(int height, int angle, int size){ //todo we need to decide if the height of construction is counted to the lower edge of rem or the upper one.
         ArrayList<Integer> fyrLengths = new ArrayList<>();
-        int allLengths=numberOfFyrOnDistance(size-100)+2; // treats posts as fyr and counts them all;
+        int allLengths=numberOfFyrOnDistance(size-100)+2; // treats posts as fyr and counts them all, counts from the centre of first post to the centre of last post ;
         int postNumber= ConstructionSizeCalculator.sidePostAmount(size);
-        int distance = size/(postNumber+fyrNumberOnSide(size)-1);
-        int distanceOfPosts= ConstructionSizeCalculator.postDistanceMax300(size);
+        int distance = size/(allLengths-1);
+        int distanceOfPosts= ConstructionSizeCalculator.postDistanceMax3000(size);
         int numberOfFyrOnDistance = numberOfFyrOnDistance(distanceOfPosts);
         fyrLengths.add(height); //the first post has height of the start(given) height
 
             for (int i = 1; i < allLengths; i++) {
                 int tmp = height;
                 height = tmp + ConstructionSizeCalculator.raising(angle, distance); // calculates height of the element on given distance
-                fyrLengths.add(height-360); //adds calculated height and each fyr to the list
+                fyrLengths.add(height-360); //adds calculated height and each fyr to the list (there shold be in total 360 mm distance betwin the ground and the roof spear
         }
 
         //on the list there are also posts that need to by now removed. I take number of posts and
@@ -249,12 +252,6 @@ screwSpear.setAvailabke (available)
         else {
             return (int) actual+1;
         }
-
-
-
-
-
-
 
     }
 

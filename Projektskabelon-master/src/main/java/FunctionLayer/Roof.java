@@ -64,6 +64,9 @@ public abstract class Roof {
         return tagMaterialList;
     }
 
+    public void setPitched(boolean pitched) {
+        this.pitched = pitched;
+    }
 
     public boolean getIsPitched() {
         return pitched;

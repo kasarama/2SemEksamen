@@ -5,6 +5,7 @@ import FunctionLayer.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 
 public class CarportBase extends Command {
     @Override
@@ -12,6 +13,7 @@ public class CarportBase extends Command {
         int carportLength = Integer.parseInt(request.getParameter("carportLength"));
         int carportWidth = Integer.parseInt(request.getParameter("carportWidth"));
         int roofType = Integer.parseInt(request.getParameter("roofType"));
+        System.out.println(roofType+"rooftype");
         int shedWidthParameter = 1;
         int shedDepth = 0;
         int constructionHeight = Integer.parseInt(request.getParameter("constructionHeight"));
@@ -33,22 +35,31 @@ public class CarportBase extends Command {
         }
 
         Construction constructionBase = new Construction();
+
+        constructionBase.setConstructionHeight(constructionHeight);
+        constructionBase.setCarportLength(carportLength);
+        constructionBase.setCarportWidth(carportWidth);
+
         Roof roofBase;
         if (roofType == 1) {
             roofBase = new RoofPitched(0, carportLength, carportWidth, 0);
+            roofBase.setPitched(true);
         } else {
-            roofBase = new RoofFlat(0, carportLength, carportWidth);
+            roofBase = new RoofFlat(0, carportLength, carportWidth, 3,false);
+            System.out.println("roof base flat roof set degree: "+roofBase.getDegree());
         }
-        roofBase.setDegree(3);
-        int shedWidth = (carportWidth*shedWidthParameter);
-        constructionBase.setCarportLength(carportLength);
-        constructionBase.setCarportWidth(carportWidth);
+
         constructionBase.setRoof(roofBase);
+
+        int shedWidth = (carportWidth*shedWidthParameter);
+
         Shed shed = new Shed(shedWidth, shedDepth, shedSide);
-        constructionBase.setConstructionHeight(constructionHeight);
         constructionBase.setShed(shed);
-        shed.setWalls(WallBuilder.addShedWalls(constructionBase));
+        ArrayList<Wall> walls=WallBuilder.addShedWalls(constructionBase);
+        shed.setWalls(walls);
         constructionBase.setShed(shed);
+
+
 
 
         HttpSession session = request.getSession();
@@ -57,6 +68,9 @@ public class CarportBase extends Command {
 
         }
         request.setAttribute("carportToString", constructionBase.toString());
+
+        System.out.println(constructionBase.toString()+"raising. "+constructionBase.getRoof().getDegree());
+
 
         if(request.getParameter("MiaTest")!=null){
             return "MiaTest";

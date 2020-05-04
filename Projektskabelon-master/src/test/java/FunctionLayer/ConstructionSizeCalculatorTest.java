@@ -11,9 +11,9 @@ Construction construction = new Construction();
 
     @Before
     public void setUp() throws Exception {
-        construction.setCarportLength(910);
-        construction.setCarportWidth(1230);
-        Shed shed = new Shed((construction.getCarportWidth()/2),760,"left");
+        construction.setCarportLength(9100);
+        construction.setCarportWidth(12300);
+        Shed shed = new Shed((construction.getCarportWidth()/2),7600,"left");
         construction.setShed(shed);
         Roof pitchedRoof = new RoofFlat(construction.getConstructionHeight(), construction.getConstructionLength(),
                 construction.getConstructionWidth());
@@ -44,15 +44,15 @@ Construction construction = new Construction();
 
     @Test
     public void sidePostAmount() {
-        int actual= ConstructionSizeCalculator.sidePostAmount(850);
+        int actual= ConstructionSizeCalculator.sidePostAmount(8500);
         int expected = 4;
         assertEquals(expected,actual);
     }
 
     @Test
     public void postDistanceMax300() {
-        int actual= ConstructionSizeCalculator.postDistanceMax300(850);
-        int exp =280;
+        int actual= ConstructionSizeCalculator.postDistanceMax3000(8500);
+        int exp =2800;
     }
 
     @Test

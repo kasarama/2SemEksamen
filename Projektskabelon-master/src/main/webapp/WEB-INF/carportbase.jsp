@@ -14,17 +14,17 @@
 <form name="carportbase" action="FrontController" method="POST">
     <input type="hidden" name="origin" value="carportbase">
     <input type="hidden" name="target" value="carportbase">
-    <input type="hidden" name="constructionHeight" value=200> <!-- det her er det eneste sted man angivr constructionens height-->
+    <input type="hidden" name="constructionHeight" value=2000> <!-- det her er det eneste sted man angivr constructionens height-->
     <label>Vælg længde:</label>
     <select name="carportLength" class="form-control" >
         <c:forEach var="i" begin="24" end="75">
-            <option value=${i*10}>${i*10}</option>
+            <option value=${i*100}>${i*10}</option>
         </c:forEach>
     </select>
     <label>Vælg bredde:</label>
     <select name="carportWidth" class="form-control" >
         <c:forEach var="i" begin="24" end="75">
-            <option value=${i*10}>${i*10}</option>
+            <option value=${i*100}>${i*10}</option>
         </c:forEach>
     </select>
     <br>
@@ -47,8 +47,8 @@
         </select>
         <label>Vælg dybde:</label>
         <select name="shedDepth" class="form-control">
-            <c:forEach var="i" begin="12" end="75">
-                <option value=${i*10}>${i*10}</option>
+            <c:forEach var="i" begin="12" end="35">
+                <option value=${i*100}>${i*10}</option>
             </c:forEach>
         </select>
         <label>Vælg siden:</label>

@@ -98,7 +98,7 @@
             </c:otherwise>
         </c:choose>
         <input type="submit" name="justShed" value="Videre">
-        <input type="submit" name="shedOverlay" value="shoe shed overlay">
+        <input type="submit" name="shedOverlay" value="SHOW shed overlay">
     </form>
 
     <h2>

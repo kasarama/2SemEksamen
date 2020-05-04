@@ -22,6 +22,7 @@ public class OverlayCalculatorTest {
     @Test
     public void spaersNumberOnSide() {
         int result = OverlayCalculator.spaersNumberOnSide(9100, 2000, 17);
+        System.out.println("Test SpearNumberOnSide: rsult= "+result);
         int expected= 10;
         assertEquals(result,expected);
     }
@@ -51,14 +52,14 @@ public class OverlayCalculatorTest {
 
     @Test
     public void numberOfFyrOnDistance() {
-        int result= OverlayCalculator.numberOfFyrOnDistance(600);
+        int result= OverlayCalculator.numberOfFyrOnDistance(6000);
         int expected = 9;
         assertEquals(expected,result);
     }
 
     @Test
     public void fyrNumberOnSide() {
-        int result=OverlayCalculator.fyrNumberOnSide(910);
+        int result=OverlayCalculator.fyrNumberOnSide(9100);
         int expected = 12;
         assertEquals(expected,result);
 
@@ -74,12 +75,12 @@ public class OverlayCalculatorTest {
     @Test
     public void FyrLengths() {
         ArrayList<Integer> fyrLengths= OverlayCalculator.fyrLengths(2000,10,9100);
-        int distance= ConstructionSizeCalculator.postDistanceMax300(9100);
+        int distance= ConstructionSizeCalculator.postDistanceMax3000(9100);
         int numberOfdistances= ConstructionSizeCalculator.sidePostAmount(9100)-1;
         int numberOfFyr= OverlayCalculator.numberOfFyrOnDistance(distance)*numberOfdistances;
 
         int lengthOfeight=fyrLengths.get(7);
-        int expectedLength=ConstructionSizeCalculator.raising(10,5400)+2000;
+        int expectedLength=ConstructionSizeCalculator.raising(10,5400)+2000-360;
         assertEquals(fyrLengths.size(),numberOfFyr);
         assertEquals(expectedLength,lengthOfeight);
 

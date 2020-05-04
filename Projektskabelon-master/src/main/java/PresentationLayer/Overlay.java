@@ -34,7 +34,7 @@ public class Overlay extends Command {
         request.setAttribute("ovarlayMaterialList", ovarlayMaterialList);
 
         if (request.getParameter("shedOverlay") != null) {
-            return "materialsBill";
+            return "itemList";
         } else {
             request.setAttribute("notReady", "The next phase is  not ready yet");
             return "overlay";
