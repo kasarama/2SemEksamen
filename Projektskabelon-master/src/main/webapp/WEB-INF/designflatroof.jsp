@@ -12,7 +12,6 @@
 
 <h1>Fladt tag design</h1>
 
-
 <form name="makerequest" action="FrontController" method="post">
     <input type="hidden" name="target" value="makerequest">
     <label for="flatroof"> Vælg tagdækning for fladt tag:</label>
