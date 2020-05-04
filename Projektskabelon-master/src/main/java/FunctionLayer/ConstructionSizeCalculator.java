@@ -7,7 +7,6 @@ package FunctionLayer;
 public class ConstructionSizeCalculator {
     //todo some of the post are common for sides and the back - remember that when drowing or making itemlist
     //todo method counting shared posts
-    //todo we need to decide if the height of construction is counted to the lower edge of rem or the upper one.
     //todo we need to update postHights with data about the length to be berried in the ground. We can also ask Tu if
     // the posts could be chosen to be set on a surface instead of in the ground
 
@@ -77,7 +76,16 @@ public class ConstructionSizeCalculator {
     public void remPieces (Construction construction){
         //todo count witch lengths of "rem" tree chould be used so the connections ar in the right places if "rem"
         // should be compoused of more than one piece and return them in Integer[]
-        //todo in ConstrucionMaterialCalculator implement method that will return Material object for each of pieces
+
+        /*
+        først tjek om construction længde er mindre eller lige med 600
+        if not: 1. lav en rem til shed (den bliver mac 3500 mm)
+        2. fordel carports længde på 2 lige stykker eller find den stolpe det skal samles på
+         3 havd så hvis skur er kun på halve af carportts bredde - hvor skal de samles henne??
+         hvis brædde >6000 mm så rem antal gang 2???
+
+         */
+        //todo in ConstrucionMaterialCalculator implement the method that will return Material object for each of pieces
     }
 
     public void remScrewsNumner (Construction construction){
@@ -88,6 +96,9 @@ public class ConstructionSizeCalculator {
 
     public void roofSpaerLength (Construction construction) {
         //todo return lengths of spaer
+        /*
+        brædde >600
+         */
     }
     public void roofSpaernumber (Construction construction){
         //todo return number of spaer needed for whole construction length
@@ -101,7 +112,7 @@ public class ConstructionSizeCalculator {
 
     }
     public void underSternLengths(Construction construction) {
-        //todo caount pieces needet to build a under stern take to consideration that they might need to be connected on the certain length
+        //todo caount pieces needet to build a under stern take to consideration that they might need to be connected on the certain length (på middten)
         //todo in ConstrucionMaterialCalculator implement method that will return Materials of that tree for each piece
     }
 
