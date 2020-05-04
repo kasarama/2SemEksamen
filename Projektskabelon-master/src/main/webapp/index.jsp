@@ -18,27 +18,13 @@
     <a href="FrontController?target=redirect&destination=carportbase">New Designe Center</a>
 </h2>
 <br>
+<br>
 <br><a href="FrontController?target=redirect&destination=addmaterial">Add Material</a>
 <br>
 <br>
 
 
 
-<h2>
-    <a href="FrontController?target=redirect&destination=MonaTest">Mona Test</a>
-</h2>
-
-
-<br>
-<br>
-<br>
-<h2>
- <!--   <a href="FrontController?target=redirect&destination=CathrineTest">Cathrine Test</a> -->
-</h2>
-<br>
-<br>
-<br>
-<br>
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->

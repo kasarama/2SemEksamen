@@ -18,9 +18,9 @@ public class CarportBase extends Command {
         int shedDepth = 0;
         int constructionHeight = Integer.parseInt(request.getParameter("constructionHeight"));
         String shedSide = "";
+        final int RAISING=3;
 
-
-        if (request.getParameter("withShed") != null || request.getParameter("MiaTest")!=null) {
+        if (request.getParameter("withShed") != null){
 
             shedWidthParameter = Integer.parseInt(request.getParameter("shedWidthParameter"));
             shedDepth = Integer.parseInt(request.getParameter("shedDepth"));
@@ -45,8 +45,7 @@ public class CarportBase extends Command {
             roofBase = new RoofPitched(0, carportLength, carportWidth, 0);
             roofBase.setPitched(true);
         } else {
-            roofBase = new RoofFlat(0, carportLength, carportWidth, 3,false);
-            System.out.println("roof base flat roof set degree: "+roofBase.getDegree());
+            roofBase = new RoofFlat(0, carportLength, carportWidth, RAISING,false);
         }
 
         constructionBase.setRoof(roofBase);
@@ -71,17 +70,12 @@ public class CarportBase extends Command {
 
         System.out.println(constructionBase.toString()+"raising. "+constructionBase.getRoof().getDegree());
 
-
-        if(request.getParameter("MiaTest")!=null){
-            return "MiaTest";
-        }
-
-        if (request.getParameter("tooverlay") != null || request.getParameter("tooverlaynoshed")!=null) {
-            return "overlay";
-        }else if (roofType == 1) {
+        if (roofType == 1) {
             return "designpitchedroof";
-        }else if (roofType != 1) {
+        }else if (roofType ==0) {
             return "designflatroof";
-        } else return "index";
+        } else {
+            request.setAttribute("error", "kune ikke definere tag type");
+            return "index";}
     }
 }

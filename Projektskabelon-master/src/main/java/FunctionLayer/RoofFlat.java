@@ -14,6 +14,8 @@ public class RoofFlat extends Roof {
         tagMaterialList = new ArrayList();
     }
 
+
+    //Constructor used by Magda
     public RoofFlat(int height, int length, int width, int degree, boolean pitched) {
         super(height, length, width, degree, pitched);
     }

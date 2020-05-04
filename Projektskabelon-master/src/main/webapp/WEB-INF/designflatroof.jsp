@@ -17,4 +17,8 @@
 
 
 </form>--%>
+
+<h3>
+    <a href="FrontController?target=redirect&destination=overlay">Videre ti overlay</a>
+</h3>
 <%@include file="../includes/footer.inc"%>

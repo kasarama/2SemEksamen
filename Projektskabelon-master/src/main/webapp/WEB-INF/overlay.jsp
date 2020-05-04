@@ -92,7 +92,7 @@
                 </div>
                 <select name="overlayID" class="form-control">
                     <c:forEach var="material" items="${applicationScope.overlayList}">
-                        <option value="${material.id}">${material.name}</option>
+                        <option value="${material.name}">${material.name}</option>
                     </c:forEach>
                 </select>
             </c:otherwise>
@@ -103,7 +103,7 @@
 
     <h2>
         <c:set var = "msg" value = "${requestScope.notReady}"/>
-        <c:if test = "${salary!=null}">
+        <c:if test = "${msg!=null}">
         <p><c:out value = "${msg}"/><p>
         </c:if>
     </h2>

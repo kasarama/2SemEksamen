@@ -8,18 +8,9 @@
 
 ${requestScope.carportToString}
 
-<form name="showdrawing" action="FrontController" method="POST">
-    <input type="hidden" name="target" value="showdrawing">
-    <label>Vælg tagdækning:</label>
-    <select name="length" class="form-control">
-        <option selected disabled>Vælg type</option>
-        <option value="1">type 1</option>
-        <option value="2">type 2</option>
-        <option value="3">type 3</option>
-        <option value="4">type 4</option>
-    </select>
-    <input class="btn btn-primary" type="submit" value="Videre" >
-</form>
+<h3>
+    <a href="FrontController?target=redirect&destination=overlay">Videre ti overlay</a>
+</h3>
 
 <c:set var="roof" value="${sessionScope.constructionRequest.angle}"/>
 <c:choose>

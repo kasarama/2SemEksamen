@@ -34,21 +34,7 @@
         <option value="1">Tag med rejsning</option>
     </select>
     <br>
-    <label>Skal der være skur?</label>
-    <select name="shed" class="form-control" >
-        <option selected disabled>Skur?</option>
-        <option value="Y">Ja</option>
-        <option value="N">Nej</option>
-    </select>
-    <br>
-    <select name='role'>
-        <option value="${selected}" selected>${selected}</option>
-        <c:forEach items="${roles}" var="role">
-            <c:if test="${role != selected}">
-                <option value="${role}">${role}</option>
-            </c:if>
-        </c:forEach>
-    </select>
+
     <h3>Skur</h3>:
     NB! Der skal beregnes 15 cm tagudhæng på hver side af skuret
 
