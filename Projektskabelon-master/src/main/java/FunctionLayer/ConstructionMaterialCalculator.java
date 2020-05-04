@@ -1,7 +1,8 @@
 package FunctionLayer;
 
-public class ConstructionMaterialCalculator {
+// Antal af materialer
 
+public class ConstructionMaterialCalculator {
 
     public RoofMaterialCalculator r = new RoofMaterialCalculator();
 
