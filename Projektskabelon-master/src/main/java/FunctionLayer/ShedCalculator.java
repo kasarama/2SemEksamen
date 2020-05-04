@@ -70,9 +70,9 @@ public class ShedCalculator {
     public static int shedPosts(int length, int width, int shedWidth){
         int shedpost;
         if (shedWidth<=300){
-            shedpost = ConstructionCalculator.posts(length, width)+6;
+            shedpost = ConstructionMaterialCalculator.posts(length, width)+6;
         } else {
-            shedpost = ConstructionCalculator.posts(length, width)+4;
+            shedpost = ConstructionMaterialCalculator.posts(length, width)+4;
         }
         return shedpost;
     }

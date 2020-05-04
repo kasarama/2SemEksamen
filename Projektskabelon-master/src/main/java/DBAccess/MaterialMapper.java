@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -20,13 +21,11 @@ public class MaterialMapper {
     // Vi vil vide hvor meget materiale der skal bruges
 
     public static Material getMaterial(String keyword) throws LoginSampleException {
-        System.out.println("in MaterialMapper.getMaterial");
             Material material = new Material();
         try {
             Connection con = Connector.connection();
             String SQL = "SELECT name, size, unit FROM fogdb.materials "
                     + "WHERE keyword=?";
-            System.out.println(keyword);
             PreparedStatement ps = con.prepareStatement(SQL);
             ps.setString(1, keyword);
             ResultSet rs = ps.executeQuery();
@@ -36,7 +35,8 @@ public class MaterialMapper {
                 String unit = rs.getString("unit");
                 material = new Material(0, name, size, unit, keyword, null);
             }else {
-                System.out.println("ResultSet.next()=false");}
+                System.out.println("ResultSet.next()=false");
+            return null;  }//todo handle null object there where method is being used;
         } catch (ClassNotFoundException | SQLException ex) {
             throw new LoginSampleException(ex.getMessage());
         }
@@ -121,12 +121,12 @@ public class MaterialMapper {
 
     // This class Connects to DB and gets the "Overlay material" data from it.
 
-
+    //Magdalena
     public static List<Material> getAllOverlays() throws LoginSampleException {
         List<Material> materialList=new ArrayList<>();
         try
         {
-
+//todo edit the method so it uses parameters and question marks
             Connection con = Connector.connection();
             String SQL = "SELECT materialID, name, picture FROM materials WHERE category='overlay' and keyword='overlay'";
             PreparedStatement ps = con.prepareStatement(SQL);
@@ -148,7 +148,7 @@ public class MaterialMapper {
         return materialList;
     }
 
-
+    //Magdalena
     public static void addMatDB(Material material) throws LoginSampleException {
         try {
             Connection con = Connector.connection();
@@ -172,8 +172,9 @@ public class MaterialMapper {
 
     }
 
-
+    //Magdalena
     public static List<Material> getAllOverlayMaterials() throws LoginSampleException {
+        //todo edit the method so it uses parameters and question marks
         List<Material> materialList=new ArrayList<>();
         try
         {
@@ -207,6 +208,29 @@ public class MaterialMapper {
             throw new LoginSampleException(ex.getMessage());
         }
         return materialList;
+    }
+
+    //Magdalena
+    public static double spending (String name) throws LoginSampleException {
+
+        try {
+            Connection con = Connector.connection();
+            String SQL = "SELECT spending FROM fogdb.materials WHERE name=?";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ps.setString(1, name);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                double spending = rs.getDouble("spending");
+                return spending;
+            } else {
+                return 0;
+            }
+        }catch (SQLException sql){
+            return 0;
+        } catch (ClassNotFoundException ex) {
+            throw new LoginSampleException(ex.getMessage());
+        }
+
     }
 }
 

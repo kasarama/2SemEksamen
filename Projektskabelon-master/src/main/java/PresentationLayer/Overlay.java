@@ -1,9 +1,8 @@
 package PresentationLayer;
 
-import FunctionLayer.Carport;
+import FunctionLayer.Construction;
 import FunctionLayer.Material;
 import FunctionLayer.OverlayCalculator;
-import FunctionLayer.PostCalculator;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,20 +17,28 @@ public class Overlay extends Command {
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-        int overlayID= Integer.parseInt(request.getParameter("overlayID"));
+        int overlayID = Integer.parseInt(request.getParameter("overlayID"));
 
-        ArrayList<String> coveredWalls =new ArrayList<>();
-        String[] walls ={"left","right","back"};
+        ArrayList<String> coveredWalls = new ArrayList<>();
+        String[] walls = {"left", "right", "back"};
 
         for (int i = 0; i < 3; i++) {
-            if (request.getParameter(walls[i])!=null)
+            if (request.getParameter(walls[i]) != null)
                 coveredWalls.add(walls[i]);
         }
-        HttpSession session= request.getSession();
+        HttpSession session = request.getSession();
 
-        Carport carport = (Carport) session.getAttribute("carportBase");
+        Construction construction = (Construction) session.getAttribute("carportBase");
 
-        ArrayList<Material> ovarlayMaterialList= OverlayCalculator.materialList(carport);
-        return null;
+        ArrayList<Material> ovarlayMaterialList = OverlayCalculator.shedOverlayMaterialList(construction);
+        request.setAttribute("ovarlayMaterialList", ovarlayMaterialList);
+
+        if (request.getParameter("shedOverlay") != null) {
+            return "materialsBill";
+        } else {
+            request.setAttribute("notReady", "The next phase is  not ready yet");
+            return "overlay";
+        }
+
     }
 }

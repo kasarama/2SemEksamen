@@ -1,56 +1,27 @@
 package FunctionLayer;
 
-
 public class RoofSizing {
 
-    Carport carport;
+    Construction construction;
     private int roofLength;
-    private int roofHeight;
+    private double roofFullTilt;
     private int minpitchDegreeOption = 15;
-    private int maxpitchDegreeOption = 45 - 1; //Vi har valgt ud fra hvad produktowneren fra Fog har sagt
+    private int maxpitchDegreeOption = 45 - 1; //Vi har valgt ud fra hvad productowner fra Fog har sagt
     //"45 grader vil blive et tårn" - men man kan fælge det på fogs hjemmeside, så vi har derfor sagt 45-1
-    private int minTiltDegreeOption = 2;
 
-    public RoofSizing(Carport carport) {
-        this.carport = carport;
+    public RoofSizing(Construction construction) {
+        this.construction = construction;
     }
 
-    //Beregning af taget højde
+    //Beregning af tagets stigning
     public int roofHeight(boolean pitchedRoof) {
-        roofHeight = (int) Math.tan((double)(carport.getRoof().getDegree()))/carport.getLength();
+        roofFullTilt = (int) Math.tan(construction.getRoof().getDegree()) /* TODO PROBLEM - her skal stå roofFLat.getRoofRaisedCmPrCmLength istedet for grad beregning*/ *construction.getConstructionLength();
         if (pitchedRoof)
-            roofHeight = (int) (Math.tan(carport.getRoof().getDegree()) * ((carport.getWidth() / 2))); //TODO se om det virker
-        return roofHeight;
+            roofFullTilt = Math.tan(construction.getRoof().getDegree()) * ((construction.getCarportWidth() / 2.0)); //TODO se om det virker
+        return (int) roofFullTilt;
     }
 
-    //Beregning af max vinkel på tagryg (spisds tag)
-    public int tilltAngleMaxCal() {
-    int tiltAnglemax = (int) Math.tan((double) (20 / 100));
-    return tiltAnglemax;
-    }
-
-    //Areal beregning af fladt tag
-    public int flatRoofCalcutatedSide(int tiltAngle) throws Exception {
-        //Vi antager også at tagets hældnning er mindre end nedenstående beregning, som svarer til 20 cm pr meter
-        // stigning
-        //Vi antager at tagets hældning er mindst 2 grader eftersom pr meter den skal stige med mindst 3 cm pr meter,
-        // som svarer til lidt under 2 grader
-        if (tiltAngle < 2 || tiltAngle > tilltAngleMaxCal())
-            throw new Exception("Hældningen på taget må ikke være mindre end 2 grader");
-        roofHeight = roofHeight(false);
-        roofLength = (int) Math.hypot((double)carport.getLength(), (double) roofHeight);
-        return roofLength;
-    }
-
-    //Areal beregning af tag med spids
-    public int pitchedRoofCalcutatedWidth(int pitchDegrees){
-        int halfRaftWidthForPitchedRoof = carport.getWidth();
-        int roofWidth = halfRaftWidthForPitchedRoof*((int) Math.sin((double) (pitchDegrees)));
-
-        return roofWidth;
-    }
-
-    //Beregning af vinklen af tagryggen på et tag med rejsning
+    //Muligheder for vinklens grader angående af tagryggen på et tag med rejsning
     public int[] pitchDegreesOptionsForCostumerToChoose(){
         int deltaDegreeOption = maxpitchDegreeOption-minpitchDegreeOption;
         int[] pitchDegreeOptions = new int[deltaDegreeOption];
@@ -60,32 +31,38 @@ public class RoofSizing {
         return pitchDegreeOptions;
     }
 
-    //Beregning af vinklen af tagryggen på et tag med rejsning
-    public int[] tiltDegreesOptionsForCostumerToChoose(){
-        int deltaDegreeOption = tilltAngleMaxCal()-minTiltDegreeOption;
-        int[] pitchDegreeOptions = new int[deltaDegreeOption];
-        for (int i = 0; i < (deltaDegreeOption-1); i++) {
-            pitchDegreeOptions[i] = minTiltDegreeOption+5;
-        }
-        return pitchDegreeOptions;
-    }
-
     //Hjælpemetode for bredde af tag afhægnig af type
     public int roofWidthSurface() throws Exception {
-        int roofwidth = carport.getWidth();
-        if (carport.getRoof().isPitched()) {
-            roofwidth = pitchedRoofCalcutatedWidth(carport.getRoof().getDegree());
+        int roofwidth = construction.getCarportWidth();
+        if (construction.getRoof().getIsPitched()) {
+            roofwidth = pitchedRoofCalcutatedWidth(construction.getRoof().getDegree());
         }
         return roofwidth;
     }
     //Hjælpemetode for længde af tag afhægnig af type
     public int roofLengthSurface() throws Exception {
-        int roofLength = flatRoofCalcutatedSide(carport.getRoof().getDegree());
+        int roofLength = flatRoofCalcutatedLength(construction.getRoof().getDegree());
 
-        if (carport.getRoof().isPitched()) {
-            roofLength = carport.getLength();
+        if (construction.getRoof().getIsPitched()) {
+            roofLength = construction.getCarportLength();
         }
         return roofLength;
+    }
+
+    //Areal hjælpeberegning af længde af fladt tags overflade
+    public int flatRoofCalcutatedLength(int tiltAngle) throws Exception {
+        //Vi har fået beskrevet af productowner at fladt tag skal have en fast hældning
+        roofFullTilt = roofHeight(false);
+        roofLength = (int) Math.hypot((double) construction.getCarportLength(), (double) roofFullTilt);
+        return roofLength;
+    }
+
+    //Areal hjælpeberegning af bredde af tag med spids's overflade
+    public int pitchedRoofCalcutatedWidth(int pitchDegrees){
+        //Vi har antaget at tagryggen går fra midt front til midt bagpå (parallelt med construction.length)
+        int halfRaftWidthForPitchedRoof = construction.getCarportWidth();
+        int roofWidth = (int) (halfRaftWidthForPitchedRoof*(Math.sin((double) (pitchDegrees))));
+        return roofWidth;
     }
 
     public int getRoofLength() {
@@ -96,12 +73,12 @@ public class RoofSizing {
         this.roofLength = roofLength;
     }
 
-    public int getRoofHeight() {
-        return roofHeight;
+    public double getRoofFullTilt() {
+        return roofFullTilt;
     }
 
-    public void setRoofHeight(int roofHeight) {
-        this.roofHeight = roofHeight;
+    public void setRoofFullTilt(double roofFullTilt) {
+        this.roofFullTilt = roofFullTilt;
     }
 
     public int getMinpitchDegreeOption() {
@@ -119,14 +96,5 @@ public class RoofSizing {
     public void setMaxpitchDegreeOption(int maxpitchDegreeOption) {
         this.maxpitchDegreeOption = maxpitchDegreeOption;
     }
-
-    public int getMinTiltDegreeOption() {
-        return minTiltDegreeOption;
-    }
-
-    public void setMinTiltDegreeOption(int minTiltDegreeOption) {
-        this.minTiltDegreeOption = minTiltDegreeOption;
-    }
-
 
 }

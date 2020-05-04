@@ -1,6 +1,6 @@
 package FunctionLayer;
 
-public class ConstructionCalculator {
+public class ConstructionMaterialCalculator {
 
 
     public RoofMaterialCalculator r = new RoofMaterialCalculator();

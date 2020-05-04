@@ -4,14 +4,18 @@ public class Material {
 
     private int id;
     private String name;
-    private int size;
+    private int size;//actual
+    private int availablesize; //beregned fra Katarzyna metode
     private String unit;
-    private int antal;
+    private int amount;
     private double price;
     private String comment;
     private String keyword;
     private String category;
     private String picture;
+ //189 200
+    // 254 100 500 skre
+    //120  374
 
 
     public Material() {
@@ -25,6 +29,7 @@ public class Material {
         this.unit = unit;
         this.keyword = keyword;
         this.category = category;
+
     }
 
     public double cost(){
@@ -70,12 +75,12 @@ public class Material {
         this.unit = unit;
     }
 
-    public int getAntal() {
-        return antal;
+    public int getAmount() {
+        return amount;
     }
 
-    public void setAntal(int antal) {
-        this.antal = antal;
+    public void setAmount(int amount) {
+        this.amount = amount;
     }
 
     public double getPrice() {
@@ -98,6 +103,22 @@ public class Material {
         return keyword;
     }
 
+    @Override
+    public String toString() {
+        return "Material{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", size=" + size +
+                ", unit='" + unit + '\'' +
+                ", antal=" + amount +
+                ", price=" + price +
+                ", comment='" + comment + '\'' +
+                ", keyword='" + keyword + '\'' +
+                ", category='" + category + '\'' +
+                ", picture='" + picture + '\'' +
+                '}';
+    }
+
     public void setKeyword(String keyword) {
         this.keyword = keyword;
     }
@@ -110,8 +131,5 @@ public class Material {
         this.category = category;
     }
 
-    @Override
-    public String toString() {
-        return "Materiale: " + name + " " + size;
-    }
+
 }

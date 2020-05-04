@@ -26,7 +26,7 @@
 <!-- Page Content -->
 <div class="container mt-4">
 
-    <h4>Din carport</h4>
+    <h4>Din construction</h4>
     <h6>Flat tag, med skur</h6>
     <br>
     *** Billede ***
@@ -49,7 +49,7 @@
             <tr>
                 <td>${material.name}</td>
                 <td>${material.size}</td>
-                <td>${material.antal}</td>
+                <td>${material.amount}</td>
                 <td>${material.unit}</td>
                 <td>${material.comment}</td>
             </tr>

@@ -2,19 +2,17 @@ package FunctionLayer;
 
 public class RoofMaterialCalculator {
 
-    Carport carport;
-    private int length = carport.getLength();
-    private int width = carport.getWidth();
+    Construction construction;
+    private int length = construction.getCarportLength();
+    private int width = construction.getCarportWidth();
 
-    RoofSizing roofSizing = new RoofSizing(carport);
+    RoofSizing roofSizing = new RoofSizing(construction);
     private int trapezpladeWidth = 100;
     private int T600RoofPlateLength = 600;
     private int T300RoofPlateLength = 300;
     private int numberOfT600Trapezplates = 0;
     private int numberOfT300Trapezplates = 0;
-    private int tiltAngle = carport.getRoof().getDegree();
-    private int pitchDegree = carport.getRoof().getDegree();
-    private boolean pitchedRoof = carport.getRoof().isPitched();
+    private boolean pitchedRoof = construction.getRoof().getIsPitched();
     private int square1numberOfT600Trapezplates = 0;
     private int square2numberOfT600Trapezplates = 0;
     private int square3numberOfT600Trapezplates = 0;
@@ -63,11 +61,11 @@ public class RoofMaterialCalculator {
 
         /////////////////////////////////////////////////////
 
-        //Mellemregning
+        //Mellemregning til samlet antal plader
         int QuantetyOfT600TrapezplatesTotal = square1numberOfT600Trapezplates + square2numberOfT600Trapezplates +
                 square3numberOfT600Trapezplates;
 
-        /////////////Beregning af fjerde og sidste del-firkant af tag (om den sidste plade skal være en T600)
+        /////////////Beregning af fjerde og sidste del af tag (om den sidste plade skal være en T600 eller T300)
         int T300Quantety = quantityOfT300ForRoof(roofLength, roofWidth);
 
         if (T300Quantety == 0 )
@@ -190,7 +188,7 @@ public class RoofMaterialCalculator {
             return vandbrætAntal;
         }
 
-        // Tagplader
+        /*// Tagplader
         public static int roofAntal(int length, int width){
             int numberOfTrapezplader = 0;
             int T300Areal = 3;
@@ -207,6 +205,7 @@ public class RoofMaterialCalculator {
             }
             return numberOfTrapezplader;
         }
+
         public static String roofType(int length, int width){
             String trapezplader = "";
             int T300Areal = 3;
@@ -222,9 +221,9 @@ public class RoofMaterialCalculator {
                 trapezplader = "T600";
             }
             return trapezplader;
-        }
+        }*/
 
-        // Tætningsprofil
+    // Tætningsprofil
         public static int gasket(int width){
             int gasket = Math.round((width/100)*2);
             return gasket;
@@ -286,13 +285,13 @@ public class RoofMaterialCalculator {
 
         // Bræddebolte
         public static int carriageBolts(int length, int width) {
-            int carriageBolts = ConstructionCalculator.posts(length, width)*2;
+            int carriageBolts = ConstructionMaterialCalculator.posts(length, width)*2;
             return carriageBolts;
         }
 
         // Firkantskiver
         public static int squares(int length, int width){
-            int squares = ConstructionCalculator.posts(length, width);
+            int squares = ConstructionMaterialCalculator.posts(length, width);
             return squares;
         }
 

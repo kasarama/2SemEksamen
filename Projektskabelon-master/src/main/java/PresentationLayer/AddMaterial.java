@@ -51,6 +51,7 @@ public class AddMaterial extends Command {
         material.setCategory(request.getParameter("category"));
         material.setPrice(Double.parseDouble(request.getParameter("price")));
         material.setPicture(request.getParameter("category")+"/"+request.getParameter("picture"));
+        System.out.println(material.toString());
         ListFactory.saveInFile(material);
         MaterialMapper.addMatDB(material);
 
