@@ -16,7 +16,7 @@ public class CarportBase extends Command {
         int carportWidth = Integer.parseInt(request.getParameter("carportWidth"));
         int roofType = Integer.parseInt(request.getParameter("roofType"));
         System.out.println(roofType+"rooftype");
-        int shedWidthParameter = 1;
+        int shedWidthParameter = 0;
         int shedDepth = 0;
         int constructionHeight = Integer.parseInt(request.getParameter("constructionHeight"));
         String shedSide = "";

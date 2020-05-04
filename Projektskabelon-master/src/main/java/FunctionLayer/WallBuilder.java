@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * @author Magdalena
  */
 public class WallBuilder {
-    public static ArrayList<Wall> addShedWalls(Construction construction){
+    public static ArrayList<Wall> addShedWalls(Construction construction) {
         ArrayList<Wall> walls = new ArrayList<>();
         Wall right = new Wall();
         right.setSide("right");
@@ -28,7 +28,7 @@ public class WallBuilder {
 
         Wall front = new Wall();
         front.setSide("front");
-        front.setLength(construction.getShed().getWidth()-100);
+        front.setLength(construction.getShed().getWidth() - 100);
         front.setRaising(0);
         front.setMinHeight(construction.getConstructionHeight());
 
@@ -41,55 +41,58 @@ public class WallBuilder {
 
     }
 
-    public static ArrayList<Wall> addCarportWalls(Construction construction, String[] constructionswalls){
-        ArrayList<Wall> shedWalls=construction.getShed().getWalls();
-        ArrayList<Wall> carportWalls= new ArrayList<>();
+    public static ArrayList<Wall> addCarportWalls(Construction construction, String[] constructionswalls) {
+        ArrayList<Wall> shedWalls = construction.getShed().getWalls();
+        ArrayList<Wall> carportWalls = new ArrayList<>();
 
-        String side="";
-        int wallLength;
-        int raising;
-        int minHeight;
+        String side = "";
+        int wallLength = 0;
+        int raising = 0;
+        int minHeight = 0;
 
+        if (construction.getRoof().getIsPitched() || side.equals("back") || side.equals("front")) {
+            raising = 0;
+        } else {
+            raising = construction.getRoof().getDegree();
+        }
 
+        for (int i = 0; i < constructionswalls.length; i++) {
+            Wall extraWall = new Wall();
+            if (constructionswalls[i].equals("back")) {
+                /*
+                builds a wall on the backside where it's length is a difference betwin carpor width anfd shed width
+                if shed is as width as whole carport, the wall gets 0 as length
+                 */
+                wallLength = construction.getCarportWidth() - construction.getShed().getWidth();
+                minHeight = construction.getConstructionHeight();
+                side = "back";
 
-        for (Wall shedWall: shedWalls
-             ) {
-            for (int i = 0; i < constructionswalls.length ; i++) {
-                Wall carportWall = new Wall();
-                if (constructionswalls[i].equals(shedWall.getSide())) {
+            } else {
+                side = constructionswalls[i];
+                //todo find out if the wall is shared with shed
+                if (construction.getCarportWidth() == construction.getShed().getWidth()
+                        || construction.getShed().getSide().equals(constructionswalls[i])) {
                     wallLength = construction.getCarportLength();
-                    minHeight = ConstructionSizeCalculator.carportMinHeight(construction.getConstructionHeight(), shedWall.getLength(), raising);
-                    side=shedWall.getSide();
+                    minHeight = ConstructionSizeCalculator.carportMinHeight(construction.getConstructionHeight(),
+                            construction.getShed().getDepth(), raising);
+
                 } else {
-                    side=constructionswalls[i];
-                    minHeight=construction.getConstructionHeight();
-                    switch (constructionswalls[i]){
-                        case "back":
-                            wallLength=construction.getCarportWidth();
-                            break;
-                        case "right":
-                        case "left":
-                            wallLength=construction.getCarportLength()+construction.getShed().getDepth()-100;
+                    wallLength = construction.getCarportLength() + construction.getShed().getDepth() - 100;
+                    minHeight = construction.getConstructionHeight();
 
-
-
-                    }
-
-
-
-                if(construction.getRoof().getIsPitched() || side.equals("back") || side.equals("front")){
-                    raising=0;
-                } else {
-                    raising = construction.getRoof().getDegree();
                 }
-                 carportWall.setRaising(raising);
-                 carportWall.setMinHeight(minHeight);
-                 carportWall.setLength(wallLength);
-                 carportWall.setSide(side);
-                }
+
 
             }
+            extraWall.setSide(side);
+            extraWall.setLength(wallLength);
+            extraWall.setMinHeight(minHeight);
+            extraWall.setRaising(raising);
 
-        }
+            carportWalls.add(extraWall);
+
+
+        } return carportWalls;
+
     }
 }

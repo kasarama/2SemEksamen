@@ -15,12 +15,15 @@ public class OverlayCalculator {
 
     //.......................All the materials for overlay.............................//
     //gets list with materials of all the elements of overlay and sets them on one list of materials
-    public static ArrayList<Material> shedOverlayMaterialList(Construction construction) {
+    public static ArrayList<Material> shedOverlayMaterialList(Construction construction, String overlayName) throws LoginSampleException {
         ArrayList<Material> allWallsMaterials = wallMaterials(construction.getShed().getWalls());
         ArrayList<Material> doorMaterials = doorFraming(construction.getRoof().getDegree(), construction.getCarportLength());
-        ArrayList<Material> shedOverlayMaterialList= new ArrayList<>();
+        ArrayList<Material> shedOverlayMaterialList = new ArrayList<>();
+        Material overlay = overlaMaterial(overlayName,construction);
         shedOverlayMaterialList.addAll(allWallsMaterials);
         shedOverlayMaterialList.addAll(doorMaterials);
+        shedOverlayMaterialList.add(overlay);
+
 
 
         return shedOverlayMaterialList;
@@ -28,13 +31,13 @@ public class OverlayCalculator {
 
     //................................materialsForOneWallFraming............................//
     //for given wall calculates all the materials needed for framing for horizontal overlay
-    public static ArrayList<Material> materialsForOneWallFraming(Wall wall){
+    public static ArrayList<Material> materialsForOneWallFraming(Wall wall) {
 
         ArrayList<Material> materials = new ArrayList<>();
         Material spaer = new Material();
         spaer.setName("47X100 MM SPÆRTRÆ");
-        int spaers = spaersNumberOnSide(wall.getLength(),wall.getMinHeight(),wall.getRaising());
-        int spaerlength= ConstructionSizeCalculator.postDistanceMax3000(wall.getLength());
+        int spaers = spaersNumberOnSide(wall.getLength(), wall.getMinHeight(), wall.getRaising());
+        int spaerlength = ConstructionSizeCalculator.postDistanceMax3000(wall.getLength());
         spaer.setSize(spaerlength);
         spaer.setComment("Horizontal framing");
         for (int i = 0; i < spaers; i++) {
@@ -47,25 +50,21 @@ public class OverlayCalculator {
         screwSpaer.setSize(screwSpaeramount);
         materials.add(screwSpaer);
 
-        /*
-int available = katarzynaMetode (very nice);
-screwSpear.setAvailabke (available)
-         */
 
         Material fyr = new Material();
         fyr.setName("19X50 MM BRÆDDER FYR");
         fyr.setComment("Vertical framing");
-        int fyrsnumber= fyrNumberOnSide(wall.getLength());
-        ArrayList<Integer> fyrHeights=fyrLengths(wall.getMinHeight(),wall.getRaising(),wall.getLength());
-        for (Integer height:fyrHeights
-             ) {
+        int fyrsnumber = fyrNumberOnSide(wall.getLength());
+        ArrayList<Integer> fyrHeights = fyrLengths(wall.getMinHeight(), wall.getRaising(), wall.getLength());
+        for (Integer height : fyrHeights
+        ) {
             fyr.setSize(height);
             materials.add(fyr);
         }
 
-        Material screwFyr  = new Material();
+        Material screwFyr = new Material();
         screwFyr.setName("BASIC SKRUE 5,0X40MM");
-        screwFyr.setSize(screwFyr(fyrsnumber,spaers));
+        screwFyr.setSize(screwFyr(fyrsnumber, spaers));
 
         screwFyr.setComment("Til montering af vertical framing");
         materials.add(screwFyr);
@@ -73,14 +72,13 @@ screwSpear.setAvailabke (available)
     }
 
 
-
     //calculates spaer needed for one of the chosen sides of shed/carport/construction
     // max distance between spaer is 100 cm - counts number of spar after each post
     public static int spaersNumberOnSide(int length, int minHeight, int angle) {
         int spaersAmount = 0;
         Integer[] postsheights = ConstructionSizeCalculator.postsHeights(minHeight, angle, length);
-        for (int i = 0; i < postsheights.length-1; i++) { //+1 because there is one more post than distances
-            int tmp = spaersAmount+1;//
+        for (int i = 0; i < postsheights.length - 1; i++) { //+1 because there is one more post than distances
+            int tmp = spaersAmount + 1;//
             spaersAmount = tmp + postsheights[i] / 1000; //counts number of distances between 2 spaers
         }
         return spaersAmount;
@@ -92,7 +90,7 @@ screwSpear.setAvailabke (available)
         return spaernumber * 2 * 2; //2 screws on each side of spaer
     }
 
-    public static int numberOfFyrOnDistance(int distance){
+    public static int numberOfFyrOnDistance(int distance) {
         int numberOfFyrOnDistance;
         if (distance % 600 == 0) {
             numberOfFyrOnDistance = (distance / 600) - 1;
@@ -106,7 +104,7 @@ screwSpear.setAvailabke (available)
     public static int fyrNumberOnSide(int length) {
         int distance = ConstructionSizeCalculator.postDistanceMax3000(length);
         int distancesNumber = ConstructionSizeCalculator.sidePostAmount(length) - 1;
-        int numberOfFyrOnDistance=numberOfFyrOnDistance(distance);
+        int numberOfFyrOnDistance = numberOfFyrOnDistance(distance);
         return numberOfFyrOnDistance * distancesNumber;
     }
 
@@ -120,39 +118,40 @@ screwSpear.setAvailabke (available)
     /*
 
      */
-    public static ArrayList<Integer> fyrLengths(int height, int angle, int size){ //todo we need to decide if the height of construction is counted to the lower edge of rem or the upper one.
+    public static ArrayList<Integer> fyrLengths(int height, int angle, int size) { //todo we need to decide if the height of construction is counted to the lower edge of rem or the upper one.
         ArrayList<Integer> fyrLengths = new ArrayList<>();
-        int allLengths=numberOfFyrOnDistance(size-100)+2; // treats posts as fyr and counts them all, counts from the centre of first post to the centre of last post ;
-        int postNumber= ConstructionSizeCalculator.sidePostAmount(size);
-        int distance = size/(allLengths-1);
-        int distanceOfPosts= ConstructionSizeCalculator.postDistanceMax3000(size);
+        int allLengths = numberOfFyrOnDistance(size - 100) + 2; // treats posts as fyr and counts them all, counts from the centre of first post to the centre of last post ;
+        int postNumber = ConstructionSizeCalculator.sidePostAmount(size);
+        int distance = size / (allLengths - 1);
+        int distanceOfPosts = ConstructionSizeCalculator.postDistanceMax3000(size);
         int numberOfFyrOnDistance = numberOfFyrOnDistance(distanceOfPosts);
         fyrLengths.add(height); //the first post has height of the start(given) height
 
-            for (int i = 1; i < allLengths; i++) {
-                int tmp = height;
-                height = tmp + ConstructionSizeCalculator.raising(angle, distance); // calculates height of the element on given distance
-                fyrLengths.add(height-360); //adds calculated height and each fyr to the list (there shold be in total 360 mm distance betwin the ground and the roof spear
+        for (int i = 1; i < allLengths; i++) {
+            int tmp = height;
+            height = tmp + ConstructionSizeCalculator.raising(angle, distance); // calculates height of the element on given distance
+            fyrLengths.add(height - 360); //adds calculated height and each fyr to the list (there shold be in total 360 mm distance betwin the ground and the roof spear
         }
 
         //on the list there are also posts that need to by now removed. I take number of posts and
         // set every n-th element as 0 , where n=numberOfFyrOnDistance+1
-        Integer[] zeroIndexes= new Integer[postNumber];
+        Integer[] zeroIndexes = new Integer[postNumber];
         for (int i = 0; i < postNumber; i++) {
-            zeroIndexes[i]=fyrLengths.get(i*(1+numberOfFyrOnDistance));
+            zeroIndexes[i] = fyrLengths.get(i * (1 + numberOfFyrOnDistance));
         }
 
-        for (int i = postNumber-1; i >=0 ; i--) {
+        for (int i = postNumber - 1; i >= 0; i--) {
             fyrLengths.remove(zeroIndexes[i]);
         }
         return fyrLengths;
 
     }
+
     //..................door Framing..........................//
     public static ArrayList<Material> doorFraming(int angle, int sideWallLength) {
         ArrayList<Material> doorMaterials = new ArrayList<>();
-        int overDoorFyr=ConstructionSizeCalculator.raising(angle,sideWallLength-100);
-        Integer[] fyrLengths= {1640,1640,1640,overDoorFyr};
+        int overDoorFyr = ConstructionSizeCalculator.raising(angle, sideWallLength - 100);
+        Integer[] fyrLengths = {1640, 1640, 1640, overDoorFyr};
         for (int i = 0; i < 4; i++) {
             Material fyr = new Material();
             fyr.setName("19X50 MM BRÆDDER FYR");
@@ -161,7 +160,7 @@ screwSpear.setAvailabke (available)
             doorMaterials.add(fyr);
         }
 
-        Integer[]spaerSizes={1640,1000,1000,900, 900}; //acroos the door (180x90 cm), 2 over the door,two horizontal for door
+        Integer[] spaerSizes = {1640, 1000, 1000, 900, 900}; //acroos the door (180x90 cm), 2 over the door,two horizontal for door
         for (int i = 0; i < 5; i++) {
             Material spaer = new Material();
             spaer.setName("47X100 MM SPÆRTRÆ");
@@ -179,7 +178,7 @@ screwSpear.setAvailabke (available)
         hinge.setName("t hængsel 390 mm");
         doorMaterials.add(hinge);
 
-        Material screwFyr  = new Material();
+        Material screwFyr = new Material();
         screwFyr.setName("BASIC SKRUE 5,0X40MM");
         screwFyr.setSize(24); //for the door - always the same sioze of the door
         screwFyr.setComment("Til montering af vertical framing-dør");
@@ -192,17 +191,14 @@ screwSpear.setAvailabke (available)
         doorMaterials.add(screwSpaer);
 
 
-
-
         return doorMaterials;
     }
 
 
-
     //..........Materials for framing for all the given walls...........................//
-    public static ArrayList<Material> wallMaterials(ArrayList<Wall> walls){
+    public static ArrayList<Material> wallMaterials(ArrayList<Wall> walls) {
         ArrayList<Material> materials = new ArrayList<>();
-        for (Wall wall:walls) {
+        for (Wall wall : walls) {
             ArrayList wallMaterials = materialsForOneWallFraming(wall);
             materials.addAll(wallMaterials);
         }
@@ -230,12 +226,23 @@ screwSpear.setAvailabke (available)
      */
 
     //to be able to calculate the needed amount of some material for overlay, we need to know the areal surface that's going to be covered
-    public static double areal(int width, int length, int angle){
-        double raising=ConstructionSizeCalculator.raising(angle,length);
-        int backWall=width*2000;
-        double sideWall=(length*2000)+(length*raising/2);
-        double frontWall=width*(2000+raising);
-        double areal=(backWall+2*sideWall+frontWall)/1000/1000;
+    public static double areal(int width, int length, int angle) {
+        double raising = ConstructionSizeCalculator.raising(angle, length);
+        int backWall = width * 2000;
+        double sideWall = (length * 2000) + (length * raising / 2);
+        double frontWall = width * (2000 + raising);
+        double areal = (backWall + 2 * sideWall + frontWall) / 1000 / 1000;
+        return areal;
+    }
+
+    public static double allWallsAreal(Construction construction) {
+        ArrayList<Wall> allWalls = construction.getShed().getWalls();
+        allWalls.addAll(construction.getWalls());
+        double areal = 0;
+        for (Wall wall : allWalls) {
+            areal = wall.getLength() * wall.getMinHeight()
+                    + 0.5 * ConstructionSizeCalculator.raising(wall.getRaising(), wall.getLength()) * wall.getLength();
+        }
         return areal;
     }
 
@@ -243,15 +250,30 @@ screwSpear.setAvailabke (available)
     public static int overlaySpending(String materialName, double areal) throws LoginSampleException {
         //todo remember to handle that if method returns 0
         double spending = MaterialMapper.spending(materialName);
-        double actual = spending*areal;
-        actual=actual+0.05*actual; //5 % extra material for cuts
+        double actual = spending * areal;
+        actual = actual + 0.05 * actual; //5 % extra material for cuts
 
-        if ( ((actual*10)%10) ==0 ){
+        if (((actual * 10) % 10) == 0) {
             return (int) actual;
+        } else {
+            return (int) actual + 1;
         }
-        else {
-            return (int) actual+1;
-        }
+
+    }
+
+    public static Material overlaMaterial(String materialName, Construction construction) throws LoginSampleException {
+        double wholeAreal=allWallsAreal(construction);
+
+            int amount = overlaySpending(materialName, wholeAreal);
+            Material overlay = new Material();
+            overlay.setName(materialName);
+            overlay.setAmount(amount);
+            if (amount==0){
+                throw new LoginSampleException("Vi kunne ikke beregne beklædning: "
+                        +materialName+". Prøv at vælge noget andet beklædning");
+            }
+
+        return overlay;
 
     }
 
