@@ -2,6 +2,9 @@ package FunctionLayer;
 
 import java.util.ArrayList;
 
+/**
+ * @author Magdalena
+ */
 public class Wall {
     private String side;
     private int raising;
@@ -54,6 +57,6 @@ public class Wall {
 
     @Override
     public String toString() {
-        return side+" wall that falls "+raising+"cm/m";
+        return side+" wall that falls "+raising+"cm/m" + "length: "+length+" , min height: " +minHeight;
                     }
 }

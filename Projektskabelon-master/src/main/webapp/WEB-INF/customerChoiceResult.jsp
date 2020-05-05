@@ -35,11 +35,19 @@
     </tr>
 </table>
 
+</form>
+<form name="startOver" action="FrontController" method="POST">
+    <input type="hidden" name="target" value="newrequest">
+    <input type="submit" name="newrequest" value="Start forfra">
+</form>
+
+
 <!-- alligning the hyperlink to the center -->
 <div class="text-center">
     <!-- Creating a hyperlink that goes through back to 'index' page -->
     <a href="../index.jsp">Til Forsiden</a>
 </div>
+
 
 </body>
 </html>
