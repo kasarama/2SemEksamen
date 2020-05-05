@@ -26,10 +26,10 @@ public class RoofMaterialCalculatorTest {
         int roofWidthSurface = rs.roofWidthSurface();
         int roofLengthSurface = rs.roofLengthSurface();
         //Act
-        int actuel = rmc.quantityOfT600ForRoof(roofWidthSurface, roofLengthSurface, con.getRoof().getIsPitched());
+        int actual = rmc.quantityOfT600ForRoof(roofWidthSurface, roofLengthSurface, con.getRoof().getIsPitched());
         int expected = 7;
         //Assert
-        assertEquals(expected,actuel);
+        assertEquals(expected,actual);
     }
 
     @Test
