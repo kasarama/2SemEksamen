@@ -18,13 +18,13 @@
     <label>Vælg længde:</label>
     <select name="carportLength" class="form-control" >
         <c:forEach var="i" begin="24" end="75">
-            <option value=${i*100}>${i*10}</option>
+            <option value=${i*100}>${i*10} cm</option>
         </c:forEach>
     </select>
     <label>Vælg bredde:</label>
     <select name="carportWidth" class="form-control" >
         <c:forEach var="i" begin="24" end="75">
-            <option value=${i*100}>${i*10}</option>
+            <option value=${i*100}>${i*10} cm</option>
         </c:forEach>
     </select>
     <br>

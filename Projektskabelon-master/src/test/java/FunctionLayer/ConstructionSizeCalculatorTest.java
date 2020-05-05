@@ -72,5 +72,11 @@ ConstructionSizeCalculator constructionSizeCalculator = new ConstructionSizeCalc
         int rsult = heights[1];
         assertEquals(200,rsult);
     }
+    @Test
+    public  void testOfSomeMethod (){
+        int din= ConstructionSizeCalculator.SomeMethod();
+        int min=5;
+        assertEquals(min,din);
+    }
 
 }
