@@ -11,10 +11,15 @@ public class OverlaySizeCalculator {
         Integer[] postsheights = ConstructionSizeCalculator.postsHeights(minHeight, angle, length);
         for (int i = 0; i < postsheights.length - 1; i++) { //+1 because there is one more post than distances
             int tmp = spaersAmount + 1;//
-            spaersAmount = tmp + postsheights[i] / 1000; //counts number of distances between 2 spaers
+            spaersAmount =(int) (tmp + postsheights[i] / 1000); //counts number of distances between 2 spaers
         }
         return spaersAmount;
 
+    }
+    public static int spaerOnOneWall(Wall wall){
+        int amount=0;
+
+        return amount;
     }
 
     //calculates number of screws for spar (6cm)
@@ -61,7 +66,7 @@ public class OverlaySizeCalculator {
 
         for (int i = 1; i < allLengths; i++) {
             int tmp = height;
-            height = tmp + ConstructionSizeCalculator.raising(angle, distance); // calculates height of the element on given distance
+            height = (int) (tmp + ConstructionSizeCalculator.raising(angle, distance)); // calculates height of the element on given distance
             fyrLengths.add(height - 360); //adds calculated height and each fyr to the list (there shold be in total 360 mm distance betwin the ground and the roof spear
         }
 

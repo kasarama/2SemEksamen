@@ -87,7 +87,7 @@ public class OverlayMaterialCalculator {
     //..................door Framing..........................//
     public static ArrayList<Material> doorFraming(int angle, int sideWallLength) {
         ArrayList<Material> doorMaterials = new ArrayList<>();
-        int overDoorFyr = ConstructionSizeCalculator.raising(angle, sideWallLength - 100);
+        int overDoorFyr =(int) ConstructionSizeCalculator.raising(angle, sideWallLength - 100);
         Integer[] fyrLengths = {1640, 1640, 1640, overDoorFyr};
         for (int i = 0; i < 4; i++) {
             Material fyr = new Material();

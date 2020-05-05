@@ -29,22 +29,22 @@ public class ConstructionSizeCalculator {
     }
 
     //counts how much the roof drops/raises on the given distance in mm
-    public static int raising(int angle, int distance){
+    public static double raising(int angle, int distance){
 
-        return (int) angle*10*distance/1000;
+        return  angle*distance/100;
     }
 
     // fills up the array with heights of posts on the one side of the shed or carport starting from the shortest one
-    public static Integer[] postsHeights(int height, int angle, int size){
+    public static Integer[] postsHeights(double height, int angle, int size){
         //todo when calculating postHeights of carport, int height should be the heighest one of shed posts
         int postNumber=sidePostAmount(size);
         int distance = postDistanceMax3000(size);
         Integer[] postHeights = new Integer[postNumber];
-
-            for (int i = 0; i < postHeights.length ; i++) {
-                int tmp = height;
-                height= tmp+ raising(angle, distance)*i;
-                postHeights[i]=height;
+        postHeights[0]=(int)height;
+            for (int i = 1; i < postHeights.length ; i++) {
+                height= height+ raising(angle, distance);
+                postHeights[i]=(int)height;
+                System.out.println();
             }
 
         return postHeights;
@@ -74,7 +74,7 @@ public class ConstructionSizeCalculator {
 
     public static int carportMinHeight(int constuctionsMinHeight,int length, int raising) {
         //todo returns length of the lowest post of carport
-        return constuctionsMinHeight+raising(raising,length);
+        return (int) (constuctionsMinHeight+raising(raising,length));
     }
 
 

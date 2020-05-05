@@ -21,7 +21,8 @@ public class OverlaySizeCalculatorTest {
         Shed shed = new Shed(4200/2,2900,"left");
         ArrayList<Wall> shedWalls= WallBuilder.addShedWalls(construction);
         shed.setWalls(shedWalls);
-       // ArrayList<Material> carportWalls=WallBuilder.addCarportWalls()
+        String[] constructionWalls={"left","right"};
+        ArrayList<Wall> carportWalls=WallBuilder.addCarportWalls(construction, constructionWalls);
     }
 
     @Test
