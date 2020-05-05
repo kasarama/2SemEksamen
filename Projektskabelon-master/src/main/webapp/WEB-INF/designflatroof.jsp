@@ -25,5 +25,5 @@
 
     <input class="btn btn-primary" type="submit" value="Videre">
 </form>
-
 <%@include file="../includes/footer.inc" %>
+
