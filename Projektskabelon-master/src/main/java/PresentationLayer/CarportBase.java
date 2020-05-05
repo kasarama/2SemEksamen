@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
+
 /**
  * @author Magdalena
  */
@@ -19,9 +20,8 @@ public class CarportBase extends Command {
         int shedDepth = 0;
         int constructionHeight = Integer.parseInt(request.getParameter("constructionHeight"));
         String shedSide = "";
-        final int RAISING=3;
+        final int RAISING = 3;
         int shedWidth = 0;
-
 
 
         Construction constructionBase = new Construction();
@@ -35,31 +35,25 @@ public class CarportBase extends Command {
             roofBase = new RoofPitched(0, carportLength, carportWidth, 0);
             roofBase.setPitched(true);
         } else {
-            roofBase = new RoofFlat(0, carportLength, carportWidth, RAISING,false);
+            roofBase = new RoofFlat(0, carportLength, carportWidth, RAISING, false);
         }
 
         constructionBase.setRoof(roofBase);
-
-
         Shed shed = new Shed(shedWidth, shedDepth, shedSide);
+        shed.setWalls(new ArrayList<>());
         constructionBase.setShed(shed);
-
-
-        if (request.getParameter("withShed") != null){
+        if (request.getParameter("withShed") != null) {
             shedWidthParameter = Integer.parseInt(request.getParameter("shedWidthParameter"));
             shedDepth = Integer.parseInt(request.getParameter("shedDepth"));
             shedSide = request.getParameter("shedSide");
-            shedWidth = (carportWidth/shedWidthParameter);
+            shedWidth = (carportWidth / shedWidthParameter);
             shed.setWidth(shedWidth);
             shed.setDepth(shedDepth);
             shed.setSide(shedSide);
-            ArrayList<Wall> walls=WallBuilder.addShedWalls(constructionBase);
+            ArrayList<Wall> walls = WallBuilder.addShedWalls(constructionBase);
             shed.setWalls(walls);
             constructionBase.setShed(shed);
         }
-
-
-
 
 
         HttpSession session = request.getSession();
@@ -72,10 +66,11 @@ public class CarportBase extends Command {
 
         if (roofType == 1) {
             return "designpitchedroof";
-        }else if (roofType ==0) {
+        } else if (roofType == 0) {
             return "designflatroof";
         } else {
             request.setAttribute("error", "kune ikke definere tag type");
-            return "index";}
+            return "index";
+        }
     }
 }

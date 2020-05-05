@@ -16,6 +16,6 @@ public class NewRequest extends Command {
 
         HttpSession session = request.getSession();
         session.setAttribute("carportRequest", null);
-        return "carportrequest";
+        return "carportBase";
     }
 }

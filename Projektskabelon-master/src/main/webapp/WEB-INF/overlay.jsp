@@ -103,7 +103,14 @@
         </c:if>
     </h2>
 
-    <!--
+
+</form>
+<form name="startOver" action="FrontController" method="POST">
+    <input type="hidden" name="target" value="newrequest">
+    <input type="submit" name="newrequest" value="Start forfra">
+</form>
+
+<!--
         <c:forEach var="material" items="${applicationScope.overlayList}">
             <img id="${material.id}" src="${material.picture}" height="150" width="auto"/>
             <br>
@@ -120,7 +127,7 @@
     </c:forEach>
     -->
 
-</form>
+
 
 
 <!-- Optional JavaScript -->

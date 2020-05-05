@@ -22,9 +22,23 @@ public class Overlay extends Command {
 
         String overlayName=request.getParameter("overlayName");
 
-        ArrayList<String> coveredWalls = new ArrayList<>();
-        String[] walls = {"left", "right", "back"};
 
+
+
+
+        ArrayList<String> coveredWalls = new ArrayList<>();
+        String[] walls = new String[3];
+
+        if(request.getParameter("right")!=null){
+            walls[0]="right";
+        }
+        if(request.getParameter("left")!=null){
+            walls[1]="left";
+        }
+        if(request.getParameter("back")!=null){
+            walls[2]="back";
+        }
+/*
 
             for (int i = 0; i < 3; i++) {
                 if (request.getParameter(walls[i]) != null)
@@ -33,7 +47,7 @@ public class Overlay extends Command {
                 System.out.println("added wall on side: " + walls[i]);
             }
 
-
+*/
         construction.setOverlay(overlayName);
         if (coveredWalls.size()!=0) {
             String[] wallSides = new String[coveredWalls.size()];
