@@ -42,7 +42,6 @@ public class WallBuilder {
     }
 
     public static ArrayList<Wall> addCarportWalls(Construction construction, String[] constructionswalls) {
-        ArrayList<Wall> shedWalls = construction.getShed().getWalls();
         ArrayList<Wall> carportWalls = new ArrayList<>();
 
         String side = "";

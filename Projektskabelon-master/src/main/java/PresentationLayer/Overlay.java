@@ -17,27 +17,33 @@ import java.util.ArrayList;
 public class Overlay extends Command {
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        HttpSession session = request.getSession();
+        Construction construction = (Construction) session.getAttribute("carportBase");
 
         String overlayName=request.getParameter("overlayName");
-        System.out.println(overlayName);
-
 
         ArrayList<String> coveredWalls = new ArrayList<>();
         String[] walls = {"left", "right", "back"};
 
-        for (int i = 0; i < 3; i++) {
-            if (request.getParameter(walls[i]) != null)
-                coveredWalls.add(walls[i]);
-        }
 
-        HttpSession session = request.getSession();
+            for (int i = 0; i < 3; i++) {
+                if (request.getParameter(walls[i]) != null)
+                    System.out.println(request.getParameter(walls[i]));
+                    coveredWalls.add(walls[i]);
+                System.out.println("added wall on side: " + walls[i]);
+            }
 
-        Construction construction = (Construction) session.getAttribute("carportBase");
+
         construction.setOverlay(overlayName);
         if (coveredWalls.size()!=0) {
-            String[] wallSides = (String[]) coveredWalls.toArray();
-            construction.setWalls(WallBuilder.addCarportWalls(construction, wallSides));
+            String[] wallSides = new String[coveredWalls.size()];
+            for (int i = 0; i <coveredWalls.size() ; i++) {
+                wallSides[i]=coveredWalls.get(i);
+            }
         }
+
+        System.out.println("shed walls in construction: "+construction.getShed().getWalls().size());
+        System.out.println("construction walls: "+construction.getWalls().size());
 
         ArrayList<Material> ovarlayMaterialList = OverlayCalculator.shedOverlayMaterialList(construction, overlayName);
         request.setAttribute("ovarlayMaterialList", ovarlayMaterialList);
