@@ -76,9 +76,19 @@ public class RoofSizingTest {
     }
 
 
-   /* @Test
-    public void roofLengthSurface() {
-    }*/
+    @Test
+    public void roofLengthSurfaceFlatRoof() {
+        //Arrange
+        con.setConstructionLength(780);
+        con.setConstructionWidth(360);
+        roof = new RoofFlat(0,con.getConstructionLength(), con.getConstructionWidth());
+        con.setRoof(roof);
+        //Act
+        int actuel = rs.roofLengthSurface();
+        int expected = 780;
+        //Assert
+        assertEquals(expected, actuel);
+    }
 
     //Er denne nødvendig?
     @Test

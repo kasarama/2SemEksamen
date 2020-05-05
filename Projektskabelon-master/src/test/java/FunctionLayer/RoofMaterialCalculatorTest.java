@@ -8,7 +8,7 @@ import static org.junit.Assert.*;
 
 public class RoofMaterialCalculatorTest {
 
-    Construction con = new Construction();;
+    Construction con = new Construction();
     RoofSizing rs = new RoofSizing(con);
     Roof roof;
     RoofMaterialCalculator rmc = new RoofMaterialCalculator();
@@ -16,17 +16,11 @@ public class RoofMaterialCalculatorTest {
     @Test
     public void quantityOfT600ForRoofFlatRoof() {
         //Arrange
-        con.setConstructionLength(1500);
+        con.setConstructionLength(450);
         con.setConstructionWidth(350);
-
-        roof = new RoofFlat(0, con.getConstructionLength(), con.getConstructionWidth());
-        con.setRoof(roof);
-        int roofHeigth = rs.roofHeight(con.getRoof().getIsPitched());
-        con.getRoof().setHeight(roofHeigth);
-        int roofWidthSurface = rs.roofWidthSurface();
-        int roofLengthSurface = rs.roofLengthSurface();
+        roof = new RoofFlat((rs.roofHeight(con.getRoof().getIsPitched())), con.getConstructionLength(), con.getConstructionWidth());
         //Act
-        int actual = rmc.quantityOfT600ForRoof(roofWidthSurface, roofLengthSurface, con.getRoof().getIsPitched());
+        int actual = rmc.quantityOfT600ForRoof();
         int expected = 7;
         //Assert
         assertEquals(expected,actual);
