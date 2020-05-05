@@ -29,4 +29,10 @@
        <a href="FrontController?target=redirect&destination=overlay">Videre til overlay</a>
    </button>
 
+</form>
+<form name="startOver" action="FrontController" method="POST">
+    <input type="hidden" name="target" value="newrequest">
+    <input type="submit" name="newrequest" value="Start forfra">
+</form>
+
 <%@include file="../includes/footer.inc"%>

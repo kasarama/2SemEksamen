@@ -248,9 +248,9 @@ public class OverlayCalculator {
 
 
     public static int overlaySpending(String materialName, double areal) throws LoginSampleException {
-        //todo remember to handle that if method returns 0
-        double spending = MaterialMapper.spending(materialName);
-        double actual = spending * areal;
+        //todo fix DB !!!!!!
+       // double spending = MaterialMapper.spending(materialName);
+        double actual = 5; // spending * areal;
         actual = actual + 0.05 * actual; //5 % extra material for cuts
 
         if (((actual * 10) % 10) == 0) {

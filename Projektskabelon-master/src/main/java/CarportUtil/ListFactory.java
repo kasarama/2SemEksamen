@@ -44,4 +44,17 @@ public class ListFactory {
         ArrayList<Material> materials= new ArrayList<>();
         return materials;
     }
+
+    public static ArrayList<Material> sortMaterialList(ArrayList<Material> materialList){
+
+        for (int i = 0; i < materialList.size(); i++) {
+
+            for (Material material : materialList) {
+                if (materialList.get(i).equals(material.getName())){
+
+                }
+
+            }
+        }return new ArrayList<Material>();
+    }
 }
