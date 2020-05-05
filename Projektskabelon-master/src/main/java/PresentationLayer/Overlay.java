@@ -49,6 +49,7 @@ public class Overlay extends Command {
         request.setAttribute("ovarlayMaterialList", ovarlayMaterialList);
 
         if (request.getParameter("justShed") != null) {
+            System.out.println("click on ");
             return "customerChoiceResult";
         } else if (request.getParameter("shedOverlay") != null) {
             return "itemList";

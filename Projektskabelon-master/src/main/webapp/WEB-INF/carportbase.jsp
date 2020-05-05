@@ -34,6 +34,8 @@
         <option value="1">Tag med rejsning</option>
     </select>
     <br>
+    <input type="submit" name="noShed" value="Fortsæt uden redskabsrummet">
+    <br>
 
     <h3>Skur</h3>:
     NB! Der skal beregnes 15 cm tagudhæng på hver side af skuret
@@ -60,8 +62,8 @@
         <input type="submit" name="withShed" value="Videre med det valgte redskabsrum">
     </div>
     <div>
-        <p1>eller</p1>
-        <input type="submit" name="noShed" value="Fortsæt uden redskabsrummet">
+
+
     </div>
 
 </form>
