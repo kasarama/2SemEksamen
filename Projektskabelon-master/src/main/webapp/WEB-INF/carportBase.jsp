@@ -12,19 +12,19 @@
 <h1>Alt starter her!</h1>
 <h2>Her er nogle basale informationer du skal angive om din construction</h2>
 <form name="carportbase" action="FrontController" method="POST">
-    <input type="hidden" name="origin" value="carportbase">
+    <input type="hidden" name="origin" value="carportBase">
     <input type="hidden" name="target" value="carportbase">
-    <input type="hidden" name="constructionHeight" value=200> <!-- det her er det eneste sted man angivr constructionens height-->
+    <input type="hidden" name="constructionHeight" value=2000> <!-- det her er det eneste sted man angivr constructionens height-->
     <label>Vælg længde:</label>
     <select name="carportLength" class="form-control" >
         <c:forEach var="i" begin="24" end="75">
-            <option value=${i*10}>${i*10}</option>
+            <option value=${i*100}>${i*10}</option>
         </c:forEach>
     </select>
     <label>Vælg bredde:</label>
     <select name="carportWidth" class="form-control" >
         <c:forEach var="i" begin="24" end="75">
-            <option value=${i*10}>${i*10}</option>
+            <option value=${i*100}>${i*10}</option>
         </c:forEach>
     </select>
     <br>
@@ -34,11 +34,14 @@
         <option value="1">Tag med rejsning</option>
     </select>
     <br>
-    Redskabsrum:
-    NB! Der skal beregnes 15 cm tagudhæng på hver side af redskabsrummet
+    <input type="submit" name="noShed" value="Fortsæt uden redskabsrummet">
+    <br>
+
+    <h3>Skur</h3>:
+    NB! Der skal beregnes 15 cm tagudhæng på hver side af skuret
 
     <div>
-        Fortel os om redskabsrummet:
+        Fortæl os om skuret:
         <br>
         <label>Vælg bredde:</label>
         <select name="shedWidthParameter" class="form-control">
@@ -47,8 +50,8 @@
         </select>
         <label>Vælg dybde:</label>
         <select name="shedDepth" class="form-control">
-            <c:forEach var="i" begin="12" end="75">
-                <option value=${i*10}>${i*10}</option>
+            <c:forEach var="i" begin="12" end="35">
+                <option value=${i*100}>${i*10}</option>
             </c:forEach>
         </select>
         <label>Vælg siden:</label>
@@ -59,15 +62,7 @@
         <input type="submit" name="withShed" value="Videre med det valgte redskabsrum">
     </div>
     <div>
-        <p1>eller</p1>
-        <input type="submit" name="noShed" value="Fortsæt uden redskabsrummet">
-    </div>
-        <p1>eller</p1>
-        <input type="submit" name="tooverlaynoshed" value="No shed / Vælg beklædning">
-        <input type="submit" name="tooverlay" value="With shed / Vælg beklædning">
-        <input type="submit" name="MiaTest" value="MIA TEST">
-        <!--vælg tagtype til flatRoof eller picthedRoof -->
-        <input type="submit" name="tagtype" value="vælg tagtype">
+
 
     </div>
 

@@ -22,10 +22,22 @@ request.getServletContext().setAttribute("pitchedMaterialList", Initializer.getP
             <option value="${roofMaterial.id}">${roofMaterial.name}</option>
         </c:forEach>
 
+
     </select>
 
     <input class="btn btn-primary" type="submit" value="Videre">
+
+
+<button type="button" >
+    <a href="FrontController?target=redirect&destination=overlay">Videre til overlay</a>
+</button>
+
 </form>
+<form name="startOver" action="FrontController" method="POST">
+    <input type="hidden" name="target" value="newrequest">
+    <input type="submit" name="newrequest" value="Start forfra">
+</form>
+
 
 
 <%@include file="../includes/footer.inc"%>
