@@ -22,6 +22,7 @@ public class Overlay extends Command {
 
         String overlayName=request.getParameter("overlayName");
 
+        construction.setOverlay(overlayName);
 
 
 
@@ -38,32 +39,30 @@ public class Overlay extends Command {
         if(request.getParameter("back")!=null){
             walls[2]="back";
         }
-/*
+
 
             for (int i = 0; i < 3; i++) {
-                if (request.getParameter(walls[i]) != null)
-                    System.out.println(request.getParameter(walls[i]));
+                if (walls[i] != null)
                     coveredWalls.add(walls[i]);
                 System.out.println("added wall on side: " + walls[i]);
             }
 
-*/
-        construction.setOverlay(overlayName);
-        if (coveredWalls.size()!=0) {
+       if (coveredWalls.size()!=0) {
             String[] wallSides = new String[coveredWalls.size()];
             for (int i = 0; i <coveredWalls.size() ; i++) {
                 wallSides[i]=coveredWalls.get(i);
             }
+            construction.setWalls(WallBuilder.addCarportWalls(construction,wallSides));
         }
 
         System.out.println("shed walls in construction: "+construction.getShed().getWalls().size());
         System.out.println("construction walls: "+construction.getWalls().size());
-
+//todo .....................I'm not sure if the next 2 lines should be here later on
         ArrayList<Material> ovarlayMaterialList = OverlayCalculator.shedOverlayMaterialList(construction, overlayName);
         request.setAttribute("ovarlayMaterialList", ovarlayMaterialList);
 
-        if (request.getParameter("justShed") != null) {
-            System.out.println("click on ");
+        if (request.getParameter("walls") != null) {
+            System.out.println("click on Videre");
             return "customerChoiceResult";
         } else if (request.getParameter("shedOverlay") != null) {
             return "itemList";
