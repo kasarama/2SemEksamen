@@ -1,9 +1,6 @@
 package PresentationLayer;
 
-import FunctionLayer.Construction;
-import FunctionLayer.Material;
-import FunctionLayer.OverlayCalculator;
-import FunctionLayer.WallBuilder;
+import FunctionLayer.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -58,7 +55,7 @@ public class Overlay extends Command {
         System.out.println("shed walls in construction: "+construction.getShed().getWalls().size());
         System.out.println("construction walls: "+construction.getWalls().size());
 //todo .....................I'm not sure if the next 2 lines should be here later on
-        ArrayList<Material> ovarlayMaterialList = OverlayCalculator.shedOverlayMaterialList(construction, overlayName);
+        ArrayList<Material> ovarlayMaterialList = OverlayMaterialCalculator.shedOverlayMaterialList(construction, overlayName);
         request.setAttribute("ovarlayMaterialList", ovarlayMaterialList);
 
         if (request.getParameter("walls") != null) {
