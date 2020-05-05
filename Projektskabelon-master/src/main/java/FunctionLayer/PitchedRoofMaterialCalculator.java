@@ -51,6 +51,10 @@ public class PitchedRoofMaterialCalculator {
      */
 
     //Beregning af antal vandbræt
+    /*
+    På toppen af vindskeder i front og bagside monteres et vandbrædt (19x100) som beskyttelse og
+    overlap mellem tagsten og vindskede.
+     */
 
     //Beregning af.. the needed taglægte distance?
     //Beregning af..topLægter Rest længde
