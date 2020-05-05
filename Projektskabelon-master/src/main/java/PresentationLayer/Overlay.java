@@ -23,6 +23,7 @@ public class Overlay extends Command {
         String overlayName=request.getParameter("overlayName");
 
         construction.setOverlay(overlayName);
+        construction.setWalls(new ArrayList<>());
 
 
 
@@ -44,7 +45,6 @@ public class Overlay extends Command {
             for (int i = 0; i < 3; i++) {
                 if (walls[i] != null)
                     coveredWalls.add(walls[i]);
-                System.out.println("added wall on side: " + walls[i]);
             }
 
        if (coveredWalls.size()!=0) {
@@ -65,6 +65,7 @@ public class Overlay extends Command {
             System.out.println("click on Videre");
             return "customerChoiceResult";
         } else if (request.getParameter("shedOverlay") != null) {
+            System.out.println();
             return "itemList";
         } else
             request.setAttribute("notReady", "The next phase is  not ready yet");
