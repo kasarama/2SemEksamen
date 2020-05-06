@@ -10,7 +10,7 @@ public class RoofFlat extends Roof {
     public RoofFlat(int height, int length, int width, int tilt) {
         //Math.round() fordi ellers vil det være 1 grad og den skal mindst være 3 cm pr 100cm i stigning hvilket svarer
         // til 1,7... grader
-        super(height, length, width, (int) Math.round(Math.toDegrees(Math.atan(3.0 / 100.0))), false);
+        super(height, length, width, (int) Math.round(Math.toDegrees(Math.atan(3.0 / 100.0))), false, tilt);
         tagMaterialList = new ArrayList();
     }
 
