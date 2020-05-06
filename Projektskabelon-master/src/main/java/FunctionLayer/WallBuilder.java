@@ -13,13 +13,13 @@ public class WallBuilder {
             Wall right = new Wall();
             right.setSide("right");
             right.setLength(construction.getShed().getDepth());
-            right.setRaising(construction.getRoof().getDegree());
+            right.setRaising(construction.getRoof().getTilt());
             right.setMinHeight(construction.getConstructionHeight());
 
             Wall left = new Wall();
             left.setSide("left");
             left.setLength(construction.getShed().getDepth());
-            left.setRaising(construction.getRoof().getDegree());
+            left.setRaising(construction.getRoof().getTilt());
             left.setMinHeight(construction.getConstructionHeight());
 
             Wall back = new Wall();
@@ -58,7 +58,7 @@ public class WallBuilder {
             if (construction.getRoof().getIsPitched() || side.equals("back")) {
                 raising = 0;
             } else {
-                raising = construction.getRoof().getDegree();
+                raising = construction.getRoof().getTilt();
             }
 
 
@@ -91,7 +91,7 @@ public class WallBuilder {
                     if (constructionswalls[i].equals(construction.getShed().getSide())) {
                         wallLength = construction.getCarportLength();
                         minHeight = ConstructionSizeCalculator.carportMinHeight(construction.getConstructionHeight(),
-                                construction.getShed().getDepth(), construction.getRoof().getDegree());
+                                construction.getShed().getDepth(), construction.getRoof().getTilt());
                         side = constructionswalls[i];
                         Wall wall = new Wall();
                         wall.setRaising(raising);
@@ -103,7 +103,7 @@ public class WallBuilder {
                         Wall carportWall=new Wall();
                         wallLength = construction.getCarportLength();
                         minHeight = ConstructionSizeCalculator.carportMinHeight(construction.getConstructionHeight(),
-                                construction.getShed().getDepth(), construction.getRoof().getDegree());
+                                construction.getShed().getDepth(), construction.getRoof().getTilt());
                         side = constructionswalls[i];
                         carportWall.setRaising(raising);
                         carportWall.setMinHeight(minHeight);
