@@ -96,7 +96,7 @@ public class OverlaySizeCalculatorTest {
 
     @Test
     public void fyrLengthsOneWall() {
-        
+
     }
 
     @Test
