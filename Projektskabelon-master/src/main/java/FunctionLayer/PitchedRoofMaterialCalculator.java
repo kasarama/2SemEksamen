@@ -141,3 +141,41 @@ public class PitchedRoofMaterialCalculator extends Roof {
         return numberOfVandbraet;
     }
 }
+
+ /* vandbræt = length of vinskider.. which depends on roof length.. so same method as above?
+    /*
+        Længde:  480
+         2 stk
+
+     */
+
+//Beregning af needed length vindskeder - tag rejsning/ højde metode
+
+//* Beregning af taglægte længde
+
+//Note:  skal danne 300 mm udhæng i gavl ovenpå tykkelsen af sternbræt.  --> max/min roofLength?
+
+
+    /* Vindskeder på rejsningen monteres med skruer på lægte enderne husk at dette bræt skal slutte
+     1 cm. Over tagstenene.
+     --> tag rejsning = ?
+     --> tagsten højde = ?
+     */
+
+//Beregning af antal vandbræt -- What is it?
+    /*
+    På toppen af vindskeder i front og bagside monteres et vandbrædt (19x100) som beskyttelse og
+    overlap mellem tagsten og vindskede.
+     */
+
+//Beregning af.. the needed taglægte distance/length??
+// beregning af taglægte needed length?
+//Note:  skal danne 300 mm udhæng i gavl ovenpå tykkelsen af sternbræt.  --> max/min roofLength?
+
+//Beregning af..topLægter Rest længde
+
+    /* Not mine...
+    //Beregning af antal tagplade  = for loop in for loop. consider roof length and width + measurement of tagplade
+    //Beregning af antal rygsten?
+    //Rest calculations: sternbrædder, taglægte, toplægter
+     */
