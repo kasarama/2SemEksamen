@@ -8,17 +8,20 @@ import static org.junit.Assert.*;
 
 public class RoofMaterialCalculatorTest {
 
-    Construction con = new Construction();
-    RoofSizing rs = new RoofSizing(con);
-    Roof roof;
-    RoofMaterialCalculator rmc = new RoofMaterialCalculator();
-
+ //For fladt tag
     @Test
     public void quantityOfT600ForRoofFlatRoof() {
         //Arrange
-        con.setConstructionLength(450);
-        con.setConstructionWidth(350);
-        roof = new RoofFlat((rs.roofHeight(con.getRoof().getIsPitched())), con.getConstructionLength(), con.getConstructionWidth());
+        Construction con = new Construction();
+        Roof roof;
+        RoofMaterialCalculator rmc;
+        con.setConstructionLength(12000);
+        con.setConstructionWidth(3500);
+        roof = new RoofFlat(0, con.getConstructionLength(), con.getConstructionWidth());
+        con.setRoof(roof);
+        RoofSizing rs = new RoofSizing(con);
+        rmc= new RoofMaterialCalculator(con);
+        con.getRoof().setHeight(rs.roofHeight(con.getRoof().getIsPitched()));
         //Act
         int actual = rmc.quantityOfT600ForRoof();
         int expected = 7;
@@ -27,7 +30,204 @@ public class RoofMaterialCalculatorTest {
     }
 
     @Test
-    public void quantityOfT300ForRoof() {
+    public void quantityOfT600ForRoofFlatRoofThirdCoincidenceSquareWithoutT300() {
+        //Arrange
+        Construction con = new Construction();
+        Roof roof;
+        RoofMaterialCalculator rmc;
+        con.setConstructionLength(4500);
+        con.setConstructionWidth(3500);
+        roof = new RoofFlat(0, con.getConstructionLength(), con.getConstructionWidth());
+        con.setRoof(roof);
+        RoofSizing rs = new RoofSizing(con);
+        rmc= new RoofMaterialCalculator(con);
+        con.getRoof().setHeight(rs.roofHeight(con.getRoof().getIsPitched()));
+        //Act
+        int actual = rmc.quantityOfT600ForRoof();
+        int expected = 4;
+        //Assert
+        assertEquals(expected,actual);
+    }
+
+    @Test
+    public void quantityOfT600ForRoofFlatRoofThirdCoincidenceSquareWithT300() {
+        //Arrange
+        Construction con = new Construction();
+        Roof roof;
+        RoofMaterialCalculator rmc;
+        con.setConstructionLength(8000);
+        con.setConstructionWidth(3500);
+        roof = new RoofFlat(0, con.getConstructionLength(), con.getConstructionWidth());
+        con.setRoof(roof);
+        RoofSizing rs = new RoofSizing(con);
+        rmc= new RoofMaterialCalculator(con);
+        con.getRoof().setHeight(rs.roofHeight(con.getRoof().getIsPitched()));
+        //Act
+        int actual = rmc.quantityOfT600ForRoof();
+        int expected = 4;
+        //Assert
+        assertEquals(expected,actual);
+    }
+
+    @Test
+    public void quantityOfT300ForRoofFlatRoofAreNone() {
+        //Arrange
+        Construction con = new Construction();
+        Roof roof;
+        RoofMaterialCalculator rmc;
+        con.setConstructionLength(4500);
+        con.setConstructionWidth(3500);
+        roof = new RoofFlat(0, con.getConstructionLength(), con.getConstructionWidth());
+        con.setRoof(roof);
+        RoofSizing rs = new RoofSizing(con);
+        rmc= new RoofMaterialCalculator(con);
+        con.getRoof().setHeight(rs.roofHeight(con.getRoof().getIsPitched()));
+        //Act
+        int actual = rmc.quantityOfT300ForRoof();
+        int expected = 0;
+        //Assert
+        assertEquals(expected,actual);
+    }
+
+    @Test
+    public void quantityOfT300ForRoofFlatRoofIsMoreThanZero() {
+        //Arrange
+        Construction con = new Construction();
+        Roof roof;
+        RoofMaterialCalculator rmc;
+        con.setConstructionLength(8000);
+        con.setConstructionWidth(3500);
+        roof = new RoofFlat(0, con.getConstructionLength(), con.getConstructionWidth());
+        con.setRoof(roof);
+        RoofSizing rs = new RoofSizing(con);
+        rmc= new RoofMaterialCalculator(con);
+        con.getRoof().setHeight(rs.roofHeight(con.getRoof().getIsPitched()));
+        //Act
+        int actual = rmc.quantityOfT300ForRoof();
+        int expected = 4;
+        //Assert
+        assertEquals(expected,actual);
+    }
+
+    //For tag med rejsning
+    @Test
+    public void quantityOfT600ForRoofPitchedRoofTest() {
+        //Arrange
+        Construction con = new Construction();
+        Roof roof;
+        RoofMaterialCalculator rmc;
+        con.setConstructionLength(12000);
+        con.setConstructionWidth(3000);
+        roof = new RoofPitched(0, con.getConstructionLength(), con.getConstructionWidth(), 30);
+        con.setRoof(roof);
+        RoofSizing rs = new RoofSizing(con);
+        rmc= new RoofMaterialCalculator(con);
+        con.getRoof().setHeight(rs.roofHeight(con.getRoof().getIsPitched()));
+        //Act
+        int actual = rmc.quantityOfT600ForRoof();
+        int expected = 7;
+        //Assert
+        assertEquals(expected,actual);
+    }
+
+    @Test
+    public void quantityOfT600ForRoofPitchedRoofCoincidenceSquare() {
+        //Arrange
+        Construction con = new Construction();
+        Roof roof;
+        RoofMaterialCalculator rmc;
+        con.setConstructionLength(12000);
+        con.setConstructionWidth(3500);
+        roof = new RoofPitched(0, con.getConstructionLength(), con.getConstructionWidth(), 30);
+        con.setRoof(roof);
+        RoofSizing rs = new RoofSizing(con);
+        rmc= new RoofMaterialCalculator(con);
+        con.getRoof().setHeight(rs.roofHeight(con.getRoof().getIsPitched()));
+        //Act
+        int actual = rmc.quantityOfT600ForRoof();
+        int expected = 7;
+        //Assert
+        assertEquals(expected,actual);
+    }
+
+    @Test
+    public void quantityOfT600ForRoofPitchedRoofThirdCoincidenceSquareWithoutT300() {
+        //Arrange
+        Construction con = new Construction();
+        Roof roof;
+        RoofMaterialCalculator rmc;
+        con.setConstructionLength(4500);
+        con.setConstructionWidth(3500);
+        roof = new RoofPitched(0, con.getConstructionLength(), con.getConstructionWidth(), 30);
+        con.setRoof(roof);
+        RoofSizing rs = new RoofSizing(con);
+        rmc= new RoofMaterialCalculator(con);
+        con.getRoof().setHeight(rs.roofHeight(con.getRoof().getIsPitched()));
+        //Act
+        int actual = rmc.quantityOfT600ForRoof();
+        int expected = 4;
+        //Assert
+        assertEquals(expected,actual);
+    }
+
+    @Test
+    public void quantityOfT600ForRoofPitchedRoofThirdCoincidenceSquareWithT300() {
+        //Arrange
+        Construction con = new Construction();
+        Roof roof;
+        RoofMaterialCalculator rmc;
+        con.setConstructionLength(8000);
+        con.setConstructionWidth(3500);
+        roof = new RoofPitched(0, con.getConstructionLength(), con.getConstructionWidth(), 30);
+        con.setRoof(roof);
+        RoofSizing rs = new RoofSizing(con);
+        rmc= new RoofMaterialCalculator(con);
+        con.getRoof().setHeight(rs.roofHeight(con.getRoof().getIsPitched()));
+        //Act
+        int actual = rmc.quantityOfT600ForRoof();
+        int expected = 4;
+        //Assert
+        assertEquals(expected,actual);
+    }
+
+    @Test
+    public void quantityOfT300ForRoofPitchedRoofAreNone() {
+        //Arrange
+        Construction con = new Construction();
+        Roof roof;
+        RoofMaterialCalculator rmc;
+        con.setConstructionLength(4500);
+        con.setConstructionWidth(3500);
+        roof = new RoofPitched(0, con.getConstructionLength(), con.getConstructionWidth(), 30);
+        con.setRoof(roof);
+        RoofSizing rs = new RoofSizing(con);
+        rmc= new RoofMaterialCalculator(con);
+        con.getRoof().setHeight(rs.roofHeight(con.getRoof().getIsPitched()));
+        //Act
+        int actual = rmc.quantityOfT300ForRoof();
+        int expected = 0;
+        //Assert
+        assertEquals(expected,actual);
+    }
+
+    @Test
+    public void quantityOfT300ForRoofPitchedRoofIsMoreThanZero() {
+        //Arrange
+        Construction con = new Construction();
+        Roof roof;
+        RoofMaterialCalculator rmc;
+        con.setConstructionLength(8000);
+        con.setConstructionWidth(3500);
+        roof = new RoofPitched(0, con.getConstructionLength(), con.getConstructionWidth(), 30);
+        con.setRoof(roof);
+        RoofSizing rs = new RoofSizing(con);
+        rmc= new RoofMaterialCalculator(con);
+        con.getRoof().setHeight(rs.roofHeight(con.getRoof().getIsPitched()));
+        //Act
+        int actual = rmc.quantityOfT300ForRoof();
+        int expected = 4;
+        //Assert
+        assertEquals(expected,actual);
     }
 
     @Test
