@@ -78,7 +78,7 @@ public class WallBuilder {
                     wall.setRaising(raising);
                     wall.setMinHeight(minHeight);
                     wall.setLength(wallLength);
-                    wall.setSide(side);
+                    wall.setSide("carport"+side);
                     carportWalls.add(wall);
                 }
             } else {
@@ -87,7 +87,7 @@ public class WallBuilder {
                         wallLength = construction.getCarportWidth() - construction.getShed().getWidth() - 100;
                         minHeight = construction.getConstructionHeight();
                         side = "back";
-                    }
+                    } else
                     if (constructionswalls[i].equals(construction.getShed().getSide())) {
                         wallLength = construction.getCarportLength();
                         minHeight = ConstructionSizeCalculator.carportMinHeight(construction.getConstructionHeight(),
@@ -97,7 +97,7 @@ public class WallBuilder {
                         wall.setRaising(raising);
                         wall.setMinHeight(minHeight);
                         wall.setLength(wallLength);
-                        wall.setSide(side);
+                        wall.setSide("carport"+side);
                         carportWalls.add(wall);
                     } else {
                         Wall carportWall=new Wall();
@@ -108,12 +108,12 @@ public class WallBuilder {
                         carportWall.setRaising(raising);
                         carportWall.setMinHeight(minHeight);
                         carportWall.setLength(wallLength);
-                        carportWall.setSide(side);
+                        carportWall.setSide("carport"+side);
                         carportWalls.add(carportWall);
 
                         if (construction.getShed().getWidth()!=construction.getCarportWidth()){
                             Wall likeShedWall=new Wall();
-                            likeShedWall.setSide(constructionswalls[i]);
+                            likeShedWall.setSide("likeShed"+constructionswalls[i]);
                             likeShedWall.setLength(construction.getShed().getDepth());
                             likeShedWall.setMinHeight(construction.getConstructionHeight());
                             likeShedWall.setRaising(raising);
