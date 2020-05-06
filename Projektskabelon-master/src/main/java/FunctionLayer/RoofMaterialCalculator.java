@@ -5,9 +5,11 @@ public class RoofMaterialCalculator {
     Construction construction;
 
     RoofSizing roofSizing;
-    private int trapezpladeWidth = 1000;
-    private int T600RoofPlateLength = 6000;
-    private int T300RoofPlateLength = 3000;
+
+    int temp;
+    int T300RoofPlateLength = 3000;
+    int trapezpladeWidth = 1000;
+    int T600RoofPlateLength = 6000;
     private int numberOfT600Trapezplates = 0;
     private int numberOfT300Trapezplates;
     private int square1numberOfT600Trapezplates = 0;
@@ -29,8 +31,16 @@ public class RoofMaterialCalculator {
 
     //Antal T600 Trapezplader
     public int quantityOfT600ForRoof() {
-        //Tag er fladt hvis man ikke aktivt vælger tag med spids
+         //Hvis tag har rejsning byttes der om på længde og bredde beregning.
+       /* if (construction.getRoof().getIsPitched()){
+            temp = roofLength;
+            roofLength = roofWidth;
+            roofWidth = temp;
 
+            temp = trapezpladeWidth;
+            trapezpladeWidth = T600RoofPlateLength;
+            T600RoofPlateLength = temp;
+        }*/
         ///////////////Beregning af første del af tag (hvor mange HELE T600 plader kan der være)
         for (int i = 0; i < (roofWidth-trapezpladeWidth); i = i+trapezpladeWidth) {
             for (int j = 0; j < roofLength - T600RoofPlateLength; j = j+T600RoofPlateLength) {
@@ -43,15 +53,16 @@ public class RoofMaterialCalculator {
         /////Beregning af anden del af tag (T600 plader inkl. T600 pladerester - hvor pladerne er delt på bredden)
         int restWidth = roofWidth % trapezpladeWidth;
 
-        for (int i = 0; i < roofLength; i = i + T600RoofPlateLength) {
+        for (int i = 0; i < roofLength - T600RoofPlateLength; i = i + T600RoofPlateLength) {
             square2numberOfT600Trapezplates++;
         }
 
         int restPart;
+        int temp;
 
-        if (restWidth != 0) {
+        if (restWidth != 0 ) {
             restPart = trapezpladeWidth / restWidth;
-            int temp = square2numberOfT600Trapezplates / restPart;
+            temp = Math.round((float)square2numberOfT600Trapezplates / restPart);
             square2numberOfT600Trapezplates = temp;
         }
 
@@ -79,9 +90,9 @@ public class RoofMaterialCalculator {
 
         /////////////////////////////////////////////////////
 
-        if (pitchedRoof)
+        /*if (pitchedRoof)
             numberOfT600Trapezplates = numberOfT600Trapezplates * 2;
-
+*/
         return numberOfT600Trapezplates;
     }
 
@@ -92,11 +103,11 @@ public class RoofMaterialCalculator {
             numberOfT300Trapezplates = (roofWidth / trapezpladeWidth) + 1;
         //^(Beregning af fjerde og sidste del
         // af taget betyder det når jeg skriver +1)
-        int temp = 0;
-        if (pitchedRoof) {
+
+        /*if (pitchedRoof) {
             temp = (numberOfT300Trapezplates * 2);
             numberOfT300Trapezplates = temp;
-        }
+        }*/
         return numberOfT300Trapezplates;
     }
 

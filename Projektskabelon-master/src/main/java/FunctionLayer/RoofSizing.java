@@ -4,7 +4,7 @@ public class RoofSizing {
 
     Construction construction;
     private int roofLength;
-    private double roofFullTilt;
+    private double roofHeigth;
     private int minpitchDegreeOption = 15;
     private int maxpitchDegreeOption = 45 - 1; //Vi har valgt ud fra hvad productowner fra Fog har sagt
     //"45 grader vil blive et tårn" - men man kan finde det på fogs hjemmeside, så vi har derfor sagt 45-1
@@ -15,10 +15,10 @@ public class RoofSizing {
 
     //Beregning af tagets stigning
     public int roofHeight(boolean pitchedRoof) {
-        roofFullTilt = (int) (Math.tan(Math.toRadians(construction.getRoof().getDegree()))* construction.getConstructionLength());
+        roofHeigth = (int) (Math.tan(Math.toRadians(construction.getRoof().getDegree()))* construction.getConstructionLength());
         if (pitchedRoof)
-            roofFullTilt = (int) (Math.tan(Math.toRadians(construction.getRoof().getDegree())) * (construction.getConstructionWidth() / 2.0));
-        return (int) roofFullTilt;
+            roofHeigth = (int) (Math.tan(Math.toRadians(construction.getRoof().getDegree())) * (construction.getConstructionWidth() / 2.0));
+        return (int) roofHeigth;
     }
 
     //Muligheder for vinklens grader angående af tagryggen på et tag med rejsning
@@ -33,27 +33,29 @@ public class RoofSizing {
 
     //Hjælpemetode for bredde af tag afhægnig af type
     public int roofWidthSurface() {
-        int roofwidth = construction.getConstructionWidth();
-        if (construction.getRoof().getIsPitched()) {
+        int roofwidth;
+        if (construction.getRoof().getIsPitched())
             roofwidth = pitchedRoofCalcutatedWidth();
-        }
+        else
+            roofwidth= construction.getConstructionWidth();
         return roofwidth;
     }
     //Hjælpemetode for længde af tag afhægnig af type
     public int roofLengthSurface(){
-        int roofLength = flatRoofCalcutatedLength();
-
-        if (construction.getRoof().getIsPitched()) {
+        int roofLength;
+        if (construction.getRoof().getIsPitched())
             roofLength = construction.getConstructionLength();
-        }
+        else
+            roofLength = flatRoofCalcutatedLength();
+
         return roofLength;
     }
 
     //Areal hjælpeberegning af længde af fladt tags overflade
     public int flatRoofCalcutatedLength() {
         //Vi har fået beskrevet af productowner at fladt tag skal have en fast hældning
-        roofFullTilt = roofHeight(false);
-        roofLength = (int) Math.hypot((double) construction.getConstructionLength(), (double) roofFullTilt);
+        roofHeigth = roofHeight(false);
+        roofLength = (int) Math.hypot((double) construction.getConstructionLength(), (double) roofHeigth);
         return roofLength;
     }
 
@@ -73,12 +75,12 @@ public class RoofSizing {
         this.roofLength = roofLength;
     }
 
-    public double getRoofFullTilt() {
-        return roofFullTilt;
+    public double getRoofHeigth() {
+        return roofHeigth;
     }
 
-    public void setRoofFullTilt(double roofFullTilt) {
-        this.roofFullTilt = roofFullTilt;
+    public void setRoofHeigth(double roofHeigth) {
+        this.roofHeigth = roofHeigth;
     }
 
     public int getMinpitchDegreeOption() {
