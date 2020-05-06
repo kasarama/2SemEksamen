@@ -19,13 +19,6 @@ public class OverlayCalculatorTest {
     }
 
 
-    @Test
-    public void spaersNumberOnSide() {
-        int result = OverlaySizeCalculator.spaersNumberOnSide(9100, 2000, 17);
-        System.out.println("Test SpearNumberOnSide: rsult= "+result);
-        int expected= 10;
-        assertEquals(result,expected);
-    }
 
     @Test
     public void materials() {
@@ -80,7 +73,7 @@ public class OverlayCalculatorTest {
         int numberOfFyr= OverlaySizeCalculator.numberOfFyrOnDistance(distance)*numberOfdistances;
 
         int lengthOfeight=fyrLengths.get(7);
-        int expectedLength=ConstructionSizeCalculator.raising(10,5400)+2000-360;
+        int expectedLength= (int)ConstructionSizeCalculator.raising(10,5400)+2000-360;
         assertEquals(fyrLengths.size(),numberOfFyr);
         assertEquals(expectedLength,lengthOfeight);
 

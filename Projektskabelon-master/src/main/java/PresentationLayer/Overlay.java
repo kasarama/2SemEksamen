@@ -49,7 +49,7 @@ public class Overlay extends Command {
             for (int i = 0; i <coveredWalls.size() ; i++) {
                 wallSides[i]=coveredWalls.get(i);
             }
-            construction.setWalls(WallBuilder.addCarportWalls(construction,wallSides));
+            construction.setWalls(WallBuilder.addConstructionWalls(construction,wallSides));
         }
 
         System.out.println("shed walls in construction: "+construction.getShed().getWalls().size());
