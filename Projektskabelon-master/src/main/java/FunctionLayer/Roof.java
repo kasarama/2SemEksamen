@@ -9,20 +9,22 @@ public abstract class Roof {
     private int degree;
     ArrayList<Material> tagMaterialList;
     private boolean pitched;
+    private int tilt;
 
 
-    public Roof(int height, int length, int width, int degree, boolean pitched) {
+    public Roof(int height, int length, int width, int degree, boolean pitched, int tilt) {
         this.height = height;
         this.length = length;
         this.width = width;
         this.degree = degree;
         this.pitched = pitched;
         tagMaterialList = new ArrayList();
+        this.tilt = tilt;
 
     }
 
-    public Roof() {
-    }
+    /*public Roof() {
+    }*/
 
     public int getHeight() {
         return height;
@@ -74,6 +76,14 @@ public abstract class Roof {
 
     public void calculateWidth(Construction construction){
         this.width=construction.getConstructionWidth();
+    }
+
+    public int getTilt() {
+        return tilt;
+    }
+
+    public void setTilt(int tilt) {
+        this.tilt = tilt;
     }
 
 }

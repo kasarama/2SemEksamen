@@ -6,7 +6,6 @@ public class RoofMaterialCalculator {
 
     RoofSizing roofSizing;
 
-    int temp;
     int T300RoofPlateLength = 3000;
     int trapezpladeWidth = 1000;
     int T600RoofPlateLength = 6000;
@@ -18,14 +17,14 @@ public class RoofMaterialCalculator {
     private int square3numberOfT600Trapezplates = 0;
     private int roofWidth;
     private int roofLength;
-    private boolean pitchedRoof;
+    //private boolean pitchedRoof;
 
     public RoofMaterialCalculator(Construction construction) {
         this.construction = construction;
         this.roofSizing = new RoofSizing(construction);
         this.roofWidth = roofSizing.roofWidthSurface();
         this.roofLength = roofSizing.roofLengthSurface();
-        this.pitchedRoof = construction.getRoof().getIsPitched();
+      //  this.pitchedRoof = construction.getRoof().getIsPitched();
     }
 
     ////////////////// Trapezplader - START
