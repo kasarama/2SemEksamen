@@ -32,7 +32,7 @@ public class OverlayMaterialCalculator {
         ArrayList<Material> materials = new ArrayList<>();
         Material spaer = new Material();
         spaer.setName("47X100 MM SPÆRTRÆ");
-        int spaers = OverlaySizeCalculator.spaersNumberOnSide(wall.getLength(), wall.getMinHeight(), wall.getRaising());
+        int spaers = OverlaySizeCalculator.spaerOnOneWall(wall);
         int spaerlength = ConstructionSizeCalculator.postDistanceMax3000(wall.getLength());
         spaer.setSize(spaerlength);
         spaer.setComment("Horizontal framing");

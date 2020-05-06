@@ -6,56 +6,88 @@ public class OverlaySizeCalculator {
 
     //calculates spaer needed for one of the chosen sides of shed/carport/construction
     // max distance between spaer is 100 cm - counts number of spar after each post
-    public static int spaersNumberOnSide(int length, int minHeight, int angle) {
-        int spaersAmount = 0;
-        Integer[] postsheights = ConstructionSizeCalculator.postsHeights(minHeight, angle, length);
-        for (int i = 0; i < postsheights.length - 1; i++) { //+1 because there is one more post than distances
-            int tmp = spaersAmount + 1;//
-            spaersAmount =(int) (tmp + postsheights[i] / 1000); //counts number of distances between 2 spaers
-        }
-        return spaersAmount;
 
-    }
     public static int spaerOnOneWall(Wall wall){
         int amount=0;
+        Integer[] postsheights = ConstructionSizeCalculator.postsHeights(wall.getMinHeight(),
+                wall.getRaising(), wall.getLength());
 
+        for (int i = 0; i < postsheights.length - 1; i++) { //+1 because there is one more post than distances
+            int tmp = amount + 1;//
+            amount =(int) (tmp + postsheights[i] / 1000); //counts number of distances between 2 spaers
+        }
         return amount;
     }
 
-    //calculates number of screws for spar (6cm)
+
+    //.............calculates number of screws for spar (6cm)...........//
     public static int screwSpaer(int spaernumber) {
+
         return spaernumber * 2 * 2; //2 screws on each side of spaer
     }
 
-    public static int numberOfFyrOnDistance(int distance) {
-        int numberOfFyrOnDistance;
+
+//................calculates number of fyr pr wall.......................//
+    public static int fyrNumberOnWall (Wall wall){
+        int distance = wall.getLength()-100;
+        int fyrPlusPost=0;
         if (distance % 600 == 0) {
-            numberOfFyrOnDistance = (distance / 600) - 1;
+            fyrPlusPost = (distance / 600) +1;
         } else {
-            numberOfFyrOnDistance = (distance - distance % 600) / 600;
+            fyrPlusPost = (distance - distance % 600) / 600 +2;
         }
-        return numberOfFyrOnDistance;
-    }
-
-    //counts number of fyr on each distance and in total on chosen side
-    public static int fyrNumberOnSide(int length) {
-        int distance = ConstructionSizeCalculator.postDistanceMax3000(length);
-        int distancesNumber = ConstructionSizeCalculator.sidePostAmount(length) - 1;
-        int numberOfFyrOnDistance = numberOfFyrOnDistance(distance);
-        return numberOfFyrOnDistance * distancesNumber;
+        int justFyr=fyrPlusPost-ConstructionSizeCalculator.sidePostAmount(wall.getLength());
+        return justFyr;
     }
 
 
-    //calculates number of screws for fyr (4cm)
+    //...........calculates number of screws for fyr (4cm)...................//
     public static int screwFyr(int fyrnumber, int spaernumber) {
         return fyrnumber * spaernumber; //1 screws on each  spaer
     }
+
+
+
+
+
+//............creates a List with all needed lengths of fyrs pr one Wall..............//
+    public static ArrayList<Integer> fyrLengthsOneWall(Wall wall){
+        ArrayList<Integer> fyrLengthsOneWall = new ArrayList<>();
+/*
+counts number of all vertical tree elements on one wall
+counts distance between them and raising pr that distance, counts on witch idex is there a post,
+calculates and adds height of every element that is not on index of post
+ */
+        int distance = wall.getLength()-100; // 100 mm for one post
+        int fyrPlusPost=0;
+        if (distance % 600 == 0) {
+            fyrPlusPost = (distance / 600) +1;
+        } else {
+            fyrPlusPost = (distance - distance % 600) / 600 +2;
+        }
+
+        int numberOfPosts=ConstructionSizeCalculator.sidePostAmount(wall.getLength());
+        int postIndex= (fyrPlusPost-numberOfPosts)/(numberOfPosts-1)+1;
+        int distanceBetweenFyr = distance/(fyrPlusPost-1);
+        double raising=ConstructionSizeCalculator.raising(wall.getRaising(),distanceBetweenFyr);
+        for (int i = 1; i <fyrPlusPost ; i++) {
+            if (i%postIndex!=0){
+                int fyrLength= (int) (wall.getMinHeight()+raising*i);
+                fyrLengthsOneWall.add(fyrLength);
+                System.out.println("idex of fyr: "+ i+", height: "+fyrLength);
+            }
+        }
+
+        return fyrLengthsOneWall;
+    }
+
+
 
     //returns array with length of each fyr used on chosen side
     /*
 
      */
-    public static ArrayList<Integer> fyrLengths(int height, int angle, int size) { //todo we need to decide if the height of construction is counted to the lower edge of rem or the upper one.
+    public static ArrayList<Integer> fyrLengths(int height, int angle, int size) {
         ArrayList<Integer> fyrLengths = new ArrayList<>();
         int allLengths = numberOfFyrOnDistance(size - 100) + 2; // treats posts as fyr and counts them all, counts from the centre of first post to the centre of last post ;
         int postNumber = ConstructionSizeCalculator.sidePostAmount(size);
@@ -147,5 +179,28 @@ public class OverlaySizeCalculator {
     }
 
 
+
+
+
+
+    public static int numberOfFyrOnDistance(int distance) {
+        int numberOfFyrOnDistance;
+        if (distance % 600 == 0) {
+            numberOfFyrOnDistance = (distance / 600) - 1;
+        } else {
+            numberOfFyrOnDistance = (distance - distance % 600) / 600;
+        }
+        return numberOfFyrOnDistance;
+
+
+    }
+
+    //counts number of fyr on each distance and in total on chosen side
+    public static int fyrNumberOnSide(int length) {
+        int distance = ConstructionSizeCalculator.postDistanceMax3000(length);
+        int distancesNumber = ConstructionSizeCalculator.sidePostAmount(length) - 1;
+        int numberOfFyrOnDistance = numberOfFyrOnDistance(distance);
+        return numberOfFyrOnDistance * distancesNumber;
+    }
 
 }

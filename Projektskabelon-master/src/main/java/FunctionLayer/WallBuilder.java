@@ -43,7 +43,7 @@ public class WallBuilder {
 
     }
 
-    public static ArrayList<Wall> addCarportWalls(Construction construction, String[] constructionswalls) {
+    public static ArrayList<Wall> addConstructionWalls(Construction construction, String[] constructionswalls) {
         ArrayList<Wall> carportWalls = new ArrayList<>();
 
         if (constructionswalls.length == 0) {
@@ -93,19 +93,35 @@ public class WallBuilder {
                         minHeight = ConstructionSizeCalculator.carportMinHeight(construction.getConstructionHeight(),
                                 construction.getShed().getDepth(), construction.getRoof().getDegree());
                         side = constructionswalls[i];
-
+                        Wall wall = new Wall();
+                        wall.setRaising(raising);
+                        wall.setMinHeight(minHeight);
+                        wall.setLength(wallLength);
+                        wall.setSide(side);
+                        carportWalls.add(wall);
                     } else {
-                        wallLength = construction.getCarportLength() + construction.getShed().getDepth() - 100;
-                        minHeight = construction.getConstructionHeight();
+                        Wall carportWall=new Wall();
+                        wallLength = construction.getCarportLength();
+                        minHeight = ConstructionSizeCalculator.carportMinHeight(construction.getConstructionHeight(),
+                                construction.getShed().getDepth(), construction.getRoof().getDegree());
                         side = constructionswalls[i];
+                        carportWall.setRaising(raising);
+                        carportWall.setMinHeight(minHeight);
+                        carportWall.setLength(wallLength);
+                        carportWall.setSide(side);
+                        carportWalls.add(carportWall);
+
+                        if (construction.getShed().getWidth()!=construction.getCarportWidth()){
+                            Wall likeShedWall=new Wall();
+                            likeShedWall.setSide(constructionswalls[i]);
+                            likeShedWall.setLength(construction.getShed().getDepth());
+                            likeShedWall.setMinHeight(construction.getConstructionHeight());
+                            likeShedWall.setRaising(raising);
+                            carportWalls.add(likeShedWall);
+                        }
 
                     }
-                    Wall wall = new Wall();
-                    wall.setRaising(raising);
-                    wall.setMinHeight(minHeight);
-                    wall.setLength(wallLength);
-                    wall.setSide(side);
-                    carportWalls.add(wall);
+
                 }
             }
             return carportWalls;

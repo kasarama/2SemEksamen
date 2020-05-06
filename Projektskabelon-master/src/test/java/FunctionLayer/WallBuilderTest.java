@@ -39,7 +39,7 @@ Construction construction = new Construction();
     }
     @Test
     public void addCarportWalls() {
-        ArrayList<Wall> carportWalls = WallBuilder.addCarportWalls(construction, constructionWalls);
+        ArrayList<Wall> carportWalls = WallBuilder.addConstructionWalls(construction, constructionWalls);
         int leftWallLength=0;
         int rightWallLength=0;
         for (Wall wall: carportWalls) {
@@ -60,7 +60,7 @@ Construction construction = new Construction();
     @Test
     public void addCarportWallsNoShed() {
         construction.setShed(new Shed(0,0,""));
-        ArrayList<Wall> carportWalls = WallBuilder.addCarportWalls(construction, constructionWalls);
+        ArrayList<Wall> carportWalls = WallBuilder.addConstructionWalls(construction, constructionWalls);
 
 
     }

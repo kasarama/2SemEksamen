@@ -19,13 +19,6 @@ public class OverlayCalculatorTest {
     }
 
 
-    @Test
-    public void spaersNumberOnSide() {
-        int result = OverlaySizeCalculator.spaersNumberOnSide(9100, 2000, 17);
-        System.out.println("Test SpearNumberOnSide: rsult= "+result);
-        int expected= 10;
-        assertEquals(result,expected);
-    }
 
     @Test
     public void materials() {
