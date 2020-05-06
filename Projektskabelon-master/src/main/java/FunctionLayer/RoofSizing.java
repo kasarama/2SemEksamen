@@ -14,10 +14,11 @@ public class RoofSizing {
     }
 
     //Beregning af tagets stigning
-    public int roofHeight(boolean pitchedRoof) {
-        roofHeigth = (int) (Math.tan(Math.toRadians(construction.getRoof().getDegree()))* construction.getConstructionLength());
+    public int roofHeight(boolean pitchedRoof, int lenght, int width) {
         if (pitchedRoof)
-            roofHeigth = (int) (Math.tan(Math.toRadians(construction.getRoof().getDegree())) * (construction.getConstructionWidth() / 2.0));
+            roofHeigth = (int) (Math.tan(Math.toRadians(construction.getRoof().getDegree())) * width/2);
+        else
+            roofHeigth = (int) (Math.tan(Math.toRadians(construction.getRoof().getDegree()))* lenght);
         return (int) roofHeigth;
     }
 
@@ -54,7 +55,7 @@ public class RoofSizing {
     //Areal hjælpeberegning af længde af fladt tags overflade
     public int flatRoofCalcutatedLength() {
         //Vi har fået beskrevet af productowner at fladt tag skal have en fast hældning
-        roofHeigth = roofHeight(false);
+        roofHeigth = roofHeight(false, construction.getConstructionLength() , construction.getConstructionWidth());
         roofLength = (int) Math.hypot((double) construction.getConstructionLength(), (double) roofHeigth);
         return roofLength;
     }

@@ -7,9 +7,10 @@ public class RoofMaterialCalculator {
     RoofSizing roofSizing;
 
     int T300RoofPlateLength = 3000;
-    int trapezpladeWidth = 1000;
+    private int trapezpladeWidth = 1000; // Kommehtar
     int T600RoofPlateLength = 6000;
     int overlap = 20;
+
     private int numberOfT600Trapezplates = 0;
     private int numberOfT300Trapezplates;
     private int square1numberOfT600Trapezplates = 0;
@@ -31,6 +32,7 @@ public class RoofMaterialCalculator {
 
     //Antal T600 Trapezplader
     public int quantityOfT600ForRoof() {
+        int trapez;
          //Hvis tag har rejsning byttes der om på længde og bredde beregning.
        /* if (construction.getRoof().getIsPitched()){
             temp = roofLength;

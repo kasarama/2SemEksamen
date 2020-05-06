@@ -17,7 +17,7 @@ ConstructionSizeCalculator constructionSizeCalculator = new ConstructionSizeCalc
         Shed shed = new Shed((construction.getCarportWidth()/2),7600,"left");
         construction.setShed(shed);
         Roof pitchedRoof = new RoofFlat(construction.getConstructionHeight(), construction.getConstructionLength(),
-                construction.getConstructionWidth());
+                construction.getConstructionWidth(), 0);
         pitchedRoof.setDegree(3);
         construction.setRoof(pitchedRoof);
 

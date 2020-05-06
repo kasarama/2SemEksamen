@@ -9,7 +9,7 @@ public class RoofFlatTest {
     public void getFlatRoofDegree() {
         //Arrange
         Construction con = new Construction();
-        Roof flatRoof = new RoofFlat(20, 780, 380); //tilfældige tal
+        Roof flatRoof = new RoofFlat(20, 780, 380, 3); //tilfældige tal
         int excpeted = 2;
         //Act
         int actuel = flatRoof.getDegree();

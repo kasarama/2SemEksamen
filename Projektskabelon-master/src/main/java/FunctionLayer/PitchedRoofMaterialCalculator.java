@@ -3,6 +3,8 @@ package FunctionLayer;
 public class PitchedRoofMaterialCalculator {
 
     Construction construction;
+    RoofSizing roofSizing;
+
     private int RygstenBeslag;
     private int tagstenBinder;
     private int tagstenNakkekrog;
@@ -21,7 +23,13 @@ public class PitchedRoofMaterialCalculator {
     private int lægteafstand = 307; //TODO evt. hente fra Mona
     private int tagstenBredde;
 
-    RoofSizing roofSizing;
+    private int spærFuldeBrædtLength;
+    private int spærAmount;
+    private int spærFuldeAntalBrædder;
+
+    private int amountOfRygsten;
+
+
 
     public PitchedRoofMaterialCalculator(Construction construction) {
         this.construction = construction;
@@ -60,6 +68,7 @@ public class PitchedRoofMaterialCalculator {
         return tagstenNakkekrog;
     }
 
+    //dette må være selve toplægtebeslagende ?? TODO
     public int toplægteHolderCalculated(){
         toplægteHolder = amoutOfRygstenBeslagCalculated();
         return toplægteHolder;
@@ -96,9 +105,34 @@ public class PitchedRoofMaterialCalculator {
         return screwPackage;
     }*/
 
-    public int amountOfBeslagForToplægteCalculated(){
-
+    public int amountOfBeslagScrewsForToplægteCalculated(){
+        beslagForToplægte = 9*2*amountOfBeslagScrewsForToplægteCalculated();
         return beslagForToplægte;
     }
 
+    public int spærBrædtLængdePrSpær(){
+        int spærfodLength = construction.getCarportWidth();
+        int spærarm = (int) (spærfodLength/(Math.cos(Math.toRadians(construction.getRoof().getDegree()))))*2;
+        spærFuldeBrædtLength = (spærarm*2)+spærfodLength;
+        return spærFuldeBrædtLength;
+    }
+
+    public int spærAntal(){
+        int carportLength = construction.getCarportLength();
+        int distanceBestweenSpær = 89;
+        for (int i = 0; i < carportLength; i = 1 + distanceBestweenSpær) {
+            spærAmount++;
+        }
+        return spærAmount;
+    }
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    public int spærFuldeAntalBrædder(){
+        spærFuldeAntalBrædder = spærBrædtLængdePrSpær()*spærAntal();//TODO
+        return spærFuldeAntalBrædder;
+    }
+
+    public int rygsten(){
+
+        return amountOfRygsten;
+    }
 }

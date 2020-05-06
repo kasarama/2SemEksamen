@@ -17,11 +17,11 @@ public class RoofMaterialCalculatorTest {
         RoofMaterialCalculator rmc;
         con.setConstructionLength(12000);
         con.setConstructionWidth(3500);
-        roof = new RoofFlat(0, con.getConstructionLength(), con.getConstructionWidth());
+        roof = new RoofFlat(0, con.getConstructionLength(), con.getConstructionWidth(), 3);
         con.setRoof(roof);
         RoofSizing rs = new RoofSizing(con);
         rmc= new RoofMaterialCalculator(con);
-        con.getRoof().setHeight(rs.roofHeight(con.getRoof().getIsPitched()));
+        con.getRoof().setHeight(rs.roofHeight(con.getRoof().getIsPitched(), con.getConstructionLength(), con.getConstructionWidth()));
         //Act
         int actual = rmc.quantityOfT600ForRoof();
         int expected = 7;
@@ -37,11 +37,11 @@ public class RoofMaterialCalculatorTest {
         RoofMaterialCalculator rmc;
         con.setConstructionLength(4500);
         con.setConstructionWidth(3500);
-        roof = new RoofFlat(0, con.getConstructionLength(), con.getConstructionWidth());
+        roof = new RoofFlat(0, con.getConstructionLength(), con.getConstructionWidth(),3);
         con.setRoof(roof);
         RoofSizing rs = new RoofSizing(con);
         rmc= new RoofMaterialCalculator(con);
-        con.getRoof().setHeight(rs.roofHeight(con.getRoof().getIsPitched()));
+        con.getRoof().setHeight(rs.roofHeight(con.getRoof().getIsPitched(), con.getConstructionLength(), con.getConstructionWidth()));
         //Act
         int actual = rmc.quantityOfT600ForRoof();
         int expected = 4;
@@ -57,11 +57,11 @@ public class RoofMaterialCalculatorTest {
         RoofMaterialCalculator rmc;
         con.setConstructionLength(8000);
         con.setConstructionWidth(3500);
-        roof = new RoofFlat(0, con.getConstructionLength(), con.getConstructionWidth());
+        roof = new RoofFlat(0, con.getConstructionLength(), con.getConstructionWidth(),3);
         con.setRoof(roof);
         RoofSizing rs = new RoofSizing(con);
         rmc= new RoofMaterialCalculator(con);
-        con.getRoof().setHeight(rs.roofHeight(con.getRoof().getIsPitched()));
+        con.getRoof().setHeight(rs.roofHeight(con.getRoof().getIsPitched(), con.getConstructionLength(), con.getConstructionWidth()));
         //Act
         int actual = rmc.quantityOfT600ForRoof();
         int expected = 4;
@@ -77,11 +77,11 @@ public class RoofMaterialCalculatorTest {
         RoofMaterialCalculator rmc;
         con.setConstructionLength(4500);
         con.setConstructionWidth(3500);
-        roof = new RoofFlat(0, con.getConstructionLength(), con.getConstructionWidth());
+        roof = new RoofFlat(0, con.getConstructionLength(), con.getConstructionWidth(),3);
         con.setRoof(roof);
         RoofSizing rs = new RoofSizing(con);
         rmc= new RoofMaterialCalculator(con);
-        con.getRoof().setHeight(rs.roofHeight(con.getRoof().getIsPitched()));
+        con.getRoof().setHeight(rs.roofHeight(con.getRoof().getIsPitched(), con.getConstructionLength(), con.getConstructionWidth()));
         //Act
         int actual = rmc.quantityOfT300ForRoof();
         int expected = 0;
@@ -97,11 +97,11 @@ public class RoofMaterialCalculatorTest {
         RoofMaterialCalculator rmc;
         con.setConstructionLength(8000);
         con.setConstructionWidth(3500);
-        roof = new RoofFlat(0, con.getConstructionLength(), con.getConstructionWidth());
+        roof = new RoofFlat(0, con.getConstructionLength(), con.getConstructionWidth(),3);
         con.setRoof(roof);
         RoofSizing rs = new RoofSizing(con);
         rmc= new RoofMaterialCalculator(con);
-        con.getRoof().setHeight(rs.roofHeight(con.getRoof().getIsPitched()));
+        con.getRoof().setHeight(rs.roofHeight(con.getRoof().getIsPitched(), con.getConstructionLength(), con.getConstructionWidth()));
         //Act
         int actual = rmc.quantityOfT300ForRoof();
         int expected = 4;

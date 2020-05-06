@@ -32,7 +32,7 @@ public class CarportBase extends Command {
 
         Roof roofBase;
         if (roofType == 1) {
-            roofBase = new RoofPitched(0, carportLength, carportWidth, 0);
+            roofBase = new RoofPitched(0, carportLength, carportWidth, 0,0);
             roofBase.setPitched(true);
         } else {
             roofBase = new RoofFlat(0, carportLength, carportWidth, RAISING/*, false*/);
