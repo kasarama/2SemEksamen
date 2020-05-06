@@ -72,9 +72,9 @@ public class ConstructionSizeCalculator {
         return sidePostAmount(width);
     }
 
-    public static int carportMinHeight(int constuctionsMinHeight,int length, int raising) {
+    public static int carportMinHeight(int constuctionsMinHeight,int shedDepth, int raising) {
         //todo returns length of the lowest post of carport
-        return (int) (constuctionsMinHeight+raising(raising,length));
+        return (int) (constuctionsMinHeight+raising(raising,shedDepth));
     }
 
 

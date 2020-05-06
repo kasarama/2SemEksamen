@@ -78,4 +78,11 @@ ConstructionSizeCalculator constructionSizeCalculator = new ConstructionSizeCalc
         assertEquals(expected,actual,0.01);
 
     }
+
+    @Test
+    public void carportMinHeight() {
+        int minH = ConstructionSizeCalculator.carportMinHeight(2000, construction.getShed().getDepth(),3);
+        int exp =2228;
+        assertEquals(exp,minH);
+    }
 }
