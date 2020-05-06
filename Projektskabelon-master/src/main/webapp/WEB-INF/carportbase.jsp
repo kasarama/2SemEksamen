@@ -23,7 +23,7 @@
     </select>
     <label>Vælg bredde:</label>
     <select name="carportWidth" class="form-control" >
-        <c:forEach var="i" begin="24" end="75">
+        <c:forEach var="i" begin="24" end="72">
             <option value=${i*10}>${i*10}</option>
         </c:forEach>
     </select>

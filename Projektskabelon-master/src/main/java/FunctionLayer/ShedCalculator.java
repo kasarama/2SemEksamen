@@ -66,17 +66,6 @@ public class ShedCalculator {
         return antal;
     }
 
-    // Skur stolpe
-    public static int shedPosts(int length, int width, int shedWidth){
-        int shedpost;
-        if (shedWidth<=300){
-            shedpost = ConstructionMaterialCalculator.posts(length, width)+6;
-        } else {
-            shedpost = ConstructionMaterialCalculator.posts(length, width)+4;
-        }
-        return shedpost;
-    }
-
 // SKRUER OG BESLAG
     // Lås til skur
     public static int shedLock = 1;

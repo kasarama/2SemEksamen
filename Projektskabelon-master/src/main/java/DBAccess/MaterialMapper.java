@@ -44,6 +44,70 @@ public class MaterialMapper {
 
     }
 
+// @author Mia
+    public static Material getMaterialBySize(int size) throws LoginSampleException {
+        Material material = new Material();
+        try {
+            Connection con = Connector.connection();
+            String SQL = "SELECT materialName, size FROM fogdb.sizes "
+                    + "WHERE size=?";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ps.setInt(1, size);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                String name = rs.getString("materialName");
+                material = new Material(name, size, null);
+            }else {
+                System.out.println("ResultSet.next()=false");
+                return null;  }//todo handle null object there where method is being used;
+        } catch (ClassNotFoundException | SQLException ex) {
+            throw new LoginSampleException(ex.getMessage());
+        }
+        return material;
+    }
+    public static Material getMaterialByName(String name) throws LoginSampleException {
+        Material material = new Material();
+        try {
+            Connection con = Connector.connection();
+            String SQL = "SELECT name, unit FROM fogdb.materials "
+                    + "WHERE name=?";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ps.setString(1, name);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                String unit = rs.getString("unit");
+                material = new Material(name, 0, unit);
+            }else {
+                System.out.println("ResultSet.next()=false");
+                return null;  }//todo handle null object there where method is being used;
+        } catch (ClassNotFoundException | SQLException ex) {
+            throw new LoginSampleException(ex.getMessage());
+        }
+        return material;
+    }
+    public static String getUnitByName(String name) throws LoginSampleException {
+        Material material = new Material();
+        try {
+            Connection con = Connector.connection();
+            String SQL = "SELECT unit FROM fogdb.materials "
+                    + "WHERE name=?";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ps.setString(1, name);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                String unit = rs.getString("unit");
+                return unit;
+            }else {
+                System.out.println("ResultSet.next()=false");
+                return null;  }//todo handle null object there where method is being used;
+        } catch (ClassNotFoundException | SQLException ex) {
+            throw new LoginSampleException(ex.getMessage());
+        }
+    }
+
+
+
+
 // This class Connects to DB and gets the "Roof material" data from it.
 
     //1. create a method that returns a list of ROOF Materials -  Material = Class from function Layer

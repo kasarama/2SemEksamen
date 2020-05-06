@@ -21,7 +21,11 @@ public class Material {
     public Material() {
 
     }
-
+    public Material(String name, int size, String unit) {
+        this.name = name;
+        this.size = size;
+        this.unit = unit;
+    }
     public Material(int id, String name, int size, String unit, String keyword, String category) {
         this.id = id;
         this.name = name;
@@ -103,6 +107,7 @@ public class Material {
         return keyword;
     }
 
+    /*
     @Override
     public String toString() {
         return "Material{" +
@@ -116,6 +121,15 @@ public class Material {
                 ", keyword='" + keyword + '\'' +
                 ", category='" + category + '\'' +
                 ", picture='" + picture + '\'' +
+                '}';
+    }
+     */
+    @Override
+    public String toString() {
+        return "Material{" +
+                "name='" + name + '\'' +
+                ", size=" + size +
+                ", unit=" + unit +
                 '}';
     }
 

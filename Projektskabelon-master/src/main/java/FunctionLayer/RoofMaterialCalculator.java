@@ -1,7 +1,6 @@
 package FunctionLayer;
 
 public class RoofMaterialCalculator {
-
     Construction construction;
     private int length = construction.getCarportLength();
     private int width = construction.getCarportWidth();
@@ -96,96 +95,10 @@ public class RoofMaterialCalculator {
 
 
     // TRÆ OG ANDET:
-        // Understernbrædder
-        public static int understernboartU360(int length, int width){
-            int antalU360;
-            int lengthU360antal;
-            int widthU360antal;
-            if (length<=360){
-                lengthU360antal = 2;
-            } else if (length>540 && length<=720){
-                lengthU360antal = 4;
-            } else {
-                lengthU360antal = 0;
-            }
-            if (width<=360){
-                widthU360antal = 2;
-            } else if (width>540 && width<=720){
-                widthU360antal = 4;
-            } else {
-                widthU360antal = 0;
-            }
-            antalU360 = lengthU360antal + widthU360antal;
-            return antalU360;
-        }
-        public static int understernboartU540(int length, int width){
-            int antalU540;
-            int lengthU540antal;
-            int widthU540antal;
-            if (length>360 && length<=540){
-                lengthU540antal = 2;
-            } else if (length>720 && length<=780){
-                lengthU540antal = 4;
-            } else {
-                lengthU540antal = 0;
-            }
-            if (width>360 && width<=540){
-                widthU540antal = 2;
-            } else if (width>720 && width<=780){
-                widthU540antal = 4;
-            } else {
-                widthU540antal = 0;
-            }
-            antalU540 = lengthU540antal + widthU540antal;
-            return antalU540;
-        }
-
-        // Oversternbrædder
-        public static int oversternboartU360(int length, int width){
-            int oversternAntal = understernboartU360(length,width);
-            return oversternAntal;
-        }
-        public static int oversternboartU540(int length, int width){
-            int oversternAntal = understernboartU540(length,width);
-            return oversternAntal;
-        }
-
-        // Rem
-        public static int rem600(int length, int width){
-            int rem600Antal;
-            if (width>600){
-                rem600Antal = 3;
-            } else {
-                rem600Antal = 2;
-            }
-            return rem600Antal;
-        }
-        public static int rem480(int length, int width){
-            int rem480Antal;
-            if (length>600){
-                rem480Antal = 1;
-            } else if (width>600){
-                rem480Antal = 2;
-            } else{
-                rem480Antal = 0;
-            }
-            return rem480Antal;
-        }
-
-        // Spær
-        public static int raft (int length){
-            int rafts = Math.round(length/50);
-            return rafts;
-        }
-
         // Vandbræt
-        public static int vandbræt360(int length, int width){
-            int vandbrætAntal = oversternboartU360(length, width);
-            return vandbrætAntal;
-        }
-        public static int vandbræt540(int length, int width){
-            int vandbrætAntal = oversternboartU540(length, width);
-            return vandbrætAntal;
+        public int[] waterBoard(ConstructionSizeCalculator constructionSizeCalculator, Construction construction){
+            int[] waterBoardPieces = constructionSizeCalculator.overSternPieces(construction);
+            return waterBoardPieces;
         }
 
         /*// Tagplader
@@ -233,10 +146,10 @@ public class RoofMaterialCalculator {
     // SKRUER OG BESLAG:
 
         // Bundskruer
-        public static int bottomScrews(int length, int width){
+        public int bottomScrews(ConstructionSizeCalculator constructionSizeCalculator, Construction construction, int width){
             // Plader fastgøres med plastmo bundskruer og skal anvendes 6 stk pr. meter på hver spær
             // Men 8 per meter på den første og den sidste spær
-            double bottomScrews = (((raft(length)-2)*6)+16)*(width/100);
+            double bottomScrews = (((constructionSizeCalculator.roofSpaerAmount(construction)-2)*6)+16)*(width/100);
             double forskel = bottomScrews/200;
             int pakker;
             if (forskel<=1){
@@ -249,50 +162,7 @@ public class RoofMaterialCalculator {
             return pakker;
         }
 
-        // UniversalHøjre
-        public static int universalBracketsRight(int length){
-            int universalBracketsRight = raft(length);
-            return universalBracketsRight;
-        }
-
-        // UniversalVenstre
-        public static int universalBracketsLeft(int length){
-            int universalBracketsLeft = raft(length);
-            return universalBracketsLeft;
-        }
-
         // Skruer til vandbræt -- 1 pakke er nok til en stor carport
         public static int waterboardScrews = 1;
-
-        // Beslagskruer
-        public static int bracketScrewsRoof(int length){
-            // Beslagskruer til spær:
-            int bracketScrewsS = raft(length)*9;
-            // Skal bruge antallet af pakker og der er 250 stk i 1 pakke:
-            int forskel = 250/bracketScrewsS;
-            int brancketScrewPk = 0;
-            if (forskel<=1){
-                brancketScrewPk = 1;
-            } else if (forskel>1 && forskel<=2){
-                brancketScrewPk = 2;
-            } else if (forskel>2 && forskel<=3){
-                brancketScrewPk = 3;
-            } else {
-                brancketScrewPk = 4;
-            }
-            return brancketScrewPk;
-        }
-
-        // Bræddebolte
-        public static int carriageBolts(int length, int width) {
-            int carriageBolts = ConstructionMaterialCalculator.posts(length, width)*2;
-            return carriageBolts;
-        }
-
-        // Firkantskiver
-        public static int squares(int length, int width){
-            int squares = ConstructionMaterialCalculator.posts(length, width);
-            return squares;
-        }
 
 }

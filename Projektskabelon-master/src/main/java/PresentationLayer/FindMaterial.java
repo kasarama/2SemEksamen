@@ -31,7 +31,7 @@ Construction construction = (Construction) request.getSession().getAttribute("ca
 
 
 
-
+/*
     // CONSTRUCTION:
         // Stolper intet skur
         int stolpeAntal;
@@ -93,7 +93,7 @@ Construction construction = (Construction) request.getSession().getAttribute("ca
                 iSkruer.setComment("Skruer til indre beklædning");
 */
 
-
+/*
     // ROOF:
         // Understernbrædder
         int under360Antal = FunctionLayer.RoofMaterialCalculator.understernboartU360(length, width);
@@ -289,6 +289,7 @@ Construction construction = (Construction) request.getSession().getAttribute("ca
             construction.addRoofMaterial(bræddebolte);
             construction.addRoofMaterial(firkantskiver);
 */
+/*
             jspSide = "styklisteFlatroof";
         // Flat tag, med skur:
         } else if (!tag && skur != 0){
@@ -341,7 +342,7 @@ Construction construction = (Construction) request.getSession().getAttribute("ca
             construction.addShedMaterial(lås);
             construction.addShedMaterial(hængsel);
             construction.addShedMaterial(vinkelbeslag);*/
-
+/*
             jspSide = "styklisteFlatroofSkur";
         // Pitched tag, intet skur:
         } else if (tag && skur == 0){
@@ -363,7 +364,11 @@ Construction construction = (Construction) request.getSession().getAttribute("ca
         session.setAttribute("shedList", construction.getShedMaterials());
 
 */
+/*
         return jspSide;
+
+ */
+return null;
     }
 
 
