@@ -7,8 +7,9 @@ public class RoofPitched extends Roof {
     private ArrayList<Material> tagMaterialList;
 
 
-    public RoofPitched(int height, int length, int width, int degree, int tilt) {
-        super(height, length, width, degree, true, tilt);
+
+    public RoofPitched(int height, int length, int width, int degree) {
+        super(height, length, width, degree, true, 0);
         tagMaterialList = new ArrayList();
     }
 

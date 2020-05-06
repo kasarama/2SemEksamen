@@ -25,17 +25,6 @@ ConstructionSizeCalculator constructionSizeCalculator = new ConstructionSizeCalc
     }
 
 
-    //TODO - denne test er unødvendig
-    /*@Test
-    public void doubleTOint() {
-        double a = 2.75;
-        int b = (int) a;
-        assertEquals(3,b);
-
-    }*/
-
-
-
     @Test
     public void postRows() {
         int rows= ConstructionSizeCalculator.postRows(construction.getCarportWidth());
@@ -52,25 +41,48 @@ ConstructionSizeCalculator constructionSizeCalculator = new ConstructionSizeCalc
 
     @Test
     public void postDistanceMax300() {
-        int actual= ConstructionSizeCalculator.postDistanceMax3000(8500);
-        int exp =2800;
+        int actual= ConstructionSizeCalculator.postDistanceMax3000(8600);
+        int exp =2833;
+        assertEquals(exp,actual);
+
     }
 
     @Test
     public void shedFrontPostsAmount() {
         int actual = ConstructionSizeCalculator.shedFrontPostsAmount(1400);
-        int expected=5;
+        int expected=2;
+        assertEquals(expected,actual);
     }
 
-    @Test
-    public void shedFrontSidePostDistance() {
-    }
 
     @Test
     public void postsHeights() {
-        Integer[]heights= ConstructionSizeCalculator.postsHeights(200,0,500);
-        int rsult = heights[1];
-        assertEquals(200,rsult);
+        Integer[]heights= ConstructionSizeCalculator.postsHeights(2000,3,7200);
+
+        int result = heights[3];
+        assertEquals(2210,result);
+        /*
+        distance mellem stolper: 2366,7 og det svarer til 2366 som int
+        højde stiger 70,98 mm dvs 70 som int
+        1: 2000 (idex 0)
+        2:2070 (idex 1)
+        3:2140
+         */
     }
 
+
+    @Test
+    public void raising() {
+        double actual=ConstructionSizeCalculator.raising(8,9750);
+        double expected=780;
+        assertEquals(expected,actual,0.01);
+
+    }
+
+    @Test
+    public void carportMinHeight() {
+        int minH = ConstructionSizeCalculator.carportMinHeight(2000, construction.getShed().getDepth(),3);
+        int exp =2228;
+        assertEquals(exp,minH);
+    }
 }

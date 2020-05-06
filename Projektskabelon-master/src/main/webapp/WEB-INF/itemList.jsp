@@ -10,6 +10,8 @@
 <%@include file="../includes/header.inc" %>
 
 
+
+
 <table style="width:50%">
     <tr>
         <th>Navn</th>
@@ -28,6 +30,6 @@
         <th>${material.comment}</th>
         </tr>
     </c:forEach>
-
+</table>
 
 <%@include file="../includes/footer.inc" %>

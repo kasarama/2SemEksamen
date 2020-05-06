@@ -23,9 +23,6 @@ public abstract class Roof {
 
     }
 
-    /*public Roof() {
-    }*/
-
     public int getHeight() {
         return height;
     }
