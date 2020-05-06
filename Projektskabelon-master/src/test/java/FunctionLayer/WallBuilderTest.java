@@ -7,6 +7,9 @@ import java.util.ArrayList;
 
 import static org.junit.Assert.*;
 
+/**
+ * @author Magdalena
+ */
 public class WallBuilderTest {
 Construction construction = new Construction();
     String[] constructionWalls={"left","right"};

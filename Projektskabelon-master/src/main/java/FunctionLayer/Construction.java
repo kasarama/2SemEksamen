@@ -125,7 +125,7 @@ public class Construction {
         this.overlay = overlay;
     }
 
-    @Override
+    /*@Override
     public String toString() {
         return "Carport{" +
                 "width=" + carportWidth +
@@ -133,5 +133,5 @@ public class Construction {
                 ", shed=" + shed.getWidth()+"x"+shed.getDepth()+shed.getSide() +
                 ", pitchedroof? :" + roof.getIsPitched() +
                 '}';
-    }
+    }*/
 }

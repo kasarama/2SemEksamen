@@ -4,7 +4,7 @@ package FunctionLayer;
 
 public class ConstructionMaterialCalculator {
 
-    public RoofMaterialCalculator r = new RoofMaterialCalculator();
+    //public RoofMaterialCalculator r = new RoofMaterialCalculator();
 
     public static int posts (int length, int width){
 

@@ -7,6 +7,9 @@ import java.util.ArrayList;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * @author Magdalena
+ */
 public class OverlaySizeCalculatorTest {
     Construction construction = new Construction();
 
@@ -34,7 +37,7 @@ public class OverlaySizeCalculatorTest {
         ArrayList<Wall> carportWalls=construction.getWalls();
         int index=-1;
         for (Wall wall: carportWalls) {
-            if(wall.getSide().equals("right")&& wall.getMinHeight()>2000){
+            if(wall.getSide().equals("carportright")&& wall.getMinHeight()>2000){
                 index=carportWalls.indexOf(wall);
             }
         }
@@ -53,6 +56,10 @@ public class OverlaySizeCalculatorTest {
                 1+2+
                 1+2=9
                  */
+        for (Wall wall:construction.getWalls()
+             ) {
+            System.out.println(wall.getSide());
+        }
         assertEquals(expected,actual);
 
 
@@ -66,18 +73,18 @@ public class OverlaySizeCalculatorTest {
     }
 
     @Test
-    public void fyrNumberOnWall() {
+    public void fyrNumberOneWall() {
         ArrayList<Wall> carportWalls=construction.getWalls();
         int index=-1;
         for (Wall wall: carportWalls) {
-            if(wall.getSide().equals("right")&& wall.getMinHeight()>2000){
+            if(wall.getSide().equals("carportright")){
                 index=carportWalls.indexOf(wall);
             }
         }
 
-        Wall carportsWall=construction.getWalls().get(index);
+        Wall carportsRightWall=construction.getWalls().get(index);
         int expected=9;
-        int actual = OverlaySizeCalculator.fyrNumberOnWall(carportsWall);
+        int actual = OverlaySizeCalculator.fyrNumberOnWall(carportsRightWall);
 
                 /*
                  3 distances af 2366 mm hver
@@ -96,6 +103,17 @@ public class OverlaySizeCalculatorTest {
 
     @Test
     public void fyrLengthsOneWall() {
+        ArrayList<Wall> carportWalls=construction.getWalls();
+        int index=-1;
+        for (Wall wall: carportWalls) {
+            if(wall.getSide().equals("right")&& wall.getMinHeight()>2000){
+                index=carportWalls.indexOf(wall);
+            }
+        }
+
+        Wall carportsRightWall=construction.getWalls().get(index);
+        ArrayList<Integer> lengths= OverlaySizeCalculator.fyrLengthsOneWall(carportsRightWall);
+
 
     }
 

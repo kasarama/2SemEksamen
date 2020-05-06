@@ -3,30 +3,47 @@ package FunctionLayer;
 public class RoofMaterialCalculator {
 
     Construction construction;
-    private int length = construction.getCarportLength();
-    private int width = construction.getCarportWidth();
 
-    RoofSizing roofSizing = new RoofSizing(construction);
-    private int trapezpladeWidth = 100;
-    private int T600RoofPlateLength = 600;
-    private int T300RoofPlateLength = 300;
+    RoofSizing roofSizing;
+
+    int temp;
+    int T300RoofPlateLength = 3000;
+    int trapezpladeWidth = 1000;
+    int T600RoofPlateLength = 6000;
     private int numberOfT600Trapezplates = 0;
-    private int numberOfT300Trapezplates = 0;
-    private boolean pitchedRoof = construction.getRoof().getIsPitched();
+    private int numberOfT300Trapezplates;
     private int square1numberOfT600Trapezplates = 0;
     private int square2numberOfT600Trapezplates = 0;
     private int square3numberOfT600Trapezplates = 0;
+    private int roofWidth;
+    private int roofLength;
+    private boolean pitchedRoof;
 
+    public RoofMaterialCalculator(Construction construction) {
+        this.construction = construction;
+        this.roofSizing = new RoofSizing(construction);
+        this.roofWidth = roofSizing.roofWidthSurface();
+        this.roofLength = roofSizing.roofLengthSurface();
+        this.pitchedRoof = construction.getRoof().getIsPitched();
+    }
 
     ////////////////// Trapezplader - START
 
     //Antal T600 Trapezplader
-    public int quantityOfT600ForRoof(int roofWidth, int roofLength) throws Exception {
-        //Tag er fladt hvis man ikke aktivt vælger tag med spids
+    public int quantityOfT600ForRoof() {
+         //Hvis tag har rejsning byttes der om på længde og bredde beregning.
+       /* if (construction.getRoof().getIsPitched()){
+            temp = roofLength;
+            roofLength = roofWidth;
+            roofWidth = temp;
 
+            temp = trapezpladeWidth;
+            trapezpladeWidth = T600RoofPlateLength;
+            T600RoofPlateLength = temp;
+        }*/
         ///////////////Beregning af første del af tag (hvor mange HELE T600 plader kan der være)
-        for (int i = 0; i < roofWidth; i = +trapezpladeWidth) {
-            for (int j = 0; j < roofLength; j = +T600RoofPlateLength) {
+        for (int i = 0; i < (roofWidth-trapezpladeWidth); i = i+trapezpladeWidth) {
+            for (int j = 0; j < roofLength - T600RoofPlateLength; j = j+T600RoofPlateLength) {
                 square1numberOfT600Trapezplates++;
             }
         }
@@ -36,25 +53,26 @@ public class RoofMaterialCalculator {
         /////Beregning af anden del af tag (T600 plader inkl. T600 pladerester - hvor pladerne er delt på bredden)
         int restWidth = roofWidth % trapezpladeWidth;
 
-        for (int i = 0; i < roofLength; i = +T600RoofPlateLength) {
+        for (int i = 0; i < roofLength - T600RoofPlateLength; i = i + T600RoofPlateLength) {
             square2numberOfT600Trapezplates++;
         }
 
         int restPart;
+        int temp;
 
-        if(restWidth != 0) {
+        if (restWidth != 0 ) {
             restPart = trapezpladeWidth / restWidth;
-            //TODO tjek om man kan dette!
-            square2numberOfT600Trapezplates = square2numberOfT600Trapezplates / restPart;
+            temp = Math.round((float)square2numberOfT600Trapezplates / restPart);
+            square2numberOfT600Trapezplates = temp;
         }
 
         /////////////////////////////////////////////////////
 
         ///////////////Beregning af tredje del af tag (om hvor mange antal T600 plader der er (delt i længden))
-        int quantityOfT300 = quantityOfT300ForRoof(roofLength, roofWidth);
+        int quantityOfT300 = quantityOfT300ForRoof();
 
-        if (quantityOfT300 != 0){
-            for (int i = 0; i < roofWidth; i = +trapezpladeWidth) {
+        if (quantityOfT300 == 0) {
+            for (int i = 0; i < (roofWidth-trapezpladeWidth) ; i = i +trapezpladeWidth) {
                 square3numberOfT600Trapezplates++;
             }
         }
@@ -62,33 +80,34 @@ public class RoofMaterialCalculator {
         /////////////////////////////////////////////////////
 
         //Mellemregning til samlet antal plader
-        int QuantetyOfT600TrapezplatesTotal = square1numberOfT600Trapezplates + square2numberOfT600Trapezplates +
+        numberOfT600Trapezplates = square1numberOfT600Trapezplates + square2numberOfT600Trapezplates +
                 square3numberOfT600Trapezplates;
 
         /////////////Beregning af fjerde og sidste del af tag (om den sidste plade skal være en T600 eller T300)
-        int T300Quantety = quantityOfT300ForRoof(roofLength, roofWidth);
 
-        if (T300Quantety == 0 )
-            QuantetyOfT600TrapezplatesTotal++;
+        if (quantityOfT300 == 0)
+            numberOfT600Trapezplates++;
 
         /////////////////////////////////////////////////////
 
-        if(pitchedRoof)
-            QuantetyOfT600TrapezplatesTotal = QuantetyOfT600TrapezplatesTotal*2;
-
-        return QuantetyOfT600TrapezplatesTotal;
+        /*if (pitchedRoof)
+            numberOfT600Trapezplates = numberOfT600Trapezplates * 2;
+*/
+        return numberOfT600Trapezplates;
     }
 
     //Antal T300 Trapezplader
-    public int quantityOfT300ForRoof(int roofLength, int roofWidth) throws Exception {
+    public int quantityOfT300ForRoof() {
         int restOfLength = roofLength % T600RoofPlateLength;
         if (restOfLength > 0 && restOfLength <= T300RoofPlateLength)
-            numberOfT300Trapezplates = (roofWidth / trapezpladeWidth) + 1 ;
-                                                                    //^(Beregning af fjerde og sidste del
-                                                                    // af taget betyder det når jeg skriver +1)
-        if(pitchedRoof)
-            numberOfT600Trapezplates = numberOfT600Trapezplates*2;
+            numberOfT300Trapezplates = (roofWidth / trapezpladeWidth) + 1;
+        //^(Beregning af fjerde og sidste del
+        // af taget betyder det når jeg skriver +1)
 
+        /*if (pitchedRoof) {
+            temp = (numberOfT300Trapezplates * 2);
+            numberOfT300Trapezplates = temp;
+        }*/
         return numberOfT300Trapezplates;
     }
 
@@ -96,97 +115,101 @@ public class RoofMaterialCalculator {
 
 
     // TRÆ OG ANDET:
-        // Understernbrædder
-        public static int understernboartU360(int length, int width){
-            int antalU360;
-            int lengthU360antal;
-            int widthU360antal;
-            if (length<=360){
-                lengthU360antal = 2;
-            } else if (length>540 && length<=720){
-                lengthU360antal = 4;
-            } else {
-                lengthU360antal = 0;
-            }
-            if (width<=360){
-                widthU360antal = 2;
-            } else if (width>540 && width<=720){
-                widthU360antal = 4;
-            } else {
-                widthU360antal = 0;
-            }
-            antalU360 = lengthU360antal + widthU360antal;
-            return antalU360;
+    // Understernbrædder
+    public static int understernboartU360(int length, int width) {
+        int antalU360;
+        int lengthU360antal;
+        int widthU360antal;
+        if (length <= 360) {
+            lengthU360antal = 2;
+        } else if (length > 540 && length <= 720) {
+            lengthU360antal = 4;
+        } else {
+            lengthU360antal = 0;
         }
-        public static int understernboartU540(int length, int width){
-            int antalU540;
-            int lengthU540antal;
-            int widthU540antal;
-            if (length>360 && length<=540){
-                lengthU540antal = 2;
-            } else if (length>720 && length<=780){
-                lengthU540antal = 4;
-            } else {
-                lengthU540antal = 0;
-            }
-            if (width>360 && width<=540){
-                widthU540antal = 2;
-            } else if (width>720 && width<=780){
-                widthU540antal = 4;
-            } else {
-                widthU540antal = 0;
-            }
-            antalU540 = lengthU540antal + widthU540antal;
-            return antalU540;
+        if (width <= 360) {
+            widthU360antal = 2;
+        } else if (width > 540 && width <= 720) {
+            widthU360antal = 4;
+        } else {
+            widthU360antal = 0;
         }
+        antalU360 = lengthU360antal + widthU360antal;
+        return antalU360;
+    }
 
-        // Oversternbrædder
-        public static int oversternboartU360(int length, int width){
-            int oversternAntal = understernboartU360(length,width);
-            return oversternAntal;
+    public static int understernboartU540(int length, int width) {
+        int antalU540;
+        int lengthU540antal;
+        int widthU540antal;
+        if (length > 360 && length <= 540) {
+            lengthU540antal = 2;
+        } else if (length > 720 && length <= 780) {
+            lengthU540antal = 4;
+        } else {
+            lengthU540antal = 0;
         }
-        public static int oversternboartU540(int length, int width){
-            int oversternAntal = understernboartU540(length,width);
-            return oversternAntal;
+        if (width > 360 && width <= 540) {
+            widthU540antal = 2;
+        } else if (width > 720 && width <= 780) {
+            widthU540antal = 4;
+        } else {
+            widthU540antal = 0;
         }
+        antalU540 = lengthU540antal + widthU540antal;
+        return antalU540;
+    }
 
-        // Rem
-        public static int rem600(int length, int width){
-            int rem600Antal;
-            if (width>600){
-                rem600Antal = 3;
-            } else {
-                rem600Antal = 2;
-            }
-            return rem600Antal;
-        }
-        public static int rem480(int length, int width){
-            int rem480Antal;
-            if (length>600){
-                rem480Antal = 1;
-            } else if (width>600){
-                rem480Antal = 2;
-            } else{
-                rem480Antal = 0;
-            }
-            return rem480Antal;
-        }
+    // Oversternbrædder
+    public static int oversternboartU360(int length, int width) {
+        int oversternAntal = understernboartU360(length, width);
+        return oversternAntal;
+    }
 
-        // Spær
-        public static int raft (int length){
-            int rafts = Math.round(length/50);
-            return rafts;
-        }
+    public static int oversternboartU540(int length, int width) {
+        int oversternAntal = understernboartU540(length, width);
+        return oversternAntal;
+    }
 
-        // Vandbræt
-        public static int vandbræt360(int length, int width){
-            int vandbrætAntal = oversternboartU360(length, width);
-            return vandbrætAntal;
+    // Rem
+    public static int rem600(int length, int width) {
+        int rem600Antal;
+        if (width > 600) {
+            rem600Antal = 3;
+        } else {
+            rem600Antal = 2;
         }
-        public static int vandbræt540(int length, int width){
-            int vandbrætAntal = oversternboartU540(length, width);
-            return vandbrætAntal;
+        return rem600Antal;
+    }
+
+    public static int rem480(int length, int width) {
+        int rem480Antal;
+        if (length > 600) {
+            rem480Antal = 1;
+        } else if (width > 600) {
+            rem480Antal = 2;
+        } else {
+            rem480Antal = 0;
         }
+        return rem480Antal;
+    }
+
+    // Spær
+    public static int raft(int length) {
+        int rafts = Math.round(length / 50);
+        return rafts;
+    }
+
+    // Vandbræt
+    public static int vandbræt360(int length, int width) {
+        int vandbrætAntal = oversternboartU360(length, width);
+        return vandbrætAntal;
+    }
+
+    public static int vandbræt540(int length, int width) {
+        int vandbrætAntal = oversternboartU540(length, width);
+        return vandbrætAntal;
+    }
 
         /*// Tagplader
         public static int roofAntal(int length, int width){
@@ -224,75 +247,75 @@ public class RoofMaterialCalculator {
         }*/
 
     // Tætningsprofil
-        public static int gasket(int width){
-            int gasket = Math.round((width/100)*2);
-            return gasket;
-        }
+    public static int gasket(int width) {
+        int gasket = Math.round((width / 100) * 2);
+        return gasket;
+    }
 
 
     // SKRUER OG BESLAG:
 
-        // Bundskruer
-        public static int bottomScrews(int length, int width){
-            // Plader fastgøres med plastmo bundskruer og skal anvendes 6 stk pr. meter på hver spær
-            // Men 8 per meter på den første og den sidste spær
-            double bottomScrews = (((raft(length)-2)*6)+16)*(width/100);
-            double forskel = bottomScrews/200;
-            int pakker;
-            if (forskel<=1){
-                pakker = 1;
-            } else if (forskel<=2){
-                pakker = 2;
-            } else {
-                pakker = 3;
-            }
-            return pakker;
+    // Bundskruer
+    public static int bottomScrews(int length, int width) {
+        // Plader fastgøres med plastmo bundskruer og skal anvendes 6 stk pr. meter på hver spær
+        // Men 8 per meter på den første og den sidste spær
+        double bottomScrews = (((raft(length) - 2) * 6) + 16) * (width / 100);
+        double forskel = bottomScrews / 200;
+        int pakker;
+        if (forskel <= 1) {
+            pakker = 1;
+        } else if (forskel <= 2) {
+            pakker = 2;
+        } else {
+            pakker = 3;
         }
+        return pakker;
+    }
 
-        // UniversalHøjre
-        public static int universalBracketsRight(int length){
-            int universalBracketsRight = raft(length);
-            return universalBracketsRight;
+    // UniversalHøjre
+    public static int universalBracketsRight(int length) {
+        int universalBracketsRight = raft(length);
+        return universalBracketsRight;
+    }
+
+    // UniversalVenstre
+    public static int universalBracketsLeft(int length) {
+        int universalBracketsLeft = raft(length);
+        return universalBracketsLeft;
+    }
+
+    // Skruer til vandbræt -- 1 pakke er nok til en stor carport
+    public static int waterboardScrews = 1;
+
+    // Beslagskruer
+    public static int bracketScrewsRoof(int length) {
+        // Beslagskruer til spær:
+        int bracketScrewsS = raft(length) * 9;
+        // Skal bruge antallet af pakker og der er 250 stk i 1 pakke:
+        int forskel = 250 / bracketScrewsS;
+        int brancketScrewPk = 0;
+        if (forskel <= 1) {
+            brancketScrewPk = 1;
+        } else if (forskel > 1 && forskel <= 2) {
+            brancketScrewPk = 2;
+        } else if (forskel > 2 && forskel <= 3) {
+            brancketScrewPk = 3;
+        } else {
+            brancketScrewPk = 4;
         }
+        return brancketScrewPk;
+    }
 
-        // UniversalVenstre
-        public static int universalBracketsLeft(int length){
-            int universalBracketsLeft = raft(length);
-            return universalBracketsLeft;
-        }
+    // Bræddebolte
+    public static int carriageBolts(int length, int width) {
+        int carriageBolts = ConstructionMaterialCalculator.posts(length, width) * 2;
+        return carriageBolts;
+    }
 
-        // Skruer til vandbræt -- 1 pakke er nok til en stor carport
-        public static int waterboardScrews = 1;
-
-        // Beslagskruer
-        public static int bracketScrewsRoof(int length){
-            // Beslagskruer til spær:
-            int bracketScrewsS = raft(length)*9;
-            // Skal bruge antallet af pakker og der er 250 stk i 1 pakke:
-            int forskel = 250/bracketScrewsS;
-            int brancketScrewPk = 0;
-            if (forskel<=1){
-                brancketScrewPk = 1;
-            } else if (forskel>1 && forskel<=2){
-                brancketScrewPk = 2;
-            } else if (forskel>2 && forskel<=3){
-                brancketScrewPk = 3;
-            } else {
-                brancketScrewPk = 4;
-            }
-            return brancketScrewPk;
-        }
-
-        // Bræddebolte
-        public static int carriageBolts(int length, int width) {
-            int carriageBolts = ConstructionMaterialCalculator.posts(length, width)*2;
-            return carriageBolts;
-        }
-
-        // Firkantskiver
-        public static int squares(int length, int width){
-            int squares = ConstructionMaterialCalculator.posts(length, width);
-            return squares;
-        }
+    // Firkantskiver
+    public static int squares(int length, int width) {
+        int squares = ConstructionMaterialCalculator.posts(length, width);
+        return squares;
+    }
 
 }
