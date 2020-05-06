@@ -35,7 +35,7 @@ public class CarportBase extends Command {
             roofBase = new RoofPitched(0, carportLength, carportWidth, 0);
             roofBase.setPitched(true);
         } else {
-            roofBase = new RoofFlat(0, carportLength, carportWidth, RAISING, false);
+            roofBase = new RoofFlat(0, carportLength, carportWidth, RAISING);
         }
 
         constructionBase.setRoof(roofBase);
