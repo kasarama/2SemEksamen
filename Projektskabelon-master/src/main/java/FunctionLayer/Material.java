@@ -6,6 +6,8 @@ public class Material {
     private String name;
     private int size;//actual
     private int availablesize; //beregned fra Katarzyna metode
+    private int width;
+    private int thickness;
     private String unit;
     private int amount;
     private double price;
@@ -21,11 +23,32 @@ public class Material {
     public Material() {
 
     }
-    public Material(String name, int size, String unit) {
-        this.name = name;
+    // Bruges i MaterialMapper
+    public Material(int id, int size, String unit) {
+        this.id = id;
         this.size = size;
         this.unit = unit;
     }
+    public Material(String name, String unit) {
+        this.name = name;
+        this.unit = unit;
+    }
+    public Material(int id, int integer) {
+        this.id = id;
+        this.width = integer;
+        this.thickness = integer;
+    }
+    public Material(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+    public Material(int id, String name, int integer) {
+        this.id = id;
+        this.name = name;
+        this.width = integer;
+        this.thickness = integer;
+    }
+
     public Material(int id, String name, int size, String unit, String keyword, String category) {
         this.id = id;
         this.name = name;
@@ -34,6 +57,22 @@ public class Material {
         this.keyword = keyword;
         this.category = category;
 
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
+    public int getThickness() {
+        return thickness;
+    }
+
+    public void setThickness(int thickness) {
+        this.thickness = thickness;
     }
 
     public double cost(){
@@ -129,7 +168,8 @@ public class Material {
         return "Material{" +
                 "name='" + name + '\'' +
                 ", size=" + size +
-                ", unit=" + unit +
+                ", comment=" + comment +
+                ", amount=" + amount + " " +unit +
                 '}';
     }
 

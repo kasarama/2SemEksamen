@@ -37,4 +37,11 @@ public class ConstructionMaterialCalculatorTest {
             expected.add(rem);
         assertEquals(expected,actual);
     }
+
+    @Test
+    public void metalMaterials() throws LoginSampleException {
+        ArrayList<Material> actual= constructionMaterialCalculator.metalMaterials(construction);
+        ArrayList<Material> expected = new ArrayList<>();
+        assertEquals(expected,actual);
+    }
 }
