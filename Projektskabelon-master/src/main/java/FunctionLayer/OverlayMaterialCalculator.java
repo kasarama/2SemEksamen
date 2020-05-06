@@ -13,7 +13,7 @@ public class OverlayMaterialCalculator {
     //gets list with materials of all the elements of overlay and sets them on one list of materials
     public static ArrayList<Material> shedOverlayMaterialList(Construction construction, String overlayName) throws LoginSampleException {
         ArrayList<Material> allWallsMaterials = wallMaterials(construction.getShed().getWalls());
-        ArrayList<Material> doorMaterials = doorFraming(construction.getRoof().getDegree(), construction.getCarportLength());
+        ArrayList<Material> doorMaterials = doorFraming(construction.getRoof().getTilt(), construction.getCarportLength());
         ArrayList<Material> shedOverlayMaterialList = new ArrayList<>();
         Material overlay = overlaMaterial(overlayName,construction);
         shedOverlayMaterialList.addAll(allWallsMaterials);
@@ -50,8 +50,8 @@ public class OverlayMaterialCalculator {
         Material fyr = new Material();
         fyr.setName("19X50 MM BRÆDDER FYR");
         fyr.setComment("Vertical framing");
-        int fyrsnumber = OverlaySizeCalculator.fyrNumberOnSide(wall.getLength());
-        ArrayList<Integer> fyrHeights = OverlaySizeCalculator.fyrLengths(wall.getMinHeight(), wall.getRaising(), wall.getLength());
+        int fyrsnumber = OverlaySizeCalculator.fyrNumberOnWall(wall);
+        ArrayList<Integer> fyrHeights = OverlaySizeCalculator.fyrLengthsOneWall(wall);
         for (Integer height : fyrHeights
         ) {
             fyr.setSize(height);

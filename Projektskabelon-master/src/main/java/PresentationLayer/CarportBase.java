@@ -30,15 +30,9 @@ public class CarportBase extends Command {
         constructionBase.setCarportLength(carportLength);
         constructionBase.setCarportWidth(carportWidth);
 
-        Roof roofBase;
-        if (roofType == 1) {
-            roofBase = new RoofPitched(0, carportLength, carportWidth, 0);
-            roofBase.setPitched(true);
-        } else {
-            roofBase = new RoofFlat(0, carportLength, carportWidth, RAISING);
-        }
 
-        constructionBase.setRoof(roofBase);
+
+
         Shed shed = new Shed(shedWidth, shedDepth, shedSide);
         shed.setWalls(new ArrayList<>());
         constructionBase.setShed(shed);
@@ -54,6 +48,15 @@ public class CarportBase extends Command {
             shed.setWalls(walls);
             constructionBase.setShed(shed);
         }
+
+        Roof roofBase;
+        if (roofType == 1) {
+            roofBase = new RoofPitched(0, carportLength+shedDepth-100, carportWidth, 0);
+            roofBase.setPitched(true);
+        } else {
+            roofBase = new RoofFlat(0, carportLength+shedDepth-100, carportWidth, RAISING);
+        }
+        constructionBase.setRoof(roofBase);
 
 
         HttpSession session = request.getSession();
