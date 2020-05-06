@@ -7,6 +7,7 @@ public abstract class Roof {
     private int length;
     private int width;
     private int degree;
+
     ArrayList<Material> tagMaterialList;
     private boolean pitched;
 
