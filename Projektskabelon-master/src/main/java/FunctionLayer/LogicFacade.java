@@ -21,8 +21,8 @@ public class LogicFacade {
         return user;
     }
 
-    public static Material getMaterialBySize(int size) throws LoginSampleException {
-        return MaterialMapper.getMaterialBySize(size);
+    public static Material getMaterialBySizeName(int size) throws LoginSampleException {
+        return MaterialMapper.getMaterialBySizeName(size);
     }
     public static Material getMaterialByID(int id) throws LoginSampleException {
         return MaterialMapper.getMaterialByID(id);
