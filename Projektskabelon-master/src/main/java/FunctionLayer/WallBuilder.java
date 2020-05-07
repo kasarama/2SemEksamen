@@ -8,6 +8,7 @@ import java.util.ArrayList;
 public class WallBuilder {
 
     private final static int DOORSIZE=1000;
+    private final static int POSTWIDTH=100;
 
     public static int frontWallHeight(Construction construction){
         int tilt =construction.getRoof().getTilt();
@@ -94,7 +95,7 @@ public class WallBuilder {
             } else {
                 for (int i = 0; i < constructionswalls.length; i++) {
                     if (constructionswalls[i].equals("back")) {
-                        wallLength = construction.getCarportWidth() - construction.getShed().getWidth() - 100;
+                        wallLength = construction.getCarportWidth()+construction.getShed().getWidth()- (int)(0.5*POSTWIDTH );
                         minHeight = construction.getConstructionHeight();
                         side = "back";
                         Wall wall = new Wall();

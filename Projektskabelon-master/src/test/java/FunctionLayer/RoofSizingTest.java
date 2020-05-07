@@ -22,6 +22,7 @@ public class RoofSizingTest {
         con.setConstructionWidth(3600);
         roof = new RoofFlat(0,con.getConstructionLength(), con.getConstructionWidth(), 3);
 
+        con.setRoof(roof);
         //Act
         int actuel = rs.roofHeight(con.getRoof().getIsPitched());
         int expected = 272;
@@ -53,7 +54,6 @@ public class RoofSizingTest {
         con.setConstructionWidth(3600);
 
         roof = new RoofFlat(0,con.getConstructionLength(), con.getConstructionWidth(), 3);
-
         con.setRoof(roof);
         //Act
         int actuel = rs.roofWidthSurface();
@@ -85,7 +85,6 @@ public class RoofSizingTest {
         con.setConstructionWidth(3600);
 
         roof = new RoofFlat(0,con.getConstructionLength(), con.getConstructionWidth(), 3);
-
         con.setRoof(roof);
         //Act
         int actuel = rs.roofLengthSurface();
@@ -116,6 +115,7 @@ public class RoofSizingTest {
         con.setConstructionWidth(3600);
         roof = new RoofFlat(0,con.getConstructionLength(), con.getConstructionWidth(), 3);
 
+        con.setRoof(roof);
         //Act
         int actuel = rs.flatRoofCalcutatedLength();
         int expected = 7804;
