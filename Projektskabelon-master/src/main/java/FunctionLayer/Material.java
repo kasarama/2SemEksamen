@@ -21,23 +21,16 @@ public class Material {
 
     }
     // Bruges i MaterialMapper
-    public Material(int id, int size, String unit) {
+    public Material(int id, String name, String unit) {
         this.id = id;
-        this.size = size;
-        this.unit = unit;
-    }
-    public Material(String name, String unit) {
         this.name = name;
         this.unit = unit;
     }
     public Material(int id, int integer) {
         this.id = id;
+        this.size = integer;
         this.width = integer;
         this.thickness = integer;
-    }
-    public Material(int id, String name) {
-        this.id = id;
-        this.name = name;
     }
     public Material(int id, String name, int integer) {
         this.id = id;
@@ -45,6 +38,7 @@ public class Material {
         this.width = integer;
         this.thickness = integer;
     }
+
 
     public Material(int id, String name, int size, String unit, String keyword, String category) {
         this.id = id;

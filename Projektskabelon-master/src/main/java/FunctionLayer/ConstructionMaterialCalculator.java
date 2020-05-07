@@ -79,6 +79,7 @@ public class ConstructionMaterialCalculator {
             underStern = LogicFacade.getMaterialBySize(underSternObject);
             underStern.setName("TRYKIMPRENERET BRÆDT");
             underStern.setUnit(LogicFacade.getUnitByName(underStern.getName()));
+            underStern.setId(2);
                 underStern.setWidth(LogicFacade.getWidthByID(underStern.getId(), underStern.getName()));
                 underStern.setThickness(LogicFacade.getThicknessByID(underStern.getId()));
                 underStern.setName("TRYKIMPRENERET BRÆDT " + underStern.getThickness() + "x" + underStern.getWidth());
@@ -97,6 +98,7 @@ public class ConstructionMaterialCalculator {
             Material overStern = LogicFacade.getMaterialBySize(overSternObject);
             overStern.setName("TRYKIMPRENERET BRÆDT");
             overStern.setUnit(LogicFacade.getUnitByName(overStern.getName()));
+            overStern.setId(3);
                 overStern.setWidth(LogicFacade.getWidthByID(overStern.getId(), overStern.getName()));
                 overStern.setThickness(LogicFacade.getThicknessByID(overStern.getId()));
                 overStern.setName("TRYKIMPRENERET BRÆDT " + overStern.getThickness() + "x" + overStern.getWidth());
@@ -116,6 +118,10 @@ public class ConstructionMaterialCalculator {
             bræddebolt.setName("BRÆDDEBOLT");
             bræddebolt.setAmount(constructionSizeCalculator.remBoltAmount(construction));
             bræddebolt.setUnit(LogicFacade.getUnitByName(bræddebolt.getName()));
+                bræddebolt.setId(16);
+                bræddebolt.setWidth(LogicFacade.getWidthByID(bræddebolt.getId(), bræddebolt.getName()));
+                bræddebolt.setThickness(LogicFacade.getThicknessByID(bræddebolt.getId()));
+                bræddebolt.setName("BRÆDDEBOLT " + bræddebolt.getThickness() + "x" + bræddebolt.getWidth());
             bræddebolt.setComment("Til montering af rem på stolper");
         metalMaterials.add(bræddebolt);
         // Firkantskriver
@@ -123,6 +129,10 @@ public class ConstructionMaterialCalculator {
             firkantskriver.setName("FIRKANTSKIVER");
             firkantskriver.setAmount(constructionSizeCalculator.remSquaresAmount(construction));
             firkantskriver.setUnit(LogicFacade.getUnitByName(firkantskriver.getName()));
+                firkantskriver.setId(17);
+                firkantskriver.setWidth(LogicFacade.getWidthByID(firkantskriver.getId(), firkantskriver.getName()));
+                firkantskriver.setThickness(LogicFacade.getThicknessByID(firkantskriver.getId()));
+                firkantskriver.setName("FIRKANTSKIVER " + firkantskriver.getThickness() + "x" + firkantskriver.getWidth());
             firkantskriver.setComment("Til montering af rem på stolper");
         metalMaterials.add(firkantskriver);
         // Hulbånd
@@ -130,6 +140,10 @@ public class ConstructionMaterialCalculator {
             hulbånd.setName("HULBÅND");
             hulbånd.setAmount(constructionSizeCalculator.perforatedBandRolls(construction));
             hulbånd.setUnit(LogicFacade.getUnitByName(hulbånd.getName()));
+                hulbånd.setId(12);
+                hulbånd.setWidth(LogicFacade.getWidthByID(hulbånd.getId(), hulbånd.getName()));
+                hulbånd.setThickness(LogicFacade.getThicknessByID(hulbånd.getId()));
+                hulbånd.setName("HULBÅND 10 M " + hulbånd.getThickness() + "x" + hulbånd.getWidth());
             hulbånd.setComment("Til vindkryds på spær");
         metalMaterials.add(hulbånd);
         // Beslagskruer til hulbånd og spær
@@ -137,6 +151,10 @@ public class ConstructionMaterialCalculator {
             beslagskruer.setName("BESLAGSKRUER");
             beslagskruer.setAmount(constructionSizeCalculator.bracketScrews(construction));
             beslagskruer.setUnit(LogicFacade.getUnitByName(beslagskruer.getName()));
+                beslagskruer.setId(15);
+                beslagskruer.setWidth(LogicFacade.getWidthByID(beslagskruer.getId(), beslagskruer.getName()));
+                beslagskruer.setThickness(LogicFacade.getThicknessByID(beslagskruer.getId()));
+                beslagskruer.setName("BESLAGSKRUER " + beslagskruer.getThickness() + "x" + beslagskruer.getWidth());
             beslagskruer.setComment("Til montering af universalbeslag + hulbånd");
         metalMaterials.add(beslagskruer);
         // Universalbeslag Højre
@@ -144,7 +162,9 @@ public class ConstructionMaterialCalculator {
             universalbeslagHøjre.setName("UNIVERSALBESLAG");
             universalbeslagHøjre.setAmount(constructionSizeCalculator.universalBracketsRight(construction));
             universalbeslagHøjre.setUnit(LogicFacade.getUnitByName(universalbeslagHøjre.getName()));
-            universalbeslagHøjre.setName("UNIVERSALBESLAG Højre");
+                universalbeslagHøjre.setId(13);
+                universalbeslagHøjre.setWidth(LogicFacade.getWidthByID(universalbeslagHøjre.getId(), universalbeslagHøjre.getName()));
+            universalbeslagHøjre.setName("UNIVERSALBESLAG " + universalbeslagHøjre.getWidth() + " MM. Højre");
             universalbeslagHøjre.setComment("Til montering af spær på rem");
         metalMaterials.add(universalbeslagHøjre);
         // Universalbeslag Venstre
@@ -152,7 +172,9 @@ public class ConstructionMaterialCalculator {
             universalbeslagVenstre.setName("UNIVERSALBESLAG");
             universalbeslagVenstre.setAmount(constructionSizeCalculator.universalBracketsLeft(construction));
             universalbeslagVenstre.setUnit(LogicFacade.getUnitByName(universalbeslagVenstre.getName()));
-            universalbeslagVenstre.setName("UNIVERSALBESLAG Venstre");
+                universalbeslagVenstre.setId(13);
+                universalbeslagVenstre.setWidth(LogicFacade.getWidthByID(universalbeslagVenstre.getId(), universalbeslagVenstre.getName()));
+            universalbeslagVenstre.setName("UNIVERSALBESLAG " + universalbeslagVenstre.getWidth() + " MM. Venstre");
             universalbeslagVenstre.setComment("Til montering af spær på rem");
         metalMaterials.add(universalbeslagVenstre);
         // Skruer til stern og vandbræt
@@ -160,6 +182,10 @@ public class ConstructionMaterialCalculator {
             skruer.setName("SKRUER");
             skruer.setAmount(constructionSizeCalculator.screwAmount);
             skruer.setUnit(LogicFacade.getUnitByName(skruer.getName()));
+                skruer.setId(14);
+                skruer.setWidth(LogicFacade.getWidthByID(skruer.getId(), skruer.getName()));
+                skruer.setThickness(LogicFacade.getThicknessByID(skruer.getId()));
+                skruer.setName("SKRUER " + skruer.getThickness() +"x"+ skruer.getWidth());
             skruer.setComment("Til montering af stern&vandbrædt");
         metalMaterials.add(skruer);
 

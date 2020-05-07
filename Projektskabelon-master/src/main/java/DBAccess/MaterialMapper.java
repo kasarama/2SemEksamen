@@ -33,7 +33,7 @@ public class MaterialMapper {
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 int materialID = rs.getInt("materialID");
-                material = new Material(materialID, size, null);
+                material = new Material(materialID, size);
             }else {
                 System.out.println("ResultSet.next()=false");
                 return null;  }//todo handle null object there where method is being used;
@@ -53,7 +53,7 @@ public class MaterialMapper {
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 String name = rs.getString("name");
-                material = new Material(id, name);
+                material = new Material(id, name, null);
             }else {
                 System.out.println("ResultSet.next()=false");
                 return null;  }//todo handle null object there where method is being used;
@@ -72,7 +72,7 @@ public class MaterialMapper {
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 String unit = rs.getString("unit");
-                material = new Material(name, unit);
+                material = new Material(0, name, unit);
                 material.setUnit(unit);
                 return material.getUnit();
             } else {
