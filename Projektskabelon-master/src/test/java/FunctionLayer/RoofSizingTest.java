@@ -20,12 +20,8 @@ public class RoofSizingTest {
         //Arrange
         con.setConstructionLength(7800);
         con.setConstructionWidth(3600);
-<<<<<<< HEAD
         roof = new RoofFlat(0,con.getConstructionLength(), con.getConstructionWidth(), 3);
-=======
-        roof = new RoofFlat(0,con.getConstructionLength(), con.getConstructionWidth(),3);
->>>>>>> b2a0bbd49392224361ee1b755fddebf94a0d0409
-        con.setRoof(roof);
+
         //Act
         int actuel = rs.roofHeight(con.getRoof().getIsPitched());
         int expected = 272;
@@ -55,11 +51,9 @@ public class RoofSizingTest {
         //Arrange
         con.setConstructionLength(7800);
         con.setConstructionWidth(3600);
-<<<<<<< HEAD
+
         roof = new RoofFlat(0,con.getConstructionLength(), con.getConstructionWidth(), 3);
-=======
-        roof = new RoofFlat(0,con.getConstructionLength(), con.getConstructionWidth(),3);
->>>>>>> b2a0bbd49392224361ee1b755fddebf94a0d0409
+
         con.setRoof(roof);
         //Act
         int actuel = rs.roofWidthSurface();
@@ -89,11 +83,9 @@ public class RoofSizingTest {
         //Arrange
         con.setConstructionLength(7800);
         con.setConstructionWidth(3600);
-<<<<<<< HEAD
+
         roof = new RoofFlat(0,con.getConstructionLength(), con.getConstructionWidth(), 3);
-=======
-        roof = new RoofFlat(0,con.getConstructionLength(), con.getConstructionWidth(),3);
->>>>>>> b2a0bbd49392224361ee1b755fddebf94a0d0409
+
         con.setRoof(roof);
         //Act
         int actuel = rs.roofLengthSurface();
@@ -122,12 +114,8 @@ public class RoofSizingTest {
         //Arrange
         con.setConstructionLength(7800);
         con.setConstructionWidth(3600);
-<<<<<<< HEAD
         roof = new RoofFlat(0,con.getConstructionLength(), con.getConstructionWidth(), 3);
-=======
-        roof = new RoofFlat(0,con.getConstructionLength(), con.getConstructionWidth(),3);
->>>>>>> b2a0bbd49392224361ee1b755fddebf94a0d0409
-        con.setRoof(roof);
+
         //Act
         int actuel = rs.flatRoofCalcutatedLength();
         int expected = 7804;
