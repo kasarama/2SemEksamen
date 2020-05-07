@@ -19,10 +19,12 @@ public class OverlaySizeCalculatorTest {
         construction.setCarportLength(7200);
         construction.setConstructionHeight(2000);
         construction.setCarportWidth(4200);
-        Roof roof = new RoofFlat( 0, 7200+2900, 4200, 3);
+
+        Roof roof = new RoofFlat( 0, 7200+2900, 4200,3);
+
         construction.setRoof(roof);
 
-        Shed shed = new Shed(4200/2,2900,"left");
+        Shed shed = new Shed(4200/2+50,2900,"left");
         construction.setShed(shed);
         ArrayList<Wall> shedWalls= WallBuilder.addShedWalls(construction);
         shed.setWalls(shedWalls);
@@ -37,7 +39,7 @@ public class OverlaySizeCalculatorTest {
         ArrayList<Wall> carportWalls=construction.getWalls();
         int index=-1;
         for (Wall wall: carportWalls) {
-            if(wall.getSide().equals("carportright")&& wall.getMinHeight()>2000){
+            if(wall.getSide().equals("carportright")){
                 index=carportWalls.indexOf(wall);
             }
         }
@@ -73,7 +75,7 @@ public class OverlaySizeCalculatorTest {
     }
 
     @Test
-    public void fyrNumberOneWall() {
+    public void fyrNumberOnWall() {
         ArrayList<Wall> carportWalls=construction.getWalls();
         int index=-1;
         for (Wall wall: carportWalls) {
@@ -106,31 +108,59 @@ public class OverlaySizeCalculatorTest {
         ArrayList<Wall> carportWalls=construction.getWalls();
         int index=-1;
         for (Wall wall: carportWalls) {
-            if(wall.getSide().equals("right")&& wall.getMinHeight()>2000){
+            if(wall.getSide().equals("carportright")){
                 index=carportWalls.indexOf(wall);
             }
         }
 
         Wall carportsRightWall=construction.getWalls().get(index);
         ArrayList<Integer> lengths= OverlaySizeCalculator.fyrLengthsOneWall(carportsRightWall);
-
-
     }
 
+
     @Test
-    public void fyrLengths() {
+    public void oneWallArea() {
+        ArrayList<Wall> carportWalls=construction.getWalls();
+        int index=-1;
+        for (Wall wall: carportWalls) {
+            System.out.println(wall.getSide());
+            if(wall.getSide().equals("likeShedright")){
+                index=carportWalls.indexOf(wall);
+            }
+        }
+        Wall likeShedright=construction.getWalls().get(index);
+
+        double actual = OverlaySizeCalculator.oneWallArea(likeShedright);
+        double expected =5.92615;
+
+        //assertEquals(expected,actual, 0.01);
+        }
+
+
+    @Test
+    public void allWallsAreal() {
+
+        double totalSurface=OverlaySizeCalculator.allWallsArea(construction);
+        double expected= (3*( (2000+2087)/2*2900  )+ 2*( (2087+2303)/2*7200 ) + (2000*2150) + (2087*2150)   );
+        expected=expected/1000/1000;
+        assertEquals(expected,totalSurface, 0.01);
     }
 
     @Test
     public void overlaySpending() {
-    }
+        int result;
+        double spending=7.7;
+        double actual = spending*34.52;
+        actual=actual+0.05*actual; //5 % extra material for cuts
 
-    @Test
-    public void areal() {
-    }
-
-    @Test
-    public void allWallsAreal() {
+        if ( ((actual*10)%10) ==0 ){
+            result= (int) actual;
+        }
+        else {
+            result= (int) actual+1;
+        }
+        int expected = 280;
+        assertEquals(result,expected);
     }
 
     @Test

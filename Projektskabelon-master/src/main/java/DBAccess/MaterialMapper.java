@@ -20,29 +20,128 @@ public class MaterialMapper {
 
     // Vi vil vide hvor meget materiale der skal bruges
 
-    public static Material getMaterial(String keyword) throws LoginSampleException {
-            Material material = new Material();
+
+// @author Mia
+    public static Material getMaterialBySize(int size) throws LoginSampleException {
+        Material material = new Material();
         try {
             Connection con = Connector.connection();
-            String SQL = "SELECT name, size, unit FROM fogdb.materials "
-                    + "WHERE keyword=?";
+            String SQL = "SELECT materialID, size FROM fogdb.sizes "
+                    + "WHERE size=?";
             PreparedStatement ps = con.prepareStatement(SQL);
-            ps.setString(1, keyword);
+            ps.setInt(1, size);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                String name = rs.getString("name");
-                int size = rs.getInt("size");
-                String unit = rs.getString("unit");
-                material = new Material(0, name, size, unit, keyword, null);
+                int materialID = rs.getInt("materialID");
+                material = new Material(materialID, size, null);
             }else {
                 System.out.println("ResultSet.next()=false");
-            return null;  }//todo handle null object there where method is being used;
+                return null;  }//todo handle null object there where method is being used;
         } catch (ClassNotFoundException | SQLException ex) {
             throw new LoginSampleException(ex.getMessage());
         }
         return material;
-
     }
+    public static Material getMaterialByID(int id) throws LoginSampleException {
+        Material material = new Material();
+        try {
+            Connection con = Connector.connection();
+            String SQL = "SELECT name FROM fogdb.materials "
+                    + "WHERE materialID=?";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                String name = rs.getString("name");
+                material = new Material(id, name);
+            }else {
+                System.out.println("ResultSet.next()=false");
+                return null;  }//todo handle null object there where method is being used;
+        } catch (ClassNotFoundException | SQLException ex) {
+            throw new LoginSampleException(ex.getMessage());
+        }
+        return material;
+    }
+    public static String getUnitByName (String name) throws LoginSampleException {
+        Material material = new Material();
+        try {
+            Connection con = Connector.connection();
+            String SQL = "SELECT unit FROM fogdb.materials WHERE name=?";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ps.setString(1, name);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                String unit = rs.getString("unit");
+                material = new Material(name, unit);
+                material.setUnit(unit);
+                return material.getUnit();
+            } else {
+                material.setUnit(null);
+                return material.getUnit();
+            }
+        }catch (SQLException sql){
+            material.setUnit(null);
+            return material.getUnit();
+        } catch (ClassNotFoundException ex) {
+            throw new LoginSampleException(ex.getMessage());
+        }
+    }
+    public static int getWidthByID (int id, String name) throws LoginSampleException {
+        Material material = new Material();
+        try {
+            Connection con = Connector.connection();
+            String SQL = "SELECT width FROM fogdb.materials WHERE materialID=? and name=?";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ps.setInt(1, id);
+            ps.setString(2, name);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                int width = rs.getInt("width");
+                material = new Material(id, name, width);
+                material.setWidth(width);
+                return material.getWidth();
+            } else {
+                material.setUnit(null);
+                return material.getWidth();
+            }
+        }catch (SQLException sql){
+            material.setUnit(null);
+            return material.getWidth();
+        } catch (ClassNotFoundException ex) {
+            throw new LoginSampleException(ex.getMessage());
+        }
+    }
+
+    public static int getThicknessByID (int id) throws LoginSampleException {
+        Material material = new Material();
+        try {
+            Connection con = Connector.connection();
+            String SQL = "SELECT thickness FROM fogdb.materials WHERE materialID=?";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                int thickness = rs.getInt("thickness");
+                material = new Material(id, thickness);
+                material.setThickness(thickness);
+                return material.getThickness();
+            } else {
+                material.setUnit(null);
+                return material.getThickness();
+            }
+        }catch (SQLException sql){
+            material.setUnit(null);
+            return material.getThickness();
+        } catch (ClassNotFoundException ex) {
+            throw new LoginSampleException(ex.getMessage());
+        }
+    }
+
+
+
+
+
+
 
 // This class Connects to DB and gets the "Roof material" data from it.
 
@@ -72,13 +171,12 @@ public class MaterialMapper {
                 //get the data rows:
                 int materialID = rs.getInt("materialID");
                 String name = rs.getString("name");
-                int size = rs.getInt("size");
                 String unit = rs.getString("unit");
                 String keyword = rs.getString("keyword");
                 String category = rs.getString("category");
 
                 //create a new material obj of 'Material' class and pass the gotten data in it (materialID, name, size etc)
-                Material material = new Material(materialID, name, size, unit, keyword, category);// data gets stored in 'material'
+                Material material = new Material(materialID, name, 0, unit, keyword, category);// data gets stored in 'material'
                 //add the gotten 'info' data to the 'InfoList'
                 materialList.add(material);
             }
@@ -104,12 +202,11 @@ public class MaterialMapper {
                 }
                 int materialID = rs.getInt("materialID");
                 String name = rs.getString("name");
-                int size = rs.getInt("size");
                 String unit = rs.getString("unit");
                 String keyword = rs.getString("keyword");
                 String category = rs.getString("category");
 
-                Material material = new Material(materialID, name, size, unit, keyword, category);
+                Material material = new Material(materialID, name, 0, unit, keyword, category);
                 materialList.add(material);
             }
         }
@@ -152,15 +249,14 @@ public class MaterialMapper {
     public static void addMatDB(Material material) throws LoginSampleException {
         try {
             Connection con = Connector.connection();
-            String SQL = "INSERT INTO materials (name,size,unit,keyword,category,price,picture) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            String SQL = "INSERT INTO materials (name,unit,keyword,category,price,picture) VALUES (?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement ps = con.prepareStatement(SQL);
             ps.setString(1, material.getName());
-            ps.setInt(2, material.getSize());
-            ps.setString(3, material.getUnit());
-            ps.setString(4, material.getKeyword());
-            ps.setString(5, material.getCategory());
-            ps.setDouble(6, material.getPrice());
-            ps.setString(7, material.getPicture());
+            ps.setString(2, material.getUnit());
+            ps.setString(3, material.getKeyword());
+            ps.setString(4, material.getCategory());
+            ps.setDouble(5, material.getPrice());
+            ps.setString(6, material.getPicture());
             ps.executeUpdate();
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -179,7 +275,7 @@ public class MaterialMapper {
         try
         {
             Connection con = Connector.connection();
-            String SQL = "SELECT materialID, name, size, unit, price, picture FROM materials WHERE category='overlay'";
+            String SQL = "SELECT materialID, name, unit, price, picture FROM materials WHERE category='overlay'";
             PreparedStatement ps = con.prepareStatement(SQL);
             ResultSet rs = ps.executeQuery();
             while (rs.next())
@@ -188,7 +284,6 @@ public class MaterialMapper {
                 int materialID = rs.getInt("materialID");
                 String name = rs.getString("name");
                 String picture = rs.getString("picture");
-                int size = rs.getInt("size");
                 String unit = rs.getString("unit");
                 double price = rs.getDouble("price");
 
@@ -196,7 +291,6 @@ public class MaterialMapper {
                 Material material = new Material();
                 material.setId(materialID);
                 material.setName(name);
-                material.setSize(size);
                 material.setUnit(unit);
                 material.setPrice(price);
                 material.setPicture(picture);
@@ -230,7 +324,6 @@ public class MaterialMapper {
         } catch (ClassNotFoundException ex) {
             throw new LoginSampleException(ex.getMessage());
         }
-
     }
 }
 

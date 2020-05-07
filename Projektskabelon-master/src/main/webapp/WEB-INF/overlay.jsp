@@ -1,4 +1,5 @@
-<%@ page import="CarportUtil.Initializer" %><%--
+<%@ page import="CarportUtil.Initializer" %>
+<%@ page import="FunctionLayer.LoginSampleException" %><%--
   Created by IntelliJ IDEA.
   User: magda
   Date: 25-04-2020
@@ -13,13 +14,21 @@
 <%
     // if i'm the first user on this application, then set the overlayList. (else the list already exists)
     if (request.getServletContext().getAttribute("overlayList") == null) {
-        request.getServletContext().setAttribute("overlayList", Initializer.getOverlayList());
+        try {
+            request.getServletContext().setAttribute("overlayList", Initializer.getOverlayList());
+        } catch (LoginSampleException e) {
+            e.printStackTrace();
+        }
     }
 %>
 <%
     // if i'm the first user on this application, then set the overlayMaterialsList. (else the list already exists)
     if (request.getServletContext().getAttribute("overlayMaterialsList") == null) {
-        request.getServletContext().setAttribute("overlayMaterialsList", Initializer.getOverlayList());
+        try {
+            request.getServletContext().setAttribute("overlayMaterialsList", Initializer.getOverlayList());
+        } catch (LoginSampleException e) {
+            e.printStackTrace();
+        }
     }
 %>
 
@@ -111,21 +120,20 @@
 </form>
 
 <!--
-        <c:forEach var="material" items="${applicationScope.overlayList}">
-            <img id="${material.id}" src="${material.picture}" height="150" width="auto"/>
-            <br>
-            <input type="button" value="${material.name}" name="${material.id}"
-                   onMouseOver="document.getElementById('${material.id}').style.display='block'"
-                   onMouseOut="document.getElementById('${material.id}').style.display='none'">
-            <br>
-        </c:forEach>
-
-    <c:forEach var="material" items="${applicationScope.overlayList}">
-        ${material.name}<br>
-        <input type="image" src="${material.picture}" height="200" width="auto" name="${material.id}"
-               alt="${material.name}"><br>
-    </c:forEach>
-    -->
+<c:forEach var="material" items="${applicationScope.overlayList}">
+    <img id="${material.id}" src="${material.picture}" height="150" width="auto"/>
+    <br>
+    <input type="button" value="${material.name}" name="${material.id}"
+    onMouseOver="document.getElementById('${material.id}').style.display='block'"
+    onMouseOut="document.getElementById('${material.id}').style.display='none'">
+    <br>
+</c:forEach>
+<c:forEach var="material" items="${applicationScope.overlayList}">
+    ${material.name}<br>
+    <input type="image" src="${material.picture}" height="200" width="auto" name="${material.id}"
+    alt="${material.name}"><br>
+</c:forEach>
+-->
 
 
 

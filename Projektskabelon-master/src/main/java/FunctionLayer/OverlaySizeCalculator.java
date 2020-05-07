@@ -6,6 +6,11 @@ import java.util.ArrayList;
  * @author Magdalena
  */
 public class OverlaySizeCalculator {
+    final private  static int FYRMAXDISTANCE=600;
+    final private  static int POSTSIZE=100;
+    final private  static int MMPERM=1000;
+    final private  static double SECURITYPERCENTAGE=0.05;
+
 
     //calculates spaer needed for one of the chosen sides of shed/carport/construction
     // max distance between spaer is 100 cm - counts number of spar after each post
@@ -17,7 +22,7 @@ public class OverlaySizeCalculator {
 
         for (int i = 0; i < postsheights.length - 1; i++) { //+1 because there is one more post than distances
             int tmp = amount + 1;//
-            amount = (int) (tmp + postsheights[i] / 1000); //counts number of distances between 2 spaers
+            amount = (int) (tmp + postsheights[i] / MMPERM); //counts number of distances between 2 spaers
         }
         return amount;
     }
@@ -32,12 +37,12 @@ public class OverlaySizeCalculator {
 
     //................calculates number of fyr pr wall.......................//
     public static int fyrNumberOnWall(Wall wall) {
-        int distance = wall.getLength() - 100;
+        int distance = wall.getLength() - POSTSIZE;
         int fyrPlusPost = 0;
-        if (distance % 600 == 0) {
-            fyrPlusPost = (distance / 600) + 1;
+        if (distance % FYRMAXDISTANCE == 0) {
+            fyrPlusPost = (distance / FYRMAXDISTANCE) + 1;
         } else {
-            fyrPlusPost = (distance - distance % 600) / 600 + 2;
+            fyrPlusPost = (distance - distance % FYRMAXDISTANCE) / FYRMAXDISTANCE + 2;
         }
         int justFyr = fyrPlusPost - ConstructionSizeCalculator.sidePostAmount(wall.getLength());
         return justFyr;
@@ -53,17 +58,17 @@ public class OverlaySizeCalculator {
     //............creates a List with all needed lengths of fyrs pr one Wall..............//
     public static ArrayList<Integer> fyrLengthsOneWall(Wall wall) {
         ArrayList<Integer> fyrLengthsOneWall = new ArrayList<>();
-/*
-counts number of all vertical tree elements on one wall
-counts distance between them and raising pr that distance, counts on witch idex is there a post,
-calculates and adds height of every element that is not on index of post
- */
-        int distance = wall.getLength() - 100; // 100 mm for one post
+        /*
+        counts number of all vertical tree elements on one wall
+        counts distance between them and raising pr that distance, counts on witch idex is there a post,
+        calculates and adds height of every element that is not on index of post
+         */
+        int distance = wall.getLength() - POSTSIZE; // 100 mm for one post
         int fyrPlusPost = 0;
-        if (distance % 600 == 0) {
-            fyrPlusPost = (distance / 600) + 1;
+        if (distance % FYRMAXDISTANCE == 0) {
+            fyrPlusPost = (distance / FYRMAXDISTANCE) + 1;
         } else {
-            fyrPlusPost = (distance - distance % 600) / 600 + 2;
+            fyrPlusPost = (distance - distance % FYRMAXDISTANCE) / FYRMAXDISTANCE + 2;
         }
 
         int numberOfPosts = ConstructionSizeCalculator.sidePostAmount(wall.getLength());
@@ -81,6 +86,23 @@ calculates and adds height of every element that is not on index of post
         return fyrLengthsOneWall;
     }
 
+    //................................. counts surface of a given wall.................//
+    public static double oneWallArea(Wall wall){
+        //to be able to calculate the needed amount of some material for overlay, we need to know the area of
+        // surface that's going to be covered
+        double area=-1;
+        /*Trapez area: (a+b)/2*h
+        a=minHeight, b= maxHeight, h= length
+         */
+        int maxHeight=(int) (wall.getMinHeight()+ConstructionSizeCalculator.raising(wall.getRaising(),wall.getLength()));
+        System.out.println("minH="+wall.getMinHeight()+", maxH="+maxHeight+", wallLength="+wall.getLength());
+        area=((wall.getMinHeight()+maxHeight)) /2*wall.getLength();
+
+        System.out.println("area: "+area); //returnes valeu in mm
+
+        return area;
+    }
+
 
 
 
@@ -96,51 +118,63 @@ calculates and adds height of every element that is not on index of post
      */
 
 
-    public static int overlaySpending(String materialName, double areal) throws LoginSampleException {
-        //todo fix DB !!!!!!
-        // double spending = MaterialMapper.spending(materialName);
-        double actual = 5; // spending * areal;
-        actual = actual + 0.05 * actual; //5 % extra material for cuts
 
-        if (((actual * 10) % 10) == 0) {
-            return (int) actual;
-        } else {
-            return (int) actual + 1;
+
+
+    public static double allWallsArea(Construction construction) {
+        ArrayList<Wall> allWalls = new ArrayList<>();
+        ArrayList<Wall> shedWalls = construction.getShed().getWalls();
+        System.out.println("walls in construction: "+construction.getWalls().size());
+
+        int backSideindex=-1;
+        int frontSideindex=-1;
+
+        for (Wall wall: shedWalls) {
+            if (!wall.getSide().equals("front")){
+                allWalls.add(wall);
+            }
+
         }
+        for (Wall wall: shedWalls ) {
+            if(wall.getSide().equals("back")){
+                backSideindex= shedWalls.indexOf(wall);
+            }
+        }
+        for (Wall wall: shedWalls) {
+            if (wall.getSide().equals("front")) {
+                System.out.println("first length: "+wall.getLength());
+                wall.setLength(shedWalls.get(backSideindex).getLength());
+                System.out.println("new length: "+wall.getLength());
 
-    }
-
-
-    //to be able to calculate the needed amount of some material for overlay, we need to know the areal surface that's going to be covered
-    public static double areal(int width, int length, int angle) {
-        double raising = ConstructionSizeCalculator.raising(angle, length);
-        int backWall = width * 2000;
-        double sideWall = (length * 2000) + (length * raising / 2);
-        double frontWall = width * (2000 + raising);
-        double areal = (backWall + 2 * sideWall + frontWall) / 1000 / 1000;
-        return areal;
-    }
-
-    public static double wallAreal(Wall wall){
-        double areal=-1;
-        /*Trapez areal: (a+b)/2*h
-        a=minHeight, b= maxHeight, h= length
-         */
-        int maxHeight=(int) ConstructionSizeCalculator.raising(wall.getRaising(),wall.getLength());
-        areal=(wall.getMinHeight()+maxHeight)/2*wall.getLength();
-
-        return areal;
-    }
-
-    public static double allWallsAreal(Construction construction) {
-        ArrayList<Wall> allWalls = construction.getShed().getWalls();
+                allWalls.add(wall);
+            }
+        }
         allWalls.addAll(construction.getWalls());
-        double areal = 0;
-        for (Wall wall : allWalls) {
-            areal = wall.getLength() * wall.getMinHeight()
-                    + 0.5 * ConstructionSizeCalculator.raising(wall.getRaising(), wall.getLength()) * wall.getLength();
+
+        double totalArea = 0;
+        for (int i = 0; i < allWalls.size() ; i++) {
+
+            double area=oneWallArea(allWalls.get(i));
+            totalArea=totalArea+area;
+            System.out.println("wall: "+allWalls.get(i)+" area: "+ area+"\n"+"total Area:" +totalArea+"\n");
         }
-        return areal;
+
+        return totalArea/MMPERM/MMPERM;
+    }
+
+    public static int overlaySpending(String materialName, double area) throws LoginSampleException {
+        //todo fix DB !!!!!!
+
+        //double spending = MaterialMapper.spending(materialName);
+        double needed = 5; // spending * area;
+        needed = needed + SECURITYPERCENTAGE * needed; //5 % extra material for cuts
+
+        if (((needed * 10) % 10) == 0) {
+            return (int) needed;
+        } else {
+            return (int) needed + 1;
+        }
+
     }
 
 

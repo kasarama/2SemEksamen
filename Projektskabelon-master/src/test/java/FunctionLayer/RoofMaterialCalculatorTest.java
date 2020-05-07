@@ -37,7 +37,9 @@ public class RoofMaterialCalculatorTest {
         RoofMaterialCalculator rmc;
         con.setConstructionLength(4500);
         con.setConstructionWidth(3500);
-        roof = new RoofFlat(0, con.getConstructionLength(), con.getConstructionWidth(),3);
+
+        roof = new RoofFlat(0, con.getConstructionLength(), con.getConstructionWidth(), 3);
+
         con.setRoof(roof);
         RoofSizing rs = new RoofSizing(con);
         rmc= new RoofMaterialCalculator(con);

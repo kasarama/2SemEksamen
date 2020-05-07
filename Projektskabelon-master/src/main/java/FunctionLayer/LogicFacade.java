@@ -21,8 +21,24 @@ public class LogicFacade {
         return user;
     }
 
-    public static Material getMaterial(String keyword) throws LoginSampleException {
-        return MaterialMapper.getMaterial(keyword);
+    public static Material getMaterialBySize(int size) throws LoginSampleException {
+        return MaterialMapper.getMaterialBySize(size);
+    }
+    public static Material getMaterialByID(int id) throws LoginSampleException {
+        return MaterialMapper.getMaterialByID(id);
+    }
+
+    public static String getUnitByName(String name) throws LoginSampleException {
+        String unit = MaterialMapper.getUnitByName(name);
+        return unit;
+    }
+    public static int getWidthByID(int id, String name) throws LoginSampleException {
+        int width = MaterialMapper.getWidthByID(id, name);
+        return width;
+    }
+    public static int getThicknessByID(int id) throws LoginSampleException {
+        int thickness = MaterialMapper.getThicknessByID(id);
+        return thickness;
     }
 
     //call the static method that gets the ROOF materials data from DB - static = can be called without creating an obj.

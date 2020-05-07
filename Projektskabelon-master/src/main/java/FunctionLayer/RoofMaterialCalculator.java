@@ -2,6 +2,9 @@ package FunctionLayer;
 
 public class RoofMaterialCalculator {
 
+    // TODO gem vandbræt, bundskruer, tætningsprofil
+
+
     Construction construction;
 
     RoofSizing roofSizing;
@@ -32,12 +35,11 @@ public class RoofMaterialCalculator {
 
     //Antal T600 Trapezplader
     public int quantityOfT600ForRoof() {
-         //Hvis tag har rejsning byttes der om på længde og bredde beregning.
+        //Hvis tag har rejsning byttes der om på længde og bredde beregning.
        /* if (construction.getRoof().getIsPitched()){
             temp = roofLength;
             roofLength = roofWidth;
             roofWidth = temp;
-
             temp = trapezpladeWidth;
             trapezpladeWidth = T600RoofPlateLength;
             T600RoofPlateLength = temp;
@@ -206,6 +208,7 @@ public class RoofMaterialCalculator {
         return rafts;
     }
 
+
     // Vandbræt
     public static int vandbræt360(int length, int width) {
         int vandbrætAntal = oversternboartU360(length, width);
@@ -225,7 +228,6 @@ public class RoofMaterialCalculator {
             int samletAreal = length*width;
             int numberOfT300 = samletAreal/T300Areal;
             int numberOfT600 = samletAreal/T600Areal;
-
             // Hvis antallet af T300 er mindre end T600 bruges T300
             if (numberOfT300<numberOfT600){
                 numberOfTrapezplader = numberOfT300;
@@ -234,7 +236,6 @@ public class RoofMaterialCalculator {
             }
             return numberOfTrapezplader;
         }
-
         public static String roofType(int length, int width){
             String trapezplader = "";
             int T300Areal = 3;
@@ -242,7 +243,6 @@ public class RoofMaterialCalculator {
             int samletAreal = (length/100)*(width/100);
             int numberOfT300 = samletAreal/T300Areal;
             int numberOfT600 = samletAreal/T600Areal;
-
             // Hvis antallet af T300 er mindre end T600 bruges T300
             if (numberOfT300<numberOfT600){
                 trapezplader = "T300";
@@ -312,16 +312,5 @@ public class RoofMaterialCalculator {
         return brancketScrewPk;
     }
 
-    // Bræddebolte
-    public static int carriageBolts(int length, int width) {
-        int carriageBolts = ConstructionMaterialCalculator.posts(length, width) * 2;
-        return carriageBolts;
-    }
-
-    // Firkantskiver
-    public static int squares(int length, int width) {
-        int squares = ConstructionMaterialCalculator.posts(length, width);
-        return squares;
-    }
 
 }
