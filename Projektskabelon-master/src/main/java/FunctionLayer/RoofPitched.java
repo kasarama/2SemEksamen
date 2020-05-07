@@ -8,7 +8,7 @@ public class RoofPitched extends Roof {
 
 
     public RoofPitched(int height, int length, int width, int degree) {
-        super(height, length, width, degree, true);
+        super(height, length, width, degree, true, 0);
         tagMaterialList = new ArrayList();
     }
 
@@ -22,5 +22,6 @@ public class RoofPitched extends Roof {
     public void setTagMaterialList(ArrayList<Material> tagMaterialList) {
         this.tagMaterialList = tagMaterialList;
     }
+
 
 }

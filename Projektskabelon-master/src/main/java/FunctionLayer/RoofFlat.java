@@ -5,24 +5,14 @@ import java.util.ArrayList;
 public class RoofFlat extends Roof {
 
     private ArrayList<Material> tagMaterialList;
-    private int roofTiltDegree;
-    private double roofRaisedCmPrCmLength = 3.0 / 100.0; //TODO - Final fordi det er en konstant?
 
-    public RoofFlat(int height, int length, int width) {
-        super(height, length, width, 0, false);
-        super.setDegree(roofTiltDegree);
+    public RoofFlat(int height, int length, int width, int tilt) {
+        //Math.round() fordi ellers vil det være 1 grad og den skal mindst være 3 cm pr 100cm i stigning hvilket svarer
+        // til 1,7... grader
+        super(height, length, width, tiltToDegree,false, tilt);
         tagMaterialList = new ArrayList();
     }
-
-    //Beregner af fladt tags hældning i grader
-    public int flatRoofDegreeCalculator() {
-        roofTiltDegree = (int) Math.atan(roofRaisedCmPrCmLength);
-        return roofTiltDegree;
-    }
-
-    public double getRoofRaisedCmPrCmLength() {
-        return roofRaisedCmPrCmLength;
-    }
+    static int tiltToDegree=(int) Math.round(Math.toDegrees(Math.atan(3.0 / 100.0)));
 
     @Override
     public ArrayList<Material> getTagMaterialList() {
@@ -33,7 +23,10 @@ public class RoofFlat extends Roof {
     public void setTagMaterialList(ArrayList<Material> tagMaterialList) {
         this.tagMaterialList = tagMaterialList;
     }
-
-
+    /*//Constructor used by Magda
+    public RoofFlat(int height, int length, int width, int degree, boolean pitched) {
+        super(height, length, width, degree, pitched);
+    }
+*/
 
 }

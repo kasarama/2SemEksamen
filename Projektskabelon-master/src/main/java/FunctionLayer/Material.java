@@ -15,9 +15,6 @@ public class Material {
     private String keyword;
     private String category;
     private String picture;
- //189 200
-    // 254 100 500 skre
-    //120  374
 
 
     public Material() {

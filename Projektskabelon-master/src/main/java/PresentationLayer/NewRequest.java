@@ -5,7 +5,9 @@ import FunctionLayer.LoginSampleException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
+/**
+ * @author Magdalena
+ */
 public class NewRequest extends Command {
 
     @Override
@@ -14,6 +16,6 @@ public class NewRequest extends Command {
 
         HttpSession session = request.getSession();
         session.setAttribute("carportRequest", null);
-        return "carportrequest";
+        return "carportBase";
     }
 }

@@ -13,6 +13,10 @@ public class Construction {
     private ArrayList<Material> fundamentMaterials; // stolper, rem, spær, over- og under- stern plus de metal elementer
     private double cost; //samlet pris på hver material fra hver liste
     private double salePrice; //cost pris plus VAT eller + det employee vil tilføje eller give som rabat
+    private ArrayList<Wall> walls;
+    private String overlay;
+
+
 
 
     public Construction() {
@@ -107,9 +111,23 @@ public class Construction {
         this.roof = roof;
     }
 
+    public ArrayList<Wall> getWalls() {
+        return walls;
+    }
 
+    public void setWalls(ArrayList<Wall> walls) {
+        this.walls = walls;
+    }
 
-    @Override
+    public String getOverlay() {
+        return overlay;
+    }
+
+    public void setOverlay(String overlay) {
+        this.overlay = overlay;
+    }
+
+    /*@Override
     public String toString() {
         return "Carport{" +
                 "width=" + carportWidth +
@@ -117,5 +135,5 @@ public class Construction {
                 ", shed=" + shed.getWidth()+"x"+shed.getDepth()+shed.getSide() +
                 ", pitchedroof? :" + roof.getIsPitched() +
                 '}';
-    }
+    }*/
 }

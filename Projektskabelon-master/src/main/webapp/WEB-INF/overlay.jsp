@@ -1,4 +1,5 @@
-<%@ page import="CarportUtil.Initializer" %><%--
+<%@ page import="CarportUtil.Initializer" %>
+<%@ page import="FunctionLayer.LoginSampleException" %><%--
   Created by IntelliJ IDEA.
   User: magda
   Date: 25-04-2020
@@ -13,13 +14,21 @@
 <%
     // if i'm the first user on this application, then set the overlayList. (else the list already exists)
     if (request.getServletContext().getAttribute("overlayList") == null) {
-        request.getServletContext().setAttribute("overlayList", Initializer.getOverlayList());
+        try {
+            request.getServletContext().setAttribute("overlayList", Initializer.getOverlayList());
+        } catch (LoginSampleException e) {
+            e.printStackTrace();
+        }
     }
 %>
 <%
     // if i'm the first user on this application, then set the overlayMaterialsList. (else the list already exists)
     if (request.getServletContext().getAttribute("overlayMaterialsList") == null) {
-        request.getServletContext().setAttribute("overlayMaterialsList", Initializer.getOverlayList());
+        try {
+            request.getServletContext().setAttribute("overlayMaterialsList", Initializer.getOverlayList());
+        } catch (LoginSampleException e) {
+            e.printStackTrace();
+        }
     }
 %>
 
@@ -39,15 +48,10 @@
         <c:choose>
             <c:when test="${shed != 0}">
                 Vælg beklædning
-                <select name="overlayID" class="form-control">
-                    <option value="1">aaaall</option>
-                    <option value="2">bbbbbbeauty</option>
-                    <option value="3">ccccccom on!</option>
-                    <!--
+                <select name="overlayName" class="form-control">
                     <c:forEach var="material" items="${applicationScope.overlayList}">
-                        <option value="${material.id}">${material.name}</option>
+                        <option value="${material.name}">${material.name}</option>
                     </c:forEach>
--->
                 </select>
                 Du kan også vælge at beklæde vægger af construction:
                 <div class="form-check">
@@ -90,42 +94,48 @@
                         Bagvæg
                     </label>
                 </div>
-                <select name="overlayID" class="form-control">
+                <select name="overlayName" class="form-control">
                     <c:forEach var="material" items="${applicationScope.overlayList}">
-                        <option value="${material.id}">${material.name}</option>
+                        <option value="${material.name}">${material.name}</option>
                     </c:forEach>
                 </select>
             </c:otherwise>
         </c:choose>
-        <input type="submit" name="justShed" value="Videre">
-        <input type="submit" name="shedOverlay" value="shoe shed overlay">
+        <input type="submit" name="walls" value="Videre">
+        <input type="submit" name="shedOverlay" value="SHOW shed overlay">
     </form>
 
     <h2>
         <c:set var = "msg" value = "${requestScope.notReady}"/>
-        <c:if test = "${salary!=null}">
+        <c:if test = "${msg!=null}">
         <p><c:out value = "${msg}"/><p>
         </c:if>
     </h2>
 
-    <!--
-        <c:forEach var="material" items="${applicationScope.overlayList}">
-            <img id="${material.id}" src="${material.picture}" height="150" width="auto"/>
-            <br>
-            <input type="button" value="${material.name}" name="${material.id}"
-                   onMouseOver="document.getElementById('${material.id}').style.display='block'"
-                   onMouseOut="document.getElementById('${material.id}').style.display='none'">
-            <br>
-        </c:forEach>
-
-    <c:forEach var="material" items="${applicationScope.overlayList}">
-        ${material.name}<br>
-        <input type="image" src="${material.picture}" height="200" width="auto" name="${material.id}"
-               alt="${material.name}"><br>
-    </c:forEach>
-    -->
 
 </form>
+<form name="startOver" action="FrontController" method="POST">
+    <input type="hidden" name="target" value="newrequest">
+    <input type="submit" name="newrequest" value="Start forfra">
+</form>
+
+<!--
+<c:forEach var="material" items="${applicationScope.overlayList}">
+    <img id="${material.id}" src="${material.picture}" height="150" width="auto"/>
+    <br>
+    <input type="button" value="${material.name}" name="${material.id}"
+    onMouseOver="document.getElementById('${material.id}').style.display='block'"
+    onMouseOut="document.getElementById('${material.id}').style.display='none'">
+    <br>
+</c:forEach>
+<c:forEach var="material" items="${applicationScope.overlayList}">
+    ${material.name}<br>
+    <input type="image" src="${material.picture}" height="200" width="auto" name="${material.id}"
+    alt="${material.name}"><br>
+</c:forEach>
+-->
+
+
 
 
 <!-- Optional JavaScript -->
