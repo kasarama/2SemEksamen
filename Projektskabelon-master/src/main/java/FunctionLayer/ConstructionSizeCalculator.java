@@ -10,14 +10,23 @@ public class ConstructionSizeCalculator {
     //todo we need to update postHights with data about the length to be berried in the ground. We can also ask Tu if
     // the posts could be chosen to be set on a surface instead of in the ground
 
+    final private  static int POSTSIZE=100;
+    final private  static int CMPERM=100;
+    final private  static int MAXPOSTDISTANCE=3000;
+    final private  static int MAXROWSISTANCE=6000;
+    final private  static int DOORWIDTH=1000;
+
+
+
+
     //counts how many posts should there be on one side of a carport or a shed
     public  static int sidePostAmount(int size){
         int numberOfPost;
-        size=size-100;
-        if(size%3000==0){ //
-            numberOfPost=size/3000+1;
+        size=size-POSTSIZE;
+        if(size%MAXPOSTDISTANCE==0){ //
+            numberOfPost=size/MAXPOSTDISTANCE+1;
         } else {
-            numberOfPost= ( size - size%3000)/3000+2; //(750cm -(3*300) =0) 750%300=2 2*300=600 (150????)
+            numberOfPost= ( size - size%MAXPOSTDISTANCE)/MAXPOSTDISTANCE+2; //(750cm -(3*300) =0) 750%300=2 2*300=600 (150????)
         }
         return numberOfPost;
     }
@@ -25,13 +34,13 @@ public class ConstructionSizeCalculator {
 
     //counts distance between posts on the side
     public static int postDistanceMax3000(int size) {
-        return (size-100)/(sidePostAmount(size)-1);
+        return (size-POSTSIZE)/(sidePostAmount(size)-1);
     }
 
     //counts how much the roof drops/raises on the given distance in mm
     public static double raising(int angle, int distance){
 
-        return  angle*distance/100;
+        return  angle*distance/CMPERM;
     }
 
     // fills up the array with heights of posts on the one side of the shed or carport starting from the shortest one
@@ -53,10 +62,10 @@ public class ConstructionSizeCalculator {
     //counts how many rows of post should there be because max distans between posts is 600 cm from side to side
     public static int postRows (int width){
         int rows;
-        if(width%6000==0){
-            rows=width/6000+1;
+        if(width%MAXROWSISTANCE==0){
+            rows=width/MAXROWSISTANCE+1;
         } else {
-            rows=(width - width%6000)/6000 +2;
+            rows=(width - width%MAXROWSISTANCE)/MAXROWSISTANCE +2;
         }
         return  rows;
     }
@@ -67,7 +76,7 @@ public class ConstructionSizeCalculator {
     //counts number of post on the front side of the shed
     public static int shedFrontPostsAmount(int width) {
         //method cunts posts starting from the door not from the very first post. That missing post comes in door calculation
-        width = width - 1050;
+        width = width - DOORWIDTH-POSTSIZE/2;
 
         return sidePostAmount(width);
     }

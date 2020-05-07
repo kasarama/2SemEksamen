@@ -21,6 +21,7 @@ public class CarportBase extends Command {
         int constructionHeight = Integer.parseInt(request.getParameter("constructionHeight"));
         String shedSide = "";
         final int RAISING = 3;
+        final int POSTWIDTH = 100;
         int shedWidth = 0;
 
 
@@ -39,7 +40,7 @@ public class CarportBase extends Command {
             shedWidthParameter = Integer.parseInt(request.getParameter("shedWidthParameter"));
             shedDepth = Integer.parseInt(request.getParameter("shedDepth"));
             shedSide = request.getParameter("shedSide");
-            shedWidth = (carportWidth / shedWidthParameter);
+            shedWidth = (int) ( (carportWidth / shedWidthParameter)+(0.5*POSTWIDTH) );
             shed.setWidth(shedWidth);
             shed.setDepth(shedDepth);
             shed.setSide(shedSide);
@@ -50,10 +51,10 @@ public class CarportBase extends Command {
 
         Roof roofBase;
         if (roofType == 1) {
-            roofBase = new RoofPitched(0, carportLength+shedDepth-100, carportWidth, 0);
+            roofBase = new RoofPitched(0, carportLength+shedDepth-POSTWIDTH, carportWidth, 0);
             roofBase.setPitched(true);
         } else {
-            roofBase = new RoofFlat(0, carportLength+shedDepth-100, carportWidth, RAISING);
+            roofBase = new RoofFlat(0, carportLength+shedDepth-POSTWIDTH, carportWidth, RAISING);
         }
         constructionBase.setRoof(roofBase);
 
