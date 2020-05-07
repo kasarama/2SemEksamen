@@ -22,18 +22,19 @@ public class MaterialMapper {
 
 
 // @author Mia
-    public static Material getMaterialBySize(int size) throws LoginSampleException {
+    // TODO join tables for at få et materiale frem - denne skal ikke slettes selvom den ikke virker
+    public static Material getMaterialBySizeName(int length, String name) throws LoginSampleException {
         Material material = new Material();
         try {
             Connection con = Connector.connection();
-            String SQL = "SELECT materialID, size FROM fogdb.sizes "
-                    + "WHERE size=?";
+            String SQL = "SELECT variations.materialID, variations.length, materials.name FROM fogdb.variations"
+                    + "WHERE variations.length=?";
             PreparedStatement ps = con.prepareStatement(SQL);
-            ps.setInt(1, size);
+            ps.setInt(1, length);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 int materialID = rs.getInt("materialID");
-                material = new Material(materialID, size);
+                material = new Material(materialID, length);
             }else {
                 System.out.println("ResultSet.next()=false");
                 return null;  }//todo handle null object there where method is being used;

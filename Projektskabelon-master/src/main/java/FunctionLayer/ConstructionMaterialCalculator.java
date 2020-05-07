@@ -38,7 +38,7 @@ public class ConstructionMaterialCalculator {
         int counter = 0;
         Material rem = null;
         for (int remPiece : remPieces) {
-            rem = LogicFacade.getMaterialBySize(remPiece);
+            rem = LogicFacade.getMaterialBySizeName(remPiece, "");
             rem.setName("SPÆRTRÆ UBEHANDLET");
             rem.setUnit(LogicFacade.getUnitByName(rem.getName()));
             rem.setWidth(LogicFacade.getWidthByID(rem.getId(), rem.getName()));
@@ -59,7 +59,7 @@ public class ConstructionMaterialCalculator {
         int size = constructionSizeCalculator.roofSpaerLength(construction);
         Material spær = null;
         for (int i = 0; i < amount; i++) {
-            spær = LogicFacade.getMaterialBySize(size);
+            spær = LogicFacade.getMaterialBySizeName(size, "");
             spær.setName("SPÆRTRÆ UBEHANDLET");
             spær.setUnit(LogicFacade.getUnitByName(spær.getName()));
                 spær.setWidth(LogicFacade.getWidthByID(spær.getId(), spær.getName()));
@@ -76,7 +76,7 @@ public class ConstructionMaterialCalculator {
         int counter2 = 0;
         Material underStern = null;
         for (int underSternObject : understernPieces) {
-            underStern = LogicFacade.getMaterialBySize(underSternObject);
+            underStern = LogicFacade.getMaterialBySizeName(underSternObject, "");
             underStern.setName("TRYKIMPRENERET BRÆDT");
             underStern.setUnit(LogicFacade.getUnitByName(underStern.getName()));
             underStern.setId(2);
@@ -95,7 +95,7 @@ public class ConstructionMaterialCalculator {
         // Overstern
         int[] oversternPieces = constructionSizeCalculator.overSternPieces(construction);
         for (int overSternObject : oversternPieces) {
-            Material overStern = LogicFacade.getMaterialBySize(overSternObject);
+            Material overStern = LogicFacade.getMaterialBySizeName(overSternObject, "");
             overStern.setName("TRYKIMPRENERET BRÆDT");
             overStern.setUnit(LogicFacade.getUnitByName(overStern.getName()));
             overStern.setId(3);
