@@ -1,6 +1,6 @@
 package FunctionLayer;
 
-public class PitchedRoofMaterialCalculator extends Roof {
+public class PitchedRoofMaterialCalculatorMona extends Roof {
     //todo: fix attributes with attributes from Roof?
 
 
