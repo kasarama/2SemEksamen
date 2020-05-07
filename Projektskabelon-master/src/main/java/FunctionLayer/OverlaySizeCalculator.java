@@ -100,7 +100,7 @@ public class OverlaySizeCalculator {
 
         System.out.println("area: "+area); //returnes valeu in mm
 
-        return area;
+        return area/MMPERM/MMPERM;
     }
 
 
@@ -159,7 +159,7 @@ public class OverlaySizeCalculator {
             System.out.println("wall: "+allWalls.get(i)+" area: "+ area+"\n"+"total Area:" +totalArea+"\n");
         }
 
-        return totalArea/MMPERM/MMPERM;
+        return totalArea;
     }
 
     public static int overlaySpending(String materialName, double area) throws LoginSampleException {

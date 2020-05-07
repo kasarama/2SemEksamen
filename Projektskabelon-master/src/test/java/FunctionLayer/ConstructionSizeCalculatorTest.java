@@ -10,6 +10,7 @@ import static org.junit.Assert.*;
 public class ConstructionSizeCalculatorTest {
     Construction construction = new Construction();
     ConstructionSizeCalculator constructionSizeCalculator = new ConstructionSizeCalculator();
+    Construction magdaTest = new Construction();
 
 
     @Before
@@ -26,45 +27,55 @@ public class ConstructionSizeCalculatorTest {
         construction.setConstructionWidth(5000);
         construction.setConstructionLength(6000);
 
+
+////.......................SETUP FOR MAGDA'S TEST:....................../////
+        magdaTest.setCarportLength(9100);
+        magdaTest.setCarportWidth(12300);
+        Shed shedMagda = new Shed((magdaTest.getCarportWidth()/2),7600,"left");
+        magdaTest.setShed(shedMagda);
+        Roof roof = new RoofFlat(0, construction.getConstructionLength(), magdaTest.getConstructionWidth(),3);
+        pitchedRoof.setDegree(3);
+        magdaTest.setRoof(roof);
+
     }
 
 
-    @Test
+    @Test // Magda
     public void postRows() {
-        int rows = ConstructionSizeCalculator.postRows(construction.getCarportWidth());
-        assertEquals(4, rows);
+        int rows= ConstructionSizeCalculator.postRows(magdaTest.getCarportWidth());
+        assertEquals(4,rows);
     }
 
 
-    @Test
+    @Test // Magda
     public void sidePostAmount() {
-        int actual = ConstructionSizeCalculator.sidePostAmount(8500);
+        int actual= ConstructionSizeCalculator.sidePostAmount(8500);
         int expected = 4;
-        assertEquals(expected, actual);
+        assertEquals(expected,actual);
     }
 
-    @Test
+    @Test // Magda
     public void postDistanceMax300() {
-        int actual = ConstructionSizeCalculator.postDistanceMax3000(8600);
-        int exp = 2833;
-        assertEquals(exp, actual);
+        int actual= ConstructionSizeCalculator.postDistanceMax3000(8600);
+        int exp =2833;
+        assertEquals(exp,actual);
 
     }
 
-    @Test
+    @Test // Magda
     public void shedFrontPostsAmount() {
         int actual = ConstructionSizeCalculator.shedFrontPostsAmount(1400);
-        int expected = 2;
-        assertEquals(expected, actual);
+        int expected=2;
+        assertEquals(expected,actual);
     }
 
 
-    @Test
+    @Test // Magda
     public void postsHeights() {
-        Integer[] heights = ConstructionSizeCalculator.postsHeights(2000, 3, 7200);
+        Integer[]heights= ConstructionSizeCalculator.postsHeights(2000,3,7200);
 
         int result = heights[3];
-        assertEquals(2210, result);
+        assertEquals(2210,result);
         /*
         distance mellem stolper: 2366,7 og det svarer til 2366 som int
         højde stiger 70,98 mm dvs 70 som int
@@ -75,13 +86,23 @@ public class ConstructionSizeCalculatorTest {
     }
 
 
-    @Test
+    @Test // Magda
     public void raising() {
-        double actual = ConstructionSizeCalculator.raising(8, 9750);
-        double expected = 780;
-        assertEquals(expected, actual, 0.01);
+        double actual=ConstructionSizeCalculator.raising(8,9750);
+        double expected=780;
+        assertEquals(expected,actual,0.01);
 
     }
+
+    @Test // Magda
+    public void carportMinHeight() {
+        int minH = ConstructionSizeCalculator.carportMinHeight(2000, magdaTest.getShed().getDepth(),3);
+        int exp =2228;
+        assertEquals(exp,minH);
+    }
+
+
+
 
     @Test
     public void possibleRems() {
@@ -219,10 +240,4 @@ public class ConstructionSizeCalculatorTest {
 
     }
 
-    @Test
-    public void carportMinHeight() {
-        int minH = ConstructionSizeCalculator.carportMinHeight(2000, construction.getShed().getDepth(), 3);
-        int exp = 2228;
-        assertEquals(exp, minH);
-    }
 }
