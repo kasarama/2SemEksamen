@@ -171,13 +171,12 @@ public class MaterialMapper {
                 //get the data rows:
                 int materialID = rs.getInt("materialID");
                 String name = rs.getString("name");
-                int size = rs.getInt("size");
                 String unit = rs.getString("unit");
                 String keyword = rs.getString("keyword");
                 String category = rs.getString("category");
 
                 //create a new material obj of 'Material' class and pass the gotten data in it (materialID, name, size etc)
-                Material material = new Material(materialID, name, size, unit, keyword, category);// data gets stored in 'material'
+                Material material = new Material(materialID, name, 0, unit, keyword, category);// data gets stored in 'material'
                 //add the gotten 'info' data to the 'InfoList'
                 materialList.add(material);
             }
@@ -203,12 +202,11 @@ public class MaterialMapper {
                 }
                 int materialID = rs.getInt("materialID");
                 String name = rs.getString("name");
-                int size = rs.getInt("size");
                 String unit = rs.getString("unit");
                 String keyword = rs.getString("keyword");
                 String category = rs.getString("category");
 
-                Material material = new Material(materialID, name, size, unit, keyword, category);
+                Material material = new Material(materialID, name, 0, unit, keyword, category);
                 materialList.add(material);
             }
         }
@@ -251,15 +249,14 @@ public class MaterialMapper {
     public static void addMatDB(Material material) throws LoginSampleException {
         try {
             Connection con = Connector.connection();
-            String SQL = "INSERT INTO materials (name,size,unit,keyword,category,price,picture) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            String SQL = "INSERT INTO materials (name,unit,keyword,category,price,picture) VALUES (?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement ps = con.prepareStatement(SQL);
             ps.setString(1, material.getName());
-            ps.setInt(2, material.getSize());
-            ps.setString(3, material.getUnit());
-            ps.setString(4, material.getKeyword());
-            ps.setString(5, material.getCategory());
-            ps.setDouble(6, material.getPrice());
-            ps.setString(7, material.getPicture());
+            ps.setString(2, material.getUnit());
+            ps.setString(3, material.getKeyword());
+            ps.setString(4, material.getCategory());
+            ps.setDouble(5, material.getPrice());
+            ps.setString(6, material.getPicture());
             ps.executeUpdate();
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -278,7 +275,7 @@ public class MaterialMapper {
         try
         {
             Connection con = Connector.connection();
-            String SQL = "SELECT materialID, name, size, unit, price, picture FROM materials WHERE category='overlay'";
+            String SQL = "SELECT materialID, name, unit, price, picture FROM materials WHERE category='overlay'";
             PreparedStatement ps = con.prepareStatement(SQL);
             ResultSet rs = ps.executeQuery();
             while (rs.next())
@@ -287,7 +284,6 @@ public class MaterialMapper {
                 int materialID = rs.getInt("materialID");
                 String name = rs.getString("name");
                 String picture = rs.getString("picture");
-                int size = rs.getInt("size");
                 String unit = rs.getString("unit");
                 double price = rs.getDouble("price");
 
@@ -295,7 +291,6 @@ public class MaterialMapper {
                 Material material = new Material();
                 material.setId(materialID);
                 material.setName(name);
-                material.setSize(size);
                 material.setUnit(unit);
                 material.setPrice(price);
                 material.setPicture(picture);

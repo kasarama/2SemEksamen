@@ -18,6 +18,7 @@ public class RoofMaterialCalculatorTest {
         con.setConstructionLength(12000);
         con.setConstructionWidth(3500);
         roof = new RoofFlat(0, con.getConstructionLength(), con.getConstructionWidth(), 3);
+
         con.setRoof(roof);
         RoofSizing rs = new RoofSizing(con);
         rmc= new RoofMaterialCalculator(con);
@@ -38,6 +39,7 @@ public class RoofMaterialCalculatorTest {
         con.setConstructionLength(4500);
         con.setConstructionWidth(3500);
         roof = new RoofFlat(0, con.getConstructionLength(), con.getConstructionWidth(), 3);
+
         con.setRoof(roof);
         RoofSizing rs = new RoofSizing(con);
         rmc= new RoofMaterialCalculator(con);
@@ -58,6 +60,7 @@ public class RoofMaterialCalculatorTest {
         con.setConstructionLength(8000);
         con.setConstructionWidth(3500);
         roof = new RoofFlat(0, con.getConstructionLength(), con.getConstructionWidth(), 3);
+
         con.setRoof(roof);
         RoofSizing rs = new RoofSizing(con);
         rmc= new RoofMaterialCalculator(con);
@@ -78,6 +81,7 @@ public class RoofMaterialCalculatorTest {
         con.setConstructionLength(4500);
         con.setConstructionWidth(3500);
         roof = new RoofFlat(0, con.getConstructionLength(), con.getConstructionWidth(), 3);
+
         con.setRoof(roof);
         RoofSizing rs = new RoofSizing(con);
         rmc= new RoofMaterialCalculator(con);
@@ -98,6 +102,7 @@ public class RoofMaterialCalculatorTest {
         con.setConstructionLength(8000);
         con.setConstructionWidth(3500);
         roof = new RoofFlat(0, con.getConstructionLength(), con.getConstructionWidth(), 3);
+
         con.setRoof(roof);
         RoofSizing rs = new RoofSizing(con);
         rmc= new RoofMaterialCalculator(con);
