@@ -25,9 +25,9 @@
 
     <input class="btn btn-primary" type="submit" value="Videre">
 </form>
-   <button type="button" >
-       <a href="FrontController?target=redirect&destination=overlay">Videre til overlay</a>
-   </button>
+<button type="button" >
+    <a href="FrontController?target=redirect&destination=overlay">Videre til overlay</a>
+</button>
 
 </form>
 <form name="startOver" action="FrontController" method="POST">
