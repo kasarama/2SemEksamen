@@ -34,7 +34,7 @@ public class ConstructionMaterialCalculator {
 
 
         // Rem
-        int[] remPieces = constructionSizeCalculator.remPieces(construction, construction.getCarportLength(), construction.getConstructionWidth(), construction.getShedDepth());
+        int[] remPieces = constructionSizeCalculator.remPieces(construction);
         int counter = 0;
         Material rem = null;
         for (int remPiece : remPieces) {

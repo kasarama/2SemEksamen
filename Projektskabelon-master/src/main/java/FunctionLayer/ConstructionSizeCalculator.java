@@ -88,7 +88,7 @@ public class ConstructionSizeCalculator {
 
 
     public int possibleRems(Construction construction){
-        int[] possibleRems = new int[]{300, 360, 420, 480, 540, 600, 660, 720};
+        int[] possibleRems = new int[]{3000, 3600, 4200, 4800, 5400, 6000, 6600, 7200};
         int carportLength = construction.getCarportLength();
         int wantedRem = 0;
         int difference = 0;
@@ -98,14 +98,14 @@ public class ConstructionSizeCalculator {
             // Tag hver forskel, og find den nærmeste positive værdi
             difference = possibleRems[i]-carportLength;
             if (difference>=0){
-                wantedRem = carportLength+difference;
+                wantedRem = (carportLength+difference)/10;
                 break;
             }
         }
         return wantedRem;
     }
 
-    public int[] remPieces (Construction construction, int carportLength, int constructionWidth, int shedDept){
+    public int[] remPieces (Construction construction){
         //todo count witch lengths of "rem" tree chould be used so the connections ar in the right places if "rem"
         // should be compoused of more than one piece and return them in Integer[]
         /*
@@ -135,23 +135,19 @@ public class ConstructionSizeCalculator {
          */
         //todo in ConstrucionMaterialCalculator implement the method that will return Material object for each of pieces
         int[] remPieces = new int[0];
-        //int constructionWidth = construction.getConstructionWidth()*10;
-        constructionWidth = constructionWidth*10;
-        int constructionLength = (construction.getCarportLength() + construction.getShedDepth())*10;
-        //int carportLength = construction.getCarportLength()*10;
-        carportLength = carportLength*10;
-        //int shedDept = construction.getShedDepth()*10;
-        shedDept = shedDept*10;
+        int constructionLength = (construction.getCarportLength() + construction.getShedDepth());
+        int carportLength = construction.getCarportLength();
+        int constructionWidth = construction.getConstructionWidth();
+        int shedDept = construction.getShedDepth();
         int tmpRem = possibleRems(construction);
-        // Hvis noShed = 0 er der ikke noget skur
-        int noShed = construction.getShedDepth();
+        // Hvis shedDept = 0 er der ikke noget skur
 
         if (constructionWidth<6000){
-            if (carportLength>7200 && noShed == 0){
+            if (carportLength>7200 && shedDept == 0){
                 // Length = 750 cm, sidePostAmount = 4, postDistanceMax300 = 246,67 cm
                 // Samlet på 2. stolpe: (1*300 og 1*480)*2
                 remPieces = new int[]{300, 300, 480, 480};
-            } else if (carportLength<=7200 && noShed==0){
+            } else if (carportLength<=7200 && shedDept==0){
                 remPieces = new int[]{tmpRem, tmpRem};
             } else if (constructionLength>7200){
                 if (carportLength<=7200 && shedDept<=3000){
@@ -170,7 +166,7 @@ public class ConstructionSizeCalculator {
             }
         // Hvis bredden er over 600 cm:
         } else {
-            if (carportLength>7200 && noShed == 0){
+            if (carportLength>7200 && shedDept == 0){
                 // Length = 750 cm, sidePostAmount = 4, postDistanceMax300 = 246,67 cm
                 // Samlet på 2. stolpe: (1*300 og 1*480)*3
                 remPieces = new int[]{300, 300, 300, 480, 480, 480};
@@ -199,7 +195,7 @@ public class ConstructionSizeCalculator {
         //todo in ConstrucionMaterialCalculator implement method that will return a material of that screw with size that equals this number
         // 2 brædebolte pr. stolpe
         int carportLength = construction.getCarportLength();
-        int carportWidth = construction.getCarportWidth()*10;
+        int carportWidth = construction.getCarportWidth();
         int shedDept = construction.getShedDepth();
         int bolts;
         if (shedDept==0){
@@ -226,7 +222,7 @@ public class ConstructionSizeCalculator {
         //todo in ConstrucionMaterialCalculator implement method that will return a material of that screw with size that equals this number
         // 1 firkantskirver pr. stolpe
         int carportLength = construction.getCarportLength();
-        int carportWidth = construction.getCarportWidth()*10;
+        int carportWidth = construction.getCarportWidth();
         int shedDept = construction.getShedDepth();
         int squares;
         if (shedDept==0){
@@ -276,7 +272,7 @@ public class ConstructionSizeCalculator {
         // - one for left and one for right with amount of number of spaer and one Material that is the beslag skruer where the amount is roofSpaernumber x2x3x3
 
         // Der skal være max 500 mm mellem spærne
-        int constructionLength = construction.getConstructionLength()*10;
+        int constructionLength = construction.getConstructionLength();
         double almostSpaerAmount = constructionLength/500.0 +1;
         int spaerAmount = (int) Math.round(almostSpaerAmount);
         return spaerAmount;
@@ -333,7 +329,7 @@ public class ConstructionSizeCalculator {
     }
 
     public int possibleSternSmall(int size, int extra){
-        int[] possibleStern = new int[]{300, 360, 420, 480, 540, 600};
+        int[] possibleStern = new int[]{3000, 3600, 4200, 4800, 5400, 6000};
         int wantedStern = 0;
         int difference = 0;
         size = size + extra;
@@ -343,7 +339,7 @@ public class ConstructionSizeCalculator {
             // Tag hver forskel, og find den nærmeste positive værdi
             difference = possibleStern[i]-size;
             if (difference>=0){
-                wantedStern = size+difference;
+                wantedStern = (size+difference)/10;
                 break;
             }
         }
@@ -351,7 +347,7 @@ public class ConstructionSizeCalculator {
     }
 
     public int possibleSternDobbelt(int size, int ekstra){
-        int[] possibleStern = new int[]{300, 360, 420, 480, 540, 600};
+        int[] possibleStern = new int[]{3000, 3600, 4200, 4800, 5400, 6000};
         int wantedStern = 0;
         int difference = 0;
         size = size + ekstra;
@@ -361,7 +357,7 @@ public class ConstructionSizeCalculator {
             // Tag hver forskel, og find den nærmeste positive værdi
             difference = Math.abs(possibleStern[i]-(size/2));
             if ((size/2)<=possibleStern[i]){
-                wantedStern = (size/2)+difference;
+                wantedStern = ((size/2)+difference)/10;
                 break;
             }
         }
@@ -381,25 +377,25 @@ public class ConstructionSizeCalculator {
         int sideStern;
         int backStern;
         // frontstern skal have 50 mm ekstra, sidestern skal have 25 mm ekstra
-        if (cunstructionLength<=540 && cunstructionWidth<=540){
-            frontStern = possibleSternSmall(cunstructionWidth, 5);
+        if (cunstructionLength<=5400 && cunstructionWidth<=5400){
+            frontStern = possibleSternSmall(cunstructionWidth, 50);
             backStern = possibleSternSmall(cunstructionWidth, 0);
-            sideStern = possibleSternSmall(cunstructionLength, (int) 2.5);
+            sideStern = possibleSternSmall(cunstructionLength, 25);
             understernPieces = new int[]{frontStern, backStern, sideStern, sideStern};
-        } else if (cunstructionLength<=540){
-            frontStern = possibleSternDobbelt(cunstructionWidth, 5);
+        } else if (cunstructionLength<=5400){
+            frontStern = possibleSternDobbelt(cunstructionWidth, 50);
             backStern = possibleSternDobbelt(cunstructionWidth, 0);
-            sideStern = possibleSternSmall(cunstructionLength, (int) 2.5);
+            sideStern = possibleSternSmall(cunstructionLength, 25);
             understernPieces = new int[]{frontStern, frontStern, backStern, backStern, sideStern, sideStern};
-        } else if (cunstructionWidth<=540){
-            frontStern = possibleSternSmall(cunstructionWidth, 5);
+        } else if (cunstructionWidth<=5400){
+            frontStern = possibleSternSmall(cunstructionWidth, 50);
             backStern = possibleSternSmall(cunstructionWidth, 0);
-            sideStern = possibleSternDobbelt(cunstructionLength, (int) 2.5);
+            sideStern = possibleSternDobbelt(cunstructionLength,  25);
             understernPieces = new int[]{frontStern, backStern, sideStern, sideStern, sideStern, sideStern};
         } else {
-            frontStern = possibleSternDobbelt(cunstructionWidth, 5);
+            frontStern = possibleSternDobbelt(cunstructionWidth, 50);
             backStern = possibleSternDobbelt(cunstructionWidth, 0);
-            sideStern = possibleSternDobbelt(cunstructionLength, (int) 2.5);
+            sideStern = possibleSternDobbelt(cunstructionLength, 25);
             understernPieces = new int[]{frontStern, frontStern, backStern, backStern,
                                         sideStern, sideStern, sideStern, sideStern};
         }
@@ -419,25 +415,25 @@ public class ConstructionSizeCalculator {
         int sideStern;
         int backStern;
         // frontstern skal have 100 mm ekstra, sidestern skal have 50 mm ekstra, bagstern skal have 50 mm ekstra
-        if (cunstructionLength<=540 && cunstructionWidth<=540){
-            frontStern = possibleSternSmall(cunstructionWidth, 10);
-            backStern = possibleSternSmall(cunstructionWidth, 5);
-            sideStern = possibleSternSmall(cunstructionLength, 5);
+        if (cunstructionLength<=5400 && cunstructionWidth<=5400){
+            frontStern = possibleSternSmall(cunstructionWidth, 100);
+            backStern = possibleSternSmall(cunstructionWidth, 50);
+            sideStern = possibleSternSmall(cunstructionLength, 50);
             oversternPieces = new int[]{frontStern, backStern, sideStern, sideStern};
-        } else if (cunstructionLength<=540){
-            frontStern = possibleSternDobbelt(cunstructionWidth, 10);
-            backStern = possibleSternDobbelt(cunstructionWidth, 5);
-            sideStern = possibleSternSmall(cunstructionLength, 5);
+        } else if (cunstructionLength<=5400){
+            frontStern = possibleSternDobbelt(cunstructionWidth, 100);
+            backStern = possibleSternDobbelt(cunstructionWidth, 50);
+            sideStern = possibleSternSmall(cunstructionLength, 50);
             oversternPieces = new int[]{frontStern, frontStern, backStern, backStern, sideStern, sideStern};
-        } else if (cunstructionWidth<=540){
-            frontStern = possibleSternSmall(cunstructionWidth, 10);
-            backStern = possibleSternSmall(cunstructionWidth, 5);
-            sideStern = possibleSternDobbelt(cunstructionLength, 5);
+        } else if (cunstructionWidth<=5400){
+            frontStern = possibleSternSmall(cunstructionWidth, 100);
+            backStern = possibleSternSmall(cunstructionWidth, 50);
+            sideStern = possibleSternDobbelt(cunstructionLength, 50);
             oversternPieces = new int[]{frontStern, backStern, sideStern, sideStern, sideStern, sideStern};
         } else {
-            frontStern = possibleSternDobbelt(cunstructionWidth, 10);
-            backStern = possibleSternDobbelt(cunstructionWidth, 5);
-            sideStern = possibleSternDobbelt(cunstructionLength, 5);
+            frontStern = possibleSternDobbelt(cunstructionWidth, 100);
+            backStern = possibleSternDobbelt(cunstructionWidth, 50);
+            sideStern = possibleSternDobbelt(cunstructionLength, 50);
             oversternPieces = new int[]{frontStern, frontStern, backStern, backStern,
                     sideStern, sideStern, sideStern, sideStern};
         }

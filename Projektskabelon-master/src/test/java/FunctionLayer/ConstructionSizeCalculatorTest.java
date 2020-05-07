@@ -14,17 +14,17 @@ public class ConstructionSizeCalculatorTest {
 
     @Before
     public void setUp() throws Exception {
-        construction.setCarportLength(9100);
-        construction.setCarportWidth(12300);
-        Shed shed = new Shed((construction.getCarportWidth() / 2), 7600, "left");
+        construction.setCarportLength(7500);
+        construction.setCarportWidth(4000);
+        Shed shed = new Shed((construction.getCarportWidth() / 2), 0, "left");
         construction.setShed(shed);
 
         Roof pitchedRoof = new RoofFlat(construction.getConstructionHeight(), construction.getConstructionLength(),
         construction.getConstructionWidth(), 3);
         pitchedRoof.setDegree(3);
         construction.setRoof(pitchedRoof);
-        construction.setConstructionWidth(500);
-        construction.setConstructionLength(600);
+        construction.setConstructionWidth(5000);
+        construction.setConstructionLength(6000);
 
     }
 
@@ -92,11 +92,11 @@ public class ConstructionSizeCalculatorTest {
 
     @Test
     public void remPieces() {
-        // Hvis carportLength=500, constructionWidth=450, shedDepth=0
+        // Hvis carportLength=5000, constructionWidth=4500, shedDepth=0
         // Hvis carportLength=750, constructionWidth=620, shedDepth=120
         // Hvis carportLength=750, constructionWidth=350, shedDepth=120
         // Nedenstående læser målene højere oppe fra
-        int[] actual = constructionSizeCalculator.remPieces(construction, 0, 0, 0);
+        int[] actual = constructionSizeCalculator.remPieces(construction);
         int[] expected = {540, 540};
         //int[] expected = {300, 300, 300, 300, 300, 300, 480, 480, 480};
         //int[] expected = {300, 300, 300, 300, 480, 480};
@@ -108,7 +108,7 @@ public class ConstructionSizeCalculatorTest {
     public void remBoltAmount() {
         // Hvis carportWidth=620, shedDepth=0, carportLength=450
         // Hvis carportWidth=620, shedDepth=100, carportLength=450
-        // Hvis carportWidth=400, shedDepth=100, carportLength=450
+        // Hvis carportWidth=4000, shedDepth=1000, carportLength=4500
         int actual = constructionSizeCalculator.remBoltAmount(construction);
         //int expected = 18;
         //int expected = 28;
@@ -133,7 +133,7 @@ public class ConstructionSizeCalculatorTest {
     public void roofSpaerLength() {
         // Hvis constructionWidth=300
         // Hvis constructionWidth=500
-        // Hvis constructionWidth=700
+        // Hvis constructionWidth=7000
         int actual = constructionSizeCalculator.roofSpaerLength(construction);
         //int expected = 300;
         //int expected = 540;
@@ -144,7 +144,7 @@ public class ConstructionSizeCalculatorTest {
     @Test
     public void roofSpaerAmount() {
         // Hvis constructionLength=400
-        // Hvis constructionLength=540
+        // Hvis constructionLength=5400
         int actual = constructionSizeCalculator.roofSpaerAmount(construction);
         //int expected = 9;
         int expected = 12;
@@ -162,7 +162,7 @@ public class ConstructionSizeCalculatorTest {
 
     @Test
     public void perforatedBandRolls() {
-        // Hvis carportLength=750, carportWidth=750
+        // Hvis carportLength=7500, carportWidth=7500
         // Hvis carportLength=450, carportWidth=450
         int actual = constructionSizeCalculator.perforatedBandRolls(construction);
         int expected = 2;
@@ -172,7 +172,7 @@ public class ConstructionSizeCalculatorTest {
 
     @Test
     public void bracketScrews() {
-        // Hvis roofSpaerAmount=12 (constructionLength=540) = 128 skruer
+        // Hvis roofSpaerAmount=12 (constructionLength=5400) = 128 skruer
         // Hvis roofSpaerAmount=16 (constructionLength=750) = 172 skruer
         // Hvis roofSpaerAmount=23 (constructionLength=1100) = 249 skruer
         int actual = constructionSizeCalculator.bracketScrews(construction);
@@ -183,7 +183,7 @@ public class ConstructionSizeCalculatorTest {
     @Test
     public void possibleSternSmall() {
         int actual = constructionSizeCalculator.possibleSternSmall(500, 5);
-        int expected = 480;
+        int expected = 540;
         assertEquals(expected, actual);
     }
 
@@ -199,7 +199,7 @@ public class ConstructionSizeCalculatorTest {
         // Hvis cunstructionLength=400, cunstructionWidth=500
         // Hvis cunstructionLength=600, cunstructionWidth=500
         // Hvis cunstructionLength=400, cunstructionWidth=700
-        // Hvis cunstructionLength=700, cunstructionWidth=700
+        // Hvis cunstructionLength=7000, cunstructionWidth=7000
         int[] actual = constructionSizeCalculator.underSternPieces(construction);
         //int[] expected = {540, 540, 420, 420};
         //int[] expected = {540, 540, 360, 360, 360, 360};
@@ -211,7 +211,7 @@ public class ConstructionSizeCalculatorTest {
 
     @Test
     public void overSternLengths() {
-        // Hvis cunstructionLength=600, cunstructionWidth=500
+        // Hvis cunstructionLength=6000, cunstructionWidth=5000
         int[] actual = constructionSizeCalculator.overSternPieces(construction);
         int[] expected = {540, 540, 360, 360, 360, 360};
 
