@@ -27,8 +27,8 @@ public class MaterialMapper {
         Material material = new Material();
         try {
             Connection con = Connector.connection();
-            String SQL = "SELECT variations.materialID, variations.length, materials.name FROM fogdb.variations"
-                    + "WHERE variations.length=?";
+            String SQL = "SELECT materials.name, variations.length FROM fogdb.materials JOIN fogdb.variations " +
+                    "ON variations.materialID = materials.materialID WHERE variations.length = ?";
             PreparedStatement ps = con.prepareStatement(SQL);
             ps.setInt(1, length);
             ResultSet rs = ps.executeQuery();
