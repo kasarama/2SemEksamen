@@ -9,6 +9,42 @@ public class OverlayMaterialCalculator {
     //todo what is misssing for the door??
 
 
+    //..................SPAER......................//
+
+public static Material sparOneWall(Wall wall){
+    Material spaer = new Material();
+
+    int amount = OverlaySizeCalculator.spaerOnOneWall(wall);
+    int size = OverlaySizeCalculator.spaerLengthOneWall(wall);
+    spaer.setName("47X100 MM SPÆRTRÆ");
+    spaer.setAmount(amount);
+    spaer.setSize(size);
+    spaer.setComment("Horizontal framing");
+
+    return spaer;
+}
+    public static Material screwSparOneWall(Wall wall){
+        Material screwSpaer = new Material();
+        int spaerAmount = OverlaySizeCalculator.spaerOnOneWall(wall);
+        int screwSpaeramount = OverlaySizeCalculator.screwSpaer(spaerAmount);
+        screwSpaer.setName("5X80 MM RUST FRI SKRUER");
+        screwSpaer.setComment("til montering af horizontal framing");
+        screwSpaer.setSize(screwSpaeramount);
+    return  screwSpaer;
+
+
+
+
+
+
+
+
+
+
+
+  /*
+
+
     //.......................All the materials for overlay.............................//
     //gets list with materials of all the elements of overlay and sets them on one list of materials
     public static ArrayList<Material> shedOverlayMaterialList(Construction construction, String overlayName) throws LoginSampleException {
@@ -140,54 +176,5 @@ public class OverlayMaterialCalculator {
         }
         return materials;
     }
-
-
-
-/*
-    // Skur beklædning
-    public int shedTimbering(int shedWidth){
-        int areal = shedWidth*carport.getShedDepth();
-        int shedTimbering = (int) Math.round(((areal/100)*12.5));
-        return shedTimbering;
-    }
-
-    // Ydrebeklædnings skruer
-    public int outherTimbering(int length, int width){
-        int outherTimbering = 0;
-
-        if (length < 500 && width < 510){
-            outherTimbering = 200;
-        }
-        if (length > 500 && width > 510){
-            outherTimbering = 400;
-        }
-        return outherTimbering;
-    }
-
-    // Inner beklædningsskruer
-    public int innerTimbering(int length, int width){
-        int innerTimbering = 0;
-
-        if (length < 500 && width < 510){
-            innerTimbering = 150;
-        }
-        if (length > 500 && width > 510){
-            innerTimbering = 300;
-        }
-        return innerTimbering;
-    }
-*/
-
-
-
-    /*
-    m x 25 x 300cm
-    hvis unit.equals ("m"){
-    pris = size*pris/100
-
-    ("stk2)
-    pris=size*price
-
-     */
-
+    */
 }

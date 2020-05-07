@@ -9,26 +9,34 @@ public class OverlaySizeCalculator {
     final private  static int FYRMAXDISTANCE=600;
     final private  static int POSTSIZE=100;
     final private  static int MMPERM=1000;
+    final private  static int SPAERDISTANCE=1000;
     final private  static double SECURITYPERCENTAGE=0.05;
 
 
-    //calculates spaer needed for one of the chosen sides of shed/carport/construction
-    // max distance between spaer is 100 cm - counts number of spar after each post
+    //..............calculates spaer needed for one of the chosen wall...........//
 
     public static int spaerOnOneWall(Wall wall) {
+        // max distance between spaer is 100 cm - counts number of spar after each post
         int amount = 0;
         Integer[] postsheights = ConstructionSizeCalculator.postsHeights(wall.getMinHeight(),
                 wall.getRaising(), wall.getLength());
 
-        for (int i = 0; i < postsheights.length - 1; i++) { //+1 because there is one more post than distances
+        for (int i = 0; i < postsheights.length - 1; i++) { //-1 because there is one more post than distances
             int tmp = amount + 1;//
-            amount = (int) (tmp + postsheights[i] / MMPERM); //counts number of distances between 2 spaers
+            amount = (int) (tmp + postsheights[i] / SPAERDISTANCE); //counts number of distances between 2 spaers
         }
         return amount;
     }
+    //..............calculates spaer længth for one of the chosen wall...........//
+    public static int spaerLengthOneWall(Wall wall) {
+        //spaer has length of distance between posts of one wall
+        return ConstructionSizeCalculator.postDistanceMax3000(wall.getLength());
+
+    }
 
 
-    //.............calculates number of screws for spar (6cm)...........//
+
+    //.............calculates number of screws for spaer (6cm)...........//
     public static int screwSpaer(int spaernumber) {
 
         return spaernumber * 2 * 2; //2 screws on each side of spaer
