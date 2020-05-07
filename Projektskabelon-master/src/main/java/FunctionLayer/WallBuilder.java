@@ -6,6 +6,16 @@ import java.util.ArrayList;
  * @author Magdalena
  */
 public class WallBuilder {
+
+    private final static int DOORSIZE=1000;
+
+    public static int frontWallHeight(Construction construction){
+        int tilt =construction.getRoof().getTilt();
+        int shedDepth=construction.getShed().getDepth();
+        double raising = ConstructionSizeCalculator.raising(shedDepth,tilt);
+        int height=construction.getConstructionHeight()+ (int) raising;
+        return  height;
+    }
     public static ArrayList<Wall> addShedWalls(Construction construction) {
         ArrayList<Wall> walls = new ArrayList<>();
         if (construction.getShed().getDepth()!=0) {
@@ -30,9 +40,9 @@ public class WallBuilder {
 
             Wall front = new Wall();
             front.setSide("front");
-            front.setLength(construction.getShed().getWidth() - 100);
+            front.setLength(construction.getShed().getWidth() - DOORSIZE);
             front.setRaising(0);
-            front.setMinHeight(construction.getConstructionHeight());
+            front.setMinHeight(frontWallHeight(construction));
 
             walls.add(right);
             walls.add(left);
@@ -87,6 +97,12 @@ public class WallBuilder {
                         wallLength = construction.getCarportWidth() - construction.getShed().getWidth() - 100;
                         minHeight = construction.getConstructionHeight();
                         side = "back";
+                        Wall wall = new Wall();
+                        wall.setRaising(raising);
+                        wall.setMinHeight(minHeight);
+                        wall.setLength(wallLength);
+                        wall.setSide("carport"+side);
+                        carportWalls.add(wall);
                     } else
                     if (constructionswalls[i].equals(construction.getShed().getSide())) {
                         wallLength = construction.getCarportLength();

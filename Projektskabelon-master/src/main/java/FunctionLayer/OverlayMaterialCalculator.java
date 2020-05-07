@@ -69,7 +69,7 @@ public class OverlayMaterialCalculator {
 
 
     public static Material overlaMaterial(String materialName, Construction construction) throws LoginSampleException {
-        double wholeAreal=OverlaySizeCalculator.allWallsAreal(construction);
+        double wholeAreal=OverlaySizeCalculator.allWallsArea(construction);
 
         int amount = OverlaySizeCalculator.overlaySpending(materialName, wholeAreal);
         Material overlay = new Material();
