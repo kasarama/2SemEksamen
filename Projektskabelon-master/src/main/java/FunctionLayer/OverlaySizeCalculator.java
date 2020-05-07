@@ -2,82 +2,107 @@ package FunctionLayer;
 
 import java.util.ArrayList;
 
+/**
+ * @author Magdalena
+ */
 public class OverlaySizeCalculator {
+    final private  static int FYRMAXDISTANCE=600;
+    final private  static int POSTSIZE=100;
+    final private  static int MMPERM=1000;
+    final private  static double SECURITYPERCENTAGE=0.05;
+
 
     //calculates spaer needed for one of the chosen sides of shed/carport/construction
     // max distance between spaer is 100 cm - counts number of spar after each post
-    public static int spaersNumberOnSide(int length, int minHeight, int angle) {
-        int spaersAmount = 0;
-        Integer[] postsheights = ConstructionSizeCalculator.postsHeights(minHeight, angle, length);
-        for (int i = 0; i < postsheights.length - 1; i++) { //+1 because there is one more post than distances
-            int tmp = spaersAmount + 1;//
-            spaersAmount = tmp + postsheights[i] / 1000; //counts number of distances between 2 spaers
-        }
-        return spaersAmount;
 
+    public static int spaerOnOneWall(Wall wall) {
+        int amount = 0;
+        Integer[] postsheights = ConstructionSizeCalculator.postsHeights(wall.getMinHeight(),
+                wall.getRaising(), wall.getLength());
+
+        for (int i = 0; i < postsheights.length - 1; i++) { //+1 because there is one more post than distances
+            int tmp = amount + 1;//
+            amount = (int) (tmp + postsheights[i] / MMPERM); //counts number of distances between 2 spaers
+        }
+        return amount;
     }
 
-    //calculates number of screws for spar (6cm)
+
+    //.............calculates number of screws for spar (6cm)...........//
     public static int screwSpaer(int spaernumber) {
+
         return spaernumber * 2 * 2; //2 screws on each side of spaer
     }
 
-    public static int numberOfFyrOnDistance(int distance) {
-        int numberOfFyrOnDistance;
-        if (distance % 600 == 0) {
-            numberOfFyrOnDistance = (distance / 600) - 1;
+
+    //................calculates number of fyr pr wall.......................//
+    public static int fyrNumberOnWall(Wall wall) {
+        int distance = wall.getLength() - POSTSIZE;
+        int fyrPlusPost = 0;
+        if (distance % FYRMAXDISTANCE == 0) {
+            fyrPlusPost = (distance / FYRMAXDISTANCE) + 1;
         } else {
-            numberOfFyrOnDistance = (distance - distance % 600) / 600;
+            fyrPlusPost = (distance - distance % FYRMAXDISTANCE) / FYRMAXDISTANCE + 2;
         }
-        return numberOfFyrOnDistance;
-    }
-
-    //counts number of fyr on each distance and in total on chosen side
-    public static int fyrNumberOnSide(int length) {
-        int distance = ConstructionSizeCalculator.postDistanceMax3000(length);
-        int distancesNumber = ConstructionSizeCalculator.sidePostAmount(length) - 1;
-        int numberOfFyrOnDistance = numberOfFyrOnDistance(distance);
-        return numberOfFyrOnDistance * distancesNumber;
+        int justFyr = fyrPlusPost - ConstructionSizeCalculator.sidePostAmount(wall.getLength());
+        return justFyr;
     }
 
 
-    //calculates number of screws for fyr (4cm)
+    //...........calculates number of screws for fyr (4cm)...................//
     public static int screwFyr(int fyrnumber, int spaernumber) {
         return fyrnumber * spaernumber; //1 screws on each  spaer
     }
 
-    //returns array with length of each fyr used on chosen side
-    /*
 
-     */
-    public static ArrayList<Integer> fyrLengths(int height, int angle, int size) { //todo we need to decide if the height of construction is counted to the lower edge of rem or the upper one.
-        ArrayList<Integer> fyrLengths = new ArrayList<>();
-        int allLengths = numberOfFyrOnDistance(size - 100) + 2; // treats posts as fyr and counts them all, counts from the centre of first post to the centre of last post ;
-        int postNumber = ConstructionSizeCalculator.sidePostAmount(size);
-        int distance = size / (allLengths - 1);
-        int distanceOfPosts = ConstructionSizeCalculator.postDistanceMax3000(size);
-        int numberOfFyrOnDistance = numberOfFyrOnDistance(distanceOfPosts);
-        fyrLengths.add(height); //the first post has height of the start(given) height
-
-        for (int i = 1; i < allLengths; i++) {
-            int tmp = height;
-            height = tmp + ConstructionSizeCalculator.raising(angle, distance); // calculates height of the element on given distance
-            fyrLengths.add(height - 360); //adds calculated height and each fyr to the list (there shold be in total 360 mm distance betwin the ground and the roof spear
+    //............creates a List with all needed lengths of fyrs pr one Wall..............//
+    public static ArrayList<Integer> fyrLengthsOneWall(Wall wall) {
+        ArrayList<Integer> fyrLengthsOneWall = new ArrayList<>();
+        /*
+        counts number of all vertical tree elements on one wall
+        counts distance between them and raising pr that distance, counts on witch idex is there a post,
+        calculates and adds height of every element that is not on index of post
+         */
+        int distance = wall.getLength() - POSTSIZE; // 100 mm for one post
+        int fyrPlusPost = 0;
+        if (distance % FYRMAXDISTANCE == 0) {
+            fyrPlusPost = (distance / FYRMAXDISTANCE) + 1;
+        } else {
+            fyrPlusPost = (distance - distance % FYRMAXDISTANCE) / FYRMAXDISTANCE + 2;
         }
 
-        //on the list there are also posts that need to by now removed. I take number of posts and
-        // set every n-th element as 0 , where n=numberOfFyrOnDistance+1
-        Integer[] zeroIndexes = new Integer[postNumber];
-        for (int i = 0; i < postNumber; i++) {
-            zeroIndexes[i] = fyrLengths.get(i * (1 + numberOfFyrOnDistance));
+        int numberOfPosts = ConstructionSizeCalculator.sidePostAmount(wall.getLength());
+        int postIndex = (fyrPlusPost - numberOfPosts) / (numberOfPosts - 1) + 1;
+        int distanceBetweenFyr = distance / (fyrPlusPost - 1);
+        double raising = ConstructionSizeCalculator.raising(wall.getRaising(), distanceBetweenFyr);
+        for (int i = 1; i < fyrPlusPost; i++) {
+            if (i % postIndex != 0) {
+                int fyrLength = (int) (wall.getMinHeight() + raising * i);
+                fyrLengthsOneWall.add(fyrLength);
+                System.out.println("idex of fyr: " + i + ", height: " + fyrLength);
+            }
         }
 
-        for (int i = postNumber - 1; i >= 0; i--) {
-            fyrLengths.remove(zeroIndexes[i]);
-        }
-        return fyrLengths;
-
+        return fyrLengthsOneWall;
     }
+
+    //................................. counts surface of a given wall.................//
+    public static double oneWallArea(Wall wall){
+        //to be able to calculate the needed amount of some material for overlay, we need to know the area of
+        // surface that's going to be covered
+        double area=-1;
+        /*Trapez area: (a+b)/2*h
+        a=minHeight, b= maxHeight, h= length
+         */
+        int maxHeight=(int) (wall.getMinHeight()+ConstructionSizeCalculator.raising(wall.getRaising(),wall.getLength()));
+        System.out.println("minH="+wall.getMinHeight()+", maxH="+maxHeight+", wallLength="+wall.getLength());
+        area=((wall.getMinHeight()+maxHeight)) /2*wall.getLength();
+
+        System.out.println("area: "+area); //returnes valeu in mm
+
+        return area;
+    }
+
 
 
 
@@ -94,42 +119,63 @@ public class OverlaySizeCalculator {
 
 
 
-    public static int overlaySpending(String materialName, double areal) throws LoginSampleException {
-        //todo fix DB !!!!!!
-        // double spending = MaterialMapper.spending(materialName);
-        double actual = 5; // spending * areal;
-        actual = actual + 0.05 * actual; //5 % extra material for cuts
 
-        if (((actual * 10) % 10) == 0) {
-            return (int) actual;
-        } else {
-            return (int) actual + 1;
+
+    public static double allWallsArea(Construction construction) {
+        ArrayList<Wall> allWalls = new ArrayList<>();
+        ArrayList<Wall> shedWalls = construction.getShed().getWalls();
+        System.out.println("walls in construction: "+construction.getWalls().size());
+
+        int backSideindex=-1;
+        int frontSideindex=-1;
+
+        for (Wall wall: shedWalls) {
+            if (!wall.getSide().equals("front")){
+                allWalls.add(wall);
+            }
+
         }
+        for (Wall wall: shedWalls ) {
+            if(wall.getSide().equals("back")){
+                backSideindex= shedWalls.indexOf(wall);
+            }
+        }
+        for (Wall wall: shedWalls) {
+            if (wall.getSide().equals("front")) {
+                System.out.println("first length: "+wall.getLength());
+                wall.setLength(shedWalls.get(backSideindex).getLength());
+                System.out.println("new length: "+wall.getLength());
 
-    }
-
-
-    //to be able to calculate the needed amount of some material for overlay, we need to know the areal surface that's going to be covered
-    public static double areal(int width, int length, int angle) {
-        double raising = ConstructionSizeCalculator.raising(angle, length);
-        int backWall = width * 2000;
-        double sideWall = (length * 2000) + (length * raising / 2);
-        double frontWall = width * (2000 + raising);
-        double areal = (backWall + 2 * sideWall + frontWall) / 1000 / 1000;
-        return areal;
-    }
-
-    public static double allWallsAreal(Construction construction) {
-        ArrayList<Wall> allWalls = construction.getShed().getWalls();
+                allWalls.add(wall);
+            }
+        }
         allWalls.addAll(construction.getWalls());
-        double areal = 0;
-        for (Wall wall : allWalls) {
-            areal = wall.getLength() * wall.getMinHeight()
-                    + 0.5 * ConstructionSizeCalculator.raising(wall.getRaising(), wall.getLength()) * wall.getLength();
+
+        double totalArea = 0;
+        for (int i = 0; i < allWalls.size() ; i++) {
+
+            double area=oneWallArea(allWalls.get(i));
+            totalArea=totalArea+area;
+            System.out.println("wall: "+allWalls.get(i)+" area: "+ area+"\n"+"total Area:" +totalArea+"\n");
         }
-        return areal;
+
+        return totalArea/MMPERM/MMPERM;
     }
 
+    public static int overlaySpending(String materialName, double area) throws LoginSampleException {
+        //todo fix DB !!!!!!
+
+        //double spending = MaterialMapper.spending(materialName);
+        double needed = 5; // spending * area;
+        needed = needed + SECURITYPERCENTAGE * needed; //5 % extra material for cuts
+
+        if (((needed * 10) % 10) == 0) {
+            return (int) needed;
+        } else {
+            return (int) needed + 1;
+        }
+
+    }
 
 
     //wood delivers in chosen length with cuts every 20 cm. Pricing is pr. meter. We order not shorter piece with
@@ -140,7 +186,5 @@ public class OverlaySizeCalculator {
         } else
             return (needed - (needed % 20) + 20);
     }
-
-
 
 }
