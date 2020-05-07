@@ -45,9 +45,20 @@ public class CarportBase extends Command {
         constructionBase.setShed(shed);
         if (request.getParameter("withShed") != null) {
             shedWidthParameter = Integer.parseInt(request.getParameter("shedWidthParameter"));
+            System.out.println(shedWidthParameter+"shedWidthParameter");
             shedDepth = Integer.parseInt(request.getParameter("shedDepth"));
             shedSide = request.getParameter("shedSide");
-            shedWidth = (int) ( (carportWidth / shedWidthParameter)+(0.5*POSTWIDTH) );
+            if(shedWidthParameter==1){
+                shedWidth = (int) ( (carportWidth / shedWidthParameter) );
+            } else
+                if (shedWidthParameter==2){
+                shedWidth = (int) ( (carportWidth / shedWidthParameter) +0.5*POSTWIDTH);
+
+            } else {
+                throw new LoginSampleException("Kunne ikke forstå inputtet for tag parameter CarportBase.java linie 47");
+            }
+
+
             shed.setWidth(shedWidth);
             shed.setDepth(shedDepth);
             shed.setSide(shedSide);

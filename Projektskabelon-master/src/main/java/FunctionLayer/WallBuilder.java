@@ -94,8 +94,12 @@ public class WallBuilder {
                 }
             } else {
                 for (int i = 0; i < constructionswalls.length; i++) {
-                    if (constructionswalls[i].equals("back")) {
-                        wallLength = construction.getCarportWidth()+construction.getShed().getWidth()- (int)(0.5*POSTWIDTH );
+                    if (constructionswalls[i].equals("back") && construction.getCarportWidth()>construction.getShed().getDepth()) {
+                        //do nothing
+                    } else
+
+                    if (constructionswalls[i].equals("back") && construction.getCarportWidth()>construction.getShed().getDepth()) {
+                        wallLength = construction.getCarportWidth()-construction.getShed().getWidth()- (int)(0.5*POSTWIDTH );
                         minHeight = construction.getConstructionHeight();
                         side = "back";
                         Wall wall = new Wall();
@@ -104,7 +108,9 @@ public class WallBuilder {
                         wall.setLength(wallLength);
                         wall.setSide("carport"+side);
                         carportWalls.add(wall);
-                    } else
+                    }
+
+                    else
                     if (constructionswalls[i].equals(construction.getShed().getSide())) {
                         wallLength = construction.getCarportLength();
                         minHeight = ConstructionSizeCalculator.carportMinHeight(construction.getConstructionHeight(),

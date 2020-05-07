@@ -18,13 +18,13 @@
     <label>Vælg længde:</label>
     <select name="carportLength" class="form-control" >
         <c:forEach var="i" begin="24" end="75">
-            <option value=${i*100}>${i*10}</option>
+            <option value=${i*100}>${i*10} cm</option>
         </c:forEach>
     </select>
     <label>Vælg bredde:</label>
     <select name="carportWidth" class="form-control" >
         <c:forEach var="i" begin="24" end="75">
-            <option value=${i*100}>${i*10}</option>
+            <option value=${i*100}>${i*10} cm</option>
         </c:forEach>
     </select>
     <br>
@@ -51,7 +51,7 @@
         <label>Vælg dybde:</label>
         <select name="shedDepth" class="form-control">
             <c:forEach var="i" begin="12" end="35">
-                <option value=${i*100}>${i*10}</option>
+                <option value=${i*100}>${i*10} cm</option>
             </c:forEach>
         </select>
         <label>Vælg siden:</label>
@@ -63,9 +63,11 @@
     </div>
     <div>
 
+
     </div>
 
 </form>
+
 
 
 <!-- Optional JavaScript -->
