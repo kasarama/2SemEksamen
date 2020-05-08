@@ -39,7 +39,11 @@ public class CarportBase extends Command {
             roofBase = new RoofFlat(0, carportLength, carportWidth, RAISING);
         }
 
+
+
+
         constructionBase.setRoof(roofBase);
+
         Shed shed = new Shed(shedWidth, shedDepth, shedSide);
         shed.setWalls(new ArrayList<>());
         constructionBase.setShed(shed);

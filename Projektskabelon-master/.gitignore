@@ -14,6 +14,7 @@
 .idea/**/dictionaries
 .idea/**/shelf
 .idea/**/compiler.xml
+src/**/Connector.java
 
 src/**/Connector.java
 # Generated files

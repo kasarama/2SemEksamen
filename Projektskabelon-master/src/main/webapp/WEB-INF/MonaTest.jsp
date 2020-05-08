@@ -18,12 +18,12 @@
         <%
     // if i'm the first user on this application, then set the materialList. (else the list already exists)
     if (request.getServletContext().getAttribute("pitchedMaterialList") == null) {
-        System.out.println("initializing materiallis");
+        System.out.println("initializing materiallist");
     }
     request.getServletContext().setAttribute("pitchedMaterialList", Initializer.getPitchedRoofMateriallist());
 
     if (request.getServletContext().getAttribute("flatMaterialList") == null) {
-        System.out.println("initializing materiallis");
+        System.out.println("initializing materiallist");
     }
     request.getServletContext().setAttribute("flatMaterialList", Initializer.getFlatRoofMateriallist());
 %>

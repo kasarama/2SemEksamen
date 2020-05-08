@@ -4,8 +4,6 @@ package FunctionLayer;
 
 import java.util.*;
 
-//TODO lav counter udenfor for loop med givne materiale, basically counter på arraylist
-//TODO lav width og tickness
 
 public class ConstructionMaterialCalculator {
 

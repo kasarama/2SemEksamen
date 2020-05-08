@@ -12,6 +12,7 @@ public class RoofFlat extends Roof {
         super(height, length, width, tiltToDegree,false, tilt);
         tagMaterialList = new ArrayList();
     }
+
     static int tiltToDegree=(int) Math.round(Math.toDegrees(Math.atan(3.0 / 100.0)));
 
     @Override
@@ -23,10 +24,5 @@ public class RoofFlat extends Roof {
     public void setTagMaterialList(ArrayList<Material> tagMaterialList) {
         this.tagMaterialList = tagMaterialList;
     }
-    /*//Constructor used by Magda
-    public RoofFlat(int height, int length, int width, int degree, boolean pitched) {
-        super(height, length, width, degree, pitched);
-    }
-*/
 
 }
