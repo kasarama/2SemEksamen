@@ -1,5 +1,7 @@
 package FunctionLayer;
 
+import DBAccess.MaterialMapper;
+
 import java.util.ArrayList;
 
 /**
@@ -37,14 +39,14 @@ public class OverlaySizeCalculator {
 
 
     //.............calculates number of screws for spaer (6cm)...........//
-    public static int screwSpaer(int spaernumber) {
+    public static int screwSpaer(int spaerQuantity) {
 
-        return spaernumber * 2 * 2; //2 screws on each side of spaer
+        return spaerQuantity * 2 * 2; //2 screws on each side of spaer
     }
 
 
     //................calculates number of fyr pr wall.......................//
-    public static int fyrNumberOnWall(Wall wall) {
+    public static int fyrQuantityOnWall(Wall wall) {
         int distance = wall.getLength() - POSTSIZE;
         int fyrPlusPost = 0;
         if (distance % FYRMAXDISTANCE == 0) {
@@ -58,8 +60,8 @@ public class OverlaySizeCalculator {
 
 
     //...........calculates number of screws for fyr (4cm)...................//
-    public static int screwFyr(int fyrnumber, int spaernumber) {
-        return fyrnumber * spaernumber; //1 screws on each  spaer
+    public static int screwFyr(int fyrQuantity, int spaerQuantity) {
+        return fyrQuantity * spaerQuantity; //1 screws on each  spaer
     }
 
 
@@ -171,10 +173,9 @@ public class OverlaySizeCalculator {
     }
 
     public static int overlaySpending(String materialName, double area) throws LoginSampleException {
-        //todo fix DB !!!!!!
 
-        //double spending = MaterialMapper.spending(materialName);
-        double needed = 5; // spending * area;
+        double spending = MaterialMapper.spending(materialName);
+        double needed = spending * area;
         needed = needed + SECURITYPERCENTAGE * needed; //5 % extra material for cuts
 
         if (((needed * 10) % 10) == 0) {
@@ -193,6 +194,13 @@ public class OverlaySizeCalculator {
             return needed;
         } else
             return (needed - (needed % 20) + 20);
+    }
+
+    public static int overDoorSpearQuantity(int raising) {
+        raising=raising - raising%SPAERDISTANCE;
+        int quantity = (int) raising/SPAERDISTANCE +1;
+
+        return quantity;
     }
 
 

@@ -84,7 +84,7 @@ public class OverlaySizeCalculatorTest {
 
         Wall carportsRightWall=construction.getWalls().get(index);
         int expected=9;
-        int actual = OverlaySizeCalculator.fyrNumberOnWall(carportsRightWall);
+        int actual = OverlaySizeCalculator.fyrQuantityOnWall(carportsRightWall);
 
                 /*
                  3 distances af 2366 mm hver

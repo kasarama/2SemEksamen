@@ -1,8 +1,7 @@
 package FunctionLayer;
 
 /**
- * @author Magdalena
- * Hvilken størrelse af materiale
+ * @author Magdalena and Mia
  */
 public class ConstructionSizeCalculator {
     //todo some of the post are common for sides and the back - remember that when drowing or making itemlist
