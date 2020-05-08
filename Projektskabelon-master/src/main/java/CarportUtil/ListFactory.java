@@ -3,10 +3,7 @@ package CarportUtil;
 import FunctionLayer.LoginSampleException;
 import FunctionLayer.Material;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.net.URL;
 import java.util.ArrayList;
 
@@ -38,6 +35,27 @@ public class ListFactory {
     public static ArrayList<Material> readFromFile(){
         //todo read data from textfile to send them to DB
         ArrayList<Material> materials= new ArrayList<>();
+        String[] attributter = new String[10];
+
+        String path = "dbAccess/materials.txt";
+        try {
+            FileReader fr = new FileReader(new File(path));
+            BufferedReader br = new BufferedReader(fr);
+            String line = br.readLine();
+            attributter = line.split(";");
+
+            for (int i = 0; i < 10; i++) {
+
+            }
+
+        }catch (FileNotFoundException ex){
+            System.out.println("File not found "+path);
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+            ex.printStackTrace();
+        }
+
+
         return materials;
     }
 
