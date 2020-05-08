@@ -15,6 +15,7 @@ public class Material {
     private String keyword;
     private String category;
     private String picture;
+    private double spending; // bruges til beregninger af beklædning
 
 
     public Material() {
@@ -48,6 +49,14 @@ public class Material {
         this.keyword = keyword;
         this.category = category;
 
+    }
+
+    public double getSpending() {
+        return spending;
+    }
+
+    public void setSpending(double spending) {
+        this.spending = spending;
     }
 
     public int getAvailablesize() {

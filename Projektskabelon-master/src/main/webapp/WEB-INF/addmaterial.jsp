@@ -12,6 +12,7 @@
 
 <h1>Tilføj material til databasen</h1>
 
+<h3>Tilføj en material ad gangen:</h3>
 <form name="addmaterial" action="FrontController" method="POST">
     <input type="hidden" name="target" value="addmaterial">
     <input type="hidden" name="origin" value="addmaterial">
@@ -25,13 +26,20 @@
     picture <input type="text" name="picture"><br>
     spending <input type="text" name="spending"><br>
 
-    <input class="btn btn-primary" type="submit" value="tilføj" >
+    <input class="btn btn-primary" type="submit" name="addOne" value="tilføj">
+<br>
+<br>
+<br>
+<h3>Tilføj materials from text file:</h3>
+    <input type="hidden" name="target" value="addmaterial">
+    <input type="hidden" name="origin" value="addmaterial">
+    stig på din komputer til den fil du vil læe materials fra:<br>
+    <input type="text" name="path"><br>
+    <input class="btn btn-primary" type="submit" name="readFile" value="Læs og tilføj">
 </form>
 
-<c:if test = "${requestScope.error!= null}" >
-    <h2>Error ! </h2>
-    ${requestScope.error}
-</c:if>
+<h3>${requestScope.status}</h3>
+
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->

@@ -8,7 +8,42 @@
 --%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@include file="includes/header.inc"%>
+
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta http-equiv="Content-Type" charset="utf-8" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <!-- Font awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <title>Fog Carport Designe Centre</title>
+    <style>
+        body {
+            position: relative;
+            text-align: center;
+            font-family: "Arial Black";
+            color: #333333;
+        }
+        select {
+            font-family: "Arial";
+        }
+        .container2 {
+            background-image: url("./images/baggrund3.png");
+            background-repeat: no-repeat; /* Do not repeat the image */
+            background-size: cover; /* Resize the background image to cover the entire container */
+        }
+
+    </style>
+
+</head>
+<body>
 
     <!-- Start Picture -->
     <img src="./images/verstTilHjemmeside2.png" alt="Logo" width="100%" height=20%>
@@ -33,20 +68,22 @@
         </div>
     </nav>
 
-    <div class="container">
-        <img src="./images/baggrund.png" style="filter: opacity(30%);" alt="Background" width="100%" height=auto>
-        <div class="centered">
-            <h2>Velkommen til</h2>
-            <img class="mt-4 mb-3" src="./images/logo.png" alt="Logo" width="430" height=auto>
-            <h6  class="mb-3" style="font-size: small;">Her kan du designe din egen carport & <br>
-                få vejledning, når inden du køber</h6>
-            <br><br>
-            <a class=" mt-4 mb-3 btn btn-primary" href="FrontController?target=redirect&destination=carportBase" role="button">DESIGN CARPORT</a>
+<div class="container2">
+    <div class="col-md-12">
             <br>
-            <a class=" mt-3 btn btn-dark" href="FrontController?target=redirect&destination=?" role="button">Login/Registrer</a>
-
-        </div>
+            <br>
+        <h2>Velkommen til</h2>
+        <img class="mt-4 mb-3" src="./images/logo.png" alt="Logo" width="430" height=auto>
+        <h6  class="mb-3" style="font-size: small;">Her kan du designe din egen carport & <br>
+            få vejledning, når inden du køber</h6>
+        <br><br>
+        <a class=" mt-4 mb-3 btn btn-primary" href="FrontController?target=redirect&destination=carportBase" role="button">DESIGN CARPORT</a>
+        <br>
+        <a class=" mt-3 btn btn-dark" href="FrontController?target=redirect&destination=?" role="button">Login/Registrer</a>
     </div>
-
-
+</div>
+<br>
+<br>
 <%@include file="includes/footer.inc"%>
+
+<a href="FrontController?target=redirect&destination=addmaterial">Add Material</a>

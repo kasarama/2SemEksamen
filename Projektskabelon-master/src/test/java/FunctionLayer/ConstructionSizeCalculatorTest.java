@@ -21,7 +21,9 @@ public class ConstructionSizeCalculatorTest {
         construction.setShed(shed);
 
         Roof pitchedRoof = new RoofFlat(construction.getConstructionHeight(), construction.getConstructionLength(),
+
         construction.getConstructionWidth(), 3);
+
         pitchedRoof.setDegree(3);
         construction.setRoof(pitchedRoof);
         construction.setConstructionWidth(5000);

@@ -20,27 +20,43 @@
             font-family: "Arial Black";
             color: #333333;
         }
-        .centered {
-            position: absolute;
-            top: 500px;
-            left: 50%;
-            transform: translate(-50%, -50%);
+        select {
+            font-family: "Arial";
         }
-        .container1 {
-          position:relative;
-                top: 10px;
-                left: 10px;
-                z-index: 1;
-        }
-        .topimage {
-          position:absolute;
-                top: 10px;
-                left: 25px;
-                z-index: 2;
+        .container2 {
+            background-image: url("./images/baggrund3.png");
+            background-repeat: no-repeat; /* Do not repeat the image */
+            background-size: cover; /* Resize the background image to cover the entire container */
         }
 
     </style>
 
 </head>
 <body>
+
+<!-- Start Picture -->
+    <img src="./images/header.JPG" alt="header" width="100%" height=auto>
+
+
+    <!-- Navigation -->
+    <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light" style="border-bottom: 2px solid black;">
+        <a class="navbar-brand ml-4 c" href="FrontController?target=redirect&destination=index">
+            Fog
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse mr-4" id="navbarNavDropdown" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="FrontController?target=redirect&destination=index"><i
+                            class="fa fa-fw fa-home"></i>Hjem</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="FrontController?target=redirect&destination=login">Min profil</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
 

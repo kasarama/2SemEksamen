@@ -19,7 +19,9 @@ public class OverlaySizeCalculatorTest {
         construction.setCarportLength(7200);
         construction.setConstructionHeight(2000);
         construction.setCarportWidth(4200);
+
         Roof roof = new RoofFlat( 0, 7200+2900, 4200,3);
+
         construction.setRoof(roof);
 
         Shed shed = new Shed(4200/2+50,2900,"left");

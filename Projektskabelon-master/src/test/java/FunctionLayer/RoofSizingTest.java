@@ -21,10 +21,9 @@ public class RoofSizingTest {
         con.setConstructionLength(7800);
         con.setConstructionWidth(3600);
         roof = new RoofFlat(0,con.getConstructionLength(), con.getConstructionWidth(), 3);
-
         con.setRoof(roof);
         //Act
-        int actuel = rs.roofHeight(con.getRoof().getIsPitched());
+        int actuel = rs.roofHeight(con.getRoof().getIsPitched(), con.getConstructionLength(), con.getConstructionWidth());
         int expected = 272;
         //Assert
         assertEquals(expected, actuel);
@@ -39,7 +38,7 @@ public class RoofSizingTest {
         roof = new RoofPitched(0, con.getConstructionLength(), con.getConstructionWidth(), 30);
         con.setRoof(roof);
         //Act
-        int actuel = rs.roofHeight(con.getRoof().getIsPitched());
+        int actuel = rs.roofHeight(con.getRoof().getIsPitched(), con.getConstructionLength(), con.getConstructionWidth());
         int expected = 1039;
         //Assert
         assertEquals(expected, actuel);
@@ -52,7 +51,6 @@ public class RoofSizingTest {
         //Arrange
         con.setConstructionLength(7800);
         con.setConstructionWidth(3600);
-
         roof = new RoofFlat(0,con.getConstructionLength(), con.getConstructionWidth(), 3);
         con.setRoof(roof);
         //Act
@@ -83,7 +81,6 @@ public class RoofSizingTest {
         //Arrange
         con.setConstructionLength(7800);
         con.setConstructionWidth(3600);
-
         roof = new RoofFlat(0,con.getConstructionLength(), con.getConstructionWidth(), 3);
         con.setRoof(roof);
         //Act
@@ -114,7 +111,6 @@ public class RoofSizingTest {
         con.setConstructionLength(7800);
         con.setConstructionWidth(3600);
         roof = new RoofFlat(0,con.getConstructionLength(), con.getConstructionWidth(), 3);
-
         con.setRoof(roof);
         //Act
         int actuel = rs.flatRoofCalcutatedLength();
