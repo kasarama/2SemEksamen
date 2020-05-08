@@ -9,38 +9,14 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@include file="../includes/header.inc" %>
 
-    <!-- Start Picture -->
-    <img src="./images/header.JPG" alt="header" width="100%" height=auto>
-
-
-    <!-- Navigation -->
-    <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light" style="border-bottom: 2px solid black;">
-        <a class="navbar-brand ml-4 c" href="FrontController?target=redirect&destination=index">
-            Fog
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
-                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse mr-4" id="navbarNavDropdown" id="navbarResponsive">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="FrontController?target=redirect&destination=index"><i
-                            class="fa fa-fw fa-home"></i>Hjem <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="FrontController?target=redirect&destination=login">Min profil</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
-
-<!-- Page content -->
-    <div class="container1 text-center">
-            <form name="carportbase" action="FrontController" method="POST">
+    <div class="container2">
+        <div class="col-md-12">
+            <form name="carportbase" action="FrontController" method="POST" class="ml-lg-5 mr-lg-5">
                 <input type="hidden" name="origin" value="carportBase">
                 <input type="hidden" name="target" value="carportbase">
                 <input type="hidden" name="constructionHeight" value=2000> <!-- det her er det eneste sted man angivr constructionens height-->
+                <br>
+                <br>
                 <h2>Design din Carport</h2>
                 <div class="row mt-4">
                     <div class="col-md-6 school-options-dropdown text-center">
@@ -81,8 +57,8 @@
                 </div>
                 <!-- 2. row end -->
 
-                <h2>Design dit Skur</h2>
-                <h6 class="mb-3" style="font-size: small;">NB! Der skal beregnes 15 cm tagudhæng på hver side af skuret</h6>
+                <h2 class="mt-4">Design dit Skur</h2>
+                <h6 class="mb-3 mt-3" style="font-size: small;">NB! Der skal beregnes 15 cm tagudhæng på hver side af skuret</h6>
                 <div class="row mt-4">
                     <div class="col-md-6 school-options-dropdown text-center">
                         <div class="form-group">
@@ -122,9 +98,10 @@
                 <!-- 2. row end -->
             </form>
             <!-- End of form -->
+        </div>
     </div>
-    <!-- End of page content -->
-
+<br>
+<br>
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->

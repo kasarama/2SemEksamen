@@ -1,16 +1,3 @@
-<%@ page import="CarportUtil.Initializer" %>
-<%@ page import="FunctionLayer.LoginSampleException" %><%--
-  Created by IntelliJ IDEA.
-  User: magda
-  Date: 25-04-2020
-  Time: 02:35
-  To change this template use File | Settings | File Templates.
---%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page contentType="text/html" pageEncoding="UTF-8" %>
-<%@include file="../includes/header.inc" %>
-
-
 <%
     // if i'm the first user on this application, then set the overlayList. (else the list already exists)
     if (request.getServletContext().getAttribute("overlayList") == null) {
@@ -31,6 +18,18 @@
         }
     }
 %>
+
+
+
+
+
+
+
+
+
+
+
+
 <div class="container2">
     <div class="col-md-12">
         <form name="overlay" action="FrontController" method="POST">
@@ -53,8 +52,8 @@
                                 <option value="${material.name}">${material.name}</option>
                             </c:forEach>
                         </select>
-                        
-                        <label class="mt-3"> Du kan også vælge at beklæde vægge af konstruktion:</label>
+
+                        <label class="mt-3"> Du kan også vælge at beklæde væggen af konstruktion:</label>
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" name="left" value="left" id="left1">
                             <label class="form-check-label" for="left1">
@@ -139,11 +138,3 @@
     alt="${material.name}"><br>
 </c:forEach>
 -->
-
-
-
-
-<!-- Optional JavaScript -->
-<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-
-<%@include file="../includes/footer.inc" %>

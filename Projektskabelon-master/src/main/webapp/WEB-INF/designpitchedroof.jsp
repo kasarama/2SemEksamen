@@ -10,34 +10,33 @@ System.out.println("initializing materiallist");
 }
 request.getServletContext().setAttribute("pitchedMaterialList", Initializer.getPitchedRoofMateriallist());
 %>
-<h1>Tag med rejsning design</h1>
 
-<form name="makerequest" action="FrontController" method="post">
-    <input type="hidden" name="target" value="makerequest">
-    <label for="pitchedroof"> Vælg tagdækning for tag med hældning:</label>
-    <select class="form-control" name="pitchedroof" id="pitchedroof">
-        <option selected disabled>Vælg tag type (pitched):</option>
+<div class="container2">
+    <div class="col-md-12">
+        <form name="makerequest" action="FrontController" method="post">
+            <input type="hidden" name="target" value="makerequest">
+            <br>
+            <br>
+            <h2>Tag med rejsning design</h2>
+            <label class="mt-3" for="pitchedroof"> Vælg tagdækning for tag med hældning:</label>
+            <select class="form-control mt-3" name="pitchedroof" id="pitchedroof">
+                <option selected disabled>Vælg tag type (pitched):</option>
+                <c:forEach var="roofMaterial" items="${applicationScope.pitchedMaterialList}">
+                    <option value="${roofMaterial.id}">${roofMaterial.name}</option>
+                </c:forEach>
+            </select>
 
-        <c:forEach var="roofMaterial" items="${applicationScope.pitchedMaterialList}">
-            <option value="${roofMaterial.id}">${roofMaterial.name}</option>
-        </c:forEach>
+            <input class="btn btn-primary mt-3" type="submit" value="Videre">
+            <br>
+            <a class="mt-3 btn btn-dark" href="FrontController?target=redirect&destination=overlay" role="button">Videre til overlay</a>
+        </form>
+        <!-- End of form -->
 
-
-    </select>
-
-    <input class="btn btn-primary" type="submit" value="Videre">
-
-
-<button type="button" >
-    <a href="FrontController?target=redirect&destination=overlay">Videre til overlay</a>
-</button>
-
-</form>
-<form name="startOver" action="FrontController" method="POST">
-    <input type="hidden" name="target" value="newrequest">
-    <input type="submit" name="newrequest" value="Start forfra">
-</form>
-
-
+        <form name="startOver" action="FrontController" method="POST">
+            <input type="hidden" name="target" value="newrequest">
+            <input class="mt-3 mb-4 btn btn-outline-dark" type="submit" name="newrequest" value="Start forfra">
+        </form>
+    </div>
+</div>
 
 <%@include file="../includes/footer.inc"%>
