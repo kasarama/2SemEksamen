@@ -86,7 +86,6 @@ fabric.properties
 ### Java-Web ###
 ## ignoring target file
 target/
-.src/**/Connector.java
 
 
 ### macOS ###
