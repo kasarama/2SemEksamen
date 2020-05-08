@@ -20,23 +20,12 @@
             font-family: "Arial Black";
             color: #333333;
         }
-        .centered {
-            position: absolute;
-            top: 500px;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
         .container1 {
-          position:relative;
-                top: 10px;
-                left: 10px;
-                z-index: 1;
-        }
-        .topimage {
-          position:absolute;
-                top: 10px;
-                left: 25px;
-                z-index: 2;
+            background-image: url("./images/baggrund.png");
+            height: auto; /* You must set a specified height */
+            background-position: center; /* Center the image */
+            background-repeat: no-repeat; /* Do not repeat the image */
+            background-size: cover; /* Resize the background image to cover the entire container */
         }
 
     </style>
