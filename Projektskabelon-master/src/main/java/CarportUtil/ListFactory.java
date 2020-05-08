@@ -24,7 +24,7 @@ public class ListFactory {
 
             FileWriter fw = new FileWriter(path, true);
             BufferedWriter out = new BufferedWriter(fw);
-            String linie = String.format("%s;%d;%d;%s;%s;%s;%.2f;%s;%.2",material.getName(), material.getWidth(),
+            String linie = String.format("%s;%d;%d;%s;%s;%s;%.2f;%s;%.2f",material.getName(), material.getWidth(),
                     material.getThickness(), material.getUnit(), material.getKeyword(), material.getCategory(),
                     material.getPrice(), material.getPicture(),spending);
             out.newLine();
