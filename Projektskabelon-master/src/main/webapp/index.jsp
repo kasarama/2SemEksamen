@@ -50,3 +50,5 @@
 
 
 <%@include file="includes/footer.inc"%>
+
+<a href="FrontController?target=redirect&destination=addmaterial">Add Material</a>
