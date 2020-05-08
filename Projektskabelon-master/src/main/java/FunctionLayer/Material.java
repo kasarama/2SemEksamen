@@ -5,7 +5,7 @@ public class Material {
     private int id;
     private String name;
     private int size;//actual
-    private int availablesize; //beregned fra Katarzyna metode
+    private int availablesize;
     private int width;
     private int thickness;
     private String unit;
@@ -48,6 +48,14 @@ public class Material {
         this.keyword = keyword;
         this.category = category;
 
+    }
+
+    public int getAvailablesize() {
+        return availablesize;
+    }
+
+    public void setAvailablesize(int availablesize) {
+        this.availablesize = availablesize;
     }
 
     public int getWidth() {
@@ -137,23 +145,7 @@ public class Material {
         return keyword;
     }
 
-    /*
-    @Override
-    public String toString() {
-        return "Material{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", size=" + size +
-                ", unit='" + unit + '\'' +
-                ", antal=" + amount +
-                ", price=" + price +
-                ", comment='" + comment + '\'' +
-                ", keyword='" + keyword + '\'' +
-                ", category='" + category + '\'' +
-                ", picture='" + picture + '\'' +
-                '}';
-    }
-     */
+
     @Override
     public String toString() {
         return "Material{" +

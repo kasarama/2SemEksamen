@@ -15,13 +15,15 @@
 <form name="addmaterial" action="FrontController" method="POST">
     <input type="hidden" name="target" value="addmaterial">
     <input type="hidden" name="origin" value="addmaterial">
-    name<input type="text" name="name"><br>
-    size<input type="text" name="size"><br>
-    unit<input type="text" name="unit"><br>
-    keyword<input type="text" name="keyword"><br>
-    category<input type="text" name="category"><br>
-    price<input type="text" name="price"><br>
-    picture<input type="text" name="picture"><br>
+    name <input type="text" name="name"><br>
+    width <input type="text" name="width"><br>
+    thickness <input type="text" name="thickness"><br>
+    unit <input type="text" name="unit"><br>
+    keyword <input type="text" name="keyword"><br>
+    category <input type="text" name="category"><br>
+    price <input type="text" name="price"><br>
+    picture <input type="text" name="picture"><br>
+    spending <input type="text" name="spending"><br>
 
     <input class="btn btn-primary" type="submit" value="tilføj" >
 </form>

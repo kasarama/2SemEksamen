@@ -64,16 +64,6 @@ public class Initializer {
         return overlayList;
     }
 
-    public static List<Material> getAllOverlayMaterials() throws LoginSampleException {
-        if (overlayMaterialsList == null){
-            try {
-                overlayMaterialsList = LogicFacade.getAllOverlays();
-            } catch (LoginSampleException e) {
-                throw new LoginSampleException("Overlay list could not load");
-            }
-        }
-        return overlayList;
 
-    }
 
 }

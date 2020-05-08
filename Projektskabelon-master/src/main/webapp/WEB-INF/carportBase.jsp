@@ -9,6 +9,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@include file="../includes/header.inc" %>
 
+<<<<<<< HEAD
 <!-- Start Picture -->
 <div style="width: 100%; height: 20%; position: relative;">
     <img id="image1" style="position: relative;" src="./images/verstTilHjemmeside2.png" alt="header" />
@@ -48,9 +49,63 @@
         <a class=" mt-4 mb-3 btn btn-primary" href="FrontController?target=redirect&destination=carportBase" role="button">DESIGN CARPORT</a>
         <br>
         <a class=" mt-3 btn btn-dark" href="FrontController?target=redirect&destination=?" role="button">Login/Registrer</a>
-
     </div>
 </div>
+<h1>Alt starter her!</h1>
+<h2>Her er nogle basale informationer du skal angive om din construction</h2>
+<form name="carportbase" action="FrontController" method="POST">
+    <input type="hidden" name="origin" value="carportBase">
+    <input type="hidden" name="target" value="carportbase">
+    <input type="hidden" name="constructionHeight" value=2000> <!-- det her er det eneste sted man angivr constructionens height-->
+    <label>Vælg længde:</label>
+    <select name="carportLength" class="form-control" >
+        <c:forEach var="i" begin="24" end="75">
+            <option value=${i*100}>${i*10} cm</option>
+        </c:forEach>
+    </select>
+    <label>Vælg bredde:</label>
+    <select name="carportWidth" class="form-control" >
+        <c:forEach var="i" begin="24" end="75">
+            <option value=${i*100}>${i*10} cm</option>
+        </c:forEach>
+    </select>
+    <br>
+    <label>Vælg tag type:</label>
+    <select name="roofType" class="form-control" >
+        <option value="0">Fladt tag</option>
+        <option value="1">Tag med rejsning</option>
+    </select>
+    <br>
+    <input type="submit" name="noShed" value="Fortsæt uden redskabsrummet">
+    <br>
+
+    <h3>Skur</h3>:
+    NB! Der skal beregnes 15 cm tagudhæng på hver side af skuret
+
+    <div>
+        Fortæl os om skuret:
+        <br>
+        <label>Vælg bredde:</label>
+        <select name="shedWidthParameter" class="form-control">
+            <option value="1">på hele carportens bredde</option>
+            <option value="2">på halvdelen af carportens bredde</option>
+        </select>
+        <label>Vælg dybde:</label>
+        <select name="shedDepth" class="form-control">
+            <c:forEach var="i" begin="12" end="35">
+                <option value=${i*100}>${i*10} cm</option>
+            </c:forEach>
+        </select>
+        <label>Vælg siden:</label>
+        <select name="shedSide" class="form-control">
+            <option value="left">til venstre</option>
+            <option value="right">til højre</option>
+        </select>
+        <input type="submit" name="withShed" value="Videre med det valgte redskabsrum">
+    </div>
+</form>
+
+
 
 
 <!-- Optional JavaScript -->

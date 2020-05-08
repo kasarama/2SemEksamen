@@ -250,14 +250,16 @@ public class MaterialMapper {
     public static void addMatDB(Material material) throws LoginSampleException {
         try {
             Connection con = Connector.connection();
-            String SQL = "INSERT INTO materials (name,unit,keyword,category,price,picture) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            String SQL = "INSERT INTO materials (name,width,thickness,unit,keyword,category,price,picture) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement ps = con.prepareStatement(SQL);
             ps.setString(1, material.getName());
-            ps.setString(2, material.getUnit());
-            ps.setString(3, material.getKeyword());
-            ps.setString(4, material.getCategory());
-            ps.setDouble(5, material.getPrice());
-            ps.setString(6, material.getPicture());
+            ps.setInt(2,material.getWidth());
+            ps.setInt(3, material.getThickness());
+            ps.setString(4, material.getUnit());
+            ps.setString(5, material.getKeyword());
+            ps.setString(6, material.getCategory());
+            ps.setDouble(7, material.getPrice());
+            ps.setString(8, material.getPicture());
             ps.executeUpdate();
         } catch (SQLException ex) {
             ex.printStackTrace();
