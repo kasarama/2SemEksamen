@@ -37,8 +37,7 @@
 <div class="container">
     <img src="./images/baggrund.png" style="filter: opacity(30%);" alt="Background" width="100%" height=auto>
     <div class="centered">
-        <h2>Velkommen til</h2>
-        <img class="mt-4 mb-3" src="./images/logo.png" alt="Logo" width="430" height=auto>
+        <h2>Design din Carport</h2>
         <h6  class="mb-3" style="font-size: small;">Her kan du designe din egen carport & <br>
             få vejledning, når inden du køber</h6>
         <br><br>
