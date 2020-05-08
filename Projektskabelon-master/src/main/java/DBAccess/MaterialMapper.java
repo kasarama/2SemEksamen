@@ -155,7 +155,7 @@ public class MaterialMapper {
             //2. start the connection by calling ".connection()" method from the "Connector" class
             Connection con = Connector.connection();
             //3. create an SQL statement - select only 'tag' from the 'material' table
-            String SQL = "SELECT * FROM materials WHERE category = 'TagPitched'";
+            String SQL = "SELECT * FROM materials WHERE category = 'PitchedTag'";
             //4. insert the SQL statement into the ".preparedStatement()" method - it sends the SQL statement to the DB
             PreparedStatement ps = con.prepareStatement(SQL);
             //5. call the ".executeQuery()" to execute the SQL statement and return the result (stored in ResultSet).
