@@ -87,6 +87,8 @@ fabric.properties
 ### Java-Web ###
 ## ignoring target file
 target/
+.src/**/Connector.java
+
 
 ### macOS ###
 # General
@@ -156,4 +158,3 @@ $RECYCLE.BIN/
 
 # End of https://www.gitignore.io/api/maven,macos,windows,java-web,intellij# Created by .ignore support plugin (hsz.mobi)
 
-src/main/webapp/images/uncategorized/
