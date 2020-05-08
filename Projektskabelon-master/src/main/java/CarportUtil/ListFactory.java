@@ -20,9 +20,7 @@ public class ListFactory {
         String mac = "";
         String path=windows;
         File file = new File(path);
-        if (!file.exists()){
-            path=mac;
-        }
+
 
 
         try {
