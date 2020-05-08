@@ -9,12 +9,13 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@include file="../includes/header.inc" %>
 
-
 <!-- Start Picture -->
-<div id="container1">
-    <img src="./images/verstTilHjemmeside2.png" alt="Header" width="100%" height=20% id="img1">
-    <img src="./images/logo.png" alt="Logo" width="20%" height=auto id="img2">
+<div style="width: 100%; height: 20%; position: relative;">
+    <img id="image1" style="position: relative;" src="./images/verstTilHjemmeside2.png" alt="header" />
+    <img id="image2" style="position: absolute; top: 2px; left: 80px;" src="./images/logo.png" alt="logo" />
 </div>
+
+
 
 <!-- Navigation -->
 <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light" style="border-bottom: 2px solid black;">

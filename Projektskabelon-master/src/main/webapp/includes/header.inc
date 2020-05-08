@@ -27,13 +27,16 @@
             transform: translate(-50%, -50%);
         }
         .container1 {
-            position:relative;
+          position:relative;
+                top: 10px;
+                left: 10px;
+                z-index: 1;
         }
-
-        .img {
-            position: absolute;
-            left: 50px;
-            top: 50px;
+        .topimage {
+          position:absolute;
+                top: 10px;
+                left: 25px;
+                z-index: 2;
         }
 
     </style>
