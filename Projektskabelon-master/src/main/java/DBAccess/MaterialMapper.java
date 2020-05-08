@@ -261,7 +261,7 @@ public class MaterialMapper {
     public static void addMatDB(Material material) throws LoginSampleException {
         try {
             Connection con = Connector.connection();
-            String SQL = "INSERT INTO materials (name,width,thickness,unit,keyword,category,price,picture) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            String SQL = "INSERT INTO materials (name,width,thickness,unit,keyword,category,price,picture,spending) VALUES (?, ?, ?, ?, ?, ?, ?, ?,?)";
             PreparedStatement ps = con.prepareStatement(SQL);
             ps.setString(1, material.getName());
             ps.setInt(2,material.getWidth());
@@ -271,6 +271,7 @@ public class MaterialMapper {
             ps.setString(6, material.getCategory());
             ps.setDouble(7, material.getPrice());
             ps.setString(8, material.getPicture());
+            ps.setDouble(9,material.getSpending());
             ps.executeUpdate();
         } catch (SQLException ex) {
             ex.printStackTrace();
