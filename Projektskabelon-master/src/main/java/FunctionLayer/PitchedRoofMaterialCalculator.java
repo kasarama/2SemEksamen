@@ -84,7 +84,7 @@ public class PitchedRoofMaterialCalculator {
 
     public int screwForTaglægterCalculated(){
         //TODO - hent hvor lang lægten + spær er fra Mias beregning (og evt. monas)!!
-        //Vi antager der er er en skrue pr toplægteholder samt et pr spær for at sætte toplægten fast
+        //Vi antager der er er en skrue pr toplægteholder + samt et pr spær for at sætte toplægten fast
         screwForTaglægter = 0;//monas her metode til toplægteholderantal ; // TODO + antal spær
      return screwForTaglægter;
     }
