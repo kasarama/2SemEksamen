@@ -145,23 +145,7 @@ public class Material {
         return keyword;
     }
 
-    /*
-    @Override
-    public String toString() {
-        return "Material{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", size=" + size +
-                ", unit='" + unit + '\'' +
-                ", antal=" + amount +
-                ", price=" + price +
-                ", comment='" + comment + '\'' +
-                ", keyword='" + keyword + '\'' +
-                ", category='" + category + '\'' +
-                ", picture='" + picture + '\'' +
-                '}';
-    }
-     */
+
     @Override
     public String toString() {
         return "Material{" +

@@ -17,9 +17,13 @@ public class AddMaterial extends Command {
         if (request.getParameter("name")==null){
             name=null;
         }
-        int size= Integer.parseInt(request.getParameter("size"));
-        if((request.getParameter("size")==null)){
-            size=0;
+        int width= Integer.parseInt(request.getParameter("width"));
+        if((request.getParameter("width")==null)){
+            width=0;
+        }
+        int thickness= Integer.parseInt(request.getParameter("thickness"));
+        if((request.getParameter("thickness")==null)){
+            width=0;
         }
         String unit = (request.getParameter("unit"));
         if(request.getParameter("unit")==null){
@@ -42,17 +46,24 @@ public class AddMaterial extends Command {
         if(request.getParameter("picture")==null){
             picture="uncategorized/logo.png";
         }
+        double spending=Double.parseDouble(request.getParameter("category")+"/"+request.getParameter("picture"));
+        if(request.getParameter("spending")==null){
+            spending=0;
+        }
 
 
-        material.setName(request.getParameter("name"));
-        material.setSize(Integer.parseInt(request.getParameter("size")));
-        material.setUnit(request.getParameter("unit"));
-        material.setKeyword(request.getParameter("keyword"));
-        material.setCategory(request.getParameter("category"));
-        material.setPrice(Double.parseDouble(request.getParameter("price")));
-        material.setPicture(request.getParameter("category")+"/"+request.getParameter("picture"));
+
+        material.setName(name);
+        material.setWidth(width);
+        material.setThickness(thickness);
+        material.setUnit(unit);
+        material.setKeyword(keyword);
+        material.setCategory(category);
+        material.setPrice(price);
+        material.setPicture(category+"/"+picture);
+
         System.out.println(material.toString());
-        ListFactory.saveInFile(material);
+        ListFactory.saveInFile(material,spending);
         MaterialMapper.addMatDB(material);
 
         return "addmaterial";
