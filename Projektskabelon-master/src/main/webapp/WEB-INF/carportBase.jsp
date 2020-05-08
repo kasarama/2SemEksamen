@@ -9,12 +9,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@include file="../includes/header.inc" %>
 
-<<<<<<< HEAD
 <!-- Start Picture -->
-<div style="width: 100%; height: 20%; position: relative;">
-    <img id="image1" style="position: relative;" src="./images/verstTilHjemmeside2.png" alt="header" />
-    <img id="image2" style="position: absolute; top: 2px; left: 80px;" src="./images/logo.png" alt="logo" />
-</div>
+<img src="./images/header.JPG" alt="header" width="100%" height=auto>
 
 
 
