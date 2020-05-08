@@ -14,23 +14,19 @@ import java.util.ArrayList;
  * @author Magdalena
  */
 public class ListFactory {
-    public static void saveInFile(Material material) throws LoginSampleException {
+    public static void saveInFile(Material material, double spending) throws LoginSampleException {
         //todo save material in text file
         String windows = "dbAccess/materials.txt";
-        String mac = "";
         String path=windows;
         File file = new File(path);
-        if (!file.exists()){
-            path=mac;
-        }
-
 
         try {
+
             FileWriter fw = new FileWriter(path, true);
             BufferedWriter out = new BufferedWriter(fw);
-            String linie = String.format("%s;%d;%s;%s;%s;%.2f;%s",material.getName(), material.getSize(),
-                    material.getUnit(), material.getKeyword(), material.getCategory(), material.getPrice(),
-                    material.getPicture());
+            String linie = String.format("%s;%d;%d;%s;%s;%s;%.2f;%s;%.2f",material.getName(), material.getWidth(),
+                    material.getThickness(), material.getUnit(), material.getKeyword(), material.getCategory(),
+                    material.getPrice(), material.getPicture(),spending);
             out.newLine();
             out.write(linie);
             out.close();

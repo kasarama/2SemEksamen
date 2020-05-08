@@ -1,5 +1,7 @@
 package FunctionLayer;
 
+import DBAccess.MaterialMapper;
+
 import java.util.ArrayList;
 
 /**
@@ -9,34 +11,42 @@ public class OverlaySizeCalculator {
     final private  static int FYRMAXDISTANCE=600;
     final private  static int POSTSIZE=100;
     final private  static int MMPERM=1000;
+    final private  static int SPAERDISTANCE=1000;
     final private  static double SECURITYPERCENTAGE=0.05;
 
 
-    //calculates spaer needed for one of the chosen sides of shed/carport/construction
-    // max distance between spaer is 100 cm - counts number of spar after each post
+    //..............calculates spaer needed for one of the chosen wall...........//
 
     public static int spaerOnOneWall(Wall wall) {
+        // max distance between spaer is 100 cm - counts number of spar after each post
         int amount = 0;
         Integer[] postsheights = ConstructionSizeCalculator.postsHeights(wall.getMinHeight(),
                 wall.getRaising(), wall.getLength());
 
-        for (int i = 0; i < postsheights.length - 1; i++) { //+1 because there is one more post than distances
+        for (int i = 0; i < postsheights.length - 1; i++) { //-1 because there is one more post than distances
             int tmp = amount + 1;//
-            amount = (int) (tmp + postsheights[i] / MMPERM); //counts number of distances between 2 spaers
+            amount = (int) (tmp + postsheights[i] / SPAERDISTANCE); //counts number of distances between 2 spaers
         }
         return amount;
     }
+    //..............calculates spaer længth for one of the chosen wall...........//
+    public static int spaerLengthOneWall(Wall wall) {
+        //spaer has length of distance between posts of one wall
+        return ConstructionSizeCalculator.postDistanceMax3000(wall.getLength());
+
+    }
 
 
-    //.............calculates number of screws for spar (6cm)...........//
-    public static int screwSpaer(int spaernumber) {
 
-        return spaernumber * 2 * 2; //2 screws on each side of spaer
+    //.............calculates number of screws for spaer (6cm)...........//
+    public static int screwSpaer(int spaerQuantity) {
+
+        return spaerQuantity * 2 * 2; //2 screws on each side of spaer
     }
 
 
     //................calculates number of fyr pr wall.......................//
-    public static int fyrNumberOnWall(Wall wall) {
+    public static int fyrQuantityOnWall(Wall wall) {
         int distance = wall.getLength() - POSTSIZE;
         int fyrPlusPost = 0;
         if (distance % FYRMAXDISTANCE == 0) {
@@ -50,8 +60,8 @@ public class OverlaySizeCalculator {
 
 
     //...........calculates number of screws for fyr (4cm)...................//
-    public static int screwFyr(int fyrnumber, int spaernumber) {
-        return fyrnumber * spaernumber; //1 screws on each  spaer
+    public static int screwFyr(int fyrQuantity, int spaerQuantity) {
+        return fyrQuantity * spaerQuantity; //1 screws on each  spaer
     }
 
 
@@ -79,7 +89,6 @@ public class OverlaySizeCalculator {
             if (i % postIndex != 0) {
                 int fyrLength = (int) (wall.getMinHeight() + raising * i);
                 fyrLengthsOneWall.add(fyrLength);
-                System.out.println("idex of fyr: " + i + ", height: " + fyrLength);
             }
         }
 
@@ -95,10 +104,8 @@ public class OverlaySizeCalculator {
         a=minHeight, b= maxHeight, h= length
          */
         int maxHeight=(int) (wall.getMinHeight()+ConstructionSizeCalculator.raising(wall.getRaising(),wall.getLength()));
-        System.out.println("minH="+wall.getMinHeight()+", maxH="+maxHeight+", wallLength="+wall.getLength());
         area=((wall.getMinHeight()+maxHeight)) /2*wall.getLength();
 
-        System.out.println("area: "+area); //returnes valeu in mm
 
         return area/MMPERM/MMPERM;
     }
@@ -111,10 +118,7 @@ public class OverlaySizeCalculator {
     https://www.youtube.com/watch?v=ovbLedbDQUA
     https://www.10-4.dk/varer/byggematerialer/trae/beklaedningsbraedder/25x125mm-klinkbeklaedning-tryk-1432825125300?gclid=Cj0KCQjw17n1BRDEARIsAFDHFey9ARt6e_0jQkOYRhKuj4egHaKtd_JTND164NF9BZA9ptSG0MEYV0YaAvT9EALw_wcB
     https://www.johannesfog.dk/byggecenter/produkter/222X145_GRAN_KLINK_BEKL__SORT1/
-     */
-    //.................Plank montage..............//
-    /*
-    On fog webpage we can find spending of serten material per kvadrat meter. This data ar being located i DB
+    On fog webpage we can find spending of serten material per squer meter. This data ar being located i DB
      */
 
 
@@ -124,7 +128,6 @@ public class OverlaySizeCalculator {
     public static double allWallsArea(Construction construction) {
         ArrayList<Wall> allWalls = new ArrayList<>();
         ArrayList<Wall> shedWalls = construction.getShed().getWalls();
-        System.out.println("walls in construction: "+construction.getWalls().size());
 
         int backSideindex=-1;
         int frontSideindex=-1;
@@ -142,9 +145,7 @@ public class OverlaySizeCalculator {
         }
         for (Wall wall: shedWalls) {
             if (wall.getSide().equals("front")) {
-                System.out.println("first length: "+wall.getLength());
                 wall.setLength(shedWalls.get(backSideindex).getLength());
-                System.out.println("new length: "+wall.getLength());
 
                 allWalls.add(wall);
             }
@@ -156,17 +157,15 @@ public class OverlaySizeCalculator {
 
             double area=oneWallArea(allWalls.get(i));
             totalArea=totalArea+area;
-            System.out.println("wall: "+allWalls.get(i)+" area: "+ area+"\n"+"total Area:" +totalArea+"\n");
         }
 
         return totalArea;
     }
 
     public static int overlaySpending(String materialName, double area) throws LoginSampleException {
-        //todo fix DB !!!!!!
 
-        //double spending = MaterialMapper.spending(materialName);
-        double needed = 5; // spending * area;
+        double spending = MaterialMapper.spending(materialName)*MMPERM;
+        double needed = spending * area;
         needed = needed + SECURITYPERCENTAGE * needed; //5 % extra material for cuts
 
         if (((needed * 10) % 10) == 0) {
@@ -185,6 +184,13 @@ public class OverlaySizeCalculator {
             return needed;
         } else
             return (needed - (needed % 20) + 20);
+    }
+
+    public static int overDoorSpearQuantity(int raising) {
+        raising=raising - raising%SPAERDISTANCE;
+        int quantity = (int) raising/SPAERDISTANCE +1;
+
+        return quantity;
     }
 
 
