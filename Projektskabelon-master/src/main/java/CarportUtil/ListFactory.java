@@ -45,6 +45,8 @@ public class ListFactory {
             attributter = line.split(";");
 
             for (int i = 0; i < 10; i++) {
+                Material material = new Material();
+                material.set
 
             }
 
