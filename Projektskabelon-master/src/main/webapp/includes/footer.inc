@@ -1,4 +1,22 @@
-
+<!-- Footer -->
+    <footer class="py-4 bg-dark">
+        <div class="container text-white">
+            <div class="row">
+                <div class="col" style="text-align: right; right: 20px">
+                    <i class="fa fa-address-card-o mb-3" style="font-size:24px"></i>
+                    <br>
+                    <i class="fa fa-phone-square mb-3" style="font-size:24px"></i>
+                    <br>
+                    <i class="fa fa-envelope-o" style="font-size:24px"></i>
+                </div>
+                <div class="col" style="text-align: left; left: -20px">
+                    <p class="mb-3">Johannes Fog A/S</p>
+                    <p class="mb-3">45 87 10 01</p>
+                    <p>Send email</p>
+                </div>
+            </div>
+        </div>
+    </footer>
 
 <c:if test = "${requestScope.error!= null}" >
     <h2>Error ! </h2>
