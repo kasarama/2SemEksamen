@@ -147,7 +147,7 @@ public class OverlaySizeCalculatorTest {
     @Test
     public void overlaySpending() {
         int result;
-        double spending=7.7;
+        double spending=7.7*1000;
         double actual = spending*34.52;
         actual=actual+0.05*actual; //5 % extra material for cuts
 
@@ -157,8 +157,8 @@ public class OverlaySizeCalculatorTest {
         else {
             result= (int) actual+1;
         }
-        int expected = 280;
-        assertEquals(result,expected);
+        int expected =(int) ((7.7*1000*34.52)*1.05);
+        assertEquals(expected,result,100);
     }
 
     @Test

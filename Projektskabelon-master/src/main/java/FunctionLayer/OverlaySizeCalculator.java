@@ -89,7 +89,6 @@ public class OverlaySizeCalculator {
             if (i % postIndex != 0) {
                 int fyrLength = (int) (wall.getMinHeight() + raising * i);
                 fyrLengthsOneWall.add(fyrLength);
-                System.out.println("idex of fyr: " + i + ", height: " + fyrLength);
             }
         }
 
@@ -105,10 +104,8 @@ public class OverlaySizeCalculator {
         a=minHeight, b= maxHeight, h= length
          */
         int maxHeight=(int) (wall.getMinHeight()+ConstructionSizeCalculator.raising(wall.getRaising(),wall.getLength()));
-        System.out.println("minH="+wall.getMinHeight()+", maxH="+maxHeight+", wallLength="+wall.getLength());
         area=((wall.getMinHeight()+maxHeight)) /2*wall.getLength();
 
-        System.out.println("area: "+area); //returnes valeu in mm
 
         return area/MMPERM/MMPERM;
     }
@@ -121,10 +118,7 @@ public class OverlaySizeCalculator {
     https://www.youtube.com/watch?v=ovbLedbDQUA
     https://www.10-4.dk/varer/byggematerialer/trae/beklaedningsbraedder/25x125mm-klinkbeklaedning-tryk-1432825125300?gclid=Cj0KCQjw17n1BRDEARIsAFDHFey9ARt6e_0jQkOYRhKuj4egHaKtd_JTND164NF9BZA9ptSG0MEYV0YaAvT9EALw_wcB
     https://www.johannesfog.dk/byggecenter/produkter/222X145_GRAN_KLINK_BEKL__SORT1/
-     */
-    //.................Plank montage..............//
-    /*
-    On fog webpage we can find spending of serten material per kvadrat meter. This data ar being located i DB
+    On fog webpage we can find spending of serten material per squer meter. This data ar being located i DB
      */
 
 
@@ -134,7 +128,6 @@ public class OverlaySizeCalculator {
     public static double allWallsArea(Construction construction) {
         ArrayList<Wall> allWalls = new ArrayList<>();
         ArrayList<Wall> shedWalls = construction.getShed().getWalls();
-        System.out.println("walls in construction: "+construction.getWalls().size());
 
         int backSideindex=-1;
         int frontSideindex=-1;
@@ -152,9 +145,7 @@ public class OverlaySizeCalculator {
         }
         for (Wall wall: shedWalls) {
             if (wall.getSide().equals("front")) {
-                System.out.println("first length: "+wall.getLength());
                 wall.setLength(shedWalls.get(backSideindex).getLength());
-                System.out.println("new length: "+wall.getLength());
 
                 allWalls.add(wall);
             }
@@ -166,7 +157,6 @@ public class OverlaySizeCalculator {
 
             double area=oneWallArea(allWalls.get(i));
             totalArea=totalArea+area;
-            System.out.println("wall: "+allWalls.get(i)+" area: "+ area+"\n"+"total Area:" +totalArea+"\n");
         }
 
         return totalArea;
@@ -174,7 +164,7 @@ public class OverlaySizeCalculator {
 
     public static int overlaySpending(String materialName, double area) throws LoginSampleException {
 
-        double spending = MaterialMapper.spending(materialName);
+        double spending = MaterialMapper.spending(materialName)*MMPERM;
         double needed = spending * area;
         needed = needed + SECURITYPERCENTAGE * needed; //5 % extra material for cuts
 
