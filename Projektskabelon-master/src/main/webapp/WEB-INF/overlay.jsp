@@ -53,7 +53,7 @@
                                 <option value="${material.name}">${material.name}</option>
                             </c:forEach>
                         </select>
-                        
+
                         <label class="mt-3"> Du kan også vælge at beklæde vægge af konstruktion:</label>
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" name="left" value="left" id="left1">
