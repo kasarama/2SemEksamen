@@ -219,38 +219,49 @@ public class MaterialMapper {
 
     // This class Connects to DB and gets the "Overlay material" data from it.
 
+
+
+    //.......................................MAGDA'S Methods.............................................//
+
+
     //Magdalena
     public static List<Material> getAllOverlays() throws LoginSampleException {
+        System.out.println("MaterialMapper.getAllOverlays");
         List<Material> materialList=new ArrayList<>();
         try
         {
-//todo edit the method so it uses parameters and question marks
+//todo edit the method so it uses parameters and question marks??
             Connection con = Connector.connection();
-            String SQL = "SELECT materialID, name, picture FROM materials WHERE category='overlay' and keyword='overlay'";
+            String SQL = "SELECT name, picture, price FROM materials WHERE category='overlayMaterial'";
             PreparedStatement ps = con.prepareStatement(SQL);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 String name = rs.getString("name");
                 String picture = rs.getString("picture");
-                int materialID = rs.getInt("materialID");
+                double price = rs.getDouble("price");
 
                 Material material = new Material();
                 material.setName(name);
                 material.setPicture(picture);
-                material.setId(materialID);
+                material.setPrice(price);
                 materialList.add(material);
+                System.out.println(material.getName());
             }
         } catch (ClassNotFoundException | SQLException ex) {
+            ex.printStackTrace();
             throw new LoginSampleException(ex.getMessage());
         }
+        System.out.println("materials on ");
         return materialList;
     }
+
+    
 
     //Magdalena
     public static void addMatDB(Material material) throws LoginSampleException {
         try {
             Connection con = Connector.connection();
-            String SQL = "INSERT INTO materials (name,width,thickness,unit,keyword,category,price,picture) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            String SQL = "INSERT INTO materials (name,width,thickness,unit,keyword,category,price,picture,spending) VALUES (?, ?, ?, ?, ?, ?, ?, ?,?)";
             PreparedStatement ps = con.prepareStatement(SQL);
             ps.setString(1, material.getName());
             ps.setInt(2,material.getWidth());
@@ -260,6 +271,7 @@ public class MaterialMapper {
             ps.setString(6, material.getCategory());
             ps.setDouble(7, material.getPrice());
             ps.setString(8, material.getPicture());
+            ps.setDouble(9,material.getSpending());
             ps.executeUpdate();
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -271,41 +283,7 @@ public class MaterialMapper {
 
     }
 
-    //Magdalena
-    public static List<Material> getAllOverlayMaterials() throws LoginSampleException {
-        //todo edit the method so it uses parameters and question marks
-        List<Material> materialList=new ArrayList<>();
-        try
-        {
-            Connection con = Connector.connection();
-            String SQL = "SELECT materialID, name, unit, price, picture FROM materials WHERE category='overlay'";
-            PreparedStatement ps = con.prepareStatement(SQL);
-            ResultSet rs = ps.executeQuery();
-            while (rs.next())
-            {
-
-                int materialID = rs.getInt("materialID");
-                String name = rs.getString("name");
-                String picture = rs.getString("picture");
-                String unit = rs.getString("unit");
-                double price = rs.getDouble("price");
-
-
-                Material material = new Material();
-                material.setId(materialID);
-                material.setName(name);
-                material.setUnit(unit);
-                material.setPrice(price);
-                material.setPicture(picture);
-                materialList.add(material);
-            }
-        }
-        catch(ClassNotFoundException | SQLException ex )
-        {
-            throw new LoginSampleException(ex.getMessage());
-        }
-        return materialList;
-    }
+    
 
     //Magdalena
     public static double spending (String name) throws LoginSampleException {
