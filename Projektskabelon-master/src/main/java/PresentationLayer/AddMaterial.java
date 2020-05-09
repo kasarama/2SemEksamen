@@ -47,7 +47,7 @@ public class AddMaterial extends Command {
                     price = 0;
                 }
                 String picture = (request.getParameter("category") + "/" + request.getParameter("picture"));
-                if (request.getParameter("picture") == null) {
+                if (request.getParameter("picture") == "") {
                     picture = "uncategorized/logo.png";
                 }
                 double spending = Double.parseDouble(request.getParameter("spending"));
@@ -62,7 +62,7 @@ public class AddMaterial extends Command {
                 material.setKeyword(keyword);
                 material.setCategory(category);
                 material.setPrice(price);
-                material.setPicture(category + "/" + picture);
+                material.setPicture(picture);
                 material.setSpending(spending);
 
                 System.out.println(material.toString());

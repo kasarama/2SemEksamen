@@ -21,7 +21,7 @@ public class MaterialMapper {
     // Vi vil vide hvor meget materiale der skal bruges
 
 
-// @author Mia
+    // @author Mia
     // TODO join tables for at få et materiale frem - denne skal ikke slettes selvom den ikke virker
     public static Material getMaterialBySizeName(int length, String name) throws LoginSampleException {
         Material material = new Material();
@@ -35,14 +35,16 @@ public class MaterialMapper {
             if (rs.next()) {
                 int materialID = rs.getInt("materialID");
                 material = new Material(materialID, length);
-            }else {
+            } else {
                 System.out.println("ResultSet.next()=false");
-                return null;  }//todo handle null object there where method is being used;
+                return null;
+            }//todo handle null object there where method is being used;
         } catch (ClassNotFoundException | SQLException ex) {
             throw new LoginSampleException(ex.getMessage());
         }
         return material;
     }
+
     public static Material getMaterialByID(int id) throws LoginSampleException {
         Material material = new Material();
         try {
@@ -55,15 +57,17 @@ public class MaterialMapper {
             if (rs.next()) {
                 String name = rs.getString("name");
                 material = new Material(id, name, null);
-            }else {
+            } else {
                 System.out.println("ResultSet.next()=false");
-                return null;  }//todo handle null object there where method is being used;
+                return null;
+            }//todo handle null object there where method is being used;
         } catch (ClassNotFoundException | SQLException ex) {
             throw new LoginSampleException(ex.getMessage());
         }
         return material;
     }
-    public static String getUnitByName (String name) throws LoginSampleException {
+
+    public static String getUnitByName(String name) throws LoginSampleException {
         Material material = new Material();
         try {
             Connection con = Connector.connection();
@@ -80,14 +84,15 @@ public class MaterialMapper {
                 material.setUnit(null);
                 return material.getUnit();
             }
-        }catch (SQLException sql){
+        } catch (SQLException sql) {
             material.setUnit(null);
             return material.getUnit();
         } catch (ClassNotFoundException ex) {
             throw new LoginSampleException(ex.getMessage());
         }
     }
-    public static int getWidthByID (int id, String name) throws LoginSampleException {
+
+    public static int getWidthByID(int id, String name) throws LoginSampleException {
         Material material = new Material();
         try {
             Connection con = Connector.connection();
@@ -105,7 +110,7 @@ public class MaterialMapper {
                 material.setUnit(null);
                 return material.getWidth();
             }
-        }catch (SQLException sql){
+        } catch (SQLException sql) {
             material.setUnit(null);
             return material.getWidth();
         } catch (ClassNotFoundException ex) {
@@ -113,7 +118,7 @@ public class MaterialMapper {
         }
     }
 
-    public static int getThicknessByID (int id) throws LoginSampleException {
+    public static int getThicknessByID(int id) throws LoginSampleException {
         Material material = new Material();
         try {
             Connection con = Connector.connection();
@@ -130,18 +135,13 @@ public class MaterialMapper {
                 material.setUnit(null);
                 return material.getThickness();
             }
-        }catch (SQLException sql){
+        } catch (SQLException sql) {
             material.setUnit(null);
             return material.getThickness();
         } catch (ClassNotFoundException ex) {
             throw new LoginSampleException(ex.getMessage());
         }
     }
-
-
-
-
-
 
 
 // This class Connects to DB and gets the "Roof material" data from it.
@@ -189,6 +189,7 @@ public class MaterialMapper {
         // return the gotten 'material' data from the DB
         return materialList;
     }
+
     public static List<Material> getAllFlatRoofMaterials() throws LoginSampleException {
         List<Material> materialList = null;
 
@@ -210,8 +211,7 @@ public class MaterialMapper {
                 Material material = new Material(materialID, name, 0, unit, keyword, category);
                 materialList.add(material);
             }
-        }
-        catch (ClassNotFoundException | SQLException ex) {
+        } catch (ClassNotFoundException | SQLException ex) {
             throw new LoginSampleException(ex.getMessage());
         }
         return materialList;
@@ -220,16 +220,19 @@ public class MaterialMapper {
     // This class Connects to DB and gets the "Overlay material" data from it.
 
 
-
     //.......................................MAGDA'S Methods.............................................//
 
 
-    //Magdalena
+    /**
+     * @return List<Material>
+     * @throws LoginSampleException The purpose of this method is to get all position from database from materials table, where
+     *                              category='overlayMaterial' end return them on list of Material
+     * @author Magdalena
+     */
     public static List<Material> getAllOverlays() throws LoginSampleException {
         System.out.println("MaterialMapper.getAllOverlays");
-        List<Material> materialList=new ArrayList<>();
-        try
-        {
+        List<Material> materialList = new ArrayList<>();
+        try {
 //todo edit the method so it uses parameters and question marks??
             Connection con = Connector.connection();
             String SQL = "SELECT name, picture, price FROM materials WHERE category='overlayMaterial'";
@@ -255,23 +258,27 @@ public class MaterialMapper {
         return materialList;
     }
 
-    
 
-    //Magdalena
+    /**
+     * @param material
+     * @throws LoginSampleException The purpose of this method is to save data contained in attributes of parameter material
+     *                              in database in materials table
+     * @author Magdalena
+     */
     public static void addMatDB(Material material) throws LoginSampleException {
         try {
             Connection con = Connector.connection();
             String SQL = "INSERT INTO materials (name,width,thickness,unit,keyword,category,price,picture,spending) VALUES (?, ?, ?, ?, ?, ?, ?, ?,?)";
             PreparedStatement ps = con.prepareStatement(SQL);
             ps.setString(1, material.getName());
-            ps.setInt(2,material.getWidth());
+            ps.setInt(2, material.getWidth());
             ps.setInt(3, material.getThickness());
             ps.setString(4, material.getUnit());
             ps.setString(5, material.getKeyword());
             ps.setString(6, material.getCategory());
             ps.setDouble(7, material.getPrice());
             ps.setString(8, material.getPicture());
-            ps.setDouble(9,material.getSpending());
+            ps.setDouble(9, material.getSpending());
             ps.executeUpdate();
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -283,10 +290,15 @@ public class MaterialMapper {
 
     }
 
-    
 
-    //Magdalena
-    public static double spending (String name) throws LoginSampleException {
+    /**
+     * @param name
+     * @return double
+     * @throws LoginSampleException the purpose of this method is to find a value of 'spending' colon in materials table,
+     *                              where value of name collon is the parameter
+     * @author Magdalena
+     */
+    public static double spending(String name) throws LoginSampleException {
 
         try {
             Connection con = Connector.connection();
@@ -300,11 +312,34 @@ public class MaterialMapper {
             } else {
                 return 0;
             }
-        }catch (SQLException sql){
+        } catch (SQLException sql) {
             return 0;
         } catch (ClassNotFoundException ex) {
             throw new LoginSampleException(ex.getMessage());
         }
     }
+
+    public static int getWidthByName(String materialName) throws LoginSampleException {
+
+        try {
+            Connection con = Connector.connection();
+            String SQL = "SELECT width FROM fogdb.materials WHERE name=?";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ps.setString(1, materialName);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                int width = rs.getInt("width");
+                return width;
+            } else {
+                return 0;
+            }
+        } catch (SQLException sql) {
+            return 0;
+        } catch (ClassNotFoundException ex) {
+            throw new LoginSampleException(ex.getMessage());
+        }
+
+    }
+
 }
 
