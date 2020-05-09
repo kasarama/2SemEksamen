@@ -14,6 +14,10 @@ public class OverlayMaterialCalculator {
     final private static int POSTWIDTH = 100;
     final private static int MAXGAPDOORROOF = 100;
     final private static int SPLITSPAERINTO = 3;
+    final private static int SCREWFORDOORELEMEN = 9;
+    final private static int DOORMETALELEMENS = 3;
+
+
 
 
     //......................SPAER......................//
@@ -95,13 +99,13 @@ public class OverlayMaterialCalculator {
     public static Material overlayMaterial(Construction construction, String materialName) throws LoginSampleException {
         double wholeAreal = OverlaySizeCalculator.allWallsArea(construction);
 
-        int size = OverlaySizeCalculator.overlaySpending(materialName, wholeAreal);
+        int quantity = OverlaySizeCalculator.overlaySpending(materialName, wholeAreal);
         Material overlay = new Material();
         overlay.setName(materialName);
-        overlay.setSize(size);
-        overlay.setAmount(1);
+        overlay.setSize(3600);
+        overlay.setAmount(quantity);
         overlay.setComment("Beklædning");
-        if (size == 0) {
+        if (quantity == 0) {
             throw new LoginSampleException("Vi kunne ikke beregne beklædning: "
                     + materialName + ". Prøv at vælge noget andet til beklædning");
         }
@@ -158,7 +162,7 @@ public class OverlayMaterialCalculator {
 
 
         Material greb = new Material();
-        greb.setName("stalddørsgreb 50x75");
+        greb.setName("Stalddørsgreb 50x75");
         greb.setComment("Greb til skurdør");
         greb.setSize(1);
         greb.setAmount(1);
@@ -166,7 +170,7 @@ public class OverlayMaterialCalculator {
 
         Material hinge = new Material();
         hinge.setComment("Hængsler til skurdør");
-        hinge.setName("t hængsel 390 mm");
+        hinge.setName("T-Hængsel 390 mm");
         hinge.setAmount(2);
         hinge.setSize(1);
         doorMaterials.add(hinge);
@@ -190,6 +194,12 @@ public class OverlayMaterialCalculator {
         screwFyr.setSize(screwFyrQuantity); //for the door - always the same size of the door
         screwFyr.setComment("Til montering af vertical framing-dør");
         doorMaterials.add(screwFyr);
+
+        Material screwFyrDoor = new Material();
+        screwFyrDoor.setName("BASIC SKRUE 5,0X40MM");
+        screwFyrDoor.setSize(SCREWFORDOORELEMEN*DOORMETALELEMENS); //for the door - always the same size of the door
+        screwFyrDoor.setComment("Til montering af vertical framing-dør");
+        doorMaterials.add(screwFyrDoor);
 
         Material screwSpaer = new Material();
         screwSpaer.setName("5X80 MM RUST FRI SKRUER");

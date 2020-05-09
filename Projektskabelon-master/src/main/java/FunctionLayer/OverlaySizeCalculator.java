@@ -13,6 +13,7 @@ public class OverlaySizeCalculator {
     final private  static int MMPERM=1000;
     final private  static int SPAERDISTANCE=1000;
     final private  static double SECURITYPERCENTAGE=0.05;
+    final private  static double LENGTHOFOVERLAYPLANK=3600;
 
 
     //..............calculates spaer needed for one of the chosen wall...........//
@@ -105,6 +106,8 @@ public class OverlaySizeCalculator {
          */
         int maxHeight=(int) (wall.getMinHeight()+ConstructionSizeCalculator.raising(wall.getRaising(),wall.getLength()));
         area=((wall.getMinHeight()+maxHeight)) /2*wall.getLength();
+        String areaString = String.format(wall.getSide()+"area: %.5f",area);
+        System.out.println(areaString);
 
 
         return area/MMPERM/MMPERM;
@@ -158,14 +161,20 @@ public class OverlaySizeCalculator {
             double area=oneWallArea(allWalls.get(i));
             totalArea=totalArea+area;
         }
-
+        System.out.println("total area: "+totalArea);
         return totalArea;
     }
 
     public static int overlaySpending(String materialName, double area) throws LoginSampleException {
+        double spending = MaterialMapper.spending(materialName); // m / m^2
+        double needed =0;
+        if ( materialName.equals("HARDIEPLANK 180X3600X8MM")){
+            needed = spending * area; //spending : how many pieces pr squwe meter
+        } else {
+            needed = spending * area * LENGTHOFOVERLAYPLANK / MMPERM;
+        }
 
-        double spending = MaterialMapper.spending(materialName)*MMPERM;
-        double needed = spending * area;
+
         needed = needed + SECURITYPERCENTAGE * needed; //5 % extra material for cuts
 
         if (((needed * 10) % 10) == 0) {
