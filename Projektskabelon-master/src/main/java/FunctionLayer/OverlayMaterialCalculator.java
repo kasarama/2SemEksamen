@@ -75,6 +75,26 @@ public class OverlayMaterialCalculator {
     }
 
 
+    //..............SCREWS FOR OVERLAY........................//
+    public  static Material screwForOverlayOneWall ( Wall wall, String overlayName) throws LoginSampleException {
+        Material screwOverlay = new Material();
+        if (overlayName.equals("HARDIEPLANK 180X3600X8MM")) {
+            screwOverlay.setName("FACADESKRUE TIL HARDIEPLANK");
+        } else {
+            screwOverlay.setName("BASIC SKRUE 5,0X40MM");
+        }
+        int size = OverlaySizeCalculator.overlayScrewOneWall(wall, overlayName);
+        screwOverlay.setSize(size);
+        screwOverlay.setComment("til montering af beklædningsplanke");
+        screwOverlay.setAmount(1);
+
+
+        return screwOverlay;
+
+
+    }
+
+
 
     //.......................returns LIST OF ALL MATERIALS NEEDED FOR FRAMING chosen wall.................//
     public static ArrayList<Material> wallFraming(Wall wall) {
@@ -95,8 +115,22 @@ public class OverlayMaterialCalculator {
     }
 
 
-    //....................................MATERIAL FOR OVERLAY....................................//
-    public static Material overlayMaterial(Construction construction, String materialName) throws LoginSampleException {
+    //....................................MATERIALS FOR OVERLAY....................................//
+    public static ArrayList<Material> overlayMaterial(Construction construction, String materialName) throws LoginSampleException {
+
+        ArrayList<Material> overlayMaterials = new ArrayList<>();
+
+        ArrayList<Wall> carportWalls = construction.getWalls();
+        ArrayList<Wall> shedWalls = construction.getShed().getWalls();
+        ArrayList<Wall> allWalls = new ArrayList<>();
+        allWalls.addAll(carportWalls);
+        allWalls.addAll(shedWalls);
+
+        for (Wall wall :allWalls) {
+            Material overlayScrew = screwForOverlayOneWall(wall, materialName);
+            overlayMaterials.add(overlayScrew);
+        }
+
         double wholeAreal = OverlaySizeCalculator.allWallsArea(construction);
 
         int quantity = OverlaySizeCalculator.overlaySpending(materialName, wholeAreal);
@@ -109,8 +143,13 @@ public class OverlayMaterialCalculator {
             throw new LoginSampleException("Vi kunne ikke beregne beklædning: "
                     + materialName + ". Prøv at vælge noget andet til beklædning");
         }
+        overlayMaterials.add(overlay);
 
-        return overlay;
+
+
+
+
+        return overlayMaterials;
 
     }
 
@@ -212,7 +251,7 @@ public class OverlayMaterialCalculator {
     }
 
 
-    public static ArrayList<Material> overlayMaterialList(Construction construction, String overlayName) throws LoginSampleException {
+    public static ArrayList<Material> allOverlayMaterialList(Construction construction, String overlayName) throws LoginSampleException {
         ArrayList<Material> overlayMaterials = new ArrayList<>();
         ArrayList<Material> doorFraming = doorFraming(construction);
         ArrayList<Wall> walls = new ArrayList<>();
@@ -227,7 +266,7 @@ public class OverlayMaterialCalculator {
             overlayMaterials.addAll(oneWallMaterials);
         }
         overlayMaterials.addAll(doorFraming);
-        overlayMaterials.add(overlayMaterial(construction,overlayName));
+        overlayMaterials.addAll(overlayMaterial(construction,overlayName));
 
 
 

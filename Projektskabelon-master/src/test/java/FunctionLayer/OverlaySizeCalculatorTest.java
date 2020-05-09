@@ -173,9 +173,9 @@ public class OverlaySizeCalculatorTest {
 
         double needed2 = 0;
         if (materialName1.equals("HARDIEPLANK 180X3600X8MM")) {
-            needed2 = spending * area; //spending : how many pieces pr squwe meter
+            needed2 = spending * area; //spending : how many pieces pr square meter
         } else {
-            needed2 = spending * area * 3600 / 1000;
+            needed2 = spending * area / 3600 / 1000;
         }
 
         needed2 = needed2 + 0.05 * needed2; //5 % extra material for cuts
@@ -188,7 +188,7 @@ public class OverlaySizeCalculatorTest {
 
 
         int exepted1 = 405;
-        int exepted2 = 1457;
+        int exepted2 = 108;
         assertEquals(exepted1,result1);
 
 
@@ -196,5 +196,48 @@ public class OverlaySizeCalculatorTest {
 
     @Test
     public void countWoodLength() {
+    }
+
+    @Test
+    public void overlayScrewOneWall() {
+        Wall wall = new Wall();
+        wall.setLength(5200);
+        wall.setMinHeight(2000);
+        wall.setSide("right");
+        wall.setRaising(3);
+
+
+        ArrayList<Integer> fyrLengthsOneWall = new ArrayList<>();
+        /*
+        counts number of all vertical tree elements on one wall
+        counts distance between them and raising pr that distance,
+        calculates and adds height of every element
+         */
+        int distance = wall.getLength() - 100; // 100 mm for one post
+        int fyrPlusPost = 0;
+        if (distance % 600== 0) {
+            fyrPlusPost = (distance / 600) + 1;
+        } else {
+            fyrPlusPost = (distance - distance % 600) / 600 + 2;
+        }
+        int distanceBetweenFyr = distance / (fyrPlusPost - 1);
+        double raising = ConstructionSizeCalculator.raising(wall.getRaising(), distanceBetweenFyr);
+        for (int i = 0; i < fyrPlusPost; i++) {
+
+            int fyrLength = (int) (wall.getMinHeight() + raising * i);
+            fyrLengthsOneWall.add(fyrLength);
+        }
+        int width = 128;
+
+        int quantity = 0;
+        for (Integer length : fyrLengthsOneWall) {
+            if(length%width==0){
+                quantity = quantity + length / width;
+            } else {
+                quantity = quantity + ((length - (length % width)  ) +1) / width;
+            }
+        }
+        assertEquals(((10*2000)+(10*16))/128,quantity);
+
     }
 }
