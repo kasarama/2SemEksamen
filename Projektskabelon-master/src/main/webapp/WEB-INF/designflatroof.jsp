@@ -19,7 +19,7 @@
             <h2>Fladt tag design</h2>
             <label class="mt-3" for="flatroof"> Vælg tagdækning for fladt tag:</label>
             <select class="form-control mt-3" name="flatroof" id="flatroof">
-                <option selected disabled>Vælg tag type:</option>
+                <option selected disabled>Vælg tagdækning</option>
                 <c:forEach var="roofMaterial" items="${applicationScope.flatMaterialList}">
                     <option value="${roofMaterial.id}">${roofMaterial.name}</option>
                 </c:forEach>
@@ -27,7 +27,7 @@
 
             <input class="btn btn-primary mt-3" type="submit" value="Videre">
             <br>
-            <a class="mt-3 btn btn-dark" href="FrontController?target=redirect&destination=overlay" role="button">Videre til overlay</a>
+            <a class="mt-3 btn btn-dark" href="FrontController?target=redirect&destination=overlay" role="button">Videre til beklædning</a>
         </form>
         <!-- End of form -->
 

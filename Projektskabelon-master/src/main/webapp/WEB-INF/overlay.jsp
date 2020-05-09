@@ -49,6 +49,7 @@
 
                         <label class="mt-3" for="overlay"> Vælg beklædning:</label>
                         <select name="overlayName" class="form-control" id="overlay">
+                            <option selected disabled>Vælg beklædning</option>
                             <c:forEach var="material" items="${applicationScope.overlayList}">
                                 <option value="${material.name}">${material.name}</option>
                             </c:forEach>

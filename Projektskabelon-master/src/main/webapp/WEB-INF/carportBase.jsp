@@ -21,8 +21,9 @@
                 <div class="row mt-4">
                     <div class="col-md-6 school-options-dropdown text-center">
                         <div class="form-group">
-                            <label>Vælg længde:</label>
+                            <label>Vælg carportens længde:</label>
                             <select name="carportLength" class="form-control">
+                                <option selected disabled>Vælg længde</option>
                                 <c:forEach var="i" begin="24" end="75">
                                     <option value=${i*100}>${i*10} cm</option>
                                 </c:forEach>
@@ -31,8 +32,9 @@
                     </div>
                     <div class="col-md-6 school-options-dropdown text-center">
                         <div class="form-group">
-                            <label>Vælg bredde:</label>
+                            <label>Vælg carportens bredde:</label>
                             <select name="carportWidth" class="form-control">
+                                <option selected disabled>Vælg bredde</option>
                                 <c:forEach var="i" begin="24" end="75">
                                     <option value=${i*100}>${i*10} cm</option>
                                 </c:forEach>
@@ -44,8 +46,9 @@
                 <div class="row mt-4">
                     <div class="col-md-6 school-options-dropdown text-center">
                         <div class="form-group">
-                            <label>Vælg tag type:</label>
+                            <label>Vælg tagtype:</label>
                             <select name="roofType" class="form-control">
+                                <option selected disabled>Vælg tagtype</option>
                                 <option value="0">Fladt tag</option>
                                 <option value="1">Tag med rejsning</option>
                             </select>
@@ -62,8 +65,9 @@
                 <div class="row mt-4">
                     <div class="col-md-6 school-options-dropdown text-center">
                         <div class="form-group">
-                            <label>Vælg bredde:</label>
+                            <label>Vælg skurets bredde:</label>
                             <select name="shedWidthParameter" class="form-control">
+                                <option selected disabled>Vælg bredde</option>
                                 <option value="1">Hele carportens bredde</option>
                                 <option value="2">Halvdelen af carportens bredde</option>
                             </select>
@@ -71,8 +75,9 @@
                     </div>
                     <div class="col-md-6 school-options-dropdown text-center">
                         <div class="form-group">
-                            <label>Vælg dybde:</label>
+                            <label>Vælg skurets dybde:</label>
                             <select name="shedDepth" class="form-control">
+                                <option selected disabled>Vælg dybde</option>
                                 <c:forEach var="i" begin="12" end="35">
                                     <option value=${i*100}>${i*10} cm</option>
                                 </c:forEach>
@@ -84,8 +89,9 @@
                 <div class="row mt-4">
                     <div class="col-md-6 school-options-dropdown text-center">
                         <div class="form-group">
-                            <label>Vælg placerings side:</label>
+                            <label>Vælg skurets placering:</label>
                             <select name="shedSide" class="form-control">
+                                <option selected disabled>Vælg side</option>
                                 <option value="left">Venstre</option>
                                 <option value="right">Højre</option>
                             </select>
