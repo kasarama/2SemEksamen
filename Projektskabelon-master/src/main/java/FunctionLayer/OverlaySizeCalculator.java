@@ -108,9 +108,6 @@ public class OverlaySizeCalculator {
          */
         int maxHeight = (int) (wall.getMinHeight() + ConstructionSizeCalculator.raising(wall.getRaising(), wall.getLength()));
         area = ((wall.getMinHeight() + maxHeight)) / 2 * wall.getLength();
-        String areaString = String.format(wall.getSide() + "area: %.5f", area);
-        System.out.println(areaString);
-
 
         return area / MMPERM / MMPERM;
     }
@@ -160,7 +157,6 @@ public class OverlaySizeCalculator {
             double area = oneWallArea(allWalls.get(i));
             totalArea = totalArea + area;
         }
-        System.out.println("total area: " + totalArea);
         return totalArea;
     }
 

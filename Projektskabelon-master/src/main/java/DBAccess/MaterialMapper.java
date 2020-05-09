@@ -36,7 +36,6 @@ public class MaterialMapper {
                 int materialID = rs.getInt("materialID");
                 material = new Material(materialID, length);
             } else {
-                System.out.println("ResultSet.next()=false");
                 return null;
             }//todo handle null object there where method is being used;
         } catch (ClassNotFoundException | SQLException ex) {
@@ -58,7 +57,6 @@ public class MaterialMapper {
                 String name = rs.getString("name");
                 material = new Material(id, name, null);
             } else {
-                System.out.println("ResultSet.next()=false");
                 return null;
             }//todo handle null object there where method is being used;
         } catch (ClassNotFoundException | SQLException ex) {
@@ -230,7 +228,6 @@ public class MaterialMapper {
      * @author Magdalena
      */
     public static List<Material> getAllOverlays() throws LoginSampleException {
-        System.out.println("MaterialMapper.getAllOverlays");
         List<Material> materialList = new ArrayList<>();
         try {
 //todo edit the method so it uses parameters and question marks??
@@ -248,13 +245,11 @@ public class MaterialMapper {
                 material.setPicture(picture);
                 material.setPrice(price);
                 materialList.add(material);
-                System.out.println(material.getName());
             }
         } catch (ClassNotFoundException | SQLException ex) {
             ex.printStackTrace();
             throw new LoginSampleException(ex.getMessage());
         }
-        System.out.println("materials on ");
         return materialList;
     }
 
@@ -310,7 +305,7 @@ public class MaterialMapper {
                 double spending = rs.getDouble("spending");
                 return spending;
             } else {
-                return 0;
+                throw new LoginSampleException("Kunne ikke læse data om forbrug af den valgte materiale til beklædning");
             }
         } catch (SQLException sql) {
             return 0;
