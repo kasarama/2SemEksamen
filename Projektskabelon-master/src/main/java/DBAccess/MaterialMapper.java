@@ -194,7 +194,7 @@ public class MaterialMapper {
 
         try {
             Connection con = Connector.connection();
-            String SQL = "SELECT * FROM materials WHERE category = 'TagFladt'";
+            String SQL = "SELECT * FROM materials WHERE keyword = 'FladtTag'";
             PreparedStatement ps = con.prepareStatement(SQL);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {

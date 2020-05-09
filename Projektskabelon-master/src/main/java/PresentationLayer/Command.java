@@ -10,7 +10,7 @@ abstract class Command {
 
     private static void initCommands() {
         commands = new HashMap<>();
-        commands.put( "login", new Login() );
+        commands.put( "login", new Login());
         commands.put( "register", new Register() );
         commands.put( "redirect", new Redirect() );
         commands.put( "designflatroof", new FlatRoof() );

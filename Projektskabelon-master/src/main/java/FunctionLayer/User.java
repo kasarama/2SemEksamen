@@ -1,27 +1,48 @@
 package FunctionLayer;
 
 /**
- * The purpose of User is to...
- * @author kasper
+ * @author Mia
  */
 public class User {
 
-    public User( String email, String password, String role ) {
+    private int userID; // bruges til at hente autogenererede keys i UserMapper
+    private String name;
+    private String email;
+    private String password;
+    private String role;
+
+    public User(String name, String email, String password, String role) {
+        this.name = name;
         this.email = email;
         this.password = password;
         this.role = role;
     }
 
-    private int id; // just used to demo retrieval of autogen keys in UserMapper
-    private String email;
-    private String password; // Should be hashed and secured
-    private String role;
+    public User(String email) {
+        this.email = email;
+    }
+
+    public int getUserID() {
+        return userID;
+    }
+
+    public void setUserID(int userID) {
+        this.userID = userID;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public String getEmail() {
         return email;
     }
 
-    public void setEmail( String email ) {
+    public void setEmail(String email) {
         this.email = email;
     }
 
@@ -29,7 +50,7 @@ public class User {
         return password;
     }
 
-    public void setPassword( String password ) {
+    public void setPassword(String password) {
         this.password = password;
     }
 
@@ -37,16 +58,19 @@ public class User {
         return role;
     }
 
-    public void setRole( String role ) {
+    public void setRole(String role) {
         this.role = role;
     }
 
-    public int getId() {
-        return id;
-    }
 
-    public void setId( int id ) {
-        this.id = id;
+    @Override
+    public String toString() {
+        return "User{" +
+                "userID=" + userID +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", role='" + role + '\'' +
+                '}';
     }
-
 }

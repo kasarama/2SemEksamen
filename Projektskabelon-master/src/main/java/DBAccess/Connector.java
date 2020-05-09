@@ -27,7 +27,7 @@ public class Connector {
 
     public static void setDBCredentials() {
         // Prod: hent variabler fra setenv.sh i Tomcats bin folder
-        URL = "jdbc:mysql://localhost:3306/fogDB?serverTimezone=CET&allowPublicKeyRetrieval=true&useSSL=false";
+        URL = "jdbc:mysql://127.0.0.1:3306/fogDB?serverTimezone=CET&allowPublicKeyRetrieval=true&useSSL=false";
         USERNAME = "root";
         PASSWORD = "Kat4Kanin5Hund1Hamster1";
 

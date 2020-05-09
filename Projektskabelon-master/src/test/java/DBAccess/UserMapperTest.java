@@ -58,7 +58,7 @@ public class UserMapperTest {
     @Test
     public void testLogin01() throws LoginSampleException {
         // Can we log in
-        User user = UserMapper.login( "jens@somewhere.com", "jensen" );
+        User user = UserMapper.login( "ca.h@gmail.com", "dyrErSøde" );
         assertTrue( user != null );
     }
 
@@ -71,7 +71,7 @@ public class UserMapperTest {
     @Test
     public void testLogin03() throws LoginSampleException {
         // Jens is supposed to be a customer
-        User user = UserMapper.login( "jens@somewhere.com", "jensen" );
+        User user = UserMapper.login( "ca.h@gmail.com", "dyrErSøde" );
         assertEquals( "customer", user.getRole() );
     }
 
@@ -79,7 +79,7 @@ public class UserMapperTest {
     public void testCreateUser01() throws LoginSampleException {
         // Can we create a new user - Notice, if login fails, this will fail
         // but so would login01, so this is OK
-        User original = new User( "king@kong.com", "uhahvorhemmeligt", "konge" );
+        User original = new User( "king","king@kong.com", "uhahvorhemmeligt", "konge" );
         UserMapper.createUser( original );
         User retrieved = UserMapper.login( "king@kong.com", "uhahvorhemmeligt" );
         assertEquals( "konge", retrieved.getRole() );
