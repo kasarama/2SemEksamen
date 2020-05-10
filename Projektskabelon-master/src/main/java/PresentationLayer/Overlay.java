@@ -17,55 +17,73 @@ public class Overlay extends Command {
         HttpSession session = request.getSession();
         Construction construction = (Construction) session.getAttribute("carportBase");
 
-        String overlayName=request.getParameter("overlayName");
-
-        construction.setOverlay(overlayName);
-        construction.setWalls(new ArrayList<>());
+        ArrayList<Material> ovarlayMaterialList;
 
 
-
-
-        ArrayList<String> coveredWalls = new ArrayList<>();
-        String[] walls = new String[3];
-
-        if(request.getParameter("right")!=null){
-            walls[0]="right";
+        String overlayName = request.getParameter("overlayName");
+        String right = request.getParameter("right");
+        String left = request.getParameter("left");
+        String back = request.getParameter("back");
+        String noWalls = request.getParameter("noWalls");
+        String coverWalls = request.getParameter("coverWalls");
+        ArrayList<String> wallsToCover = new ArrayList<>();
+        if (right != null) {
+            wallsToCover.add(right);
         }
-        if(request.getParameter("left")!=null){
-            walls[1]="left";
+        if (left != null) {
+            wallsToCover.add(left);
+
         }
-        if(request.getParameter("back")!=null){
-            walls[2]="back";
+        if (back != null) {
+            wallsToCover.add(back);
         }
 
+        int shedDepth = construction.getShedDepth();
+        String overlayMSG = "Prøv igen";
+        String targetPage = "customerChoiceResult";
 
-            for (int i = 0; i < 3; i++) {
-                if (walls[i] != null)
-                    coveredWalls.add(walls[i]);
+
+        if (shedDepth == 0 && noWalls != null) {
+            return targetPage;
+        }
+
+        if (shedDepth == 0 && coverWalls != null) {
+            if (overlayName == null || wallsToCover.size() == 0) {
+                overlayMSG = "Vælg beklædning og de ønskede vægger ";
+            } else {
+                construction.setOverlay(overlayName);
+                construction.setWalls(WallBuilder.createCarportWalls(construction, wallsToCover));
+                ovarlayMaterialList = OverlayMaterialCalculator.allOverlayMaterialList(construction, overlayName);
+                request.setAttribute("ovarlayMaterialList", ovarlayMaterialList);
+                return targetPage;
+            }
+        }
+
+        if (shedDepth>0 && noWalls!=null){
+            if (overlayName == null) {
+                overlayMSG = "Vælg beklædning for at fortsætte";
+            } else {
+                construction.setOverlay(overlayName);
+                ovarlayMaterialList = OverlayMaterialCalculator.allOverlayMaterialList(construction, overlayName);
+                request.setAttribute("ovarlayMaterialList", ovarlayMaterialList);
+                return targetPage;
+            }
+        }
+        if (shedDepth>0 && coverWalls!=null){
+            if (overlayName == null || wallsToCover.size() == 0) {
+                overlayMSG = "Vælg beklædning og de ønskede vægger ";
+            } else {
+                construction.setOverlay(overlayName);
+                construction.setWalls(WallBuilder.createCarportWalls(construction, wallsToCover));
+                ovarlayMaterialList = OverlayMaterialCalculator.allOverlayMaterialList(construction, overlayName);
+                request.setAttribute("ovarlayMaterialList", ovarlayMaterialList);
+                return targetPage;
             }
 
-       if (coveredWalls.size()!=0) {
-            String[] wallSides = new String[coveredWalls.size()];
-            for (int i = 0; i <coveredWalls.size() ; i++) {
-                wallSides[i]=coveredWalls.get(i);
-            }
-            construction.setWalls(WallBuilder.addConstructionWalls(construction,wallSides));
         }
 
-
-
-        ArrayList<Material> ovarlayMaterialList = OverlayMaterialCalculator.allOverlayMaterialList(construction, overlayName);
-        request.setAttribute("ovarlayMaterialList", ovarlayMaterialList);
-
-        if (request.getParameter("walls") != null) {
-            return "customerChoiceResult";
-        } else if (request.getParameter("shedOverlay") != null) {
-            return "itemList";
-        } else
-            request.setAttribute("notReady", "The next phase is  not ready yet");
+        request.setAttribute("overlayMSG", overlayMSG);
         return "overlay";
-
-
     }
 }
 

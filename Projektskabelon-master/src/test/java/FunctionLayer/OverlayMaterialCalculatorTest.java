@@ -20,8 +20,10 @@ public class OverlayMaterialCalculatorTest {
         construction.setConstructionHeight(2000);
         ArrayList<Wall> shedWalls = WallBuilder.addShedWalls(construction);
         shed.setWalls(shedWalls);
-        String[] wallsSides = {"right","back"};
-        ArrayList<Wall> carportWalls = WallBuilder.addConstructionWalls(construction, wallsSides);
+        ArrayList<String> wallsSides = new ArrayList<>();
+        wallsSides.add("right");
+        wallsSides.add("back");
+        ArrayList<Wall> carportWalls = WallBuilder.createCarportWalls(construction, wallsSides);
         construction.setWalls(carportWalls);
         construction.setOverlay("SIBIRISK LÆRK KLINKBEKLÆDNING");
     }

@@ -40,8 +40,6 @@ public class CarportBase extends Command {
         }
 
 
-
-
         constructionBase.setRoof(roofBase);
 
         Shed shed = new Shed(shedWidth, shedDepth, shedSide);
@@ -51,11 +49,10 @@ public class CarportBase extends Command {
             shedWidthParameter = Integer.parseInt(request.getParameter("shedWidthParameter"));
             shedDepth = Integer.parseInt(request.getParameter("shedDepth"));
             shedSide = request.getParameter("shedSide");
-            if(shedWidthParameter==1){
-                shedWidth = (int) ( (carportWidth / shedWidthParameter) );
-            } else
-            if (shedWidthParameter==2){
-                shedWidth = (int) ( (carportWidth / shedWidthParameter) +0.5*POSTWIDTH);
+            if (shedWidthParameter == 1) {
+                shedWidth = (int) ((carportWidth / shedWidthParameter));
+            } else if (shedWidthParameter == 2) {
+                shedWidth = (int) ((carportWidth / shedWidthParameter) + 0.5 * POSTWIDTH);
 
             } else {
                 throw new LoginSampleException("Kunne ikke forstå inputtet for tag parameter CarportBase.java linie 47");
@@ -69,15 +66,14 @@ public class CarportBase extends Command {
             shed.setWalls(walls);
             constructionBase.setShed(shed);
         }
-        System.out.println(" Shed depth from carportbase: "+constructionBase.getShed().getDepth());
 
 
         //Roof roofBase;
         if (roofType == 1) {
-            roofBase = new RoofPitched(0, carportLength+shedDepth-POSTWIDTH, carportWidth, 0);
+            roofBase = new RoofPitched(0, carportLength + shedDepth - POSTWIDTH, carportWidth, 0);
             roofBase.setPitched(true);
         } else {
-            roofBase = new RoofFlat(0, carportLength+shedDepth-POSTWIDTH, carportWidth, RAISING);
+            roofBase = new RoofFlat(0, carportLength + shedDepth - POSTWIDTH, carportWidth, RAISING);
         }
         constructionBase.setRoof(roofBase);
 
@@ -89,15 +85,12 @@ public class CarportBase extends Command {
         }
 
         if (roofType == 1) {
-            System.out.println("shed depth: " +constructionBase.getShed().getDepth());
             return "designpitchedroof";
         } else if (roofType == 0) {
-            System.out.println("shed depth: " +constructionBase.getShed().getDepth());
 
             return "designflatroof";
 
         } else {
-            System.out.println("shed depth: " +constructionBase.getShed().getDepth());
 
             request.setAttribute("error", "kune ikke definere tag type");
             return "index";

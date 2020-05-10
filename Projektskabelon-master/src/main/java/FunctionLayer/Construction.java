@@ -21,6 +21,7 @@ public class Construction {
 
     public Construction() {
         this.fundamentMaterials = new ArrayList<>();
+        this.walls = new ArrayList<>();
     }
 
     public int getConstructionLength() {

@@ -29,8 +29,10 @@ public class OverlaySizeCalculatorTest {
         construction.setShed(shed);
         ArrayList<Wall> shedWalls = WallBuilder.addShedWalls(construction);
         shed.setWalls(shedWalls);
-        String[] constructionWalls = {"left", "right"};
-        ArrayList<Wall> carportWalls = WallBuilder.addConstructionWalls(construction, constructionWalls);
+        ArrayList<String> wallsSides = new ArrayList<>();
+        wallsSides.add("right");
+        wallsSides.add("back");
+        ArrayList<Wall> carportWalls = WallBuilder.createCarportWalls(construction, wallsSides);
         construction.setWalls(carportWalls);
         construction.setShed(shed);
 
@@ -163,8 +165,12 @@ public class OverlaySizeCalculatorTest {
 
         double totalSurface = OverlaySizeCalculator.allWallsArea(construction);
         double expected = (3 * ((2000 + 2087) / 2 * 2900) + 2 * ((2087 + 2303) / 2 * 7200) + (2000 * 2150) + (2087 * 2150));
-        expected = expected / 1000 / 1000;
-        assertEquals(expected, totalSurface, 0.01);
+
+        double area= 3* (2.9/2*(2+2.087)) + 2*(7.2/2*(2.084+2.3)) + 2*2.15 +2.087*2.150;
+
+
+
+        assertEquals(area, totalSurface, 0.01);
     }
 
 
@@ -183,12 +189,11 @@ public class OverlaySizeCalculatorTest {
 
     @Test
     public  void doubleTest(){
-        double calculation= 35.5*7.64;
-        System.out.println(calculation);
-        double nextStep = calculation /(3600/1000);
-        System.out.println(nextStep);
-        double problem =(3600/1000);
-        System.out.println(problem);
+        for (Wall wall : construction.getAllWalls()
+             ) {
+            double area=OverlaySizeCalculator.oneWallArea(wall);
+            System.out.println(String.format("length %d, height %d, area %.3f", wall.getLength(), wall.getMinHeight(), area));
+        }
     }
 
     @Test

@@ -80,9 +80,9 @@
         <br>
 
 
-        <c:set var="walls" value="${sessionScope.carportBase.allWalls}"/>
+        <c:set var="list" value="${requestScope.ovarlayMaterialList}"/>
         <c:choose>
-            <c:when test="${walls.size() != 0}">
+            <c:when test="${list.size() != 0}">
                 <table class="table table-striped ">
                     <thead>
                     <tr class="tr1">

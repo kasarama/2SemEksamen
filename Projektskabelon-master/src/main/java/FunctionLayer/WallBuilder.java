@@ -7,19 +7,20 @@ import java.util.ArrayList;
  */
 public class WallBuilder {
 
-    private final static int DOORSIZE=1000;
-    private final static int POSTWIDTH=100;
+    private final static int DOORSIZE = 1000;
+    private final static int POSTWIDTH = 100;
 
-    public static int frontWallHeight(Construction construction){
-        int tilt =construction.getRoof().getTilt();
-        int shedDepth=construction.getShedDepth();
-        double raising = ConstructionSizeCalculator.raising(shedDepth,tilt);
-        int height=construction.getConstructionHeight()+ (int) raising;
-        return  height;
+    public static int frontWallHeight(Construction construction) {
+        int tilt = construction.getRoof().getTilt();
+        int shedDepth = construction.getShedDepth();
+        double raising = ConstructionSizeCalculator.raising(shedDepth, tilt);
+        int height = construction.getConstructionHeight() + (int) raising;
+        return height;
     }
+
     public static ArrayList<Wall> addShedWalls(Construction construction) {
         ArrayList<Wall> walls = new ArrayList<>();
-        if (construction.getShedDepth()!=0) {
+        if (construction.getShedDepth() != 0) {
 
             Wall right = new Wall();
             right.setSide("right");
@@ -54,89 +55,78 @@ public class WallBuilder {
 
     }
 
-    public static ArrayList<Wall> addConstructionWalls(Construction construction, String[] constructionswalls) {
+    public static ArrayList<Wall> createCarportWalls(Construction construction, ArrayList<String> sides) {
         ArrayList<Wall> carportWalls = new ArrayList<>();
-
-        if (constructionswalls.length == 0) {
+        if (sides.size() == 0) {
             return carportWalls;
         } else {
-
             String side = "";
             int wallLength = 0;
-            int raising = 0;
+            int raising = construction.getRoof().getTilt();
             int minHeight = 0;
-
-            if (construction.getRoof().getIsPitched() || side.equals("back")) {
-                raising = 0;
-            } else {
-                raising = construction.getRoof().getTilt();
-            }
 
 
             if (construction.getShedDepth() == 0) {
-                for (int i = 0; i < constructionswalls.length; i++) {
-                    if (constructionswalls[i].equals("back")) {
+                for (String wallSide : sides) {
+                    if (wallSide.equals("back")) {
 
                         wallLength = construction.getCarportWidth();
                         minHeight = construction.getConstructionHeight();
                         side = "back";
+                        raising=0;
                     } else {
                         wallLength = construction.getCarportLength();
                         minHeight = construction.getConstructionHeight();
-                        side = constructionswalls[i];
+                        side = wallSide;
                     }
                     Wall wall = new Wall();
                     wall.setRaising(raising);
                     wall.setMinHeight(minHeight);
                     wall.setLength(wallLength);
-                    wall.setSide("carport"+side);
+                    wall.setSide("carport" + side);
                     carportWalls.add(wall);
                 }
             } else {
-                for (int i = 0; i < constructionswalls.length; i++) {
-                    if (constructionswalls[i].equals("back") && construction.getCarportWidth()>construction.getShedDepth()) {
-                        //do nothing
-                    } else
 
-                    if (constructionswalls[i].equals("back") && construction.getCarportWidth()>construction.getShedDepth()) {
-                        wallLength = construction.getCarportWidth()-construction.getShed().getWidth()- (int)(0.5*POSTWIDTH );
+                for (String wallSide : sides) {
+
+                    if (wallSide.equals("back") && construction.getCarportWidth() > construction.getShedDepth()) {
+                        wallLength = construction.getShed().getWidth();
                         minHeight = construction.getConstructionHeight();
                         side = "back";
                         Wall wall = new Wall();
-                        wall.setRaising(raising);
+                        wall.setRaising(0);
                         wall.setMinHeight(minHeight);
                         wall.setLength(wallLength);
-                        wall.setSide("carport"+side);
+                        wall.setSide("carport" + side);
                         carportWalls.add(wall);
-                    }
-
-                    else
-                    if (constructionswalls[i].equals(construction.getShed().getSide())) {
+                    } else if (wallSide.equals(construction.getShed().getSide())) {
                         wallLength = construction.getCarportLength();
                         minHeight = ConstructionSizeCalculator.carportMinHeight(construction.getConstructionHeight(),
-                                construction.getShedDepth(), construction.getRoof().getTilt());
-                        side = constructionswalls[i];
+                                construction.getShedDepth()-POSTWIDTH, construction.getRoof().getTilt());
+                        side = wallSide;
                         Wall wall = new Wall();
                         wall.setRaising(raising);
                         wall.setMinHeight(minHeight);
                         wall.setLength(wallLength);
-                        wall.setSide("carport"+side);
+                        wall.setSide("carport" + side);
                         carportWalls.add(wall);
                     } else {
-                        Wall carportWall=new Wall();
+                        Wall carportWall = new Wall();
                         wallLength = construction.getCarportLength();
                         minHeight = ConstructionSizeCalculator.carportMinHeight(construction.getConstructionHeight(),
-                                construction.getShedDepth(), construction.getRoof().getTilt());
-                        side = constructionswalls[i];
+                                construction.getShedDepth()-100, construction.getRoof().getTilt());
+                        side = wallSide;
                         carportWall.setRaising(raising);
                         carportWall.setMinHeight(minHeight);
                         carportWall.setLength(wallLength);
-                        carportWall.setSide("carport"+side);
+                        carportWall.setSide("carport" + side);
+                        System.out.println(carportWall.getSide()+": minHeight= "+carportWall.getMinHeight()+"length= "+carportWall.getLength());
                         carportWalls.add(carportWall);
 
-                        if (construction.getShed().getWidth()!=construction.getCarportWidth()){
-                            Wall likeShedWall=new Wall();
-                            likeShedWall.setSide("likeShed"+constructionswalls[i]);
+                        if (construction.getShed().getWidth() != construction.getCarportWidth()) {
+                            Wall likeShedWall = new Wall();
+                            likeShedWall.setSide("likeShed" + wallSide);
                             likeShedWall.setLength(construction.getShedDepth());
                             likeShedWall.setMinHeight(construction.getConstructionHeight());
                             likeShedWall.setRaising(raising);
@@ -147,7 +137,10 @@ public class WallBuilder {
 
                 }
             }
+
+
             return carportWalls;
         }
     }
+
 }
