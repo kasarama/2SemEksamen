@@ -64,7 +64,7 @@
         <c:forEach var="material" items="${sessionScope.overlayList}">
             <tr class="tr2">
                 <td>${material.name}</td>
-                <td>${material.antal}</td>
+                <td>${material.amount}</td>
                 <td>${material.unit}</td>
                 <td>${material.comment}</td>
             </tr>

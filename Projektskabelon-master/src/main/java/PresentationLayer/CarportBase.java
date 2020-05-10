@@ -49,7 +49,6 @@ public class CarportBase extends Command {
         constructionBase.setShed(shed);
         if (request.getParameter("withShed") != null) {
             shedWidthParameter = Integer.parseInt(request.getParameter("shedWidthParameter"));
-            System.out.println(shedWidthParameter+"shedWidthParameter");
             shedDepth = Integer.parseInt(request.getParameter("shedDepth"));
             shedSide = request.getParameter("shedSide");
             if(shedWidthParameter==1){
@@ -88,7 +87,6 @@ public class CarportBase extends Command {
 
         }
         request.setAttribute("carportToString", constructionBase.toString());
-        System.out.println(shed.getWalls().size() + "walls of shed");
 
         if (roofType == 1) {
             return "designpitchedroof";

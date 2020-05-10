@@ -58,10 +58,8 @@ public class Overlay extends Command {
         request.setAttribute("ovarlayMaterialList", ovarlayMaterialList);
 
         if (request.getParameter("walls") != null) {
-            System.out.println("click on Videre");
             return "customerChoiceResult";
         } else if (request.getParameter("shedOverlay") != null) {
-            System.out.println();
             return "itemList";
         } else
             request.setAttribute("notReady", "The next phase is  not ready yet");

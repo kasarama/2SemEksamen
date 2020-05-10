@@ -17,7 +17,6 @@ public class OverlaySizeCalculator {
     final private static int OVERLAP = 10;
 
 
-
     //..............calculates spaer needed for one of the chosen wall...........//
 
     public static int spaerOnOneWall(Wall wall) {
@@ -32,6 +31,7 @@ public class OverlaySizeCalculator {
         }
         return amount;
     }
+
 
     //..............calculates spaer længth for one of the chosen wall...........//
     public static int spaerLengthOneWall(Wall wall) {
@@ -161,20 +161,24 @@ public class OverlaySizeCalculator {
     }
 
     public static int overlaySpending(String materialName, double area) throws LoginSampleException {
-        double spending = MaterialMapper.spending(materialName); // m / m^2
+        double spending = MaterialMapper.spending(materialName);
         double needed = 0;
         if (materialName.equals("HARDIEPLANK 180X3600X8MM")) {
             needed = spending * area; //spending : how many pieces pr squwe meter
         } else {
             needed = spending * area / LENGTHOFOVERLAYPLANK / MMPERM;
+            ;
+
         }
 
 
         needed = needed + SECURITYPERCENTAGE * needed; //5 % extra material for cuts
 
         if (((needed * 10) % 10) == 0) {
+
             return (int) needed;
         } else {
+
             return (int) needed + 1;
         }
 
@@ -204,22 +208,21 @@ public class OverlaySizeCalculator {
             fyrLengthsOneWall.add(fyrLength);
         }
         int width = MaterialMapper.getWidthByName(overlayName);
-        if(overlayName.equals("HARDIEPLANK 180X3600X8MM")){
-            width = width - 2*OVERLAP;
+        if (overlayName.equals("HARDIEPLANK 180X3600X8MM")) {
+            width = width - 2 * OVERLAP;
         } else width = width - OVERLAP;
 
 
         int quantity = 0;
         for (Integer length : fyrLengthsOneWall) {
-            if(length%width==0){
+            if (length % width == 0) {
                 quantity = quantity + length / width;
             } else {
-                quantity = quantity + ((length - (length % width) ) +1) / width;
+                quantity = quantity + ((length - (length % width)) + 1) / width;
             }
         }
         return quantity;
     }
-
 
 
     //wood delivers in chosen length with cuts every 20 cm. Pricing is pr. meter. We order not shorter piece with

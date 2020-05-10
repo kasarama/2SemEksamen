@@ -13,6 +13,7 @@ import static org.junit.Assert.assertEquals;
  */
 public class OverlaySizeCalculatorTest {
     Construction construction = new Construction();
+    Wall wall = new Wall();
 
 
     @Before
@@ -32,6 +33,11 @@ public class OverlaySizeCalculatorTest {
         ArrayList<Wall> carportWalls = WallBuilder.addConstructionWalls(construction, constructionWalls);
         construction.setWalls(carportWalls);
         construction.setShed(shed);
+
+        wall.setRaising(3);
+        wall.setSide("left");
+        wall.setMinHeight(2500);
+        wall.setLength(5800);
     }
 
     @Test
@@ -68,14 +74,23 @@ public class OverlaySizeCalculatorTest {
     }
 
     @Test
+    public void spaerLengthOneWall() {
+        int result = OverlaySizeCalculator.spaerLengthOneWall(wall);
+        assertEquals(2850,result);
+    }
+
+
+    @Test
     public void screwSpaer() {
         int expected = 9 * 4;
         int actual = OverlaySizeCalculator.screwSpaer(9);
+        assertEquals(expected,actual);
 
     }
 
+
     @Test
-    public void fyrNumberOnWall() {
+    public void fyrQuantityOnWall() {
         ArrayList<Wall> carportWalls = construction.getWalls();
         int index = -1;
         for (Wall wall : carportWalls) {
@@ -100,20 +115,27 @@ public class OverlaySizeCalculatorTest {
     public void screwFyr() {
         int expected = 9 * 9;
         int actual = OverlaySizeCalculator.screwFyr(9, 9);
+        assertEquals(expected,actual);
     }
 
     @Test
     public void fyrLengthsOneWall() {
-        ArrayList<Wall> carportWalls = construction.getWalls();
-        int index = -1;
-        for (Wall wall : carportWalls) {
-            if (wall.getSide().equals("carportright")) {
-                index = carportWalls.indexOf(wall);
-            }
-        }
 
-        Wall carportsRightWall = construction.getWalls().get(index);
-        ArrayList<Integer> lengths = OverlaySizeCalculator.fyrLengthsOneWall(carportsRightWall);
+        ArrayList<Integer> lengths = OverlaySizeCalculator.fyrLengthsOneWall(wall);
+        /*
+        distance =  518
+        fyr + posts = 11
+        posts: 3
+        raising=17
+
+         */
+        int result = lengths.get(0);
+        int result2 = lengths.get(7);
+        int expected1=wall.getMinHeight()+17;
+        int expected2=wall.getMinHeight()+17*9;
+        assertEquals(8,lengths.size());
+        assertEquals(expected1,result);
+        assertEquals(expected2,result2);
     }
 
 
@@ -240,5 +262,12 @@ public class OverlaySizeCalculatorTest {
         }
         assertEquals(((10*2000)+(10*16))/128,quantity);
 
+    }
+
+    @Test
+    public void overDoorSpearQuantity() {
+        int result = OverlaySizeCalculator.overDoorSpearQuantity(2133);
+        int expected = 3;
+        assertEquals(expected,result);
     }
 }
