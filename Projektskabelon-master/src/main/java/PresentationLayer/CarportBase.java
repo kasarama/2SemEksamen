@@ -89,7 +89,6 @@ public class CarportBase extends Command {
         }
         request.setAttribute("carportToString", constructionBase.toString());
         System.out.println(shed.getWalls().size() + "walls of shed");
-
         if (roofType == 1) {
             return "designpitchedroof";
         } else if (roofType == 0) {

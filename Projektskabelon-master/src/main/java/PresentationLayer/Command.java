@@ -21,6 +21,7 @@ abstract class Command {
         commands.put( "carportbase", new CarportBase() );
         commands.put( "addmaterial", new AddMaterial() );
         commands.put( "overlay", new Overlay() );
+        commands.put("drawing", new Drawing());
 
     }
 
