@@ -33,52 +33,9 @@ public class ConstructionMaterialCalculator {
 
         // Stolper
         //TODO: sæt stolper i den rigtige størrelse ind i woodMaterials listen
+        //Beregning er uden stolper til skur
         double constructionMinHeight = construction.getConstructionHeight() - construction.getRoof().getHeight();
-        int degreeRoof = construction.getRoof().getDegree();
-        int shedDepth = construction.getShed().getDepth();
-        int meterPerFrontPostsForShed;
-        int quantityOfPostsFrontShed;
-        int quatityOfPostsShedBack = sidePostAmount(construction.getConstructionWidth());
-
-        Integer[] heightsOfPostsForShedDepthSide1;
-        Integer[] heightsOfPostsForShedDepthSide2;
-        Integer[] heightsOfPostsForShedFront;
-        Integer[] heightsOfPostsForShedBack;
-        ArrayList<Integer> actualHeightsOfPostsForTotalConstrution = new ArrayList();
-
-        if (construction.getShed() != null) {
-            quantityOfPostsFrontShed = shedFrontPostsAmount(construction.getShed().getWidth());
-            meterPerFrontPostsForShed = (int) (raising(construction.getRoof().getDegree(),
-                    construction.getShed().getDepth() + SHEDMINHEIGHT));
-            heightsOfPostsForShedFront = new Integer[quantityOfPostsFrontShed];
-            for (int i = 0; i < heightsOfPostsForShedFront.length - 1; i++) {
-                heightsOfPostsForShedFront[i] = meterPerFrontPostsForShed;
-            }
-
-            heightsOfPostsForShedDepthSide1 = postsHeights(constructionMinHeight, degreeRoof, shedDepth);
-            heightsOfPostsForShedDepthSide2 = postsHeights(constructionMinHeight, degreeRoof, shedDepth);
-            heightsOfPostsForShedBack = new Integer[quatityOfPostsShedBack];
-            for (int i = 0; i < heightsOfPostsForShedFront.length - 1; i++) {
-                heightsOfPostsForShedBack[i] = (int) (constructionMinHeight +
-                        raising(construction.getRoof().getDegree(), shedDepth));
-            }
-
-            for (int postHeight : heightsOfPostsForShedFront) {
-                actualHeightsOfPostsForTotalConstrution.add(postHeight);
-            }
-
-            for (int postHeight : heightsOfPostsForShedBack) {
-                actualHeightsOfPostsForTotalConstrution.add(postHeight);
-            }
-
-            for (int postHeight : heightsOfPostsForShedDepthSide1) {
-                actualHeightsOfPostsForTotalConstrution.add(postHeight);
-            }
-
-            for (int postHeight : heightsOfPostsForShedDepthSide2) {
-                actualHeightsOfPostsForTotalConstrution.add(postHeight);
-            }
-        }
+        ArrayList<Integer> actualHeightsOfPostsForConstruction = new ArrayList();
 
         int carportMinHeight = carportMinHeight((int) constructionMinHeight, construction.getShed().getDepth(),
                 construction.getRoof().getTilt());
@@ -87,7 +44,7 @@ public class ConstructionMaterialCalculator {
                 construction.getConstructionWidth());
         for (int i = 0; i < quantityOfCarportPostsRows - 1; i++) {
             for (int postHeight : heightsOfPostsPerRow) {
-                actualHeightsOfPostsForTotalConstrution.add(postHeight);
+                actualHeightsOfPostsForConstruction.add(postHeight);
             }
         }
 
@@ -103,7 +60,7 @@ public class ConstructionMaterialCalculator {
                 post.setWidth(LogicFacade.getWidthByID(post.getId(), post.getName()));
                 post.setThickness(LogicFacade.getThicknessByID(post.getId()));
                 post.setName("TRYKIMPRENERET STOLPE" + post.getThickness() + "x" + post.getWidth());
-                for (int postHeight : actualHeightsOfPostsForTotalConstrution) {
+                for (int postHeight : actualHeightsOfPostsForConstruction) {
                 if (postHeight <= avaliblePostMaterialLength) {
                     countPosts++;
                     restOfAvalibleMaterial = avaliblePostMaterialLength % postHeight;
