@@ -94,6 +94,11 @@
                 <input class="mt-3 mb-4 btn btn-outline-dark" type="submit" name="newrequest" value="Start forfra">
             </form>
 
+            <form name="svg" action="FrontController" method="POST">
+                <input type="hidden" name="target" value="svg">
+                <input class="btn btn-primary mt-3" type="submit" name="svgSketch" value="See Caport tegning?">
+            </form>
+
             <!-- Hint: Create forEach loop to print a List BD line 53- 60 -->
 
         </div>
