@@ -3,6 +3,7 @@ package FunctionLayer;
 import DBAccess.MaterialMapper;
 import DBAccess.UserMapper;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -39,6 +40,11 @@ public class LogicFacade {
     public static int getThicknessByID(int id) throws LoginSampleException {
         int thickness = MaterialMapper.getThicknessByID(id);
         return thickness;
+    }
+
+    public static ArrayList<Integer> getLengthForMaterials(String nameMaterial){
+        ArrayList<Integer> lengthForMaterials= getLengthForMaterials(nameMaterial);
+        return lengthForMaterials;
     }
 
     //call the static method that gets the ROOF materials data from DB - static = can be called without creating an obj.

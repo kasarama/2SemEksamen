@@ -336,5 +336,26 @@ public class MaterialMapper {
 
     }
 
+    //Cath
+    public ArrayList getLengthForMaterials(String materialName) throws LoginSampleException {
+        ArrayList <Integer> lengthViaMaterailName = null;
+        try {
+            Connection con = Connector.connection();
+            String SQLRequest = "SELECT variations.length FROM fogdb.variations JOIN fogdb.materials ON materials.materialID = variations.materialID WHERE materials.name=?";
+            PreparedStatement preparedStatement = con.prepareStatement(SQLRequest);
+            preparedStatement.setString(1, materialName);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while(resultSet.next()){
+                lengthViaMaterailName.add(resultSet.getInt("length"));
+            }
+        } catch (ClassNotFoundException e) {
+            return null;
+        } catch (SQLException e) {
+            throw new LoginSampleException(e.getMessage());
+        }
+
+        return lengthViaMaterailName;
+    }
+
 }
 
