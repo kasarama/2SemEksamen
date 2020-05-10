@@ -16,7 +16,8 @@
         <br>
     <h2>Din construction</h2>
     <br>
-    *** Billede ***
+
+
     <br>
     <br>
 
