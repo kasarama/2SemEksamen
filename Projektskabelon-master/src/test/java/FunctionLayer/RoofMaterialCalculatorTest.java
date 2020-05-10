@@ -23,7 +23,7 @@ public class RoofMaterialCalculatorTest {
         rmc= new RoofMaterialCalculator(con);
         con.getRoof().setHeight(rs.roofHeight(con.getRoof().getIsPitched(), con.getConstructionLength(), con.getConstructionWidth()));
         //Act
-        int actual = rmc.quantityOfT600ForRoof();
+        int actual = rmc.quantityOfT600ForRoof(1090);
         int expected = 7;
         //Assert
         assertEquals(expected,actual);
@@ -45,7 +45,7 @@ public class RoofMaterialCalculatorTest {
         rmc= new RoofMaterialCalculator(con);
         con.getRoof().setHeight(rs.roofHeight(con.getRoof().getIsPitched(), con.getConstructionLength(), con.getConstructionWidth()));
         //Act
-        int actual = rmc.quantityOfT600ForRoof();
+        int actual = rmc.quantityOfT600ForRoof(1090);
         int expected = 4;
         //Assert
         assertEquals(expected,actual);
@@ -65,7 +65,7 @@ public class RoofMaterialCalculatorTest {
         rmc= new RoofMaterialCalculator(con);
         con.getRoof().setHeight(rs.roofHeight(con.getRoof().getIsPitched(), con.getConstructionLength(), con.getConstructionWidth()));
         //Act
-        int actual = rmc.quantityOfT600ForRoof();
+        int actual = rmc.quantityOfT600ForRoof(1090);
         int expected = 4;
         //Assert
         assertEquals(expected,actual);
@@ -85,7 +85,7 @@ public class RoofMaterialCalculatorTest {
         rmc= new RoofMaterialCalculator(con);
         con.getRoof().setHeight(rs.roofHeight(con.getRoof().getIsPitched(), con.getConstructionLength(), con.getConstructionWidth()));
         //Act
-        int actual = rmc.quantityOfT300ForRoof();
+        int actual = rmc.quantityOfT300ForRoof(1090);
         int expected = 0;
         //Assert
         assertEquals(expected,actual);
@@ -105,7 +105,7 @@ public class RoofMaterialCalculatorTest {
         rmc= new RoofMaterialCalculator(con);
         con.getRoof().setHeight(rs.roofHeight(con.getRoof().getIsPitched(), con.getConstructionLength(), con.getConstructionWidth()));
         //Act
-        int actual = rmc.quantityOfT300ForRoof();
+        int actual = rmc.quantityOfT300ForRoof(1090);
         int expected = 4;
         //Assert
         assertEquals(expected,actual);
