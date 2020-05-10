@@ -40,7 +40,7 @@
             <form name="overlay" action="FrontController" method="POST">
                 <input type="hidden" name="target" value="overlay">
                 <input type="hidden" name="origin" value="overlay">
-                <c:set var="shed" value="${sessionScope.constructionBase.shed.depth}"/>
+                <c:set var="shed" value="${sessionScope.carportBase.shed.depth}"/>
                 <c:choose>
                     <c:when test="${shed != 0}">
                         <br>

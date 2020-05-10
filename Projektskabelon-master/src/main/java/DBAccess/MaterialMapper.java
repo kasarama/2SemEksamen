@@ -232,18 +232,24 @@ public class MaterialMapper {
         try {
 //todo edit the method so it uses parameters and question marks??
             Connection con = Connector.connection();
-            String SQL = "SELECT name, picture, price FROM materials WHERE category='overlayMaterial'";
+            String SQL = "SELECT name, picture, price, color FROM materials LEFT JOIN variations ON materials.materialID=variations.materialID WHERE category='overlayMaterial'";
             PreparedStatement ps = con.prepareStatement(SQL);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 String name = rs.getString("name");
                 String picture = rs.getString("picture");
                 double price = rs.getDouble("price");
+                String color = rs.getString("color");
 
                 Material material = new Material();
                 material.setName(name);
                 material.setPicture(picture);
                 material.setPrice(price);
+                if (color == null) {
+                    color = "standard";
+                }
+                material.setColor(color);
+
                 materialList.add(material);
             }
         } catch (ClassNotFoundException | SQLException ex) {
@@ -307,7 +313,7 @@ public class MaterialMapper {
             } else {
                 throw new LoginSampleException("Kunne ikke læse data om forbrug af den valgte materiale til beklædning");
             }
-                } catch (ClassNotFoundException | SQLException ex) {
+        } catch (ClassNotFoundException | SQLException ex) {
             throw new LoginSampleException(ex.getMessage());
         }
     }

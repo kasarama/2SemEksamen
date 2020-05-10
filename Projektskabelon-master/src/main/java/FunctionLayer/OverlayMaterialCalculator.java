@@ -133,7 +133,6 @@ public class OverlayMaterialCalculator {
 
         double wholeAreal = OverlaySizeCalculator.allWallsArea(construction);
         double amount=OverlaySizeCalculator.overlaySpending(materialName, wholeAreal);
-
         int quantity =(int)Math.round(amount);
 
         if (quantity<amount){
@@ -149,10 +148,6 @@ public class OverlayMaterialCalculator {
                     + materialName + ". Prøv at vælge noget andet til beklædning");
         }
         overlayMaterials.add(overlay);
-
-
-
-
 
         return overlayMaterials;
 
@@ -257,13 +252,15 @@ public class OverlayMaterialCalculator {
 
 
     public static ArrayList<Material> allOverlayMaterialList(Construction construction, String overlayName) throws LoginSampleException {
+
         ArrayList<Material> overlayMaterials = new ArrayList<>();
         ArrayList<Material> doorFraming = doorFraming(construction);
-        ArrayList<Wall> walls = new ArrayList<>();
-        ArrayList<Wall> shedWalls = construction.getShed().getWalls();
-        ArrayList<Wall> carportWalls = construction.getWalls();
-        walls.addAll(shedWalls);
-        walls.addAll(carportWalls);
+        ArrayList<Wall> walls = construction.getAllWalls();
+
+
+        if (walls.size()==0){
+            return null;
+        } else
 
         for (Wall wall : walls) {
             ArrayList<Material> oneWallMaterials = new ArrayList<>();
@@ -272,8 +269,6 @@ public class OverlayMaterialCalculator {
         }
         overlayMaterials.addAll(doorFraming);
         overlayMaterials.addAll(overlayMaterial(construction,overlayName));
-
-
 
         return overlayMaterials;
     }

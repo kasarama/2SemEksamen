@@ -52,6 +52,8 @@ public class Overlay extends Command {
             construction.setWalls(WallBuilder.addConstructionWalls(construction,wallSides));
         }
 
+
+
         ArrayList<Material> ovarlayMaterialList = OverlayMaterialCalculator.allOverlayMaterialList(construction, overlayName);
         request.setAttribute("ovarlayMaterialList", ovarlayMaterialList);
 

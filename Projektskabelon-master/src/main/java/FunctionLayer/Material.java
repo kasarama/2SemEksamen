@@ -16,6 +16,7 @@ public class Material {
     private String category;
     private String picture;
     private double spending; // bruges til beregninger af beklædning
+    private String color;
 
 
     public Material() {
@@ -154,6 +155,13 @@ public class Material {
         return keyword;
     }
 
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
 
     @Override
     public String toString() {

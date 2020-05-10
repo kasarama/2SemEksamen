@@ -129,7 +129,6 @@ public class OverlaySizeCalculator {
         ArrayList<Wall> shedWalls = construction.getShed().getWalls();
 
         int backSideindex = -1;
-        int frontSideindex = -1;
 
         for (Wall wall : shedWalls) {
             if (!wall.getSide().equals("front")) {
@@ -161,10 +160,12 @@ public class OverlaySizeCalculator {
     }
 
     public static double overlaySpending(String materialName, double area) throws LoginSampleException {
+
         double spending = MaterialMapper.spending(materialName);
-
-
         double needed = 0;
+        if (area==0) {
+            return 0;
+        } else
         if (materialName.equals("HARDIEPLANK 180X3600X8MM")) {
             needed = spending * area; //spending : how many pieces pr squwe meter
         } else {

@@ -69,6 +69,7 @@ public class CarportBase extends Command {
             shed.setWalls(walls);
             constructionBase.setShed(shed);
         }
+        System.out.println(" Shed depth from carportbase: "+constructionBase.getShed().getDepth());
 
 
         //Roof roofBase;
@@ -86,13 +87,18 @@ public class CarportBase extends Command {
             session.setAttribute("carportBase", constructionBase);
 
         }
-        request.setAttribute("carportToString", constructionBase.toString());
 
         if (roofType == 1) {
+            System.out.println("shed depth: " +constructionBase.getShed().getDepth());
             return "designpitchedroof";
         } else if (roofType == 0) {
+            System.out.println("shed depth: " +constructionBase.getShed().getDepth());
+
             return "designflatroof";
+
         } else {
+            System.out.println("shed depth: " +constructionBase.getShed().getDepth());
+
             request.setAttribute("error", "kune ikke definere tag type");
             return "index";
         }
