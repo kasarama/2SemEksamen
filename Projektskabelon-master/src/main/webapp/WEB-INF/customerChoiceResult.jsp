@@ -93,7 +93,7 @@
                 <input type="hidden" name="target" value="newrequest">
                 <input class="mt-3 mb-4 btn btn-outline-dark" type="submit" name="newrequest" value="Start forfra">
             </form>
-            
+
             <!-- Hint: Create forEach loop to print a List BD line 53- 60 -->
 
         </div>
