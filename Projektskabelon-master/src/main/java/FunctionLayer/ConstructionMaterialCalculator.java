@@ -4,9 +4,12 @@ package FunctionLayer;
 
 import java.util.*;
 
+import static FunctionLayer.ConstructionSizeCalculator.*;
+
 
 public class ConstructionMaterialCalculator {
 
+    final int SHEDMINHEIGHT = 2000;
     public ConstructionSizeCalculator constructionSizeCalculator = new ConstructionSizeCalculator();
     public Construction construction = new Construction();
     public ArrayList<Material> constructionMaterials = construction.getFundamentMaterials();
@@ -29,7 +32,64 @@ public class ConstructionMaterialCalculator {
 
         // Stolper
         //TODO: sæt stolper i den rigtige størrelse ind i woodMaterials listen
+        double constructionMinHeight = construction.getConstructionHeight() - construction.getRoof().getHeight();
+        int degreeRoof = construction.getRoof().getDegree();
+        int shedDepth = construction.getShed().getDepth();
+        int meterPerFrontPostsForShed;
+        int quantityOfPostsFrontShed;
+        int quatityOfPostsShedBack = sidePostAmount(construction.getConstructionWidth());
 
+        Integer[] heightsOfPostsForShedDepthSide1;
+        Integer[] heightsOfPostsForShedDepthSide2;
+        Integer[] heightsOfPostsForShedFront;
+        Integer[] heightsOfPostsForShedBack;
+        ArrayList <Integer> actualHeightsOfPostsForTotalConstrution = new ArrayList();
+
+        if (construction.getShed() != null ) {
+            quantityOfPostsFrontShed = shedFrontPostsAmount(construction.getShed().getWidth());
+            meterPerFrontPostsForShed = (int) (raising(construction.getRoof().getDegree(),
+                    construction.getShed().getDepth() + SHEDMINHEIGHT));
+            heightsOfPostsForShedFront = new Integer[quantityOfPostsFrontShed];
+            for (int i = 0; i <heightsOfPostsForShedFront.length-1 ; i++) {
+                heightsOfPostsForShedFront[i] = meterPerFrontPostsForShed;
+            }
+
+            heightsOfPostsForShedDepthSide1 = postsHeights(constructionMinHeight, degreeRoof, shedDepth);
+            heightsOfPostsForShedDepthSide2 = postsHeights(constructionMinHeight, degreeRoof, shedDepth);
+            heightsOfPostsForShedBack = new Integer[quatityOfPostsShedBack];
+            for (int i = 0; i < heightsOfPostsForShedFront.length-1 ; i++) {
+                heightsOfPostsForShedBack[i] = (int)(constructionMinHeight +
+                        raising(construction.getRoof().getDegree(), shedDepth));
+            }
+
+            for (int postHeight:heightsOfPostsForShedFront) {
+                actualHeightsOfPostsForTotalConstrution.add(postHeight);
+            }
+
+            for (int postHeight:heightsOfPostsForShedBack) {
+                actualHeightsOfPostsForTotalConstrution.add(postHeight);
+            }
+
+            for (int postHeight:heightsOfPostsForShedDepthSide1) {
+                actualHeightsOfPostsForTotalConstrution.add(postHeight);
+            }
+
+            for (int postHeight:heightsOfPostsForShedDepthSide2) {
+                actualHeightsOfPostsForTotalConstrution.add(postHeight);
+            }
+        }
+
+        int carportMinHeight = carportMinHeight((int)constructionMinHeight, construction.getShed().getDepth(),
+                construction.getRoof().getTilt());
+        int quantityOfCarportPostsRows = postRows(construction.getCarportWidth());
+        Integer[] heightsOfPostsPerRow = postsHeights(carportMinHeight, construction.getRoof().getDegree(),
+                construction.getConstructionWidth());
+        for (int i = 0; i < quantityOfCarportPostsRows-1; i++) {
+            for (int postHeight: heightsOfPostsPerRow) {
+                actualHeightsOfPostsForTotalConstrution.add(postHeight);
+            }
+        }
+        //Todo - Lav hvor mange der skal hentes fra lager som enten har 240, 270, 300 eller 360 i størrelse
 
         // Rem
         int[] remPieces = constructionSizeCalculator.remPieces(construction);
