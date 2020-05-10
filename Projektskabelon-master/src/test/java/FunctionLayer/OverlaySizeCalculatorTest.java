@@ -167,54 +167,28 @@ public class OverlaySizeCalculatorTest {
         assertEquals(expected, totalSurface, 0.01);
     }
 
+
     @Test
-    public void overlaySpending() {
-        int result1;
-        int result2;
-        double spending = 3.85;
-
-        String materialName1 = "HARDIEPLANK 180X3600X8MM";
-        String materialName2 = "Some other name";
-        double area = 100.1;
+    public void overlaySpending() throws LoginSampleException {
+        double area = 35.5;
+        double result1= OverlaySizeCalculator.overlaySpending("HARDIEPLANK 180X3600X8MM", area);
+        double expected1 = 68.95; // (35.5*1.85*1.05 = 68.95);
+        double result2= OverlaySizeCalculator.overlaySpending("SIBIRISK LÆRK KLINKBEKLÆDNING", area);
+        double expected2= (35.5*7.64/3.6)*1.05;
 
 
+        assertEquals(expected1,result1, 0.01);
+        assertEquals(expected2,result2, 0.01);
+    }
 
-        double needed1 = 0;
-        if (materialName1.equals("HARDIEPLANK 180X3600X8MM")) {
-            needed1 = spending * area; //spending : how many pieces pr squwe meter
-        } else {
-            needed1 = spending * area * 3600 / 1000;
-        }
-
-        needed1 = needed1 + 0.05 * needed1; //5 % extra material for cuts
-
-        if (((needed1 * 10) % 10) == 0) {
-            result1 = (int) needed1;
-        } else {
-            result1 = (int) needed1 + 1;
-        }
-
-        double needed2 = 0;
-        if (materialName1.equals("HARDIEPLANK 180X3600X8MM")) {
-            needed2 = spending * area; //spending : how many pieces pr square meter
-        } else {
-            needed2 = spending * area / 3600 / 1000;
-        }
-
-        needed2 = needed2 + 0.05 * needed2; //5 % extra material for cuts
-
-        if (((needed2 * 10) % 10) == 0) {
-            result2 = (int) needed2;
-        } else {
-            result2 = (int) needed2 + 1;
-        }
-
-
-        int exepted1 = 405;
-        int exepted2 = 108;
-        assertEquals(exepted1,result1);
-
-
+    @Test
+    public  void doubleTest(){
+        double calculation= 35.5*7.64;
+        System.out.println(calculation);
+        double nextStep = calculation /(3600/1000);
+        System.out.println(nextStep);
+        double problem =(3600/1000);
+        System.out.println(problem);
     }
 
     @Test

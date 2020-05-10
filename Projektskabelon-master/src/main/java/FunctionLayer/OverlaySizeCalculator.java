@@ -160,27 +160,21 @@ public class OverlaySizeCalculator {
         return totalArea;
     }
 
-    public static int overlaySpending(String materialName, double area) throws LoginSampleException {
+    public static double overlaySpending(String materialName, double area) throws LoginSampleException {
         double spending = MaterialMapper.spending(materialName);
+
+
         double needed = 0;
         if (materialName.equals("HARDIEPLANK 180X3600X8MM")) {
             needed = spending * area; //spending : how many pieces pr squwe meter
         } else {
-            needed = spending * area / LENGTHOFOVERLAYPLANK / MMPERM;
-            ;
+            needed = spending * area ;
+                   needed= needed / 3.6;// (LENGTHOFOVERLAYPLANK / MMPERM);
+            }
 
-        }
+        needed = needed + (SECURITYPERCENTAGE * needed); //5 % extra material for cuts
+        return needed;
 
-
-        needed = needed + SECURITYPERCENTAGE * needed; //5 % extra material for cuts
-
-        if (((needed * 10) % 10) == 0) {
-
-            return (int) needed;
-        } else {
-
-            return (int) needed + 1;
-        }
 
     }
 

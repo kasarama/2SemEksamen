@@ -117,7 +117,6 @@ public class OverlayMaterialCalculator {
 
     //....................................MATERIALS FOR OVERLAY....................................//
     public static ArrayList<Material> overlayMaterial(Construction construction, String materialName) throws LoginSampleException {
-
         ArrayList<Material> overlayMaterials = new ArrayList<>();
 
         ArrayList<Wall> carportWalls = construction.getWalls();
@@ -131,9 +130,15 @@ public class OverlayMaterialCalculator {
             overlayMaterials.add(overlayScrew);
         }
 
-        double wholeAreal = OverlaySizeCalculator.allWallsArea(construction);
 
-        int quantity = OverlaySizeCalculator.overlaySpending(materialName, wholeAreal);
+        double wholeAreal = OverlaySizeCalculator.allWallsArea(construction);
+        double amount=OverlaySizeCalculator.overlaySpending(materialName, wholeAreal);
+
+        int quantity =(int)Math.round(amount);
+
+        if (quantity<amount){
+            quantity=quantity+1;
+        }
         Material overlay = new Material();
         overlay.setName(materialName);
         overlay.setSize(3600);

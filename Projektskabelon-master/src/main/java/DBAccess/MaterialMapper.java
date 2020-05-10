@@ -307,9 +307,7 @@ public class MaterialMapper {
             } else {
                 throw new LoginSampleException("Kunne ikke læse data om forbrug af den valgte materiale til beklædning");
             }
-        } catch (SQLException sql) {
-            return 0;
-        } catch (ClassNotFoundException ex) {
+                } catch (ClassNotFoundException | SQLException ex) {
             throw new LoginSampleException(ex.getMessage());
         }
     }
