@@ -20,38 +20,14 @@
     <br>
     <br>
 
-    <table class="table table-striped ">
-        <thead>
-        <tr class="tr1">
-            <th>Beklædnings materiale</th>
-            <th>Størrelse</th>
-            <th>Antal</th>
-            <th>Enhed</th>
-            <th>Kommentar</th>
-        </tr>
-        </thead>
-        <tbody>
 
-
-        <c:forEach var="material" items="${requestScope.ovarlayMaterialList}">
-            <tr class="tr2">
-                <th>${material.name}</th>
-                <th>${material.size}</th>
-                <th>${material.amount}</th>
-                <th>${material.unit}</th>
-                <th>${material.comment}</th>
-            </tr>
-        </c:forEach>
-
-        </tbody>
-    </table>
 
     <br>
 
     <table class="table table-striped ">
         <thead>
         <tr class="tr1">
-            <th>Beklædning</th>
+            <th>Construction</th>
             <th>Længde (cm)</th>
             <th>Antal</th>
             <th>Enhed</th>
@@ -61,10 +37,10 @@
         <tbody>
 
 
-        <c:forEach var="material" items="${sessionScope.overlayList}">
+        <c:forEach var="material" items="${sessionScope.carportBase.fundamentMaterials}">
             <tr class="tr2">
                 <td>${material.name}</td>
-                <td>${material.antal}</td>
+                <td>${material.amount}</td>
                 <td>${material.unit}</td>
                 <td>${material.comment}</td>
             </tr>
@@ -73,6 +49,7 @@
         </tbody>
     </table>
 
+        <br>
 
     <table class="table table-striped ">
         <thead>
@@ -100,8 +77,43 @@
         </tbody>
     </table>
 
+        <br>
 
-</div>
+
+        <c:set var="list" value="${requestScope.ovarlayMaterialList}"/>
+        <c:choose>
+            <c:when test="${list.size() != 0}">
+                <table class="table table-striped ">
+                    <thead>
+                    <tr class="tr1">
+                        <th>Beklædnings materiale</th>
+                        <th>Størrelse</th>
+                        <th>Antal</th>
+                        <th>Enhed</th>
+                        <th>Kommentar</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+
+                    <c:forEach var="material" items="${requestScope.ovarlayMaterialList}">
+                        <tr class="tr2">
+                            <th>${material.name}</th>
+                            <th>${material.size}</th>
+                            <th>${material.amount}</th>
+                            <th>${material.unit}</th>
+                            <th>${material.comment}</th>
+                        </tr>
+                    </c:forEach>
+
+                    </tbody>
+                </table>
+            </c:when>
+        </c:choose>
+
+
+
+    </div>
 <!-- Container -->
 
 <%@include file="../includes/footer.inc" %>

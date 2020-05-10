@@ -21,6 +21,7 @@ public class Construction {
 
     public Construction() {
         this.fundamentMaterials = new ArrayList<>();
+        this.walls = new ArrayList<>();
     }
 
     public int getConstructionLength() {
@@ -125,6 +126,11 @@ public class Construction {
 
     public void setOverlay(String overlay) {
         this.overlay = overlay;
+    }
+
+    public ArrayList<Wall> getAllWalls() {
+        walls.addAll(shed.getWalls());
+        return walls;
     }
 
     /*@Override
