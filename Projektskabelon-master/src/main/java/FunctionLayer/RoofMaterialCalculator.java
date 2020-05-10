@@ -14,17 +14,17 @@ public class RoofMaterialCalculator {
 
     private int T300ROOFPLADELENGTH = 3000; //Dette skulle rigtig beregnes ud fra 3600 mm istedet men vi prioterer
     //på andre ting, da vi er tidspressede
-    private int TrapezPladeWidth = 1000; //
     private int T600ROOFPLADELENGTH = 6000;
     private int OVERLAP = 200;
 
-    private int numberOfT600Trapezplates = 0;
+    private int numberOfT600Trapezplates;
     private int numberOfT300Trapezplates;
     private int square1numberOfT600Trapezplates = 0;
     private int square2numberOfT600Trapezplates = 0;
     private int square3numberOfT600Trapezplates = 0;
     private int roofWidth;
     private int roofLength;
+
     ArrayList materialsList;
     Material material;
 
@@ -44,7 +44,7 @@ public class RoofMaterialCalculator {
         materialsList = new ArrayList();
         material = null;
 
-        //TrapesPlader
+        //TrapezPlader
         material = LogicFacade.getMaterialBySizeName(T600ROOFPLADELENGTH, "");
         material.setName("TRAPEZPLADE " + trapezColour );
         material.setUnit(LogicFacade.getUnitByName(material.getName()));
@@ -72,7 +72,7 @@ public class RoofMaterialCalculator {
         materialsList.add(material);
         return materialsList;
 
-        
+
     }
 
     ////////////////// Trapezplader - START
@@ -142,7 +142,7 @@ public class RoofMaterialCalculator {
         int tempTrapezPladeWidth = trapezPladeWidth;
         int restOfLength = roofLength % T600ROOFPLADELENGTH;
         if (restOfLength > 0 && restOfLength <= T300ROOFPLADELENGTH){
-            for (int i = 0; i < roofWidth - tempTrapezPladeWidth + OVERLAP; i=i+ TrapezPladeWidth) {
+            for (int i = 0; i < roofWidth - tempTrapezPladeWidth + OVERLAP; i=i+ tempTrapezPladeWidth) {
                 numberOfT300Trapezplates++;
                 tempTrapezPladeWidth = tempTrapezPladeWidth - OVERLAP;
             }
