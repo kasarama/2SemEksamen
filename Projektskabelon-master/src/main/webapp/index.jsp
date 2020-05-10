@@ -22,3 +22,5 @@
 <%@include file="includes/footer.inc"%>
 
 <a href="FrontController?target=redirect&destination=addmaterial">Add Material</a>
+<br>
+<a href="FrontController?target=drawing">See drawing</a>

@@ -51,15 +51,15 @@ public class ConstructionSizeCalculatorTest {
 
     @Test // Magda
     public void sidePostAmount() {
-        int actual= ConstructionSizeCalculator.sidePostAmount(8500);
+        int actual= ConstructionSizeCalculator.sidePostAmount(7800);
         int expected = 4;
         assertEquals(expected,actual);
     }
 
     @Test // Magda
     public void postDistanceMax300() {
-        int actual= ConstructionSizeCalculator.postDistanceMax3000(8600);
-        int exp =2833;
+        int actual= ConstructionSizeCalculator.postDistanceMax3000(7800);
+        int exp =2566;
         assertEquals(exp,actual);
 
     }
