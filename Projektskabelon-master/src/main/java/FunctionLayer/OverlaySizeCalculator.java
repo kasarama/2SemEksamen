@@ -169,7 +169,7 @@ public class OverlaySizeCalculator {
             needed = spending * area; //spending : how many pieces pr squwe meter
         } else {
             needed = spending * area ;
-                   needed= needed / 3.6;// (LENGTHOFOVERLAYPLANK / MMPERM);
+                   needed= needed /  ((double)LENGTHOFOVERLAYPLANK /(double) MMPERM);
             }
 
         needed = needed + (SECURITYPERCENTAGE * needed); //5 % extra material for cuts
