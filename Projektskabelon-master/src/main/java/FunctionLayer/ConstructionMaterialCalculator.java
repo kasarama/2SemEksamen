@@ -10,7 +10,6 @@ import static FunctionLayer.LogicFacade.getLengthForMaterials;
 
 public class ConstructionMaterialCalculator {
 
-    final int SHEDMINHEIGHT = 2000;
     public ConstructionSizeCalculator constructionSizeCalculator = new ConstructionSizeCalculator();
     public Construction construction = new Construction();
     public ArrayList<Material> constructionMaterials = construction.getFundamentMaterials();
@@ -49,32 +48,39 @@ public class ConstructionMaterialCalculator {
         }
 
         ArrayList<Integer> postsMaterialsAvalibleLenghts = getLengthForMaterials("TRYKIMPRENERET STOLPE");
-        Set deletesTheDuplicatesFromList = new LinkedHashSet<>();
+
+        ArrayList<Material> tempPostsMaterails = new ArrayList<>();
         int restOfAvalibleMaterial = 0;
         int countPosts = 0;
         Material post = null;
+
         for (int avaliblePostMaterialLength : postsMaterialsAvalibleLenghts) {
-                post = LogicFacade.getMaterialBySizeName(avaliblePostMaterialLength, "");
-                post.setName("TRYKIMPRENERET STOLPE");
-                post.setUnit(LogicFacade.getUnitByName(post.getName()));
-                post.setWidth(LogicFacade.getWidthByID(post.getId(), post.getName()));
-                post.setThickness(LogicFacade.getThicknessByID(post.getId()));
-                post.setName("TRYKIMPRENERET STOLPE" + post.getThickness() + "x" + post.getWidth());
-                for (int postHeight : actualHeightsOfPostsForConstruction) {
-                if (postHeight <= avaliblePostMaterialLength) {
+            post = LogicFacade.getMaterialBySizeName(avaliblePostMaterialLength, "");
+            post.setName("TRYKIMPRENERET STOLPE");
+            post.setUnit(LogicFacade.getUnitByName(post.getName()));
+            post.setWidth(LogicFacade.getWidthByID(post.getId(), post.getName()));
+            post.setThickness(LogicFacade.getThicknessByID(post.getId()));
+            post.setName("TRYKIMPRENERET STOLPE" + post.getThickness() + "x" + post.getWidth());
+            for (int postHeightForConstruction : actualHeightsOfPostsForConstruction) {
+                if (postHeightForConstruction <= avaliblePostMaterialLength) {
                     countPosts++;
-                    restOfAvalibleMaterial = avaliblePostMaterialLength % postHeight;
+                    restOfAvalibleMaterial = avaliblePostMaterialLength % postHeightForConstruction;
                 }
-                if(restOfAvalibleMaterial != 0){
 
+                if (restOfAvalibleMaterial != 0)
+                    for (int i = postsMaterialsAvalibleLenghts.indexOf(post)-1; i >= 0; i--) {
+                        double temp = (double)restOfAvalibleMaterial / postsMaterialsAvalibleLenghts.get(i);
+                        Material tempPost = tempPostsMaterails.get(i);
+                        int tempQuatityPostsTypePlusOneEkstra = tempPost.getAmount() + 1;
+                        tempPost.setAmount(tempQuatityPostsTypePlusOneEkstra);
                     }
-                post.setAmount(countPosts);
-                post.setComment("(skriv noget herinde om materialet)");
-                deletesTheDuplicatesFromList.add(post);
 
+                    post.setAmount(countPosts);
+                post.setComment("(skriv noget herinde om materialet)");
+                tempPostsMaterails.add(post);
             }
         }
-        woodMaterials.addAll(deletesTheDuplicatesFromList);
+        woodMaterials.addAll(tempPostsMaterails);
 
         // Rem
         int[] remPieces = constructionSizeCalculator.remPieces(construction);
