@@ -1,12 +1,11 @@
 package PresentationLayer;
 
-import FunctionLayer.Construction;
-import FunctionLayer.LoginSampleException;
-import FunctionLayer.RoofSizing;
+import FunctionLayer.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 
 public class FlatRoof extends Command {
     @Override
@@ -15,26 +14,21 @@ public class FlatRoof extends Command {
         HttpSession session = request.getSession();
         Construction constructionRequest = (Construction) session.getAttribute("carportRequest");
 
-
-        int height = Integer.parseInt(request.getParameter("height"));
-        int tilt = Integer.parseInt(request.getParameter("tilt"));
-
         RoofSizing roofSizing = new RoofSizing(constructionRequest);
+        RoofMaterialCalculator rmc = new RoofMaterialCalculator(constructionRequest);
+git 
+        /*int colourOfTrapezPladesID = ;
 
-        int[] tiltOptions = roofSizing.pitchDegreesOptionsForCostumerToChoose();
-
-        request.setAttribute("height", height);
-        request.setAttribute("tilt", tilt);
-
-        constructionRequest.getRoof().setHeight(height);
-        constructionRequest.getRoof().setDegree(tilt);
+        ArrayList<Material> materialList = rmc.flatRoofMaterialsInsert();
+        constructionRequest.getRoof().setRoofMaterialList();
+*/
 
         session.setAttribute("carportRequest", constructionRequest);
 
 
         //todo læs data fra designeflatroof.jsp og brug dem for t designe fladt tag
 
-        return "designflatroof";
+        return "overlay";
 
     }
 }
