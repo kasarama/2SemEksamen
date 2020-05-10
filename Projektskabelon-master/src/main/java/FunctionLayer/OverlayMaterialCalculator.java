@@ -134,6 +134,7 @@ public class OverlayMaterialCalculator {
         double wholeAreal = OverlaySizeCalculator.allWallsArea(construction);
 
         int quantity = OverlaySizeCalculator.overlaySpending(materialName, wholeAreal);
+        System.out.println("quantity, whole area: " +quantity+", "+wholeAreal);
         Material overlay = new Material();
         overlay.setName(materialName);
         overlay.setSize(3600);
