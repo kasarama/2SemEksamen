@@ -54,8 +54,8 @@ public class LogicFacade {
         return MaterialMapper.getAllOverlays();
     }
 
-    public static void sendNewRequest(Construction construction) throws LoginSampleException {
-        ConstructionMapper.saveNewRequest(construction);
+    public static void sendNewRequest(Construction construction, String email) throws LoginSampleException {
+        ConstructionMapper.saveNewRequest(construction, email);
     }
 }
 

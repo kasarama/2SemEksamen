@@ -251,7 +251,6 @@ public class MaterialMapper {
                 material.setColor(color);
 
                 materialList.add(material);
-                System.out.println(material.getName()+": "+material.getColor());
             }
         } catch (ClassNotFoundException | SQLException ex) {
             ex.printStackTrace();
