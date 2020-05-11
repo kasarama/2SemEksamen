@@ -184,7 +184,7 @@ carportright wall gives wrong result
  */
 
 
-       // assertEquals(area, totalSurface, 0.01);
+      //  assertEquals(area, totalSurface, 0.01);
     }
 
 

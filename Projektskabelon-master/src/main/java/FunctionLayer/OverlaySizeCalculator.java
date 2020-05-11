@@ -102,12 +102,13 @@ public class OverlaySizeCalculator {
     public static double oneWallArea(Wall wall) {
         //to be able to calculate the needed amount of some material for overlay, we need to know the area of
         // surface that's going to be covered
-        double area = -1;
+        long area = -1;
         /*Trapez area: (a+b)/2*h
         a=minHeight, b= maxHeight, h= length
          */
+
         int maxHeight = (int) (wall.getMinHeight() + ConstructionSizeCalculator.raising(wall.getRaising(), wall.getLength()));
-        area = ((wall.getMinHeight() + maxHeight)) / 2 * wall.getLength();
+        area = (long) ((((double)wall.getMinHeight() +(double) maxHeight)) / 2.0 * (double)wall.getLength());
         System.out.println(wall.getSide()+" area: "+area+ "min and max height: "+wall.getMinHeight()+" , "+maxHeight);
         return area / (double) MMPERM / (double) MMPERM;
     }
