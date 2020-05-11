@@ -35,12 +35,22 @@
     </tr>
 </table>
 
+
+<form name="sendnewrequest" action="FrontController" method="POST">
+    <input type="hidden" name="target" value="sendnewrequest">
+    <input type="hidden" name="origin" value="customerChoiceResult">
+    <input type="submit" name="sendnewrequest" value="Send forespørgelse">
 </form>
+
+
 <form name="startOver" action="FrontController" method="POST">
     <input type="hidden" name="target" value="newrequest">
+    <input type="hidden" name="origin" value="customerChoiceResult">
     <input type="submit" name="newrequest" value="Start forfra">
 </form>
 
+<a class=" mt-4 mb-3 btn btn-primary" href="FrontController?target=redirect&destination=itemList"
+   role="button">Item List</a>
 
 <!-- alligning the hyperlink to the center -->
 <div class="text-center">

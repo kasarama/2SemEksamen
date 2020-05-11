@@ -7,21 +7,31 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@include file="../includes/header.inc" %>
 
 <div class="container2">
     <div class="col-md-12">
         <br>
         <br>
-        <h2>Velkommen til</h2>
+        <h2>
+            <c:set var="msg" value="${requestScope.newRequestMSG}"/>
+            <c:choose>
+                <c:when test="${msg != null}">
+                    ${msg}
+                </c:when>
+                <c:otherwise>
+                    Velkommen til
+                </c:otherwise>
+            </c:choose></h2>
         <img class="mt-4 mb-3" src="./images/logo.png" alt="Logo" width="430" height=auto>
-        <h6  class="mb-3" style="font-size: small;">Her kan du designe din egen carport & <br>
+        <h6 class="mb-3" style="font-size: small;">Her kan du designe din egen carport & <br>
             få vejledning, inden du køber</h6>
         <br>
-        <a class=" mt-4 mb-3 btn btn-primary" href="FrontController?target=redirect&destination=carportBase" role="button">DESIGN CARPORT</a>
+        <a class=" mt-4 mb-3 btn btn-primary" href="FrontController?target=redirect&destination=carportBase"
+           role="button">DESIGN CARPORT</a>
     </div>
 </div>
 <br>
 <br>
-<%@include file="../includes/footer.inc"%>
+<%@include file="../includes/footer.inc" %>
