@@ -46,7 +46,8 @@ public class Overlay extends Command {
 
         if (shedDepth == 0 && noWalls != null) {
             return targetPage;
-        } else
+        }
+
 
         if (shedDepth == 0 && coverWalls != null) {
             if (overlayName == null || wallsToCover.size() == 0) {
@@ -81,7 +82,7 @@ public class Overlay extends Command {
                 return targetPage;
             }
 
-        }else
+        }
 
         request.setAttribute("overlayMSG", overlayMSG);
         return "overlay";

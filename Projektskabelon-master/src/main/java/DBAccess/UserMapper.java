@@ -60,6 +60,8 @@ public class UserMapper {
 
     public static int getIDbyEmail (String email) throws LoginSampleException {
         int id=0;
+        System.out.println("UserMapper.getIDbyEmail()");
+        System.out.println("email: "+ email);
 try {
     Connection con = Connector.connection();
     String SQL = "SELECT userID FROM users WHERE email=?";

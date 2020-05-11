@@ -1,9 +1,10 @@
 package FunctionLayer;
 
-import DBAccess.ConstructionMapper;
+import DBAccess.OrderMapper;
 import DBAccess.MaterialMapper;
 import DBAccess.UserMapper;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -54,8 +55,20 @@ public class LogicFacade {
         return MaterialMapper.getAllOverlays();
     }
 
-    public static void sendNewRequest(Construction construction, String email) throws LoginSampleException {
-        ConstructionMapper.saveNewRequest(construction, email);
+    public static void sendNewRequest(Order order) throws LoginSampleException {
+        Date nowDate = new Date();
+        long timestamp = nowDate.getTime();
+
+                /* To recreate date later on:
+
+                Date otherDate = new Date(timestamp);
+                */
+
+        order.setTimestamp(timestamp);
+        order.setStatus("newrequest");
+        order.setSalePrice(0);
+        order.setCost(0);
+        OrderMapper.saveNewRequest(order);
     }
 }
 

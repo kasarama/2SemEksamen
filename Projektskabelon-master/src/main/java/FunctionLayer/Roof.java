@@ -10,6 +10,7 @@ public abstract class Roof {
     ArrayList<Material> tagMaterialList;
     private boolean pitched;
     private int tilt;
+    private String color;
 
 
     public Roof(int height, int length, int width, int degree, boolean pitched, int tilt) {
