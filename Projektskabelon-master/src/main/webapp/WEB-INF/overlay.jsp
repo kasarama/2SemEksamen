@@ -21,16 +21,7 @@
         }
     }
 %>
-<%
-    // if i'm the first user on this application, then set the overlayMaterialsList. (else the list already exists)
-    if (request.getServletContext().getAttribute("overlayMaterialsList") == null) {
-        try {
-            request.getServletContext().setAttribute("overlayMaterialsList", Initializer.getOverlayList());
-        } catch (LoginSampleException e) {
-            e.printStackTrace();
-        }
-    }
-%>
+
 
 <c:if test="${requestScope.overlayMSG!= null}">
     <div>
@@ -56,7 +47,7 @@
                     <h2>Beklædning</h2>
 
                     <label class="mt-3" for="overlay"> Vælg beklædning:</label>
-                    <select name="overlayName" class="form-control" id="overlay" onsubmit="required()">
+                    <select name="overlayName" class="form-control" id="overlay">
                         <option selected disabled>Vælg beklædning</option>
                         <c:forEach var="material" items="${applicationScope.overlayList}">
                             <option value="${material.name}">${material.name}</option>
@@ -118,16 +109,13 @@
                     </select>
                     <input class="btn btn-primary mt-3" type="submit" name="noWalls" value="Kun carport, ingen vægge">
 
-
                 </c:otherwise>
             </c:choose>
 
             <input class="btn btn-primary mt-3" type="submit" name="coverWalls" value="Videre med de valgte vægger">
-            <input class="btn btn-danger mt-3" type="submit" name="choiceResult" value="Show Choice Result">
-
-
         </form>
         <!-- End of form -->
+
 
         <form name="startOver" action="FrontController" method="POST">
             <input type="hidden" name="target" value="newrequest">
@@ -161,16 +149,5 @@
 -->
 
 
-<script>
-    // If the length of the element's string is 0 then display helper message
-    function required(inputtx) {
-        if (inputtx.value.length == 0) {
-            alert("Vælg en beklædning for at fortsætte");
-            return false;
-        }
-        return true;
-    }
-
-</script>
 
 <%@include file="../includes/footer.inc" %>
