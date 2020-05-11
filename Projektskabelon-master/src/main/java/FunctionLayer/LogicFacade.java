@@ -42,10 +42,15 @@ public class LogicFacade {
         return thickness;
     }
 
-    public static ArrayList<Integer> getLengthForMaterials(String nameMaterial){
-        ArrayList<Integer> lengthForMaterials= getLengthForMaterials(nameMaterial);
+    public static ArrayList<Integer> getLengthForMaterials(String nameMaterial) throws LoginSampleException {
+        ArrayList<Integer> lengthForMaterials = MaterialMapper.getLengthForMaterials(nameMaterial);
         return lengthForMaterials;
     }
+
+    public static String getANameFromMaterialID(int idMaterial) throws LoginSampleException {
+        return MaterialMapper.getNameFromMaterialID(idMaterial);
+    }
+
 
     //call the static method that gets the ROOF materials data from DB - static = can be called without creating an obj.
     public static List<Material> getAllPitchedRoofMaterials() throws LoginSampleException {

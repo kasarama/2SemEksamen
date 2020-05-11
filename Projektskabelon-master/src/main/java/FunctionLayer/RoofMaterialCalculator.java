@@ -40,13 +40,13 @@ public class RoofMaterialCalculator {
         return construction.getRoof().getRoofMaterialList();
     }
 
-    public ArrayList<Material> flatRoofMaterialsInsert(String trapezColour) throws LoginSampleException {
+    public ArrayList<Material> flatRoofMaterialsInsert(String trapezColourAnName) throws LoginSampleException {
         materialsList = new ArrayList();
         material = null;
 
         //TrapezPlader
         material = LogicFacade.getMaterialBySizeName(T600ROOFPLADELENGTH, "");
-        material.setName("TRAPEZPLADE " + trapezColour );
+        material.setName(trapezColourAnName);
         material.setUnit(LogicFacade.getUnitByName(material.getName()));
         material.setWidth(LogicFacade.getWidthByID(material.getId(), material.getName()));
         material.setThickness(LogicFacade.getThicknessByID(material.getId()));
@@ -59,7 +59,7 @@ public class RoofMaterialCalculator {
         materialsList.add(material);
 
         material = LogicFacade.getMaterialBySizeName(T300ROOFPLADELENGTH, "");
-        material.setName("TRAPEZPLADE " + trapezColour );
+        material.setName(trapezColourAnName);
         material.setUnit(LogicFacade.getUnitByName(material.getName()));
         material.setWidth(LogicFacade.getWidthByID(material.getId(), material.getName()));
         material.setThickness(LogicFacade.getThicknessByID(material.getId()));

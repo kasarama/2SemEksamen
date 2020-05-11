@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 
+import static DBAccess.MaterialMapper.getNameFromMaterialID;
+
 public class FlatRoof extends Command {
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException {
@@ -16,12 +18,10 @@ public class FlatRoof extends Command {
 
         RoofSizing roofSizing = new RoofSizing(constructionRequest);
         RoofMaterialCalculator rmc = new RoofMaterialCalculator(constructionRequest);
-git 
-        /*int colourOfTrapezPladesID = ;
-
-        ArrayList<Material> materialList = rmc.flatRoofMaterialsInsert();
-        constructionRequest.getRoof().setRoofMaterialList();
-*/
+        int colourOfTrapezPladesID = Integer.parseInt(request.getParameter("roofMaterial"));
+        String materialName = LogicFacade.getANameFromMaterialID(colourOfTrapezPladesID);
+        ArrayList<Material> materialList = rmc.flatRoofMaterialsInsert(materialName);
+        constructionRequest.getRoof().setRoofMaterialList(materialList);
 
         session.setAttribute("carportRequest", constructionRequest);
 
