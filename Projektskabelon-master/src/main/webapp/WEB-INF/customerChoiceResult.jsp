@@ -49,8 +49,11 @@
     <input type="submit" name="newrequest" value="Start forfra">
 </form>
 
-<a class=" mt-4 mb-3 btn btn-primary" href="FrontController?target=redirect&destination=itemList"
-   role="button">Item List</a>
+<form name="itemlist" action="FrontController" method="POST">
+    <input type="hidden" name="target" value="itemlist">
+    <input type="hidden" name="origin" value="customerChoiceResult">
+    <input type="submit" name="showitemlist" value="Item List">
+</form>
 
 <!-- alligning the hyperlink to the center -->
 <div class="text-center">

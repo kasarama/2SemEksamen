@@ -40,7 +40,7 @@
             <c:choose>
 
 
-                <c:when test="${shed != 0}">
+                <c:when test="${shed !='0'}">
                     <br>
                     ${shed}
                     <br>
@@ -79,6 +79,11 @@
 
 
                 <c:otherwise>
+                    <br>
+                    ${shed}
+                    <br>
+                    <h2>Beklædning</h2>
+
 
                     Du kan vælge at beklæde nogle vægge af carporten:
                     <div class="form-check">
@@ -104,7 +109,7 @@
                     <select name="overlayName" class="form-control" id="overlay">
                         <option selected disabled>Vælg beklædning</option>
                         <c:forEach var="material" items="${applicationScope.overlayList}">
-                            <option value="${material.name}">${material.name}</option>
+                            <option value="${material.name}">${material.color} ${material.name}</option>
                         </c:forEach>
                     </select>
                     <input class="btn btn-primary mt-3" type="submit" name="noWalls" value="Kun carport, ingen vægge">

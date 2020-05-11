@@ -35,6 +35,7 @@ public class WallBuilderTest {
         ArrayList<Wall> shedWalls = WallBuilder.addShedWalls(construction);
         assertEquals("front", shedWalls.get(2).getSide());
         assertEquals(0, shedWalls.get(3).getRaising());
+        assertEquals(4,shedWalls.size());
 
     }
 
@@ -47,7 +48,14 @@ public class WallBuilderTest {
     }
 
 
+    @Test
+    public void QuantityOfcreateCarportWalls(){
+        sideNames = new ArrayList<>();
+        ArrayList<Wall> carportWalls = WallBuilder.createCarportWalls(construction, sideNames);
+        System.out.println(carportWalls.size());
 
+
+    }
     @Test
     public void createCarportWalls() {
         ArrayList<Wall> carportWalls = WallBuilder.createCarportWalls(construction, sideNames);

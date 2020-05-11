@@ -46,7 +46,7 @@ public class Overlay extends Command {
 
         if (shedDepth == 0 && noWalls != null) {
             return targetPage;
-        }
+        } else
 
         if (shedDepth == 0 && coverWalls != null) {
             if (overlayName == null || wallsToCover.size() == 0) {
@@ -58,7 +58,7 @@ public class Overlay extends Command {
                 request.setAttribute("ovarlayMaterialList", ovarlayMaterialList);
                 return targetPage;
             }
-        }
+        } else
 
         if (shedDepth>0 && noWalls!=null){
             if (overlayName == null) {
@@ -69,7 +69,7 @@ public class Overlay extends Command {
                 request.setAttribute("ovarlayMaterialList", ovarlayMaterialList);
                 return targetPage;
             }
-        }
+        } else
         if (shedDepth>0 && coverWalls!=null){
             if (overlayName == null || wallsToCover.size() == 0) {
                 overlayMSG = "Vælg beklædning og de ønskede vægger ";
@@ -81,7 +81,7 @@ public class Overlay extends Command {
                 return targetPage;
             }
 
-        }
+        }else
 
         request.setAttribute("overlayMSG", overlayMSG);
         return "overlay";

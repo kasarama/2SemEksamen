@@ -246,11 +246,12 @@ public class MaterialMapper {
                 material.setPicture(picture);
                 material.setPrice(price);
                 if (color == null) {
-                    color = "standard";
+                    color = "";
                 }
                 material.setColor(color);
 
                 materialList.add(material);
+                System.out.println(material.getName()+": "+material.getColor());
             }
         } catch (ClassNotFoundException | SQLException ex) {
             ex.printStackTrace();

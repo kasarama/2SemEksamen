@@ -81,7 +81,7 @@
         <br>
 
 
-        <c:set var="list" value="${requestScope.ovarlayMaterialList}"/>
+        <c:set var="list" value="${requestScope.overlayMaterials}"/>
         <c:choose>
             <c:when test="${list.size() != 0}">
                 <table class="table table-striped ">
@@ -97,7 +97,7 @@
                     <tbody>
 
 
-                    <c:forEach var="material" items="${requestScope.ovarlayMaterialList}">
+                    <c:forEach var="material" items="${requestScope.overlayMaterials}">
                         <tr class="tr2">
                             <th>${material.name}</th>
                             <th>${material.size}</th>
