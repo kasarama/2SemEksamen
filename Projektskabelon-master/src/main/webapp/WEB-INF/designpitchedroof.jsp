@@ -47,7 +47,7 @@ if (request.getServletContext().getAttribute("MAXPITCHDEGREEOPTION") == null) {
             <br>
             <select name="tiltOptions" class="form-control" >
                 <c:forEach var="degree" begin="${applicationScope.MINPITCHDEGREEOPTION}" end="${applicationScope.MAXPITCHDEGREEOPTION}" step="5">
-                    <option value=${degree}>${degree}</option>
+                    <option value="${degree}">${degree}</option>
                 </c:forEach>
             </select>
         </form>

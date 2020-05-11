@@ -51,7 +51,7 @@ public class ConstructionMaterialCalculator {
 
         ArrayList<Material> tempPostsMaterails = new ArrayList<>();
         int restOfAvalibleMaterial = 0;
-        int countPosts = 0;
+        int countPosts = 1;
         Material post = null;
 
         for (int avaliblePostMaterialLength : postsMaterialsAvalibleLenghts) {

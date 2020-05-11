@@ -122,19 +122,21 @@ public class PitchedRoofMaterialCalculator {
     }
 
 
-    //// TODO - Kommentar: Jeg kunne ikke finde spærberegninger for tag med rejsning så her er der en
     public int spærPlankLengthPerSpær(){
         int spærfodLength = construction.getCarportWidth();
         int spærArm = (int) (spærfodLength/(Math.cos(Math.toRadians(construction.getRoof().getDegree()))))*2;
         spærFullPlankLength = (spærArm*2)+spærfodLength;
         return spærFullPlankLength;
     }
-
+    //TODO beregning af ekstra spær (til sidst)
     public int spærQuatity(){
         int carportLength = construction.getCarportLength();
         int distanceBestweenSpær = 89;
         for (int i = 0; i < carportLength; i = 1 + distanceBestweenSpær) {
             spærAmount++;
+        }
+        if (construction.getShed() != null) {
+            spærAmount = spærAmount+ 2;
         }
         return spærAmount;
     }
@@ -143,6 +145,8 @@ public class PitchedRoofMaterialCalculator {
         spærFullQuatityOfPlanks = spærPlankLengthPerSpær()*spærQuatity();
         return spærFullQuatityOfPlanks;
     }
+
+    //TODO metode til gavl (trekant under tag)
 
     public int quantityRygsten() {
         amountOfRygsten = construction.getConstructionLength() / RYGSTENCOVERS;

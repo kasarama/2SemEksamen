@@ -40,7 +40,7 @@ public class RoofMaterialCalculator {
         return construction.getRoof().getRoofMaterialList();
     }
 
-    public ArrayList<Material> flatRoofMaterialsInsert(String trapezColourAnName) throws LoginSampleException {
+    public ArrayList<Material> flatRoofMaterialsInsert(String trapezColourAnName) throws LoginSampleException { //TODO - TEST
         materialsList = new ArrayList();
         material = null;
 
@@ -57,6 +57,7 @@ public class RoofMaterialCalculator {
         material.setComment("tagplader monteres på spær");
 
         materialsList.add(material);
+        material = new Material();
 
         material = LogicFacade.getMaterialBySizeName(T300ROOFPLADELENGTH, "");
         material.setName(trapezColourAnName);
@@ -71,7 +72,7 @@ public class RoofMaterialCalculator {
 
         materialsList.add(material);
         return materialsList;
-
+        //TODO - Test hvor mange elementer er på listen
 
     }
 
