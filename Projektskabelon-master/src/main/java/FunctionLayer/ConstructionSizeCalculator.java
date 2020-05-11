@@ -39,7 +39,7 @@ public class ConstructionSizeCalculator {
     //counts how much the roof drops/raises on the given distance in mm
     public static double raising(int angle, int distance){
 
-        return  angle*distance/CMPERM;
+        return (double) angle* (double) distance/ (double)CMPERM;
     }
 
     // fills up the array with heights of posts on the one side of the shed or carport starting from the shortest one

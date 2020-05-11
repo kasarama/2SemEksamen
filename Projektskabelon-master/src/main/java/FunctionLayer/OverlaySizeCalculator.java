@@ -17,7 +17,6 @@ public class OverlaySizeCalculator {
     final private static int OVERLAP = 10;
 
 
-
     //..............calculates spaer needed for one of the chosen wall...........//
 
     public static int spaerOnOneWall(Wall wall) {
@@ -32,6 +31,7 @@ public class OverlaySizeCalculator {
         }
         return amount;
     }
+
 
     //..............calculates spaer længth for one of the chosen wall...........//
     public static int spaerLengthOneWall(Wall wall) {
@@ -102,14 +102,15 @@ public class OverlaySizeCalculator {
     public static double oneWallArea(Wall wall) {
         //to be able to calculate the needed amount of some material for overlay, we need to know the area of
         // surface that's going to be covered
-        double area = -1;
+        long area = -1;
         /*Trapez area: (a+b)/2*h
         a=minHeight, b= maxHeight, h= length
          */
-        int maxHeight = (int) (wall.getMinHeight() + ConstructionSizeCalculator.raising(wall.getRaising(), wall.getLength()));
-        area = ((wall.getMinHeight() + maxHeight)) / 2 * wall.getLength();
 
-        return area / MMPERM / MMPERM;
+        int maxHeight = (int) (wall.getMinHeight() + ConstructionSizeCalculator.raising(wall.getRaising(), wall.getLength()));
+        area = (long) ((((double)wall.getMinHeight() +(double) maxHeight)) / 2.0 * (double)wall.getLength());
+        System.out.println(wall.getSide()+" area: "+area+ "min and max height: "+wall.getMinHeight()+" , "+maxHeight);
+        return area / (double) MMPERM / (double) MMPERM;
     }
 
 
@@ -129,7 +130,6 @@ public class OverlaySizeCalculator {
         ArrayList<Wall> shedWalls = construction.getShed().getWalls();
 
         int backSideindex = -1;
-        int frontSideindex = -1;
 
         for (Wall wall : shedWalls) {
             if (!wall.getSide().equals("front")) {
@@ -160,23 +160,23 @@ public class OverlaySizeCalculator {
         return totalArea;
     }
 
-    public static int overlaySpending(String materialName, double area) throws LoginSampleException {
-        double spending = MaterialMapper.spending(materialName); // m / m^2
+    public static double overlaySpending(String materialName, double area) throws LoginSampleException {
+
+        double spending = MaterialMapper.spending(materialName);
         double needed = 0;
+        if (area==0) {
+            return 0;
+        } else
         if (materialName.equals("HARDIEPLANK 180X3600X8MM")) {
             needed = spending * area; //spending : how many pieces pr squwe meter
         } else {
-            needed = spending * area / LENGTHOFOVERLAYPLANK / MMPERM;
-        }
+            needed = spending * area ;
+                   needed= needed /  ((double)LENGTHOFOVERLAYPLANK /(double) MMPERM);
+            }
 
+        needed = needed + (SECURITYPERCENTAGE * needed); //5 % extra material for cuts
+        return needed;
 
-        needed = needed + SECURITYPERCENTAGE * needed; //5 % extra material for cuts
-
-        if (((needed * 10) % 10) == 0) {
-            return (int) needed;
-        } else {
-            return (int) needed + 1;
-        }
 
     }
 
@@ -204,22 +204,21 @@ public class OverlaySizeCalculator {
             fyrLengthsOneWall.add(fyrLength);
         }
         int width = MaterialMapper.getWidthByName(overlayName);
-        if(overlayName.equals("HARDIEPLANK 180X3600X8MM")){
-            width = width - 2*OVERLAP;
+        if (overlayName.equals("HARDIEPLANK 180X3600X8MM")) {
+            width = width - 2 * OVERLAP;
         } else width = width - OVERLAP;
 
 
         int quantity = 0;
         for (Integer length : fyrLengthsOneWall) {
-            if(length%width==0){
+            if (length % width == 0) {
                 quantity = quantity + length / width;
             } else {
-                quantity = quantity + ((length - (length % width) ) +1) / width;
+                quantity = quantity + ((length - (length % width)) + 1) / width;
             }
         }
         return quantity;
     }
-
 
 
     //wood delivers in chosen length with cuts every 20 cm. Pricing is pr. meter. We order not shorter piece with

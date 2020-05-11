@@ -12,7 +12,6 @@ import java.util.ArrayList;
 public class AddMaterial extends Command {
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        System.out.println("AddMaterial called");
         String status = "Awaiting your action...";
         try {
             if (request.getParameter("addOne")!=null){
@@ -65,7 +64,6 @@ public class AddMaterial extends Command {
                 material.setPicture(picture);
                 material.setSpending(spending);
 
-                System.out.println(material.toString());
                 ListFactory.saveInFile(material);
                 MaterialMapper.addMatDB(material);
                 status="Saving file in DB and materials.txt";

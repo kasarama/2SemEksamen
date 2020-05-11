@@ -15,12 +15,15 @@ public class Construction {
     private double salePrice; //cost pris plus VAT eller + det employee vil tilføje eller give som rabat
     private ArrayList<Wall> walls;
     private String overlay;
+    private ArrayList<String> wallSides;
 
 
 
 
     public Construction() {
         this.fundamentMaterials = new ArrayList<>();
+        this.walls = new ArrayList<>();
+        this.wallSides = new ArrayList<>();
     }
 
     public int getConstructionLength() {
@@ -125,6 +128,19 @@ public class Construction {
 
     public void setOverlay(String overlay) {
         this.overlay = overlay;
+    }
+
+    public ArrayList<String> getWallSides() {
+        return wallSides;
+    }
+
+    public void setWallSides(ArrayList<String> wallSides) {
+        this.wallSides = wallSides;
+    }
+
+    public ArrayList<Wall> getAllWalls() {
+        walls.addAll(shed.getWalls());
+        return walls;
     }
 
     /*@Override
