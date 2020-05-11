@@ -37,6 +37,7 @@ public class Overlay extends Command {
         if (back != null) {
             wallsToCover.add(back);
         }
+        construction.setWallSides(wallsToCover);
 
         int shedDepth = construction.getShedDepth();
         String overlayMSG = "Prøv igen";

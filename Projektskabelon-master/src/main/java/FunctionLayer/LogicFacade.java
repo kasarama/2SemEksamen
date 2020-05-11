@@ -1,5 +1,6 @@
 package FunctionLayer;
 
+import DBAccess.ConstructionMapper;
 import DBAccess.MaterialMapper;
 import DBAccess.UserMapper;
 
@@ -53,5 +54,8 @@ public class LogicFacade {
         return MaterialMapper.getAllOverlays();
     }
 
+    public static void sendNewRequest(Construction construction) throws LoginSampleException {
+        ConstructionMapper.saveNewRequest(construction);
+    }
 }
 

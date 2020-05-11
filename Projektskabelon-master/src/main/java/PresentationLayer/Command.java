@@ -22,6 +22,7 @@ abstract class Command {
         commands.put( "addmaterial", new AddMaterial() );
         commands.put( "overlay", new Overlay() );
         commands.put("drawing", new Drawing());
+        commands.put("sendnewrequest", new SendNewRequest());
 
     }
 
