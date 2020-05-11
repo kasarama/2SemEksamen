@@ -14,7 +14,7 @@ public class FlatRoof extends Command {
     String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException {
 
         HttpSession session = request.getSession();
-        Construction constructionRequest = (Construction) session.getAttribute("carportRequest");
+        Construction constructionRequest = (Construction) session.getAttribute("carportBase");
 
         RoofSizing roofSizing = new RoofSizing(constructionRequest);
         RoofMaterialCalculator rmc = new RoofMaterialCalculator(constructionRequest);
@@ -23,7 +23,7 @@ public class FlatRoof extends Command {
         ArrayList<Material> materialList = rmc.flatRoofMaterialsInsert(materialName);
         constructionRequest.getRoof().setRoofMaterialList(materialList);
 
-        session.setAttribute("carportRequest", constructionRequest);
+        session.setAttribute("carportBase", constructionRequest);
 
 
         //todo læs data fra designeflatroof.jsp og brug dem for t designe fladt tag
