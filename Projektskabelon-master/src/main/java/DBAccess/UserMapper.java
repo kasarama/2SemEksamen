@@ -57,4 +57,26 @@ public class UserMapper {
             throw new LoginSampleException(ex.getMessage());
         }
     }
+
+    public static int getIDbyEmail (String email) throws LoginSampleException {
+        int id=0;
+try {
+    Connection con = Connector.connection();
+    String SQL = "SELECT userID FROM users WHERE email=?";
+    PreparedStatement ps = con.prepareStatement(SQL);
+    ps.setString(1, email);
+    ResultSet rs = ps.executeQuery();
+    if (rs.next()) {
+        id = rs.getInt("userID");
+    } else {
+        throw new LoginSampleException("Vi kunne ikke finde dig i vores database. Kontakt butikken");
+    }
+} catch (Exception ex ){
+    ex.printStackTrace();
+    throw new LoginSampleException(ex.getMessage());
+
+}
+
+        return id;
+    }
 }
