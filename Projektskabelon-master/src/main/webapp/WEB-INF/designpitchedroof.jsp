@@ -26,7 +26,6 @@ request.getServletContext().setAttribute("pitchedMaterialList", Initializer.getP
                 </c:forEach>
             </select>
 
-            <input class="btn btn-primary mt-3" type="submit" value="Videre">
             <br>
             <a class="mt-3 btn btn-dark" href="FrontController?target=redirect&destination=overlay" role="button">Videre til beklædning</a>
         </form>

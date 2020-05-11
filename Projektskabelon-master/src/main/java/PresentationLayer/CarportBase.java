@@ -24,7 +24,6 @@ public class CarportBase extends Command {
         final int POSTWIDTH = 100;
         int shedWidth = 0;
 
-
         Construction constructionBase = new Construction();
 
         constructionBase.setConstructionHeight(constructionHeight);

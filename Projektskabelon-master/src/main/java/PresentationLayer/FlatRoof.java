@@ -13,7 +13,7 @@ public class FlatRoof extends Command {
     String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException {
 
         HttpSession session = request.getSession();
-        Construction constructionRequest = (Construction) session.getAttribute("carportRequest");
+        Construction constructionRequest = (Construction) session.getAttribute("carportBase");
 
 
         int height = Integer.parseInt(request.getParameter("height"));
@@ -29,7 +29,7 @@ public class FlatRoof extends Command {
         constructionRequest.getRoof().setHeight(height);
         constructionRequest.getRoof().setDegree(tilt);
 
-        session.setAttribute("carportRequest", constructionRequest);
+        session.setAttribute("carportBase", constructionRequest);
 
 
         //todo læs data fra designeflatroof.jsp og brug dem for t designe fladt tag
