@@ -15,7 +15,7 @@ public class NewRequest extends Command {
         //todo sletter alle data fra carportRequest som er gemt på session
 
         HttpSession session = request.getSession();
-        session.setAttribute("carportRequest", null);
+        session.setAttribute("carportBase", null);
         return "carportBase";
     }
 }
