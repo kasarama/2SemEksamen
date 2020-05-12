@@ -68,7 +68,6 @@ public class LogicFacade {
     }
 
     public static ArrayList<Order>  ReadOrders(String status) throws LoginSampleException {
-        System.out.println("in Logic Facade");
         return  OrderMapper.ReadAllOrdersByStatus(status);
     }
 

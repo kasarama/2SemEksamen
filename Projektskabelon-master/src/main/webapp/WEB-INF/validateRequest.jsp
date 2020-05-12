@@ -11,39 +11,38 @@
 
 
 <h2> Here comes a form to edit chosen construction</h2>
-orderForValidation
 
 
 <div class="container2">
     <div class="col-md-12">
 
-        <c:set var="con" value="${requestScope.constructionForValidation}"/>
+        <c:set var="order" value="${applicationScope.orderForValidation}"/>
         <c:choose>
-            <c:when test="${con!=null}">
+            <c:when test="${order!=null}">
                 <form name="showedit" action="FrontController" method="POST" class="ml-lg-5 mr-lg-5">
                     <input type="hidden" name="origin" value="validateRequest">
                     <input type="hidden" name="target" value="showedit">
                     <br>
                     <br>
-                    <h2>Ordre nr. ${requestScope.orderForValidation.orderID}</h2>
+                    <h2>Ordre nr. ${order.orderID}</h2>
 
                     <div class="row mt-4">
                         <div class="col-md-6 school-options-dropdown text-center">
 
 
                             <div class="form-group">
-                                <label>Vælg carportens længde i mm - original : ${con.carportLength}</label>
+                                <label>Vælg carportens længde i mm - original : ${order.construction.carportLength}</label>
                                 <input type="number" name="carportLength" class="form-control"
-                                       value=${con.carportLength} min="240" max="7500">
+                                       value=${order.construction.carportLength} min="240" max="7500">
                             </div>
 
                             <div class="form-group">
-                                <label>Vælg carportens bredde i mm - original : ${con.carportWidth}</label>
+                                <label>Vælg carportens bredde i mm - original : ${order.construction.carportWidth}</label>
                                 <input type="number" name="carportWidth" class="form-control"
-                                       value=${con.carportWidth} min="240" max="7500">
+                                       value=${order.construction.carportWidth} min="240" max="7500">
                             </div>
 
-                            <c:set var="shed" value="${con.shed}"/>
+                            <c:set var="shed" value="${order.construction.shed}"/>
                             <c:choose>
                                 <c:when test="${shed.depth!=0}">
                                     <div class="form-group">
@@ -56,11 +55,12 @@ orderForValidation
                                 </c:when>
                             </c:choose>
 
-                            <c:set var="roof" value="${con.roof}"/>
+                            <c:set var="roof" value="${order.construction.roof}"/>
                             <c:choose>
                                 <c:when test="${roof.isPitched}">
                                     <div class="form-group">
                                         <label>Vælg vinkel for tag med ${roof.typeToString()}</label>
+                                        <input type="hidden" name="tilt" value=0>
                                         <input type="number" name="angle" class="form-control"
                                                value=${roof.degree} min="0" max="45">
                                     </div>
@@ -68,11 +68,19 @@ orderForValidation
                                 <c:otherwise>
                                     <div class="form-group">
                                         <label>Vælg rejsning for ${roof.typeToString()} tag</label>
+                                        <input type="hidden" name="angle" value=0>
                                         <input type="number" name="tilt" class="form-control"
                                                value=${roof.tilt} min="3" max="50">
                                     </div>
                                 </c:otherwise>
                             </c:choose>
+
+                            <div class="form-group">
+                                <label>Hvad koster transporten?</label>
+
+                                <input type="number" name="transport" class="form-control"
+                                       value="100" min="100" max="5000">
+                            </div>
 
 
                             <div class="col-md-6 text-center mt-md-4">

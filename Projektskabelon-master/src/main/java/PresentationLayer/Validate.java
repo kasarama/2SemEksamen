@@ -12,10 +12,9 @@ import java.util.ArrayList;
  */
 public class Validate extends Command {
     @Override
-    String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    String execute(HttpServletRequest request, HttpServletResponse response)  {
         int orderID = Integer.parseInt(request.getParameter("orderID"));
         ArrayList<Order> orders = (ArrayList<Order>) request.getServletContext().getAttribute("newRequestsList");
-
 
 
         Order order = new Order();
@@ -23,8 +22,8 @@ public class Validate extends Command {
             if (tmp.getOrderID()==orderID) {
                 order=tmp;
             }
-            request.setAttribute("orderForValidation", order);
-            request.setAttribute("constructionForValidation", order.getConstruction());
+            request.getServletContext().setAttribute("orderForValidation", order);
+            request.getServletContext().setAttribute("constructionForValidation", order.getConstruction());
         }
         return "validateRequest";
     }

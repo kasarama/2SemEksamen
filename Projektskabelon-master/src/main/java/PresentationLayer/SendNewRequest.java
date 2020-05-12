@@ -29,7 +29,7 @@ public class SendNewRequest extends Command {
         session.setAttribute("carportBase", null);
 
         request.setAttribute("newRequestMSG", "Dine forespørgelse er blevet sendt til validering");
-        System.out.println("MSG on request");
+
         return "customerPage";
     }
 }

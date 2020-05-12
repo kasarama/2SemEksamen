@@ -1,6 +1,7 @@
 package PresentationLayer;
 
 import FunctionLayer.Construction;
+import FunctionLayer.LoginSampleException;
 import FunctionLayer.Material;
 import FunctionLayer.OverlayMaterialCalculator;
 
@@ -14,7 +15,7 @@ import java.util.ArrayList;
  */
 public class ItemList  extends Command{
     @Override
-    String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException {
         HttpSession session = request.getSession();
         Construction construction= (Construction) session.getAttribute("carportBase");
 

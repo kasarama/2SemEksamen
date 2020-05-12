@@ -13,7 +13,7 @@ import java.util.ArrayList;
  */
 public class Overlay extends Command {
     @Override
-    String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    String execute(HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession();
         Construction construction = (Construction) session.getAttribute("carportBase");
 

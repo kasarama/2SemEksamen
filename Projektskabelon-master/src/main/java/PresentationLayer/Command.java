@@ -1,7 +1,5 @@
 package PresentationLayer;
 
-import FunctionLayer.UpdateConstruction;
-
 import java.util.HashMap;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -29,6 +27,7 @@ abstract class Command {
         commands.put("showrequests", new ShowRequests());
         commands.put("validate", new Validate());
         commands.put("showedit", new ShowEditedConstruction());
+        commands.put("sendoffer", new SendNewOffer());
 
     }
 
