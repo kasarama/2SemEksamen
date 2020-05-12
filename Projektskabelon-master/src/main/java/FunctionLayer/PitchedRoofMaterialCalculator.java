@@ -178,17 +178,12 @@ public class PitchedRoofMaterialCalculator {
             kFactor = newHeight/tempHeigth;
 
             lenghtOfTriangleGavlShorter = (int) (kFactor * lenghtOfTriangleGavlShorter);
-/*
-            (Math.round(Math.sqrt(Math.pow(lengthOfHalfRoofWidthSurface,
-                    2) * Math.pow(lengthOfHalfRoofWidthSurface, 2) - (2*lengthOfHalfRoofWidthSurface*
-                    lengthOfHalfRoofWidthSurface *Math.toDegrees(Math.cos(roofAngleInTop)))))*/
         }
         if (lenghtOfTriangleGavlShorter !=0 )
         return (int) gavlOverlayPlanksQuantity + 1;
 
         return (int) gavlOverlayPlanksQuantity;
     }
-
 
 
     public int quantityRygsten() {

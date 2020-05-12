@@ -145,7 +145,7 @@ public class MaterialMapper {
 // This class Connects to DB and gets the "Roof material" data from it.
 
     //1. create a method that returns a list of ROOF Materials -  Material = Class from function Layer
-    /*public static List<Material> getAllPitchedRoofMaterials() throws LoginSampleException {
+    public static List<Material> getAllPitchedRoofMaterials() throws LoginSampleException {
         List<Material> materialList = null;
 
         //try-catch block in case an error occurs.
@@ -186,10 +186,10 @@ public class MaterialMapper {
         }
         // return the gotten 'material' data from the DB
         return materialList;
-    }*/
+    }
 
     //Cath version
-    public static List<Material> getAllPitchedRoofMaterials() throws LoginSampleException {
+    public static List<Material> getAllPitchedRoofMaterialsCath() throws LoginSampleException {
         List<Material> materialList = null;
 
         //try-catch block in case an error occurs.
