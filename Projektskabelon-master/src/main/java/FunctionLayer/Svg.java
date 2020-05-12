@@ -12,9 +12,19 @@ public class Svg {
     private StringBuilder svg = new StringBuilder();
 
     private final String headerTemplate = "<svg version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" height=\"%s\" width=\"%s\" viewBox=\"%s\" preserveAspectRatio=\"xMinYMin\">";
-    private final String rectTemplate = "<rect x=\"%d\" y=\"%d\" height=\"%d\" width=\"%d\" style=\"stroke:#000000; fill: #ffffff\" />";
+    private final String rectTemplate = "<rect x=\"%d\" y=\"%d\" height=\"%d\" width=\"%d\" style=\"stroke:black; fill: #ffffff\" />";
     private final String bandTemplate = "<line x1=\"%d\"  y1=\"%d\" x2=\"%d\" y2=\"%d\" style=\"stroke:black; stroke-dasharray: 10 5\"/>";
-
+    private final String arrowLine = "<line x1=\"%d\"  y1=\"%d\" x2=\"%d\" y2=\"%d\" " +
+            "style\"stroke: black; marker-start: url(#beginArrow); marker-end: url(#endArrow);\"/>" +
+            "<text style=\"text-anchor: middle; font-size: 12;\" transform=\"translate(%d,%d) rotate(%d)\">%s</text>";
+    private final String arrowTemplate =
+            "<defs> <maker id=\"beginArrow\" makerWidth=\"12\" makerHeight=\"12\" refX=\"6\" refY=\"6\" orient=\"auto\"" +
+                    "<path d=\"M0,6 L12,0 L12,12 L0,6\" style=\"fill: black\" />" +
+                    "</marker>" +
+                    "<maker id=\"endArrow\" makerWidth=\"12\" makerHeight=\"12\" refX=\"12\" refY=\"6\" orient=\"auto\"" +
+                    "<path d=\"M0,0 L12,6 L0,12 L0,0\" style=\"fill: black\" />" +
+                    "</marker>" +
+            "</defs>" + arrowLine;
     public Svg(int width, int height, String viewbox, int x, int y) {
         this.width = width;
         this.height = height;
@@ -29,7 +39,10 @@ public class Svg {
     }
 
     public void addBand(int x1, int y1, int x2, int y2){
-        svg.append(String.format(bandTemplate, x1, y2, x2, y2));
+        svg.append(String.format(bandTemplate, x1, y1, x2, y2));
+    }
+    public void addArrows(int x1, int y1, int x2, int y2, int trans1, int trans2, int rotate, String text){
+        svg.append(String.format(arrowTemplate, x1, y1, x2, y2, trans1, trans2, rotate, text));
     }
 
     public int getWidth() {

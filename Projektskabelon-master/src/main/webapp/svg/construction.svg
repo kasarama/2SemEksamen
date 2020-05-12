@@ -16,7 +16,7 @@
     <rect x="7" y="570" height="7" width="763"
           style="stroke:black; fill: none"/>
     <!--Krydset-->
-    <line x1="50"  y1="30" x2="600"   y2="570"
+    <line x1="7"  y1="30" x2="600"   y2="570"
           style="stroke:black; stroke-dasharray: 10 5"/>
     <line x1="50"  y1="570" x2="600"   y2="30"
           style="stroke:black; stroke-dasharray: 10 5"/>
@@ -62,26 +62,6 @@
 	marker-end: url(#endArrow);"/>
     <text style="text-anchor: middle; font-size: 20;" transform="translate(-40,300) rotate(-90)">600 cm</text>
 
-    <defs>
-        <marker
-                id="beginArrow"
-                markerWidth="12"
-                markerHeight="12"
-                refX="6"
-                refY="6"
-                orient="auto">
-            <path d="M0,6 L12,0 L12,12 L0,6" style="fill: black;" />
-        </marker>
-        <marker
-                id="endArrow"
-                markerWidth="12"
-                markerHeight="12"
-                refX="12"
-                refY="6"
-                orient="auto">
-            <path d="M0,0 L12,6 L0,12 L0,0 " style="fill: black;" />
-        </marker>
-    </defs>
     <line x1="0"  y1="625" x2="780"   y2="625"
           style="stroke: black;
 	marker-start: url(#beginArrow);

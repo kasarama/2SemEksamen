@@ -25,7 +25,7 @@ public class ConstructionSizeCalculator {
         if(size%MAXPOSTDISTANCE==0){ //
             numberOfPost=size/MAXPOSTDISTANCE+1;
         } else {
-            numberOfPost= ( size - size%MAXPOSTDISTANCE)/MAXPOSTDISTANCE+2; //(750cm -(3*300) =0) 750%300=2 2*300=600 (150????)
+            numberOfPost= (( size - size%MAXPOSTDISTANCE)/MAXPOSTDISTANCE)+2; //(750cm -(3*300) =0) 750%300=2 2*300=600 (150????)
         }
         return numberOfPost;
     }
@@ -265,14 +265,14 @@ public class ConstructionSizeCalculator {
         return spaerLength;
     }
 
-    public int roofSpaerAmount (Construction construction){
+    public static int roofSpaerAmount (Construction construction){
         //todo return number of spaer needed for whole construction length
         //todo in ConstrucionMaterialCalculator implement method that will return  2 Materials of beslag
         // - one for left and one for right with amount of number of spaer and one Material that is the beslag skruer where the amount is roofSpaernumber x2x3x3
 
-        // Der skal være max 500 mm mellem spærne
+        // Der skal være max 550 mm mellem spærne
         int constructionLength = construction.getConstructionLength();
-        double almostSpaerAmount = constructionLength/500.0 +1;
+        double almostSpaerAmount = constructionLength/550.0 +1;
         int spaerAmount = (int) Math.round(almostSpaerAmount);
         return spaerAmount;
     }

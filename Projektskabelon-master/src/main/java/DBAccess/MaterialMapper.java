@@ -232,7 +232,8 @@ public class MaterialMapper {
         try {
 //todo edit the method so it uses parameters and question marks??
             Connection con = Connector.connection();
-            String SQL = "SELECT name, picture, price, color FROM materials LEFT JOIN variations ON materials.materialID=variations.materialID WHERE category='overlayMaterial'";
+            String SQL = "SELECT name, picture, price, color FROM materials LEFT JOIN variations " +
+                    "ON materials.materialID=variations.materialID WHERE category='overlayMaterial'";
             PreparedStatement ps = con.prepareStatement(SQL);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
