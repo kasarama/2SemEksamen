@@ -7,7 +7,7 @@ public abstract class Roof {
     private int length;
     private int width;
     private int degree;
-    ArrayList<Material> tagMaterialList;
+    private ArrayList<Material> roofMaterialList;
     private boolean pitched;
     private int tilt;
 
@@ -18,7 +18,7 @@ public abstract class Roof {
         this.width = width;
         this.degree = degree;
         this.pitched = pitched;
-        tagMaterialList = new ArrayList();
+        roofMaterialList = new ArrayList();
         this.tilt = tilt;
 
     }
@@ -35,8 +35,8 @@ public abstract class Roof {
         return degree;
     }
 
-    public void setTagMaterialList(ArrayList<Material> tagMaterialList) {
-        this.tagMaterialList = tagMaterialList;
+    public void setRoofMaterialList(ArrayList<Material> roofMaterialList) {
+        this.roofMaterialList = roofMaterialList;
     }
 
     public int getLength() {
@@ -59,8 +59,8 @@ public abstract class Roof {
         return degree;
     }
 
-    public ArrayList<Material> getTagMaterialList() {
-        return tagMaterialList;
+    public ArrayList<Material> getRoofMaterialList() {
+        return roofMaterialList;
     }
 
     public void setPitched(boolean pitched) {

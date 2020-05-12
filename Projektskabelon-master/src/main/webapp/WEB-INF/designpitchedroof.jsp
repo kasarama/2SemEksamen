@@ -1,4 +1,9 @@
 <%@ page import="CarportUtil.Initializer" %>
+<%@ page import="static FunctionLayer.RoofSizing.getMINPITCHDEGREEOPTION" %>
+<%@ page import="static FunctionLayer.RoofSizing.getMAXPITCHDEGREEOPTION" %>
+<%@ page import="java.util.Collections" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="FunctionLayer.Material" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@include file="../includes/header.inc"%>
@@ -6,9 +11,18 @@
 <%
 // if i'm the first user on this application, then set the pitchedMaterialList. (else the list already exists)
 if (request.getServletContext().getAttribute("pitchedMaterialList") == null) {
-System.out.println("initializing materiallist");
+    System.out.println("initializing materiallist"); //}
+    request.getServletContext().setAttribute("pitchedMaterialList", Initializer.getPitchedRoofMateriallist());
 }
-request.getServletContext().setAttribute("pitchedMaterialList", Initializer.getPitchedRoofMateriallist());
+
+if (request.getServletContext().getAttribute("MINPITCHDEGREEOPTION") == null) {
+            request.getServletContext().setAttribute("MINPITCHDEGREEOPTION", getMINPITCHDEGREEOPTION());
+        }
+
+if (request.getServletContext().getAttribute("MAXPITCHDEGREEOPTION") == null) {
+        request.getServletContext().setAttribute("MAXPITCHDEGREEOPTION", getMAXPITCHDEGREEOPTION());
+    }
+
 %>
 
 <div class="container2">
@@ -25,12 +39,22 @@ request.getServletContext().setAttribute("pitchedMaterialList", Initializer.getP
                     <option value="${roofMaterial.id}">${roofMaterial.name}</option>
                 </c:forEach>
             </select>
+        <!--- </form> --->
 
-            <input class="btn btn-primary mt-3" type="submit" value="Videre">
             <br>
-            <a class="mt-3 btn btn-dark" href="FrontController?target=redirect&destination=overlay" role="button">Videre til beklædning</a>
+            <input type="hidden" name="target" value="designflatroof">
+            <label>Vælg hældningsgrad:</label>
+            <br>
+            <select name="tiltOptions" class="form-control" >
+                <c:forEach var="degree" begin="${applicationScope.MINPITCHDEGREEOPTION}" end="${applicationScope.MAXPITCHDEGREEOPTION}" step="5">
+                    <option value="${degree}">${degree}</option>
+                </c:forEach>
+            </select>
         </form>
         <!-- End of form -->
+        <input class="btn btn-primary mt-3" type="submit" value="Videre">
+        <br>
+        <a class="mt-3 btn btn-dark" href="FrontController?target=redirect&destination=overlay" role="button">Videre til beklædning</a>
 
         <form name="startOver" action="FrontController" method="POST">
             <input type="hidden" name="target" value="newrequest">

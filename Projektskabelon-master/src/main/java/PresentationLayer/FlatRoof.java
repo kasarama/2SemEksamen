@@ -1,12 +1,13 @@
 package PresentationLayer;
 
-import FunctionLayer.Construction;
-import FunctionLayer.LoginSampleException;
-import FunctionLayer.RoofSizing;
+import FunctionLayer.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+
+import static DBAccess.MaterialMapper.getNameFromMaterialID;
 
 public class FlatRoof extends Command {
     @Override
@@ -15,26 +16,19 @@ public class FlatRoof extends Command {
         HttpSession session = request.getSession();
         Construction constructionRequest = (Construction) session.getAttribute("carportBase");
 
-
-        int height = Integer.parseInt(request.getParameter("height"));
-        int tilt = Integer.parseInt(request.getParameter("tilt"));
-
         RoofSizing roofSizing = new RoofSizing(constructionRequest);
-
-        int[] tiltOptions = roofSizing.pitchDegreesOptionsForCostumerToChoose();
-
-        request.setAttribute("height", height);
-        request.setAttribute("tilt", tilt);
-
-        constructionRequest.getRoof().setHeight(height);
-        constructionRequest.getRoof().setDegree(tilt);
+        RoofMaterialCalculator rmc = new RoofMaterialCalculator(constructionRequest);
+        int colourOfTrapezPladesID = Integer.parseInt(request.getParameter("roofMaterial"));
+        String materialName = LogicFacade.getANameFromMaterialID(colourOfTrapezPladesID);
+        ArrayList<Material> materialList = rmc.flatRoofMaterialsInsert(materialName);
+        constructionRequest.getRoof().setRoofMaterialList(materialList);
 
         session.setAttribute("carportBase", constructionRequest);
 
 
         //todo læs data fra designeflatroof.jsp og brug dem for t designe fladt tag
 
-        return "designflatroof";
+        return "overlay";
 
     }
 }

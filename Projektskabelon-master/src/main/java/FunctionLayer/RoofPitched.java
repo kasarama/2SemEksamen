@@ -4,24 +4,24 @@ import java.util.ArrayList;
 
 public class RoofPitched extends Roof {
 
-    private ArrayList<Material> tagMaterialList;
+    private ArrayList<Material> roofMaterialList;
 
 
 
     public RoofPitched(int height, int length, int width, int degree) {
         super(height, length, width, degree, true, 0);
-        tagMaterialList = new ArrayList();
+        roofMaterialList = new ArrayList();
     }
 
 
     @Override
-    public ArrayList<Material> getTagMaterialList() {
-        return tagMaterialList;
+    public ArrayList<Material> getRoofMaterialList() {
+        return roofMaterialList;
     }
 
     @Override
-    public void setTagMaterialList(ArrayList<Material> tagMaterialList) {
-        this.tagMaterialList = tagMaterialList;
+    public void setRoofMaterialList(ArrayList<Material> roofMaterialList) {
+        this.roofMaterialList = roofMaterialList;
     }
 
 
