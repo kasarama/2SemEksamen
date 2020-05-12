@@ -14,7 +14,7 @@ public class PitchedRoofMaterialCalculator {
 
     ConstructionSizeCalculator constructionSizeCalculator;
     Construction construction;
-    Roof roof = construction.getRoof();
+    Roof roof;
 
     //C
     RoofSizing roofSizing;
@@ -49,6 +49,7 @@ public class PitchedRoofMaterialCalculator {
     public PitchedRoofMaterialCalculator(Construction construction) {
         this.construction = construction;
         roofSizing = new RoofSizing(construction);
+        roof = construction.getRoof();
     }
 
     public int amoutOfRygstenBeslagCalculated() {
@@ -58,7 +59,7 @@ public class PitchedRoofMaterialCalculator {
 
     public int amountOfTagsten(){
         int tagstenHalfePitchedRoof = 0;
-        //Vi trækker ikke tagestenbredde fra i taget længde i for loopet fordi vi vil have det hele antal + en hvis
+        //Vi trækker ikke en tagstenbredde fra i tagets længde i for-loopet fordi vi vil have det hele antal + en hvis
         // der er en rest
         for (int i = 0; i < roofSizing.roofWidthSurface()- LÆGTESTENDISTANCE; i= i + LÆGTESTENDISTANCE) {
             for (int j = 0; j < roofSizing.roofLengthSurface(); j = j + tagstenBredde) {
@@ -146,7 +147,49 @@ public class PitchedRoofMaterialCalculator {
         return spærFullQuatityOfPlanks;
     }
 
-    //TODO metode til gavl (trekant under tag)
+    public int gavlOverlayQuantity(int overlayPlankWidthKonstant, int overlayPlankLenghtAvalible){
+        int gavlOverlayPlanksQuantity = 0;
+        int lengthOfTriangleGavl = construction.getCarportWidth();
+        int lenghtOfTriangleGavlShorter = construction.getCarportWidth();
+        int restTotal;
+        int restUseable = 1;
+        int roofHeight = construction.getRoof().getHeight();
+        double newHeight = construction.getRoof().getHeight();
+        int roofAngleInTop = (construction.getRoof().getDegree())*2;
+        int lengthOfHalfRoofWidthSurface = roofSizing.roofWidthSurface();
+        int overlayPlankWidth;
+        double kFactor;
+        double tempHeigth;
+
+        for (int i = 0; i < roofHeight-1; i = i + overlayPlankWidth) {
+            overlayPlankWidth = overlayPlankWidthKonstant;
+            gavlOverlayPlanksQuantity++;
+            restTotal = overlayPlankLenghtAvalible % lenghtOfTriangleGavlShorter;
+            if ( restTotal != 0){
+                restUseable = overlayPlankLenghtAvalible/restTotal;
+                gavlOverlayPlanksQuantity ++;
+                overlayPlankWidth = overlayPlankWidth * restUseable;
+            }
+            tempHeigth = newHeight;
+            if (overlayPlankWidth<newHeight)
+            newHeight = newHeight - overlayPlankWidth;
+            else
+                newHeight = overlayPlankWidth - newHeight;
+            kFactor = newHeight/tempHeigth;
+
+            lenghtOfTriangleGavlShorter = (int) (kFactor * lenghtOfTriangleGavlShorter);
+/*
+            (Math.round(Math.sqrt(Math.pow(lengthOfHalfRoofWidthSurface,
+                    2) * Math.pow(lengthOfHalfRoofWidthSurface, 2) - (2*lengthOfHalfRoofWidthSurface*
+                    lengthOfHalfRoofWidthSurface *Math.toDegrees(Math.cos(roofAngleInTop)))))*/
+        }
+        if (lenghtOfTriangleGavlShorter !=0 )
+        return (int) gavlOverlayPlanksQuantity + 1;
+
+        return (int) gavlOverlayPlanksQuantity;
+    }
+
+
 
     public int quantityRygsten() {
         amountOfRygsten = construction.getConstructionLength() / RYGSTENCOVERS;

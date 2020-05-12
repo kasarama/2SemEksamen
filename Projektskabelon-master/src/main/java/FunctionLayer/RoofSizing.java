@@ -31,7 +31,7 @@ public class RoofSizing {
             roofwidth= construction.getConstructionWidth();
         return roofwidth;
     }
-    //Hjælpemetode for længde af tag afhægnig af type
+    //Hjælpemetode for længde af tag afhængnig af type
     public int roofLengthSurface(){
         int roofLength;
         if (construction.getRoof().getIsPitched())
@@ -45,7 +45,8 @@ public class RoofSizing {
     //Areal hjælpeberegning af længde af fladt tags overflade
     public int flatRoofCalcutatedLength() {
         //Vi har fået beskrevet af productowner at fladt tag skal have en fast hældning
-        roofHeigth = roofHeight(false, construction.getConstructionLength() , construction.getConstructionWidth());
+        roofHeigth = roofHeight(false, construction.getConstructionLength() ,
+                construction.getConstructionWidth());
         roofLength = (int) Math.hypot((double) construction.getConstructionLength(), (double) roofHeigth);
         return roofLength;
     }
@@ -54,7 +55,8 @@ public class RoofSizing {
     public int pitchedRoofCalcutatedWidth(){
         //Vi har antaget at tagryggen går fra midt front til midt bagpå (parallelt med construction.length)
         int halfRaftWidthForPitchedRoof = construction.getConstructionWidth()/2;
-        int roofHalfWidth = (int) (halfRaftWidthForPitchedRoof/(Math.cos(Math.toRadians(construction.getRoof().getDegree()))));
+        int roofHalfWidth = (int) (halfRaftWidthForPitchedRoof/(Math.cos(
+                Math.toRadians(construction.getRoof().getDegree()))));
         return roofHalfWidth;
     }
 

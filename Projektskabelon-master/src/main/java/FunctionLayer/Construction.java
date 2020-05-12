@@ -17,9 +17,6 @@ public class Construction {
     private String overlay;
     private ArrayList<String> wallSides;
 
-
-
-
     public Construction() {
         this.fundamentMaterials = new ArrayList<>();
         this.walls = new ArrayList<>();

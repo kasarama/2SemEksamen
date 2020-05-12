@@ -33,6 +33,7 @@ public class ConstructionMaterialCalculator {
         // Stolper
         //TODO: sæt stolper i den rigtige størrelse ind i woodMaterials listen
         //Beregning er uden stolper til skur
+        //TODO - 90cm skal tilføjes pr nedsat stolpe
         double constructionMinHeight = construction.getConstructionHeight() - construction.getRoof().getHeight();
         ArrayList<Integer> actualHeightsOfPostsForConstruction = new ArrayList();
 
@@ -48,7 +49,6 @@ public class ConstructionMaterialCalculator {
         }
 
         ArrayList<Integer> postsMaterialsAvalibleLenghts = getLengthForMaterials("TRYKIMPRENERET STOLPE");
-
         ArrayList<Material> tempPostsMaterails = new ArrayList<>();
         int restOfAvalibleMaterial = 0;
         int countPosts = 1;
@@ -80,6 +80,7 @@ public class ConstructionMaterialCalculator {
                 tempPostsMaterails.add(post);
             }
         }
+        System.out.println(tempPostsMaterails.toString());
         woodMaterials.addAll(tempPostsMaterails);
 
         // Rem
