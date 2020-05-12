@@ -21,7 +21,6 @@ public class ConstructionMaterialCalculatorTest {
         construction.setConstructionLength(500);
         construction.setCarportLength(500);
 
-
     }
 
 // Denne test virker ikke selvom jeg får det rigtige resultat
