@@ -60,7 +60,7 @@
           style="stroke: black;
 	marker-start: url(#beginArrow);
 	marker-end: url(#endArrow);"/>
-    <text style="text-anchor: middle; font-size: 20;" transform="translate(-40,300) rotate(-90)">600 cm</text>
+    <text style="text-anchor: middle; font-size: 20;" transform="translate(-30,300) rotate(-90)">600 cm</text>
 
     <line x1="0"  y1="625" x2="780"   y2="625"
           style="stroke: black;
