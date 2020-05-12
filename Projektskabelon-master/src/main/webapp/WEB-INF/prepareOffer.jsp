@@ -19,14 +19,14 @@ todo Return the same page with actial data ??
 
 
 <div class="container2">
-    <div class="col-md-12">
+    <div class="col-md-6">
 
 
         <c:set var="order" value="${applicationScope.orderForValidation}"/>
         <c:choose>
             <c:when test="${order!=null}">
                 <form name="sendoffer" action="FrontController" method="POST" class="ml-lg-5 mr-lg-5">
-                    <input type="hidden" name="origin" value="newOffer">
+                    <input type="hidden" name="origin" value="prepareOffer">
                     <input type="hidden" name="target" value="sendoffer">
                     <br>
                     <br>
@@ -52,19 +52,20 @@ todo Return the same page with actial data ??
 
 
                             <div class="form-group">
-                                <label>Salgspris - original : ${order.coverage}</label>
+                                <label>Dækningsgrad - original : ${order.coverage}</label>
                                 <input type="number" step="0.01" name="coverage" class="form-control"
                                        value=${order.coverage} min="0">
                             </div>
 
 
                             <div class="col-md-6 text-center mt-md-4">
-                                <input class="btn btn-primary" type="submit" name="byPrice" value="Gem pris"
+                                <input class="btn btn-dark mt-3" type="submit" name="byPrice" value="Gem pris"
                                        role="button">
                             </div>
 
                             <div class="col-md-6 text-center mt-md-4">
-                                <input class="btn btn-primary" type="submit" name="byCoverage" value="Gem dækningsgrad"
+                                <input class="btn btn-dark mt-3" type="submit" name="byCoverage"
+                                       value="Gem dækningsgrad"
                                        role="button">
                             </div>
 
@@ -74,6 +75,35 @@ todo Return the same page with actial data ??
             </c:when>
         </c:choose>
     </div>
+
+    <div class="col-md-6">
+
+        <form name="itemList" action="FrontController" method="POST" class="ml-lg-5 mr-lg-5">
+            <input type="hidden" name="origin" value="prepareOffer">
+            <input type="hidden" name="target" value="itemlist">
+            <div class="col-md-6 text-center mt-md-4">
+                <input class="btn btn-dark mt-3" type="submit" name="itemlist" value="Vis Stykliste"
+                       role="button">
+            </div>
+        </form>
+    </div>
+
+
+
+    <div class="col-md-6">
+
+        <form name="drawing" action="FrontController" method="POST" class="ml-lg-5 mr-lg-5">
+            <input type="hidden" name="origin" value="prepareOffer">
+            <input type="hidden" name="target" value="drawing">
+            <div class="col-md-6 text-center mt-md-4">
+                <input class="btn btn-dark mt-3" type="submit" name="drawing" value="Tegning"
+                       role="button">
+            </div>
+        </form>
+    </div>
+
+
+
 </div>
 
 

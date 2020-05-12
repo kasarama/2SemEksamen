@@ -200,4 +200,8 @@ public class OrderMapper {
         }
 
     }
+
+    public static void saveNewOffer(Order order) {
+        //todo update order and orderdetails in DB
+    }
 }

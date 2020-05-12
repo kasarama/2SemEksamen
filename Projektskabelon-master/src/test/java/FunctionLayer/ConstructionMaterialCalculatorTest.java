@@ -17,8 +17,8 @@ public class ConstructionMaterialCalculatorTest {
     public void setUp() throws Exception {
         Shed shed = new Shed((construction.getCarportWidth()/2),0,"left");
         construction.setShed(shed);
-        construction.setConstructionWidth(450);
-        construction.setConstructionLength(500);
+        construction.setConstructionWidth();
+        construction.setConstructionLength();
         construction.setCarportLength(500);
     }
 

@@ -17,6 +17,7 @@ public class Construction {
     private String overlay;
     private ArrayList<String> wallSides;
     private String color;
+    final private int POSTWIDTH = 100;
 
     public Construction(int carportWidth, int carportLength, int constructionLength, int constructionWidth,
                         Shed shed, Roof roof, int constructionHeight, double cost, double salePrice,
@@ -45,16 +46,19 @@ public class Construction {
         return constructionLength;
     }
 
-    public void setConstructionLength(int constructionLength) {
-        this.constructionLength = constructionLength;
+    public void setConstructionLength() {
+        if(this.shed.getDepth()==0){
+            this.constructionLength=this.carportLength;
+        } else
+        this.constructionLength = this.carportLength+this.shed.getDepth()-POSTWIDTH;
     }
 
     public int getConstructionWidth() {
         return constructionWidth;
     }
 
-    public void setConstructionWidth(int constructionWidth) {
-        this.constructionWidth = constructionWidth;
+    public void setConstructionWidth() {
+        this.constructionWidth = this.carportWidth+150;
     }
 
     public void setFundamentMaterials(ArrayList<Material> fundamentMaterials) {

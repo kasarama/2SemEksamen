@@ -17,7 +17,8 @@
         <h2>Stykliste for ordre nr. ${requestScope.orderForValidation.orderID}</h2>
         <br>
 
-<!-- todo juster tables  so they contain needed data -->
+<!-- todo adjust tables  so they contain needed data
+todo should sho material.availablesize-->
         <br>
         <br>
         <a href="FrontController?target=redirect&destination=newOffer">tilbage til Ordre detaljer</a>

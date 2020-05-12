@@ -2,10 +2,8 @@ package PresentationLayer;
 
 import FunctionLayer.*;
 
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.net.Inet4Address;
 import java.util.ArrayList;
 
 public class ShowEditedConstruction extends Command {
@@ -40,7 +38,7 @@ public class ShowEditedConstruction extends Command {
 
 
         try {
-            order = UpdateOrder.updateOrderData(order);
+            order = LogicFacade.setMaterialsForOrder(order);
         } catch (LoginSampleException e) {
             e.printStackTrace();
             throw new LoginSampleException(e.getMessage());
@@ -49,6 +47,6 @@ public class ShowEditedConstruction extends Command {
 
         request.getServletContext().setAttribute("orderForValidation", order);
 
-        return "newOffer";
+        return "prepareOffer";
     }
 }

@@ -7,7 +7,7 @@ import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
 
 public class RoofMaterialCalculatorTest {
-
+/*
  //For fladt tag
     @Test
     public void quantityOfT600ForRoofFlatRoof() {
@@ -110,7 +110,7 @@ public class RoofMaterialCalculatorTest {
         //Assert
         assertEquals(expected,actual);
     }
-
+*/
     /*//For tag med rejsning
     @Test
     public void quantityOfT600ForRoofPitchedRoofTest() {
