@@ -16,9 +16,24 @@ public class Construction {
     private ArrayList<Wall> walls;
     private String overlay;
     private ArrayList<String> wallSides;
+    private String color;
 
-
-
+    public Construction(int carportWidth, int carportLength, int constructionLength, int constructionWidth,
+                        Shed shed, Roof roof, int constructionHeight, double cost, double salePrice,
+                        String overlay, ArrayList<String> wallSides, String color) {
+        this.carportWidth = carportWidth;
+        this.carportLength = carportLength;
+        this.constructionLength = constructionLength;
+        this.constructionWidth = constructionWidth;
+        this.shed = shed;
+        this.roof = roof;
+        this.constructionHeight = constructionHeight;
+        this.cost = cost;
+        this.salePrice = salePrice;
+        this.overlay = overlay;
+        this.wallSides = wallSides;
+        this.color = color;
+    }
 
     public Construction() {
         this.fundamentMaterials = new ArrayList<>();
@@ -46,7 +61,7 @@ public class Construction {
         this.fundamentMaterials = fundamentMaterials;
     }
 
-    public void addConstructionMaterial (Material material){
+    public void addConstructionMaterial(Material material) {
         fundamentMaterials.add(material);
     }
 
@@ -128,6 +143,14 @@ public class Construction {
 
     public void setOverlay(String overlay) {
         this.overlay = overlay;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
     }
 
     public ArrayList<String> getWallSides() {

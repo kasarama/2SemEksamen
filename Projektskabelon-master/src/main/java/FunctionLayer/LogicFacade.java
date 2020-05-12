@@ -4,6 +4,7 @@ import DBAccess.OrderMapper;
 import DBAccess.MaterialMapper;
 import DBAccess.UserMapper;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -59,16 +60,17 @@ public class LogicFacade {
         Date nowDate = new Date();
         long timestamp = nowDate.getTime();
 
-                /* To recreate date later on:
-
-                Date otherDate = new Date(timestamp);
-                */
-
         order.setTimestamp(timestamp);
         order.setStatus("newrequest");
         order.setSalePrice(0);
         order.setCost(0);
         OrderMapper.saveNewRequest(order);
     }
+
+    public static ArrayList<Order>  ReadOrders(String status) throws LoginSampleException {
+        System.out.println("in Logic Facade");
+        return  OrderMapper.ReadAllOrdersByStatus(status);
+    }
+
 }
 

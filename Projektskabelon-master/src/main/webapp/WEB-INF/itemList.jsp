@@ -112,9 +112,8 @@
             </c:when>
         </c:choose>
 
-
-
     </div>
+</div>
 <!-- Container -->
 
 <%@include file="../includes/footer.inc" %>

@@ -15,7 +15,7 @@ abstract class Command {
         commands.put( "redirect", new Redirect() );
         commands.put( "designflatroof", new FlatRoof() );
         commands.put( "designpitchedroof", new PitchedRoof() );
-        commands.put( "newrequest", new NewRequest() );
+        commands.put( "newrequest", new StartRequestOver() );
         commands.put( "findmaterial", new FindMaterial() );
         commands.put("materiale", new Materials());
         commands.put( "carportbase", new CarportBase() );
@@ -24,6 +24,8 @@ abstract class Command {
         commands.put("drawing", new Drawing());
         commands.put("sendnewrequest", new SendNewRequest());
         commands.put("itemlist", new ItemList());
+        commands.put("showrequests", new ShowRequests());
+        commands.put("validate", new Validate());
 
     }
 

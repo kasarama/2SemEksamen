@@ -1,5 +1,7 @@
 package FunctionLayer;
 
+import java.util.Date;
+
 public class Order {
     private Construction construction;
     private int orderID;
@@ -9,9 +11,21 @@ public class Order {
     private String status;
     private double cost;
     private double salePrice;
+    private Date date;
 
 
     public Order() {
+    }
+
+    public Order(Construction construction, int orderID, int customerID, String email, long timestamp, String status, double cost, double salePrice) {
+        this.construction = construction;
+        this.orderID = orderID;
+        this.customerID = customerID;
+        this.email = email;
+        this.timestamp = timestamp;
+        this.status = status;
+        this.cost = cost;
+        this.salePrice = salePrice;
     }
 
     public Construction getConstruction() {
@@ -68,6 +82,14 @@ public class Order {
 
     public void setSalePrice(double salePrice) {
         this.salePrice = salePrice;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 
     public String getEmail() {
