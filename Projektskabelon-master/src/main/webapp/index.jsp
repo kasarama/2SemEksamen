@@ -23,4 +23,6 @@
 
 <a href="FrontController?target=redirect&destination=addmaterial">Add Material</a>
 <br>
+<a href="FrontController?target=redirect&destination=drawing">Tegning</a>
+<br>
 <a href="FrontController?target=drawing">See drawing</a>

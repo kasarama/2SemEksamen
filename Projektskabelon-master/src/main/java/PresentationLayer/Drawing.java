@@ -11,18 +11,19 @@ public class Drawing extends Command{
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
         Construction con = new Construction();
-        //con.setConstructionLength(4200);
-        //con.setConstructionWidth(3000);
+        con.setConstructionLength(7800);
+        con.setConstructionWidth(6000);
 
         int width = (con.getConstructionLength()/10);
+        System.out.println("Test 1");
         int height = (con.getConstructionWidth()/10);
-        
+        System.out.println("Test 2");
         // Grundet tegningens størrelses, deles width og height med 2 så tegningen ikke bliver for stor
         if (width>500 || height>500){
             width = width/2;
             height = height/2;
         }
-
+        System.out.println("Test 3");
         String viewBox2 = "-50, -10, " + (width+100) + ", " + (height+50);
         Svg svg = new Svg(width+100, height+50, viewBox2, 0, 0);
 
@@ -73,7 +74,13 @@ public class Drawing extends Command{
         svg.addArrows(-25, 0, -25, height, -35, height/2, -90, text1);
         svg.addArrows(0, height+25, width, height+25, width/2, height+40, 0, text2);
 
+        // Hvis taget er pitched:
+        if (con.getRoof().getIsPitched()){
+            svg.addRect(0,height/2,5,width);
+        }
+
         request.setAttribute("svgdrawing", svg.toString());
+        System.out.println("Test 210");
         return "drawing";
     }
 }
