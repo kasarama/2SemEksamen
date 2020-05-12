@@ -111,11 +111,7 @@
             <input class="btn btn-primary mt-3" type="submit" name="svgSketch" value="See Caport tegning?">
         </form>
 
-        <form name="itemlist" action="FrontController" method="POST">
-            <input type="hidden" name="target" value="itemlist">
-            <input type="hidden" name="origin" value="customerChoiceResult">
-            <input class="mt-3 mb-4 btn btn-outline-dark" type="submit" name="showitemlist" value="Item List">
-        </form>
+
 
 
 

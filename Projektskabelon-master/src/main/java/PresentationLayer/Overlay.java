@@ -70,9 +70,10 @@ public class Overlay extends Command {
             } else {
                 construction.setOverlay(overlayName);
                 construction.setColor(color);
+                construction.setWallSides(wallsToCover);
                 construction.setWalls(WallBuilder.createCarportWalls(construction, wallsToCover));
-                ovarlayMaterialList = OverlayMaterialCalculator.allOverlayMaterialList(construction, overlayName);
-                request.setAttribute("ovarlayMaterialList", ovarlayMaterialList);
+                //OverlayMaterialList(construction, overlayName);
+                //request.setAttribute("ovarlayMaterialList", ovarlayMaterialList);
                 return targetPage;
             }
         } else
@@ -83,8 +84,8 @@ public class Overlay extends Command {
             } else {
                 construction.setOverlay(overlayName);
                 construction.setColor(color);
-                ovarlayMaterialList = OverlayMaterialCalculator.allOverlayMaterialList(construction, overlayName);
-                request.setAttribute("ovarlayMaterialList", ovarlayMaterialList);
+                //OverlayMaterialList(construction, overlayName);
+                //request.setAttribute("ovarlayMaterialList", ovarlayMaterialList);
                 return targetPage;
             }
 
@@ -96,8 +97,8 @@ public class Overlay extends Command {
                 construction.setOverlay(overlayName);
                 construction.setColor(color);
                 construction.setWalls(WallBuilder.createCarportWalls(construction, wallsToCover));
-                ovarlayMaterialList = OverlayMaterialCalculator.allOverlayMaterialList(construction, overlayName);
-                request.setAttribute("ovarlayMaterialList", ovarlayMaterialList);
+                //OverlayMaterialList(construction, overlayName);
+                //request.setAttribute("ovarlayMaterialList", ovarlayMaterialList);
                 return targetPage;
             }
 

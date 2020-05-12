@@ -12,6 +12,8 @@
 </head>
 <body style="background-color: lawngreen">
     <h1>Drawing page</h1>
+
+
     ${requestScope.svgFromAbove}
 <br>
 <br>

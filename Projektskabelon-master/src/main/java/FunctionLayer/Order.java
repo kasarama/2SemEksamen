@@ -12,6 +12,8 @@ public class Order {
     private double cost;
     private double salePrice;
     private Date date;
+    private double coverage;
+    private double transport;
 
 
     public Order() {
@@ -50,6 +52,14 @@ public class Order {
 
     public void setCustomerID(int customerID) {
         this.customerID = customerID;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public long getTimestamp() {
@@ -92,12 +102,24 @@ public class Order {
         this.date = date;
     }
 
-    public String getEmail() {
-        return email;
+    public double getCoverage() {
+        return coverage;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setCoverage() {
+        this.coverage = (this.salePrice - this.transport)/this.salePrice*100;
+    }
+
+    public double getTransport() {
+        return transport;
+    }
+
+    public void setTransport(double transport) {
+        this.transport = transport;
+    }
+
+    public String coverageToString() {
+       return String.format("%.2",this.coverage);
     }
 }
 

@@ -245,7 +245,7 @@ public class MaterialMapper {
                 material.setPicture(picture);
                 material.setPrice(price);
                 if (color == null) {
-                    color = "";
+                    color = "standard";
                 }
                 material.setColor(color);
 

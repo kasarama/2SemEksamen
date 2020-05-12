@@ -157,6 +157,7 @@ public class OrderMapper {
                 String statusDB = rs.getString(24);
                 double cost = rs.getDouble(25);
                 double salePrice = rs.getDouble(26);
+                double transport = rs.getDouble(27);
 
 
                 Shed shed = new Shed(shedWidth, shedDepth, shedSide);
@@ -188,6 +189,7 @@ public class OrderMapper {
                 Order order = new Order(construction, orderID, userID, email, date, status, cost, salePrice);
                 Date otherDate = new Date(date);
                 order.setDate(otherDate);
+                order.setTransport(transport);
                 orders.add(order);
 
             }

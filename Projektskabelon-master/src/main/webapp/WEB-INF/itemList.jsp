@@ -14,69 +14,68 @@
     <div class="col-md-12">
         <br>
         <br>
-    <h2>Din construction</h2>
-    <br>
+        <h2>Stykliste for ordre nr. ${requestScope.orderForValidation.orderID}</h2>
+        <br>
 
-
-    <br>
-    <br>
-
-
-
-    <br>
-
-    <table class="table table-striped ">
-        <thead>
-        <tr class="tr1">
-            <th>Construction</th>
-            <th>Længde (cm)</th>
-            <th>Antal</th>
-            <th>Enhed</th>
-            <th>Note</th>
-        </tr>
-        </thead>
-        <tbody>
-
-
-        <c:forEach var="material" items="${sessionScope.carportBase.fundamentMaterials}">
-            <tr class="tr2">
-                <td>${material.name}</td>
-                <td>${material.amount}</td>
-                <td>${material.unit}</td>
-                <td>${material.comment}</td>
-            </tr>
-        </c:forEach>
-
-        </tbody>
-    </table>
+<!-- todo juster tables  so they contain needed data -->
+        <br>
+        <br>
+        <a href="FrontController?target=redirect&destination=newOffer">tilbage til Ordre detaljer</a>
 
         <br>
 
-    <table class="table table-striped ">
-        <thead>
-        <tr class="tr1">
-            <th>Tag</th>
-            <th>Længde (cm)</th>
-            <th>Antal</th>
-            <th>Enhed</th>
-            <th>Note</th>
-        </tr>
-        </thead>
-        <tbody>
-
-
-        <c:forEach var="material" items="${sessionScope.roofList}">
-            <tr class="tr2">
-                <td>${material.name}</td>
-                <td>${material.size}</td>
-                <td>${material.antal}</td>
-                <td>${material.unit}</td>
-                <td>${material.comment}</td>
+        <table class="table table-striped ">
+            <thead>
+            <tr class="tr1">
+                <th>Construction</th>
+                <th>Længde (cm)</th>
+                <th>Antal</th>
+                <th>Enhed</th>
+                <th>Note</th>
             </tr>
-        </c:forEach>
+            </thead>
+            <tbody>
 
-        </tbody>
-    </table>
+
+            <c:forEach var="material" items="${requestScope.constructionMaterials}">
+                <tr class="tr2">
+                    <td>${material.name}</td>
+                    <td>${material.amount}</td>
+                    <td>${material.unit}</td>
+                    <td>${material.comment}</td>
+                </tr>
+            </c:forEach>
+
+            </tbody>
+        </table>
+
+        <br>
+
+        <table class="table table-striped ">
+            <thead>
+            <tr class="tr1">
+                <th>Tag</th>
+                <th>Længde (cm)</th>
+                <th>Antal</th>
+                <th>Enhed</th>
+                <th>Note</th>
+            </tr>
+            </thead>
+            <tbody>
+
+
+            <c:forEach var="material" items="${requestScope.roofMaterials}">
+                <tr class="tr2">
+                    <td>${material.name}</td>
+                    <td>${material.size}</td>
+                    <td>${material.antal}</td>
+                    <td>${material.unit}</td>
+                    <td>${material.comment}</td>
+                </tr>
+            </c:forEach>
+
+            </tbody>
+        </table>
 
         <br>
 
@@ -111,6 +110,9 @@
                 </table>
             </c:when>
         </c:choose>
+
+        <a href="FrontController?target=redirect&destination=newOffer">tilbage til Ordre detaljer</a>
+        <br>
 
     </div>
 </div>

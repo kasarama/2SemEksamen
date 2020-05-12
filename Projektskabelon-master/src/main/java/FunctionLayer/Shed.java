@@ -62,4 +62,14 @@ public class Shed {
     public void setDepth(int depth) {
         this.depth = depth;
     }
+
+    public String danishSide(){
+        String side="";
+        if (this.side.equals("right")){
+            side ="højre";
+        } else if (this.side.equals("left")){
+            side="venstre";
+        } else side=null;
+        return side;
+    }
 }

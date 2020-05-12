@@ -100,4 +100,9 @@ public abstract class Roof {
     public void setCover(String cover) {
         this.cover = cover;
     }
+    public String typeToString() {
+        if (this.pitched){
+            return "med rejsning";
+        } else return "fladt";
+    }
 }
