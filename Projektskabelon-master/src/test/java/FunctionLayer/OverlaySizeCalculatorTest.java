@@ -162,7 +162,9 @@ public class OverlaySizeCalculatorTest {
     @Test
     public void rightcarportArea(){
         Wall carportR= new Wall();
-        for (Wall waal: construction.getAllWalls()) {
+        ArrayList<Wall> allWallsOfConstr = construction.getWalls();
+        allWallsOfConstr.addAll(construction.getShed().getWalls());
+        for (Wall waal: allWallsOfConstr) {
             if (waal.getSide().equals("carportright")){
                 carportR=waal;
             }
@@ -184,7 +186,7 @@ carportright wall gives wrong result
  */
 
 
-      //  assertEquals(area, totalSurface, 0.01);
+
     }
 
 

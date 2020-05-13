@@ -12,6 +12,8 @@ import static org.junit.Assert.*;
 
 public class RoofMaterialCalculatorTest {
 Construction construction = new Construction();
+/*
+>>>>>>> lifeOfOrder
  //For fladt tag
     @Test
     public void quantityOfT600ForRoofFlatRoof() {
@@ -114,6 +116,70 @@ Construction construction = new Construction();
         //Assert
         assertEquals(expected,actual);
     }
+<<<<<<< HEAD
+=======
+*/
+    /*//For tag med rejsning
+    @Test
+    public void quantityOfT600ForRoofPitchedRoofTest() {
+        //Arrange
+        Construction con = new Construction();
+        Roof roof;
+        RoofMaterialCalculator rmc;
+        con.setConstructionLength(12000);
+        con.setConstructionWidth(3000);
+        roof = new RoofPitched(0, con.getConstructionLength(), con.getConstructionWidth(), 30);
+        con.setRoof(roof);
+        RoofSizing rs = new RoofSizing(con);
+        rmc= new RoofMaterialCalculator(con);
+        con.getRoof().setHeight(rs.roofHeight(con.getRoof().getIsPitched()));
+        //Act
+        int actual = rmc.quantityOfT600ForRoof();
+        int expected = 8;
+        //Assert
+        assertEquals(expected,actual);
+    }
+
+
+    @Test
+    public void quantityOfT600ForRoofPitchedRoofWithT300() {
+        //Arrange
+        Construction con = new Construction();
+        Roof roof;
+        RoofMaterialCalculator rmc;
+        con.setConstructionLength(8000);
+        con.setConstructionWidth(7000);
+        roof = new RoofPitched(0, con.getConstructionLength(), con.getConstructionWidth(), 30);
+        con.setRoof(roof);
+        RoofSizing rs = new RoofSizing(con);
+        rmc= new RoofMaterialCalculator(con);
+        con.getRoof().setHeight(rs.roofHeight(con.getRoof().getIsPitched()));
+        //Act
+        int actual = rmc.quantityOfT600ForRoof();
+        int expected = 2;
+        //Assert
+        assertEquals(expected,actual);
+    }
+
+    @Test
+    public void quantityOfT300ForRoofPitchedRoof() {
+        //Arrange
+        Construction con = new Construction();
+        Roof roof;
+        RoofMaterialCalculator rmc;
+        con.setConstructionLength(8000);
+        con.setConstructionWidth(7000);
+        roof = new RoofPitched(0, con.getConstructionLength(), con.getConstructionWidth(), 40);
+        con.setRoof(roof);
+        RoofSizing rs = new RoofSizing(con);
+        rmc= new RoofMaterialCalculator(con);
+        con.getRoof().setHeight(rs.roofHeight(con.getRoof().getIsPitched()));
+        //Act
+        int actual = rmc.quantityOfT300ForRoof();
+        int expected = 0;
+        //Assert
+        assertEquals(expected,actual);
+    }*/
 
     @Test
     public void understernboartU360() {

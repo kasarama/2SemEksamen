@@ -109,7 +109,7 @@ public class OverlaySizeCalculator {
 
         int maxHeight = (int) (wall.getMinHeight() + ConstructionSizeCalculator.raising(wall.getRaising(), wall.getLength()));
         area = (long) ((((double)wall.getMinHeight() +(double) maxHeight)) / 2.0 * (double)wall.getLength());
-        System.out.println(wall.getSide()+" area: "+area+ "min and max height: "+wall.getMinHeight()+" , "+maxHeight);
+
         return area / (double) MMPERM / (double) MMPERM;
     }
 
@@ -171,8 +171,8 @@ public class OverlaySizeCalculator {
             needed = spending * area; //spending : how many pieces pr squwe meter
         } else {
             needed = spending * area ;
-                   needed= needed /  ((double)LENGTHOFOVERLAYPLANK /(double) MMPERM);
-            }
+            needed= needed /  ((double)LENGTHOFOVERLAYPLANK /(double) MMPERM);
+        }
 
         needed = needed + (SECURITYPERCENTAGE * needed); //5 % extra material for cuts
         return needed;

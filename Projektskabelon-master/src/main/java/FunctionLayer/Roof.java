@@ -10,6 +10,8 @@ public abstract class Roof {
     private ArrayList<Material> roofMaterialList;
     private boolean pitched;
     private int tilt;
+    private String color;
+    private String cover;
 
 
     public Roof(int height, int length, int width, int degree, boolean pitched, int tilt) {
@@ -75,6 +77,14 @@ public abstract class Roof {
         this.width=construction.getConstructionWidth();
     }
 
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
     public int getTilt() {
         return tilt;
     }
@@ -83,4 +93,16 @@ public abstract class Roof {
         this.tilt = tilt;
     }
 
+    public String getCover() {
+        return cover;
+    }
+
+    public void setCover(String cover) {
+        this.cover = cover;
+    }
+    public String typeToString() {
+        if (this.pitched){
+            return "med rejsning";
+        } else return "fladt";
+    }
 }

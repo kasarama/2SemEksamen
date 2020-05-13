@@ -11,8 +11,8 @@ public class Drawing extends Command{
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
         Construction con = new Construction();
-        con.setConstructionLength(7800);
-        con.setConstructionWidth(6000);
+     //   con.setConstructionLength(7800);
+      //  con.setConstructionWidth(6000);
 
         int width = (con.getConstructionLength()/10);
         System.out.println("Test 1");
