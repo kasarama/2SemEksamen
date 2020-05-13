@@ -13,6 +13,10 @@ public class RoofPitched extends Roof {
         roofMaterialList = new ArrayList();
     }
 
+    @Override
+    public String optionForFlatRoof(){
+        return "Tag med rejsning";
+    }
 
     @Override
     public ArrayList<Material> getRoofMaterialList() {
