@@ -1,5 +1,7 @@
 package FunctionLayer;
 
+import java.util.ArrayList;
+
 public class PitchedRoofMaterialCalculator {
 
     //M
@@ -52,6 +54,67 @@ public class PitchedRoofMaterialCalculator {
         roof = construction.getRoof();
     }
 
+    public static ArrayList<Material> pitchedRoof (Construction construction) {
+        ArrayList<Material> pitchedRoofMaterials = new ArrayList<>();
+
+        //Toplægter
+        Material toplægter = new Material();
+        toplægter.setName("");
+        toplægter.setComment("");
+        toplægter.setSize(0);
+        toplægter.setAmount(0);
+        pitchedRoofMaterials.add(toplægter);
+
+        //Taglægter
+        Material taglaegter = new Material();
+        taglaegter.setName("");
+        taglaegter.setComment("");
+        taglaegter.setSize(0);
+        taglaegter.setAmount(0);
+        pitchedRoofMaterials.add(taglaegter);
+
+        //Sternbrædder
+        Material stern = new Material();
+        stern.setName("");
+        stern.setComment("");
+        stern.setSize(0);
+        stern.setAmount(0);
+        pitchedRoofMaterials.add(stern);
+
+        //Vandbræt
+        Material vandbraet = new Material();
+        vandbraet.setName("");
+        vandbraet.setComment("");
+        vandbraet.setSize(0);
+        vandbraet.setAmount(0);
+        pitchedRoofMaterials.add(vandbraet);
+
+
+        //Vindskeder
+        Material vindskeder = new Material();
+        vindskeder.setName("");
+        vindskeder.setComment("");
+        vindskeder.setSize(0);
+        vindskeder.setAmount(0);
+        pitchedRoofMaterials.add(vindskeder);
+
+        //toplægteHolder
+
+        Material toplaegteHolder = new Material();
+        toplaegteHolder.setName("");
+        toplaegteHolder.setComment("");
+        toplaegteHolder.setSize(0);
+        toplaegteHolder.setAmount(0);
+        pitchedRoofMaterials.add(toplaegteHolder);
+
+        return pitchedRoofMaterials;
+
+
+    }
+
+
+    //** Calculations **
+
     public int amoutOfRygstenBeslagCalculated() {
         rygstenBeslag = quantityRygsten();
         return rygstenBeslag;
@@ -69,7 +132,7 @@ public class PitchedRoofMaterialCalculator {
         tagstenEntirePitchedRoof = tagstenHalfePitchedRoof * 2;
         return tagstenEntirePitchedRoof;
     }
-    
+
     public int tagstenBindereCalculated(){
         int tagstenBinder = amountOfTagsten();
         for (int i = 0; i < tagstenBinder; i = i+2) {
@@ -85,9 +148,9 @@ public class PitchedRoofMaterialCalculator {
     }
 
     public int screwForTaglægterCalculated(){
-         //Vi antager der er er en skrue pr toplægteholder + samt et pr spær for at sætte toplægten fast
+        //Vi antager der er er en skrue pr toplægteholder + samt et pr spær for at sætte toplægten fast
         screwForTaglægter = numberOfToplaegteHolder() * SCREWSPERTAGLÆGTEHOLDER;
-     return screwForTaglægter;
+        return screwForTaglægter;
     }
 
     public int screwsForVindskederCalculated(){
@@ -145,7 +208,7 @@ public class PitchedRoofMaterialCalculator {
         return spærAmount;
     }
 
-   public int spærFullQuatityOfPlanksTotal(){
+    public int spærFullQuatityOfPlanksTotal(){
         spærFullQuatityOfPlanks = spærPlankLengthPerSpær()*spærQuatity();
         return spærFullQuatityOfPlanks;
     }
@@ -175,7 +238,7 @@ public class PitchedRoofMaterialCalculator {
             }
             tempHeigth = newHeight;
             if (overlayPlankWidth<newHeight)
-            newHeight = newHeight - overlayPlankWidth;
+                newHeight = newHeight - overlayPlankWidth;
             else
                 newHeight = overlayPlankWidth - newHeight;
             kFactor = newHeight/tempHeigth;
@@ -183,7 +246,7 @@ public class PitchedRoofMaterialCalculator {
             lenghtOfTriangleGavlShorter = (int) (kFactor * lenghtOfTriangleGavlShorter);
         }
         if (lenghtOfTriangleGavlShorter !=0 )
-        return (int) gavlOverlayPlanksQuantity + 1;
+            return (int) gavlOverlayPlanksQuantity + 1;
 
         return (int) gavlOverlayPlanksQuantity;
     }

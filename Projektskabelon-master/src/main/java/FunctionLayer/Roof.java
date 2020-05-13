@@ -41,6 +41,8 @@ public abstract class Roof {
         this.roofMaterialList = roofMaterialList;
     }
 
+
+
     public int getLength() {
         return length;
     }
