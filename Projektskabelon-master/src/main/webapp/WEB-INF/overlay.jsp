@@ -113,7 +113,6 @@
                         </c:forEach>
                     </select>
                     <input class="btn btn-primary mt-3" type="submit" name="noWalls" value="Kun carport, ingen vægge">
-
                 </c:otherwise>
             </c:choose>
 
