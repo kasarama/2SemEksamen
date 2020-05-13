@@ -62,6 +62,10 @@ public class LogicFacade {
     }
     public static List<Material> getAllFlatRoofMaterials() throws LoginSampleException {
         return MaterialMapper.getAllFlatRoofMaterials(); //return 'getAllRoofMaterials()' method from MaterialMapper
+        /*if (isPitched) {
+            return MaterialMapper.getAllRoofMaterialsByCategory("RejsningTag");//return 'getAllRoofMaterials()' method from MaterialMapper
+        }
+        return MaterialMapper.getAllRoofMaterialsByCategory("FladtTag");*/
     }
 
     public static List<Material> getAllOverlays() throws LoginSampleException {
