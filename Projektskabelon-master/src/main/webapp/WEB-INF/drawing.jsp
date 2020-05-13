@@ -10,13 +10,9 @@
 <head>
     <title>Drawing</title>
 </head>
-<body style="background-color: lawngreen">
+<body>
     <h1>Drawing page</h1>
-    ${requestScope.svgFromAbove}
-<br>
-<br>
-<br>
-<br>
+    <br>
 ${requestScope.svgdrawing}
 </body>
 </html>
