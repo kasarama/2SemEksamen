@@ -55,7 +55,6 @@ public class ListFactory {
             String[] PriceToDouble=LinieOfMaterial[6].split(",");
 
             double price = Double.parseDouble(PriceToDouble[0]+"."+PriceToDouble[1]);
-            System.out.println("price: " + price);
             String picture = LinieOfMaterial[7];
             String[] SpendingToDouble=LinieOfMaterial[8].split(",");
 

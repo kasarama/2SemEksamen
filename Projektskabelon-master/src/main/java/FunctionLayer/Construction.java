@@ -16,8 +16,26 @@ public class Construction {
     private ArrayList<Wall> walls;
     private String overlay;
     private ArrayList<String> wallSides;
+    private String color;
+    final private int POSTWIDTH = 100;
 
 
+    public Construction(int carportWidth, int carportLength, int constructionLength, int constructionWidth,
+                        Shed shed, Roof roof, int constructionHeight, double cost, double salePrice,
+                        String overlay, ArrayList<String> wallSides, String color) {
+        this.carportWidth = carportWidth;
+        this.carportLength = carportLength;
+        this.constructionLength = constructionLength;
+        this.constructionWidth = constructionWidth;
+        this.shed = shed;
+        this.roof = roof;
+        this.constructionHeight = constructionHeight;
+        this.cost = cost;
+        this.salePrice = salePrice;
+        this.overlay = overlay;
+        this.wallSides = wallSides;
+        this.color = color;
+    }
 
 
     public Construction() {
@@ -30,23 +48,26 @@ public class Construction {
         return constructionLength;
     }
 
-    public void setConstructionLength(int constructionLength) {
-        this.constructionLength = constructionLength;
+    public void setConstructionLength() {
+        if(this.shed.getDepth()==0){
+            this.constructionLength=this.carportLength;
+        } else
+        this.constructionLength = this.carportLength+this.shed.getDepth()-POSTWIDTH;
     }
 
     public int getConstructionWidth() {
         return constructionWidth;
     }
 
-    public void setConstructionWidth(int constructionWidth) {
-        this.constructionWidth = constructionWidth;
+    public void setConstructionWidth() {
+        this.constructionWidth = this.carportWidth+150;
     }
 
     public void setFundamentMaterials(ArrayList<Material> fundamentMaterials) {
         this.fundamentMaterials = fundamentMaterials;
     }
 
-    public void addConstructionMaterial (Material material){
+    public void addConstructionMaterial(Material material) {
         fundamentMaterials.add(material);
     }
 
@@ -130,6 +151,14 @@ public class Construction {
         this.overlay = overlay;
     }
 
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
     public ArrayList<String> getWallSides() {
         return wallSides;
     }
@@ -138,10 +167,23 @@ public class Construction {
         this.wallSides = wallSides;
     }
 
-    public ArrayList<Wall> getAllWalls() {
-        walls.addAll(shed.getWalls());
-        return walls;
+    public ArrayList<String> wallsToDanish()
+    {
+        ArrayList<String> wallsToDanish = new ArrayList();
+        for (String side : this.wallSides) {
+            if (side.equals("left")){
+                wallsToDanish.add("venstre");
+            }
+            if (side.equals("right")){
+                wallsToDanish.add("højre");
+            }
+            if (side.equals("back")){
+                wallsToDanish.add("bagside");
+            }
+        }
+        return wallsToDanish;
     }
+
 
     /*@Override
     public String toString() {

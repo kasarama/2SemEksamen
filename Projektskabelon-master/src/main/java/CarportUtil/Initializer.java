@@ -39,6 +39,7 @@ public class Initializer {
         }
         return pitchedRoofMateriallist;
     }
+
     public static List<Material> getFlatRoofMateriallist() {
         if (flatRoofMateriallist == null)
         {

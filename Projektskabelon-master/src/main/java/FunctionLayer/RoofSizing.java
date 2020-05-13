@@ -5,8 +5,8 @@ public class RoofSizing {
     Construction construction;
     private int roofLength;
     private double roofHeigth;
-    private int minpitchDegreeOption = 15;
-    private int maxpitchDegreeOption = 45 - 1; //Vi har valgt ud fra hvad productowner fra Fog har sagt
+    private static int MINPITCHDEGREEOPTION = 15;
+    private static int MAXPITCHDEGREEOPTION = 45 - 1; //Vi har valgt ud fra hvad productowner fra Fog har sagt
     //"45 grader vil blive et tårn" - men man kan finde det på fogs hjemmeside, så vi har derfor sagt 45-1
 
     public RoofSizing(Construction construction) {
@@ -22,16 +22,6 @@ public class RoofSizing {
         return (int) roofHeigth;
     }
 
-    //Muligheder for vinklens grader angående af tagryggen på et tag med rejsning
-    public int[] pitchDegreesOptionsForCostumerToChoose(){
-        int deltaDegreeOption = maxpitchDegreeOption-minpitchDegreeOption;
-        int[] pitchDegreeOptions = new int[deltaDegreeOption];
-        for (int i = 0; i < (deltaDegreeOption-1); i=+5) {
-            pitchDegreeOptions[i] = minpitchDegreeOption+5;
-        }
-        return pitchDegreeOptions;
-    }
-
     //Hjælpemetode for bredde af tag afhægnig af type
     public int roofWidthSurface() {
         int roofwidth;
@@ -41,7 +31,7 @@ public class RoofSizing {
             roofwidth= construction.getConstructionWidth();
         return roofwidth;
     }
-    //Hjælpemetode for længde af tag afhægnig af type
+    //Hjælpemetode for længde af tag afhængnig af type
     public int roofLengthSurface(){
         int roofLength;
         if (construction.getRoof().getIsPitched())
@@ -55,7 +45,8 @@ public class RoofSizing {
     //Areal hjælpeberegning af længde af fladt tags overflade
     public int flatRoofCalcutatedLength() {
         //Vi har fået beskrevet af productowner at fladt tag skal have en fast hældning
-        roofHeigth = roofHeight(false, construction.getConstructionLength() , construction.getConstructionWidth());
+        roofHeigth = roofHeight(false, construction.getConstructionLength() ,
+                construction.getConstructionWidth());
         roofLength = (int) Math.hypot((double) construction.getConstructionLength(), (double) roofHeigth);
         return roofLength;
     }
@@ -64,7 +55,8 @@ public class RoofSizing {
     public int pitchedRoofCalcutatedWidth(){
         //Vi har antaget at tagryggen går fra midt front til midt bagpå (parallelt med construction.length)
         int halfRaftWidthForPitchedRoof = construction.getConstructionWidth()/2;
-        int roofHalfWidth = (int) (halfRaftWidthForPitchedRoof/(Math.cos(Math.toRadians(construction.getRoof().getDegree()))));
+        int roofHalfWidth = (int) (halfRaftWidthForPitchedRoof/(Math.cos(
+                Math.toRadians(construction.getRoof().getDegree()))));
         return roofHalfWidth;
     }
 
@@ -84,20 +76,11 @@ public class RoofSizing {
         this.roofHeigth = roofHeigth;
     }
 
-    public int getMinpitchDegreeOption() {
-        return minpitchDegreeOption;
+    public static int getMINPITCHDEGREEOPTION() {
+        return MINPITCHDEGREEOPTION;
     }
 
-    public void setMinpitchDegreeOption(int minpitchDegreeOption) {
-        this.minpitchDegreeOption = minpitchDegreeOption;
+    public static int getMAXPITCHDEGREEOPTION() {
+        return MAXPITCHDEGREEOPTION;
     }
-
-    public int getMaxpitchDegreeOption() {
-        return maxpitchDegreeOption;
-    }
-
-    public void setMaxpitchDegreeOption(int maxpitchDegreeOption) {
-        this.maxpitchDegreeOption = maxpitchDegreeOption;
-    }
-
 }

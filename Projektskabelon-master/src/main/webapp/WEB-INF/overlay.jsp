@@ -40,9 +40,8 @@
             <c:choose>
 
 
-                <c:when test="${shed != 0}">
+                <c:when test="${shed !='0'}">
                     <br>
-                    ${shed}
                     <br>
                     <h2>Beklædning</h2>
 
@@ -50,7 +49,11 @@
                     <select name="overlayName" class="form-control" id="overlay">
                         <option selected disabled>Vælg beklædning</option>
                         <c:forEach var="material" items="${applicationScope.overlayList}">
+<<<<<<< HEAD
                             <option value="${material.name}">${material.color} ${material.name}</option>
+=======
+                            <option value="${material.name};${material.color}">${material.color} ${material.name}</option>
+>>>>>>> lifeOfOrder
                         </c:forEach>
                     </select>
 
@@ -79,6 +82,10 @@
 
 
                 <c:otherwise>
+                    <br>
+                    <br>
+                    <h2>Beklædning</h2>
+
 
                     Du kan vælge at beklæde nogle vægge af carporten:
                     <div class="form-check">
@@ -104,7 +111,7 @@
                     <select name="overlayName" class="form-control" id="overlay">
                         <option selected disabled>Vælg beklædning</option>
                         <c:forEach var="material" items="${applicationScope.overlayList}">
-                            <option value="${material.name}">${material.name}</option>
+                            <option value="${material.name};${material.color}">${material.color} ${material.name}</option>
                         </c:forEach>
                     </select>
                     <input class="btn btn-primary mt-3" type="submit" name="noWalls" value="Kun carport, ingen vægge">
@@ -130,24 +137,6 @@
         </form>
     </div>
 </div>
-
-
-<!--
-<c:forEach var="material" items="${applicationScope.overlayList}">
-    <img id="${material.id}" src="${material.picture}" height="150" width="auto"/>
-    <br>
-    <input type="button" value="${material.name}" name="${material.id}"
-    onMouseOver="document.getElementById('${material.id}').style.display='block'"
-    onMouseOut="document.getElementById('${material.id}').style.display='none'">
-    <br>
-</c:forEach>
-<c:forEach var="material" items="${applicationScope.overlayList}">
-    ${material.name}<br>
-    <input type="image" src="${material.picture}" height="200" width="auto" name="${material.id}"
-    alt="${material.name}"><br>
-</c:forEach>
--->
-
 
 
 <%@include file="../includes/footer.inc" %>

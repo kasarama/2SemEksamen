@@ -49,11 +49,10 @@ public class ConstructionSizeCalculator {
         int distance = postDistanceMax3000(size);
         Integer[] postHeights = new Integer[postNumber];
         postHeights[0]=(int)height;
-            for (int i = 1; i < postHeights.length ; i++) {
-                height= height+ raising(angle, distance);
-                postHeights[i]=(int)height;
-                System.out.println();
-            }
+        for (int i = 1; i < postHeights.length ; i++) {
+            height= height+ raising(angle, distance);
+            postHeights[i]=(int)height;
+        }
 
         return postHeights;
     }
@@ -70,7 +69,7 @@ public class ConstructionSizeCalculator {
     }
 
 
-        //////.........SHED FRONT SIDE ........../////////
+    //////.........SHED FRONT SIDE ........../////////
 
     //counts number of post on the front side of the shed
     public static int shedFrontPostsAmount(int width) {
@@ -163,7 +162,7 @@ public class ConstructionSizeCalculator {
                     remPieces = new int[]{300, 300, 360, 360, 480, 480};
                 }
             }
-        // Hvis bredden er over 600 cm:
+            // Hvis bredden er over 600 cm:
         } else {
             if (carportLength>7200 && shedDept == 0){
                 // Length = 750 cm, sidePostAmount = 4, postDistanceMax300 = 246,67 cm
@@ -396,7 +395,7 @@ public class ConstructionSizeCalculator {
             backStern = possibleSternDobbelt(cunstructionWidth, 0);
             sideStern = possibleSternDobbelt(cunstructionLength, 25);
             understernPieces = new int[]{frontStern, frontStern, backStern, backStern,
-                                        sideStern, sideStern, sideStern, sideStern};
+                    sideStern, sideStern, sideStern, sideStern};
         }
         return understernPieces;
     }

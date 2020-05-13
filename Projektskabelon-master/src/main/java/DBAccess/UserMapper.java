@@ -2,6 +2,7 @@ package DBAccess;
 
 import FunctionLayer.LoginSampleException;
 import FunctionLayer.User;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,9 +10,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 /**
- The purpose of UserMapper is to...
-
- @author kasper
+ * The purpose of UserMapper is to...
+ *
+ * @author kasper
  */
 public class UserMapper {
 
@@ -56,5 +57,49 @@ public class UserMapper {
         } catch (ClassNotFoundException | SQLException ex) {
             throw new LoginSampleException(ex.getMessage());
         }
+    }
+
+    public static int getIDbyEmail(String email) throws LoginSampleException {
+        int id = 0;
+            try {
+            Connection con = Connector.connection();
+            String SQL = "SELECT userID FROM users WHERE email=?";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ps.setString(1, email);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                id = rs.getInt("userID");
+            } else {
+                throw new LoginSampleException("Vi kunne ikke finde dig i vores database. Kontakt butikken");
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            throw new LoginSampleException(ex.getMessage());
+
+        }
+
+        return id;
+    }
+
+    public static String getEmailByID (int id) throws LoginSampleException {
+        String email="";
+        try {
+            Connection con = Connector.connection();
+            String SQL = "SELECT email FROM users WHERE userID=?";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                email = rs.getString("email");
+            } else {
+                throw new LoginSampleException("Vi kunne ikke finde email for ID: "+id+" i vores database. Kontakt IT dream team");
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            throw new LoginSampleException(ex.getMessage());
+
+        }
+
+        return email;
     }
 }

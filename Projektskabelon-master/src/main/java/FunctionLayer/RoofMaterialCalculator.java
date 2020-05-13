@@ -1,71 +1,108 @@
 package FunctionLayer;
 
+import PresentationLayer.Materials;
+
+import java.util.ArrayList;
+
 public class RoofMaterialCalculator {
 
     // TODO gem vandbræt, bundskruer, tætningsprofil
 
 
     Construction construction;
-
     RoofSizing roofSizing;
 
-    private int T300RoofPlateLength = 3000;
-    private int trapezpladeWidth = 1000; //
-    private int T600RoofPlateLength = 6000;
-    private int overlap = 20;
+    private int T300ROOFPLADELENGTH = 3000; //Dette skulle rigtig beregnes ud fra 3600 mm istedet men vi prioterer
+    //på andre ting, da vi er tidspressede
+    private int T600ROOFPLADELENGTH = 6000;
+    private int OVERLAP = 200;
 
-    private int numberOfT600Trapezplates = 0;
+    private int numberOfT600Trapezplates;
     private int numberOfT300Trapezplates;
     private int square1numberOfT600Trapezplates = 0;
     private int square2numberOfT600Trapezplates = 0;
     private int square3numberOfT600Trapezplates = 0;
     private int roofWidth;
     private int roofLength;
-    //private boolean pitchedRoof;
+
+    ArrayList materialsList;
+    Material material;
 
     public RoofMaterialCalculator(Construction construction) {
         this.construction = construction;
         this.roofSizing = new RoofSizing(construction);
         this.roofWidth = roofSizing.roofWidthSurface();
         this.roofLength = roofSizing.roofLengthSurface();
-      //  this.pitchedRoof = construction.getRoof().getIsPitched();
+    }
+
+    public ArrayList<Material> setflatRoofMaterials() throws LoginSampleException {
+        construction.getRoof().setRoofMaterialList(flatRoofMaterialsInsert("BLÅTONET")); //TODO hente farve kunde på jsp-side
+        return construction.getRoof().getRoofMaterialList();
+    }
+
+    public ArrayList<Material> flatRoofMaterialsInsert(String trapezColourAnName) throws LoginSampleException { //TODO - TEST
+        materialsList = new ArrayList();
+        material = null;
+
+        //TrapezPlader
+        material = LogicFacade.getMaterialBySizeName(T600ROOFPLADELENGTH, "");
+        material.setName(trapezColourAnName);
+        material.setUnit(LogicFacade.getUnitByName(material.getName()));
+        material.setWidth(LogicFacade.getWidthByID(material.getId(), material.getName()));
+        material.setThickness(LogicFacade.getThicknessByID(material.getId()));
+        material.setName("SPÆRTRÆ UBEHANDLET " + material.getThickness() + "x" + material.getWidth());
+        material.setSize(T600ROOFPLADELENGTH);
+        int quantityOfT600 = quantityOfT600ForRoof(material.getWidth());
+        material.setAmount(quantityOfT600);
+        material.setComment("tagplader monteres på spær");
+
+        materialsList.add(material);
+        material = new Material();
+
+        material = LogicFacade.getMaterialBySizeName(T300ROOFPLADELENGTH, "");
+        material.setName(trapezColourAnName);
+        material.setUnit(LogicFacade.getUnitByName(material.getName()));
+        material.setWidth(LogicFacade.getWidthByID(material.getId(), material.getName()));
+        material.setThickness(LogicFacade.getThicknessByID(material.getId()));
+        material.setName("SPÆRTRÆ UBEHANDLET " + material.getThickness() + "x" + material.getWidth());
+        material.setSize(T300ROOFPLADELENGTH);
+        int quantityOfT300 = quantityOfT300ForRoof(material.getWidth());
+        material.setAmount(quantityOfT300);
+        material.setComment("tagplader monteres på spær");
+
+        materialsList.add(material);
+        return materialsList;
+        //TODO - Test hvor mange elementer er på listen
+
     }
 
     ////////////////// Trapezplader - START
 
     //Antal T600 Trapezplader
-    public int quantityOfT600ForRoof() {
-        //Hvis tag har rejsning byttes der om på længde og bredde beregning.
-       /* if (construction.getRoof().getIsPitched()){
-            temp = roofLength;
-            roofLength = roofWidth;
-            roofWidth = temp;
-            temp = trapezpladeWidth;
-            trapezpladeWidth = T600RoofPlateLength;
-            T600RoofPlateLength = temp;
-        }*/
+    public int quantityOfT600ForRoof(int trapezPladeWidth) {
         ///////////////Beregning af første del af tag (hvor mange HELE T600 plader kan der være)
-        for (int i = 0; i < (roofWidth-trapezpladeWidth+overlap); i = i+trapezpladeWidth) {
-            for (int j = 0; j < roofLength - T600RoofPlateLength; j = j+T600RoofPlateLength) {
+        int tempTrapezPladeWidth = trapezPladeWidth;
+        for (int i = 0; i < (roofWidth- tempTrapezPladeWidth + OVERLAP); i = i+ tempTrapezPladeWidth) {
+            for (int j = 0; j < roofLength - T600ROOFPLADELENGTH; j = j+ T600ROOFPLADELENGTH) {
                 square1numberOfT600Trapezplates++;
-                trapezpladeWidth = 1000-overlap;
+                tempTrapezPladeWidth = trapezPladeWidth - OVERLAP;
             }
         }
-        trapezpladeWidth = 1000;
+        tempTrapezPladeWidth = trapezPladeWidth;
         /////////////////////////////////////////////////////
 
         /////Beregning af anden del af tag (T600 plader inkl. T600 pladerester - hvor pladerne er delt på bredden)
-        for (int i = 0; i < roofLength - T600RoofPlateLength; i = i + T600RoofPlateLength) {
+        for (int i = 0; i < roofLength - T600ROOFPLADELENGTH; i = i + T600ROOFPLADELENGTH) {
             square2numberOfT600Trapezplates++;
         }
 
-        int restWidth = roofWidth % trapezpladeWidth;
+        int restWidth = roofWidth % tempTrapezPladeWidth;
 
         int restPart;
         double temp2;
 
         if (restWidth != 0 ) {
-            restPart = trapezpladeWidth / restWidth;
+            restPart = tempTrapezPladeWidth / restWidth;
             temp2 = Math.round((double)square2numberOfT600Trapezplates / restPart);
             square2numberOfT600Trapezplates = (int) temp2;
         }
@@ -73,12 +110,12 @@ public class RoofMaterialCalculator {
         /////////////////////////////////////////////////////
 
         ///////////////Beregning af tredje del af tag (om hvor mange antal T600 plader der er (delt i længden))
-        int quantityOfT300 = quantityOfT300ForRoof();
+        int quantityOfT300 = quantityOfT300ForRoof(trapezPladeWidth);
 
-        trapezpladeWidth = 1000;
+        tempTrapezPladeWidth = trapezPladeWidth;
 
         if (quantityOfT300 == 0) {
-            for (int i = 0; i < (roofWidth-trapezpladeWidth+overlap) ; i = i +trapezpladeWidth) {
+            for (int i = 0; i < (roofWidth- tempTrapezPladeWidth + OVERLAP) ; i = i + tempTrapezPladeWidth) {
                 square3numberOfT600Trapezplates++;
 
             }
@@ -102,17 +139,18 @@ public class RoofMaterialCalculator {
     }
 
     //Antal T300 Trapezplader
-    public int quantityOfT300ForRoof() {
-        int restOfLength = roofLength % T600RoofPlateLength;
-        if (restOfLength > 0 && restOfLength <= T300RoofPlateLength){
-            for (int i = 0; i < roofWidth - trapezpladeWidth + overlap; i=i+trapezpladeWidth) {
+    public int quantityOfT300ForRoof(int trapezPladeWidth) {
+        int tempTrapezPladeWidth = trapezPladeWidth;
+        int restOfLength = roofLength % T600ROOFPLADELENGTH;
+        if (restOfLength > 0 && restOfLength <= T300ROOFPLADELENGTH){
+            for (int i = 0; i < roofWidth - tempTrapezPladeWidth + OVERLAP; i=i+ tempTrapezPladeWidth) {
                 numberOfT300Trapezplates++;
-                trapezpladeWidth = trapezpladeWidth - overlap;
+                tempTrapezPladeWidth = tempTrapezPladeWidth - OVERLAP;
             }
         }
         if (numberOfT300Trapezplates != 0)
             numberOfT300Trapezplates = numberOfT300Trapezplates +1;
-        //^(Beregning af fjerde og sidste del
+        //(Beregning af fjerde og sidste del
         // af taget betyder det når jeg skriver +1)
 
 

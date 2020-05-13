@@ -66,4 +66,7 @@ public class OverlayMaterialCalculatorTest {
     }
 
 
+    @Test
+    public void testOverlayMaterial() {
+    }
 }

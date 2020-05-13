@@ -1,13 +1,19 @@
 package FunctionLayer;
 
 import PresentationLayer.FlatRoof;
+import com.sun.xml.internal.bind.v2.runtime.reflect.opt.Const;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
+import java.util.ArrayList;
 
 import static org.junit.Assert.*;
 
 public class RoofMaterialCalculatorTest {
-
+Construction construction = new Construction();
+/*
+>>>>>>> lifeOfOrder
  //For fladt tag
     @Test
     public void quantityOfT600ForRoofFlatRoof() {
@@ -23,7 +29,7 @@ public class RoofMaterialCalculatorTest {
         rmc= new RoofMaterialCalculator(con);
         con.getRoof().setHeight(rs.roofHeight(con.getRoof().getIsPitched(), con.getConstructionLength(), con.getConstructionWidth()));
         //Act
-        int actual = rmc.quantityOfT600ForRoof();
+        int actual = rmc.quantityOfT600ForRoof(1090);
         int expected = 7;
         //Assert
         assertEquals(expected,actual);
@@ -45,7 +51,7 @@ public class RoofMaterialCalculatorTest {
         rmc= new RoofMaterialCalculator(con);
         con.getRoof().setHeight(rs.roofHeight(con.getRoof().getIsPitched(), con.getConstructionLength(), con.getConstructionWidth()));
         //Act
-        int actual = rmc.quantityOfT600ForRoof();
+        int actual = rmc.quantityOfT600ForRoof(1090);
         int expected = 4;
         //Assert
         assertEquals(expected,actual);
@@ -65,7 +71,7 @@ public class RoofMaterialCalculatorTest {
         rmc= new RoofMaterialCalculator(con);
         con.getRoof().setHeight(rs.roofHeight(con.getRoof().getIsPitched(), con.getConstructionLength(), con.getConstructionWidth()));
         //Act
-        int actual = rmc.quantityOfT600ForRoof();
+        int actual = rmc.quantityOfT600ForRoof(1090);
         int expected = 4;
         //Assert
         assertEquals(expected,actual);
@@ -85,7 +91,7 @@ public class RoofMaterialCalculatorTest {
         rmc= new RoofMaterialCalculator(con);
         con.getRoof().setHeight(rs.roofHeight(con.getRoof().getIsPitched(), con.getConstructionLength(), con.getConstructionWidth()));
         //Act
-        int actual = rmc.quantityOfT300ForRoof();
+        int actual = rmc.quantityOfT300ForRoof(1090);
         int expected = 0;
         //Assert
         assertEquals(expected,actual);
@@ -105,12 +111,14 @@ public class RoofMaterialCalculatorTest {
         rmc= new RoofMaterialCalculator(con);
         con.getRoof().setHeight(rs.roofHeight(con.getRoof().getIsPitched(), con.getConstructionLength(), con.getConstructionWidth()));
         //Act
-        int actual = rmc.quantityOfT300ForRoof();
+        int actual = rmc.quantityOfT300ForRoof(1090);
         int expected = 4;
         //Assert
         assertEquals(expected,actual);
     }
-
+<<<<<<< HEAD
+=======
+*/
     /*//For tag med rejsning
     @Test
     public void quantityOfT600ForRoofPitchedRoofTest() {
@@ -235,5 +243,17 @@ public class RoofMaterialCalculatorTest {
 
     @Test
     public void squares() {
+    }
+
+    @Before
+    public void setUp() throws Exception {
+        //Roof roof =new RoofFlat()construction.setRoof(roof);
+    }
+
+    @Test
+    public void flatRoofMaterialsInsert() throws LoginSampleException {
+        RoofMaterialCalculator rf =new RoofMaterialCalculator(construction);
+        ArrayList<Material> materials =rf.flatRoofMaterialsInsert("string");
+        System.out.println("materials number: "+materials.size());
     }
 }

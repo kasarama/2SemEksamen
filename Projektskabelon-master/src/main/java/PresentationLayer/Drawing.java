@@ -11,11 +11,10 @@ public class Drawing extends Command{
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
         Construction con = new Construction();
-        con.setConstructionLength(7800);
-        con.setConstructionWidth(6000);
 
         int width = (con.getConstructionLength()/10);
         int height = (con.getConstructionWidth()/10);
+
         // Grundet tegningens størrelses, deles width og height med 2 så tegningen ikke bliver for stor
         if (width>500 || height>500){
             width = width/2;
@@ -77,6 +76,7 @@ public class Drawing extends Command{
         }
 
         request.setAttribute("svgdrawing", svg.toString());
+        System.out.println("Test 210");
         return "drawing";
     }
 }

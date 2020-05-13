@@ -6,8 +6,9 @@
     //if i'm the first user on this application, then set the flatMaterialList. (else the list already exists)
     if (request.getServletContext().getAttribute("flatMaterialList") == null) {
         System.out.println("initializing materiallist");
+        //}
+        request.getServletContext().setAttribute("flatMaterialList", Initializer.getFlatRoofMateriallist());
     }
-    request.getServletContext().setAttribute("flatMaterialList", Initializer.getFlatRoofMateriallist());
 %>
 
 <div class="container2">
