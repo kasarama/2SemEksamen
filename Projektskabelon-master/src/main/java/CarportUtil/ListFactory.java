@@ -100,14 +100,35 @@ public class ListFactory {
 
     public static ArrayList<Material> sortMaterialList(ArrayList<Material> materialList) {
 
-        for (int i = 0; i < materialList.size(); i++) {
+        if (materialList.size() == 0) {
+            throw new NullPointerException();
+        } else if (materialList.size() == 1) {
+            return materialList;
+        } else {
 
-            for (Material material : materialList) {
-                if (materialList.get(i).equals(material.getName())) {
 
+
+
+            ArrayList<Material> original = materialList;
+            ArrayList<Material> tample = original;
+            original.remove(0);
+            ArrayList<Material> sorted = new ArrayList<>();
+
+            int counter = materialList.size();
+            ArrayList<Integer>indexOfsimmilar=new ArrayList<>();
+
+            while (counter>0) {
+                Material sample = original.get(0);
+                for (int i = 1; i <counter ; i++) {
+                    if (sample.equals(original.get(i) ) ){
+                        indexOfsimmilar.add(i);
                 }
 
+                }
             }
+
+
+
         }
         return new ArrayList<Material>();
     }
