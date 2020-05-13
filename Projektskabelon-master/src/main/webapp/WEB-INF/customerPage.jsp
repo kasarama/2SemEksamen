@@ -24,6 +24,14 @@
                     Velkommen til
                 </c:otherwise>
             </c:choose></h2>
+
+        <div class="col-md-6 school-options-dropdown text-center">
+
+            <c:if test="${requestScope.orderMSG!= null}">
+                <h2>Error ! </h2>
+                ${requestScope.orderReadyMSG}
+            </c:if>
+        </div>
         <img class="mt-4 mb-3" src="./images/logo.png" alt="Logo" width="430" height=auto>
         <h6 class="mb-3" style="font-size: small;">Her kan du designe din egen carport & <br>
             få vejledning, inden du køber</h6>

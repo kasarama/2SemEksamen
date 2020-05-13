@@ -8,7 +8,7 @@ import javax.servlet.http.HttpSession;
 /**
  * @author Magdalena
  */
-public class NewRequest extends Command {
+public class StartRequestOver extends Command {
 
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException {

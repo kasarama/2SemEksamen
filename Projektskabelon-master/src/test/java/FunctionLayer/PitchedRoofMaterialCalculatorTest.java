@@ -17,8 +17,8 @@ public class PitchedRoofMaterialCalculatorTest {
     @Before
     public void setUp() throws Exception {
         //Arrange
-        con.setConstructionWidth(2400);
-        con.setConstructionLength(3600);
+    //    con.setConstructionWidth(2400);
+      //  con.setConstructionLength(3600);
         con.setRoof(roof);
         con.setCarportWidth(con.getConstructionWidth()-150);
         con.setCarportLength(con.getConstructionLength()-15);

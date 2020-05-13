@@ -16,6 +16,7 @@ public class FlatRoof extends Command {
         HttpSession session = request.getSession();
         Construction constructionRequest = (Construction) session.getAttribute("carportBase");
 
+
         RoofSizing roofSizing = new RoofSizing(constructionRequest);
         RoofMaterialCalculator rmc = new RoofMaterialCalculator(constructionRequest);
         int colourOfTrapezPladesID = Integer.parseInt(request.getParameter("roofMaterial"));
@@ -23,6 +24,17 @@ public class FlatRoof extends Command {
         ArrayList<Material> materialList = rmc.flatRoofMaterialsInsert(materialName);
         constructionRequest.getRoof().setRoofMaterialList(materialList);
 
+/*<<<<<<< HEAD
+=======
+        int[] tiltOptions = roofSizing.pitchDegreesOptionsForCostumerToChoose();
+
+        request.setAttribute("height", height);
+        request.setAttribute("tilt", tilt);
+
+        constructionRequest.getRoof().setHeight(height);
+        constructionRequest.getRoof().setDegree(tilt);
+
+>>>>>>> lifeOfOrder*/
         session.setAttribute("carportBase", constructionRequest);
 
 

@@ -12,7 +12,17 @@
 </head>
 <body>
     <h1>Drawing page</h1>
+<<<<<<< HEAD
     <br>
+=======
+
+
+    ${requestScope.svgFromAbove}
+<br>
+<br>
+<br>
+<br>
+>>>>>>> lifeOfOrder
 ${requestScope.svgdrawing}
 </body>
 </html>

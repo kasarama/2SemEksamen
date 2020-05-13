@@ -67,10 +67,7 @@
     </div>
 </div> <!-- /.container -->
 
-<form name="showRequests" action="FrontController" method="POST">
-    <input type="hidden" name="target" value="showRequests">
-    <input class="btn btn-danger" type="submit" value="Vis Forespørgelser">
-</form>
+
 
 
 <c:if test = "${requestScope.error!= null}" >

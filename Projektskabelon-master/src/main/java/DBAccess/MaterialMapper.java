@@ -278,7 +278,6 @@ public class MaterialMapper {
     public static List<Material> getAllOverlays() throws LoginSampleException {
         List<Material> materialList = new ArrayList<>();
         try {
-//todo edit the method so it uses parameters and question marks??
             Connection con = Connector.connection();
             String SQL = "SELECT name, picture, price, color FROM materials LEFT JOIN variations " +
                     "ON materials.materialID=variations.materialID WHERE category='overlayMaterial'";
@@ -318,7 +317,8 @@ public class MaterialMapper {
     public static void addMatDB(Material material) throws LoginSampleException {
         try {
             Connection con = Connector.connection();
-            String SQL = "INSERT INTO materials (name,width,thickness,unit,keyword,category,price,picture,spending) VALUES (?, ?, ?, ?, ?, ?, ?, ?,?)";
+            String SQL = "INSERT INTO materials (name,width,thickness,unit,keyword,category,price,picture,spending)" +
+                    " VALUES (?, ?, ?, ?, ?, ?, ?, ?,?)";
             PreparedStatement ps = con.prepareStatement(SQL);
             ps.setString(1, material.getName());
             ps.setInt(2, material.getWidth());
@@ -349,7 +349,6 @@ public class MaterialMapper {
      * @author Magdalena
      */
     public static double spending(String name) throws LoginSampleException {
-
         try {
             Connection con = Connector.connection();
             String SQL = "SELECT spending FROM fogdb.materials WHERE name=?";
@@ -363,6 +362,7 @@ public class MaterialMapper {
                 throw new LoginSampleException("Kunne ikke læse data om forbrug af den valgte materiale til beklædning");
             }
         } catch (ClassNotFoundException | SQLException ex) {
+            ex.printStackTrace();
             throw new LoginSampleException(ex.getMessage());
         }
     }
@@ -382,8 +382,34 @@ public class MaterialMapper {
                 return 0;
             }
         } catch (SQLException sql) {
+            sql.printStackTrace();
             return 0;
         } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
+            throw new LoginSampleException(ex.getMessage());
+        }
+
+    }
+
+    public static int getVariationID(String color, String materialName) throws LoginSampleException {
+        int variationID = 0;
+
+        try {
+            Connection con = Connector.connection();
+            String SQL = "SELECT variationID FROM materials RIGHT JOIN variations ON " +
+                    "materials.materialID=variations.materialID WHERE variations.color=? AND materials.name=?";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ps.setString(1, color);
+            ps.setString(2, materialName);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                variationID = rs.getInt("variationID");
+                return variationID;
+            } else {
+                throw new LoginSampleException("Kunne ikke læse data om variationer af denne material: " + materialName);
+            }
+        } catch (ClassNotFoundException | SQLException ex) {
+            ex.printStackTrace();
             throw new LoginSampleException(ex.getMessage());
         }
 
@@ -418,7 +444,7 @@ public class MaterialMapper {
             PreparedStatement preparedStatement = con.prepareStatement(SQLRequest);
             preparedStatement.setInt(1, idMaterial);
             ResultSet resultSet = preparedStatement.executeQuery();
-            if (resultSet.next()){
+            if (resultSet.next()) {
                 materialNameByID = resultSet.getString(1);
             }
         } catch (ClassNotFoundException e) {
@@ -428,6 +454,27 @@ public class MaterialMapper {
         }
 
         return materialNameByID;
+    }
+
+    public static String getColorByID(int variationID) throws LoginSampleException {
+        String color="";
+        try {
+            Connection con = Connector.connection();
+            String SQL = "SELECT color FROM variations WHERE variationID=?";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ps.setInt(1, variationID);
+
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                color = rs.getString("variationID");
+                return color;
+            } else {
+                throw new LoginSampleException("Fejl under læsning af materialefarver fra DB");
+            }
+        } catch (ClassNotFoundException | SQLException ex) {
+            ex.printStackTrace();
+            throw new LoginSampleException(ex.getMessage());
+        }
     }
 
 }
