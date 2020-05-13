@@ -112,7 +112,12 @@
                             <option value="${material.name};${material.color}">${material.color} ${material.name}</option>
                         </c:forEach>
                     </select>
-                    <input class="btn btn-primary mt-3" type="submit" name="noWalls" value="Kun carport, ingen vægge">
+
+                    <!-- go to customerChoiceResult when button is pressed  (old version: only l. 115 - no form) -->
+                    <form name="ResultNoWalls" action="FrontController" method="POST">
+                        <input type="hidden" name="target" value="customerChoiceResult">
+                        <input class="btn btn-primary mt-3" type="submit" name="noWalls" value="Kun carport, ingen vægge">
+                    </form>
 
                 </c:otherwise>
             </c:choose>
