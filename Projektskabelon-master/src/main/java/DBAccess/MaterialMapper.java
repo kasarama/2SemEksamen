@@ -144,7 +144,7 @@ public class MaterialMapper {
 
 // This class Connects to DB and gets the "Roof material" data from it.
 
-    //1. create a method that returns a list of ROOF Materials -  Material = Class from function Layer
+    /*//1. create a method that returns a list of ROOF Materials -  Material = Class from function Layer
     public static List<Material> getAllPitchedRoofMaterials() throws LoginSampleException {
         List<Material> materialList = null;
 
@@ -187,9 +187,9 @@ public class MaterialMapper {
         // return the gotten 'material' data from the DB
         return materialList;
     }
-
+*/
     //Cath version
-    public static List<Material> getAllPitchedRoofMaterialsCath() throws LoginSampleException {
+    public static List<Material> getAllPitchedRoofMaterials() throws LoginSampleException {
         List<Material> materialList = null;
 
         //try-catch block in case an error occurs.
@@ -197,8 +197,8 @@ public class MaterialMapper {
             //2. start the connection by calling ".connection()" method from the "Connector" class
             Connection con = Connector.connection();
             //3. create an SQL statement - select everything from only 'RejsningTag' from the 'material' table
-            String SQL = "SELECT * FROM fogdb.materials JOIN fogdb.variations ON materials.materialID=" +
-                    "variations.materialID WHERE materials.keyword=?";
+            String SQL = "SELECT variations.color, materials.name FROM fogdb.materials LEFT JOIN fogdb.variations " +
+                    "ON materials.materialID=variations.materialID WHERE materials.category=?;";
             //4. insert the SQL statement into the ".preparedStatement()" method - it sends the SQL statement to the DB
             PreparedStatement ps = con.prepareStatement(SQL);
             ps.setString(1, "\'RejsningTag\'");
@@ -337,7 +337,6 @@ public class MaterialMapper {
             ex.printStackTrace();
             throw new LoginSampleException(ex.getMessage());
         }
-
     }
 
 

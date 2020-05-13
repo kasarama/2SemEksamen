@@ -95,7 +95,7 @@ public class PitchedRoofMaterialCalculator {
         vindskedeLængde = (int)(Math.hypot((construction.getConstructionWidth()/2.0), (double) (roofSizing.roofHeight(
                 construction.getRoof().getIsPitched(), construction.getConstructionLength(),
                 construction.getConstructionWidth()))));
-        for (int i = 50; i < vindskedeLængde-50 ; i = i + 50) {
+        for (int i = 500; i < vindskedeLængde-500 ; i = i + 500) {
             screwsForVindskeder++;
         }
         return screwsForVindskeder;
@@ -104,7 +104,7 @@ public class PitchedRoofMaterialCalculator {
     public int screwsForVandbrætCalculated(){
         //Vi antager der skal bruges til hver 30 cm en skrue
         vandBrætsLength = construction.getRoof().getLength();
-        for (int i = 30; i < vandBrætsLength -30 ; i = i + 30) {
+        for (int i = 300; i < vandBrætsLength -300 ; i = i + 300) {
             screwsForVindskeder++;
         }
         return screwsForVandbræt;
@@ -118,6 +118,7 @@ public class PitchedRoofMaterialCalculator {
     }*/
 
     public int amountOfBeslagScrewsForToplægteCalculated(){
+        //Vi antager ud fra billeder på nettet at der er plads til 9 skruger på hver side af toplægtebeslag
         beslagForToplægte = 9*2*amountOfBeslagScrewsForToplægteCalculated();
         return beslagForToplægte;
     }
@@ -130,9 +131,11 @@ public class PitchedRoofMaterialCalculator {
         return spærFullPlankLength;
     }
     //TODO beregning af ekstra spær (til sidst)
+
     public int spærQuatity(){
+        //Vi har ud fra tegning sagt der er 89 cm imellem hvert spær
         int carportLength = construction.getCarportLength();
-        int distanceBestweenSpær = 89;
+        int distanceBestweenSpær = 890;
         for (int i = 0; i < carportLength; i = 1 + distanceBestweenSpær) {
             spærAmount++;
         }
