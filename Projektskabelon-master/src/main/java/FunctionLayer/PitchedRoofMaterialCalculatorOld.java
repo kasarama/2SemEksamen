@@ -69,7 +69,7 @@ public class PitchedRoofMaterialCalculator {
         tagstenEntirePitchedRoof = tagstenHalfePitchedRoof * 2;
         return tagstenEntirePitchedRoof;
     }
-
+    
     public int tagstenBindereCalculated(){
         int tagstenBinder = amountOfTagsten();
         for (int i = 0; i < tagstenBinder; i = i+2) {
@@ -85,9 +85,9 @@ public class PitchedRoofMaterialCalculator {
     }
 
     public int screwForTaglægterCalculated(){
-        //Vi antager der er er en skrue pr toplægteholder + samt et pr spær for at sætte toplægten fast
+         //Vi antager der er er en skrue pr toplægteholder + samt et pr spær for at sætte toplægten fast
         screwForTaglægter = numberOfToplaegteHolder() * SCREWSPERTAGLÆGTEHOLDER;
-        return screwForTaglægter;
+     return screwForTaglægter;
     }
 
     public int screwsForVindskederCalculated(){
@@ -142,7 +142,7 @@ public class PitchedRoofMaterialCalculator {
         return spærAmount;
     }
 
-    public int spærFullQuatityOfPlanksTotal(){
+   public int spærFullQuatityOfPlanksTotal(){
         spærFullQuatityOfPlanks = spærPlankLengthPerSpær()*spærQuatity();
         return spærFullQuatityOfPlanks;
     }
@@ -172,7 +172,7 @@ public class PitchedRoofMaterialCalculator {
             }
             tempHeigth = newHeight;
             if (overlayPlankWidth<newHeight)
-                newHeight = newHeight - overlayPlankWidth;
+            newHeight = newHeight - overlayPlankWidth;
             else
                 newHeight = overlayPlankWidth - newHeight;
             kFactor = newHeight/tempHeigth;
@@ -180,7 +180,7 @@ public class PitchedRoofMaterialCalculator {
             lenghtOfTriangleGavlShorter = (int) (kFactor * lenghtOfTriangleGavlShorter);
         }
         if (lenghtOfTriangleGavlShorter !=0 )
-            return (int) gavlOverlayPlanksQuantity + 1;
+        return (int) gavlOverlayPlanksQuantity + 1;
 
         return (int) gavlOverlayPlanksQuantity;
     }
