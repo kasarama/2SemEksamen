@@ -15,15 +15,12 @@ public class Drawing extends Command{
         con.setConstructionWidth(6000);
 
         int width = (con.getConstructionLength()/10);
-        System.out.println("Test 1");
         int height = (con.getConstructionWidth()/10);
-        System.out.println("Test 2");
         // Grundet tegningens størrelses, deles width og height med 2 så tegningen ikke bliver for stor
         if (width>500 || height>500){
             width = width/2;
             height = height/2;
         }
-        System.out.println("Test 3");
         String viewBox2 = "-50, -10, " + (width+100) + ", " + (height+50);
         Svg svg = new Svg(width+100, height+50, viewBox2, 0, 0);
 
@@ -80,7 +77,6 @@ public class Drawing extends Command{
         }
 
         request.setAttribute("svgdrawing", svg.toString());
-        System.out.println("Test 210");
         return "drawing";
     }
 }
