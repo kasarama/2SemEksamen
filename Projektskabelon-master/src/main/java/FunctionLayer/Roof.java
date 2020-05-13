@@ -25,6 +25,10 @@ public abstract class Roof {
 
     }
 
+    public String optionForFlatRoof(){
+        return "";
+    }
+
     public int getHeight() {
         return height;
     }
@@ -40,8 +44,6 @@ public abstract class Roof {
     public void setRoofMaterialList(ArrayList<Material> roofMaterialList) {
         this.roofMaterialList = roofMaterialList;
     }
-
-
 
     public int getLength() {
         return length;

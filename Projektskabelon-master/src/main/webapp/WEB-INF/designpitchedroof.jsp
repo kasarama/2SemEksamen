@@ -16,6 +16,7 @@ if (request.getServletContext().getAttribute("pitchedMaterialList") == null) {
 }
 
 if (request.getServletContext().getAttribute("MINPITCHDEGREEOPTION") == null) {
+    //TODO Må man dette?
             request.getServletContext().setAttribute("MINPITCHDEGREEOPTION", getMINPITCHDEGREEOPTION());
         }
 
@@ -36,7 +37,7 @@ if (request.getServletContext().getAttribute("MAXPITCHDEGREEOPTION") == null) {
             <select class="form-control mt-3" name="pitchedroof" id="pitchedroof">
                 <option selected disabled>Vælg tagdækning</option>
                 <c:forEach var="roofMaterial" items="${applicationScope.pitchedMaterialList}">
-                    <option value="${roofMaterial.id}">${roofMaterial.name}</option>
+                    <option value="${roofMaterial.id}">${roofMaterial.name} ${roofMaterial.color}</option>
                 </c:forEach>
             </select>
         <!--- </form> --->

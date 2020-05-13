@@ -197,11 +197,11 @@ public class MaterialMapper {
             //2. start the connection by calling ".connection()" method from the "Connector" class
             Connection con = Connector.connection();
             //3. create an SQL statement - select everything from only 'RejsningTag' from the 'material' table
-            String SQL = "SELECT variations.color, materials.name FROM fogdb.materials LEFT JOIN fogdb.variations " +
+            String SQL = "SELECT * FROM fogdb.materials LEFT JOIN fogdb.variations " +
                     "ON materials.materialID=variations.materialID WHERE materials.category=?;";
             //4. insert the SQL statement into the ".preparedStatement()" method - it sends the SQL statement to the DB
             PreparedStatement ps = con.prepareStatement(SQL);
-            ps.setString(1, "\'RejsningTag\'");
+            ps.setString(1, "RejsningTag");
             //5. call the ".executeQuery()" to execute the SQL statement and return the result (stored in ResultSet).
             ResultSet rs = ps.executeQuery();//works with getters/setters from "Info" class
 
@@ -220,9 +220,11 @@ public class MaterialMapper {
                 String keyword = rs.getString("keyword");
                 String category = rs.getString("category");
                 int length = rs.getInt("length");
+                String color = rs.getString("color");
 
                 //create a new material obj of 'Material' class and pass the gotten data in it (materialID, name, size etc)
                 Material material = new Material(materialID, name, length, unit, keyword, category);// data gets stored in 'material'
+                material.setColor(color);
                 //add the gotten 'info' data to the 'InfoList'
                 materialList.add(material);
             }
@@ -244,7 +246,7 @@ public class MaterialMapper {
             //2. start the connection by calling ".connection()" method from the "Connector" class
             Connection con = Connector.connection();
             //3. create an SQL statement - select everything from only 'RejsningTag' from the 'material' table
-            String SQL = "SELECT, materials.name FROM fogdb.materials LEFT JOIN fogdb.variations " +
+            String SQL = "SELECT materials.name FROM fogdb.materials LEFT JOIN fogdb.variations " +
                     "ON materials.materialID=variations.materialID WHERE materials.category=?;";
             //4. insert the SQL statement into the ".preparedStatement()" method - it sends the SQL statement to the DB
             PreparedStatement ps = con.prepareStatement(SQL);
@@ -282,7 +284,7 @@ public class MaterialMapper {
         return materialList;
     }
 
-    /*public static List<Material> getAllFlatRoofMaterials() throws LoginSampleException {
+    public static List<Material> getAllFlatRoofMaterials() throws LoginSampleException {
         List<Material> materialList = null;
 
         try {
@@ -307,7 +309,7 @@ public class MaterialMapper {
             throw new LoginSampleException(ex.getMessage());
         }
         return materialList;
-    }*/
+    }
 
     // This class Connects to DB and gets the "Overlay material" data from it.
 

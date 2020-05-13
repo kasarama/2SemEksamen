@@ -1,4 +1,4 @@
-
+<%--
 Created by IntelliJ IDEA.
 User: monajakobmeshal
 Date: 10/05/20
@@ -36,7 +36,7 @@ To change this template use File | Settings | File Templates.
             </tr>
             <tr>
                 <td>Tagtype:</td>
-                <td>${requestScope.attributeName}</td>
+                <td>${sessionScope.carportBase.roof.optionForFlatRoof()}</td>
             </tr>
 
             <tr>
