@@ -201,7 +201,8 @@ public class OrderMapper {
 
     }
 
-    public static void saveNewOffer(Order order) {
+    public static void saveNewOffer(Order order) throws LoginSampleException {
+        throw new LoginSampleException("Method for saving new offer in DB not awailable yet");
         //todo update order and orderdetails in DB
     }
 }

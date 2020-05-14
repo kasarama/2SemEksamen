@@ -12,17 +12,16 @@
 </head>
 <body>
     <h1>Drawing page</h1>
-<<<<<<< HEAD
-    <br>
-=======
 
+    <a href="FrontController?target=redirect&destination=prepareOffer">tilbage til Ordre detaljer</a>
+    <br>
 
     ${requestScope.svgFromAbove}
 <br>
 <br>
 <br>
 <br>
->>>>>>> lifeOfOrder
+
 ${requestScope.svgdrawing}
 </body>
 </html>
