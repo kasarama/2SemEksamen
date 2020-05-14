@@ -22,6 +22,24 @@ todo Return the same page with actial data ??
     <div class="col-md-6">
 
 
+        <form name="itemList" action="FrontController" method="POST" class="ml-lg-5 mr-lg-5">
+            <input type="hidden" name="origin" value="prepareOffer">
+            <input type="hidden" name="target" value="itemlist">
+            <div class="col-md-6 text-center mt-md-4">
+                <input class="btn btn-dark mt-3" type="submit" name="itemlist" value="Vis Stykliste"
+                       role="button">
+            </div>
+        </form>
+
+        <form name="drawing" action="FrontController" method="POST" class="ml-lg-5 mr-lg-5">
+            <input type="hidden" name="origin" value="prepareOffer">
+            <input type="hidden" name="target" value="drawing">
+            <div class="col-md-6 text-center mt-md-4">
+                <input class="btn btn-dark mt-3" type="submit" name="drawing" value="Tegning"
+                       role="button">
+            </div>
+        </form>
+
         <c:set var="order" value="${applicationScope.orderForValidation}"/>
         <c:choose>
             <c:when test="${order!=null}">
@@ -78,28 +96,14 @@ todo Return the same page with actial data ??
 
     <div class="col-md-6">
 
-        <form name="itemList" action="FrontController" method="POST" class="ml-lg-5 mr-lg-5">
-            <input type="hidden" name="origin" value="prepareOffer">
-            <input type="hidden" name="target" value="itemlist">
-            <div class="col-md-6 text-center mt-md-4">
-                <input class="btn btn-dark mt-3" type="submit" name="itemlist" value="Vis Stykliste"
-                       role="button">
-            </div>
-        </form>
+
     </div>
 
 
 
     <div class="col-md-6">
 
-        <form name="drawing" action="FrontController" method="POST" class="ml-lg-5 mr-lg-5">
-            <input type="hidden" name="origin" value="prepareOffer">
-            <input type="hidden" name="target" value="drawing">
-            <div class="col-md-6 text-center mt-md-4">
-                <input class="btn btn-dark mt-3" type="submit" name="drawing" value="Tegning"
-                       role="button">
-            </div>
-        </form>
+
     </div>
 
 

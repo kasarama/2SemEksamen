@@ -89,7 +89,7 @@ public class LogicFacade {
         //todo create ArrayList with materials for roof and set it on order.construction.roof
 
         ArrayList<Material> roofMaterialList = new ArrayList<>(); // = call the method her
-        order.getConstruction().getRoof().setTagMaterialList(roofMaterialList);
+        //order.getConstruction().getRoof().setTagMaterialList(roofMaterialList);
 
 
         //................Materials for construction...........//
@@ -97,7 +97,7 @@ public class LogicFacade {
 
         ArrayList<Material> constructionMaterialList = new ArrayList<>(); // = call the method here
         order.getConstruction().setFundamentMaterials(constructionMaterialList);
-        Order order1 = order; //probably not necessary but not tested jet
+        Order order1 = order; //probably not necessary but not tested yet
 
         return order1;
     }

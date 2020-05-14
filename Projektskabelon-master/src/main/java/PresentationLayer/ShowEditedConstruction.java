@@ -37,13 +37,7 @@ public class ShowEditedConstruction extends Command {
         order.getConstruction().getShed().setWalls(shedWalls);
 
 
-        try {
-            order = LogicFacade.setMaterialsForOrder(order);
-        } catch (LoginSampleException e) {
-            e.printStackTrace();
-            throw new LoginSampleException(e.getMessage());
 
-        }
 
         request.getServletContext().setAttribute("orderForValidation", order);
 
