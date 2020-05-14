@@ -16,7 +16,6 @@
         <br>
         <h2>Stykliste for ordre nr. ${requestScope.orderForValidation.orderID}</h2>
         <br>
-
 <!-- todo adjust tables  so they contain needed data
 todo should sho material.availablesize-->
         <br>

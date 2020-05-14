@@ -12,21 +12,8 @@
 </head>
 <body>
     <h1>Drawing page</h1>
-<<<<<<< HEAD
     <br>
-=======
-<<<<<<< HEAD
-    <br>
-=======
 
-
-    ${requestScope.svgFromAbove}
-<br>
-<br>
-<br>
-<br>
->>>>>>> lifeOfOrder
->>>>>>> 7112decfa1f3e186110918160d45dcb05cf9c542
 ${requestScope.svgdrawing}
 </body>
 </html>

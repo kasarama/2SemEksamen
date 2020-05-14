@@ -115,11 +115,11 @@
                         </c:forEach>
                     </select>
                     <input class="btn btn-primary mt-3" type="submit" name="noWalls" value="Kun carport, ingen vægge">
-
+                    <input class="btn btn-primary mt-3" type="submit" name="coverWalls" value="Videre med de valgte vægge">
                 </c:otherwise>
             </c:choose>
 
-            <input class="btn btn-primary mt-3" type="submit" name="coverWalls" value="Videre med de valgte vægger">
+
         </form>
         <!-- End of form -->
 

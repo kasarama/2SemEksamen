@@ -47,7 +47,7 @@ public class LogicFacade {
     }
 
     public static ArrayList<Integer> getLengthForMaterials(String nameMaterial) throws LoginSampleException {
-        ArrayList<Integer> lengthForMaterials = MaterialMapper.getLengthForMaterials(nameMaterial);
+        ArrayList lengthForMaterials = MaterialMapper.getLengthForMaterials(nameMaterial);
         return lengthForMaterials;
     }
 

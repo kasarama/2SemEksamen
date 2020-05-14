@@ -15,7 +15,7 @@ public class ConstructionSizeCalculatorTest {
 
     @Before
     public void setUp() throws Exception {
-        construction.setCarportLength(7500);
+        construction.setCarportLength(5000);
         construction.setCarportWidth(4000);
         Shed shed = new Shed((construction.getCarportWidth() / 2), 0, "left");
         construction.setShed(shed);
@@ -104,7 +104,25 @@ public class ConstructionSizeCalculatorTest {
     }
 
 
+    /**
+     * @author  Mia
+     * Her er et eksempel på en test hvor der testes en metode som bliver brugt i en metode.
+     * Hvis carportens længde er 5000 skal der bruges en rem med længden 540, possibleRems
+     */
+    @Test
+    public void remMethods() {
+        // Hvis carportLength=5000
+        int possibleRems = ConstructionSizeCalculator.possibleRems(construction);
+        int[] rempieces = ConstructionSizeCalculator.remPieces(construction);
+        int actual = 0;
+        if (possibleRems == rempieces[0]){
+            actual = possibleRems;
+        }
 
+        int expected = 540;
+
+        assertEquals(expected, actual);
+    }
 
     @Test
     public void possibleRems() {

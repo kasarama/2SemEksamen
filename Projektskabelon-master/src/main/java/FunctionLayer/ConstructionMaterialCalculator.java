@@ -6,39 +6,45 @@ import java.util.*;
 
 import static FunctionLayer.ConstructionSizeCalculator.*;
 import static FunctionLayer.LogicFacade.getLengthForMaterials;
+import static FunctionLayer.LogicFacade.sendOffer;
 
 
 public class ConstructionMaterialCalculator {
-
-    public ConstructionSizeCalculator constructionSizeCalculator = new ConstructionSizeCalculator();
+    public static ConstructionSizeCalculator constructionSizeCalculator = new ConstructionSizeCalculator();
     public Construction construction = new Construction();
-    public ArrayList<Material> constructionMaterials = construction.getFundamentMaterials();
 
     //.......................All the materials for construction.............................//
-    public ArrayList<Material> constructionMaterialList(Construction construction) throws LoginSampleException {
+    public static ArrayList<Material> constructionMaterialList(Construction construction) throws LoginSampleException {
+        System.out.println("3");
         ArrayList<Material> woodMaterials = woodMaterials(construction);
+        System.out.println("4");
         ArrayList<Material> metalMaterials = metalMaterials(construction);
-
+        System.out.println("5");
         ArrayList<Material> constructionMaterials = new ArrayList<>();
-        construction.setFundamentMaterials(constructionMaterials);
+        System.out.println("6");
         constructionMaterials.addAll(woodMaterials);
+        System.out.println("7");
         constructionMaterials.addAll(metalMaterials);
+        System.out.println("8");
+
         return constructionMaterials;
     }
 
     //................................wood materials............................//
-    public ArrayList<Material> woodMaterials(Construction construction) throws LoginSampleException {
+    public static ArrayList<Material> woodMaterials(Construction construction) throws LoginSampleException {
+        System.out.println("Test 1");
         ArrayList<Material> woodMaterials = new ArrayList<>();
-
+        System.out.println("Test 2");
         // Stolper
         //TODO: sæt stolper i den rigtige størrelse ind i woodMaterials listen
         //Beregning er uden stolper til skur
         //TODO - 90cm skal tilføjes pr nedsat stolpe
         double constructionMinHeight = construction.getConstructionHeight() - construction.getRoof().getHeight();
         ArrayList<Integer> actualHeightsOfPostsForConstruction = new ArrayList();
-
+        System.out.println("Test 3");
         int carportMinHeight = carportMinHeight((int) constructionMinHeight, construction.getShed().getDepth(),
                 construction.getRoof().getTilt());
+        System.out.println("Test 4");
         int quantityOfCarportPostsRows = postRows(construction.getCarportWidth());
         Integer[] heightsOfPostsPerRow = postsHeights(carportMinHeight, construction.getRoof().getDegree(),
                 construction.getConstructionWidth());
@@ -47,13 +53,17 @@ public class ConstructionMaterialCalculator {
                 actualHeightsOfPostsForConstruction.add(postHeight);
             }
         }
-
+        System.out.println("Test 5");
         ArrayList<Integer> postsMaterialsAvalibleLenghts = getLengthForMaterials("TRYKIMPRENERET STOLPE");
+        System.out.println("Her 1?");
         ArrayList<Material> tempPostsMaterails = new ArrayList<>();
+        System.out.println("Her 2?");
         int restOfAvalibleMaterial = 0;
+        System.out.println("Her 3?");
         int countPosts = 1;
+        System.out.println("Her 4?");
         Material post = null;
-
+        System.out.println("Test 6");
         for (int avaliblePostMaterialLength : postsMaterialsAvalibleLenghts) {
             post = LogicFacade.getMaterialBySizeName(avaliblePostMaterialLength, "");
             post.setName("TRYKIMPRENERET STOLPE");
@@ -160,7 +170,7 @@ public class ConstructionMaterialCalculator {
     }
 
     //................................metal materials............................//
-    public ArrayList<Material> metalMaterials(Construction construction) throws LoginSampleException {
+    public static ArrayList<Material> metalMaterials(Construction construction) throws LoginSampleException {
         ArrayList<Material> metalMaterials = new ArrayList<>();
 
         // Bræddebolte

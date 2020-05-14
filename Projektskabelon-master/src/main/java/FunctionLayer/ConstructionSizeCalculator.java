@@ -85,7 +85,7 @@ public class ConstructionSizeCalculator {
     }
 
 
-    public int possibleRems(Construction construction){
+    public static int possibleRems(Construction construction){
         int[] possibleRems = new int[]{3000, 3600, 4200, 4800, 5400, 6000, 6600, 7200};
         int carportLength = construction.getCarportLength();
         int wantedRem = 0;
@@ -103,7 +103,7 @@ public class ConstructionSizeCalculator {
         return wantedRem;
     }
 
-    public int[] remPieces (Construction construction){
+    public static int[] remPieces (Construction construction){
         //todo count witch lengths of "rem" tree chould be used so the connections ar in the right places if "rem"
         // should be compoused of more than one piece and return them in Integer[]
         /*
@@ -188,7 +188,7 @@ public class ConstructionSizeCalculator {
     }
 
     // Brædebolte:
-    public int remBoltAmount (Construction construction){
+    public static int remBoltAmount (Construction construction){
         //todo return number of screw used to montage of rem on the posts. Use the method remPieces
         //todo in ConstrucionMaterialCalculator implement method that will return a material of that screw with size that equals this number
         // 2 brædebolte pr. stolpe
@@ -215,7 +215,7 @@ public class ConstructionSizeCalculator {
     }
 
     // Firkantskriver:
-    public int remSquaresAmount (Construction construction){
+    public static int remSquaresAmount (Construction construction){
         //todo return number of screw used to montage of rem on the posts. Use the method remPieces
         //todo in ConstrucionMaterialCalculator implement method that will return a material of that screw with size that equals this number
         // 1 firkantskirver pr. stolpe
@@ -239,7 +239,7 @@ public class ConstructionSizeCalculator {
         return squares;
     }
 
-    public int roofSpaerLength (Construction construction) {
+    public static int roofSpaerLength (Construction construction) {
         //todo return lengths of spaer
         // Mulige spærlængder: 300, 360, 420, 480, 540, 600, 660, 720
         int cuntructionWidth = construction.getConstructionWidth()*10;
@@ -287,7 +287,7 @@ public class ConstructionSizeCalculator {
         return universalBracketsLeft;
     }
 
-    public int perforatedBandRolls (Construction construction) {
+    public static int perforatedBandRolls (Construction construction) {
         //todo implement a method in ConstructionMaterialCalculator that returns hulbånd material , make sure that it is not possible that the crossing piece is longer than 10 m
         //todo return amount of hulbånd needed
 
@@ -306,7 +306,7 @@ public class ConstructionSizeCalculator {
     }
 
     // Beslagskruer til hulbånd og spær
-    public int bracketScrews (Construction construction) {
+    public static int bracketScrews (Construction construction) {
         //todo return amount of screw needed for montage of that band and spaer
 
         // Beslagskruer til spær:
@@ -326,7 +326,7 @@ public class ConstructionSizeCalculator {
         return brancketScrewPk;
     }
 
-    public int possibleSternSmall(int size, int extra){
+    public static int possibleSternSmall(int size, int extra){
         int[] possibleStern = new int[]{3000, 3600, 4200, 4800, 5400, 6000};
         int wantedStern = 0;
         int difference = 0;
@@ -344,7 +344,7 @@ public class ConstructionSizeCalculator {
         return wantedStern;
     }
 
-    public int possibleSternDobbelt(int size, int ekstra){
+    public static int possibleSternDobbelt(int size, int ekstra){
         int[] possibleStern = new int[]{3000, 3600, 4200, 4800, 5400, 6000};
         int wantedStern = 0;
         int difference = 0;
@@ -362,7 +362,7 @@ public class ConstructionSizeCalculator {
         return wantedStern;
     }
 
-    public int[] underSternPieces(Construction construction) {
+    public static int[] underSternPieces(Construction construction) {
         //todo caount pieces needet to build a under stern take to consideration that they might need to be connected on the certain length (på middten)
         //todo in ConstrucionMaterialCalculator implement method that will return Materials of that tree for each piece
 
@@ -401,7 +401,7 @@ public class ConstructionSizeCalculator {
     }
 
 
-    public int[] overSternPieces(Construction construction) {
+    public static int[] overSternPieces(Construction construction) {
         //todo caount pieces needet to build a under stern take to consideration that they might need to be connected on the certain length
         //todo in ConstrucionMaterialCalculator implement method that will return Materials of that tree for each piece
 
@@ -441,6 +441,6 @@ public class ConstructionSizeCalculator {
     // Skruer til stern og vandbræt - 1 pakke er nok til stor carport
     //todo count number of screws needet for montage of both Sterns
     //todo in ConstrucionMaterialCalculator implement method that will return Material of that screw with its size that equals this number
-    public int screwAmount = 1;
+    public static int screwAmount = 1;
 
 }

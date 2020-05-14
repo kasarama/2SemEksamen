@@ -1,9 +1,6 @@
 package PresentationLayer;
 
-import FunctionLayer.Construction;
-import FunctionLayer.LoginSampleException;
-import FunctionLayer.Material;
-import FunctionLayer.OverlayMaterialCalculator;
+import FunctionLayer.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,8 +18,9 @@ public class ItemList  extends Command{
 
         //................Materials for construction...........//
         //todo create ArrayList with materials for  construction and set it on request
-
-        ArrayList<Material> constructionMaterialList = new ArrayList<>(); // = call the method her
+        System.out.println("1");
+        ArrayList<Material> constructionMaterialList = ConstructionMaterialCalculator.constructionMaterialList(construction);
+        System.out.println("2");
         request.setAttribute("constructionMaterials", constructionMaterialList);
 
 
