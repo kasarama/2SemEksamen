@@ -167,6 +167,7 @@ public class Construction {
         this.wallSides = wallSides;
     }
 
+    //Method to convert Eng text to danish
     public ArrayList<String> wallsToDanish()
     {
         ArrayList<String> wallsToDanish = new ArrayList();
@@ -184,6 +185,25 @@ public class Construction {
         return wallsToDanish;
     }
 
+    // ** Method to convert chosen RoofType boolean to text on result page **
+    /*
+
+    public ArrayList<String> RoofTypeToDanish()
+    {
+        ArrayList<String> roofTypeToDanish = new ArrayList();
+
+        boolean roofType = this.roof.getIsPitched();
+
+            if (roofType == true){
+                roofTypeToDanish.add("Rejsning Tag");
+            }
+            if (!roofType){
+                roofTypeToDanish.add("Fladt tag");
+            }
+
+        return roofTypeToDanish;
+    }
+ */
 
     /*@Override
     public String toString() {

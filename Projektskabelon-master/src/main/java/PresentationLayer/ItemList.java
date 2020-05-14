@@ -20,7 +20,7 @@ public class ItemList  extends Command{
         Construction construction= (Construction) session.getAttribute("carportBase");
 
         //................Materials for construction...........//
-        //todo create ArrayList with materials for  construction and set it on request
+        //todo create ArrayList with materials for construction and set it on request
 
         ArrayList<Material> constructionMaterialList = new ArrayList<>(); // = call the method her
         request.setAttribute("constructionMaterials", constructionMaterialList);

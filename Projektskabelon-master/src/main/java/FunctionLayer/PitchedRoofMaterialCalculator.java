@@ -12,7 +12,6 @@ public class PitchedRoofMaterialCalculator {
     private int numberOfTagfodsLaegte;
     private int numberOfVindskeder;
     private int numberOfVandbraet;
-    private int toplaegteholder;
 
     ConstructionSizeCalculator constructionSizeCalculator;
     Construction construction;
@@ -24,9 +23,7 @@ public class PitchedRoofMaterialCalculator {
     private int LÆGTESTENDISTANCE = 307;
     private int RYGSTENCOVERS = 330;
 
-    private int tagstenBinder;
     private int tagstenNakkekrog;
-    private int toplægteHolder;
 
     private int screwForTaglægter;
     private int screwsForVindskeder;
@@ -56,6 +53,8 @@ public class PitchedRoofMaterialCalculator {
 
     public static ArrayList<Material> pitchedRoof (Construction construction) {
         ArrayList<Material> pitchedRoofMaterials = new ArrayList<>();
+
+        // Todo: Set materials to the correct attributes and call amount methods where needed.
 
         //Toplægter
         Material toplægter = new Material();
@@ -89,7 +88,6 @@ public class PitchedRoofMaterialCalculator {
         vandbraet.setAmount(0);
         pitchedRoofMaterials.add(vandbraet);
 
-
         //Vindskeder
         Material vindskeder = new Material();
         vindskeder.setName("");
@@ -99,17 +97,22 @@ public class PitchedRoofMaterialCalculator {
         pitchedRoofMaterials.add(vindskeder);
 
         //toplægteHolder
-
         Material toplaegteHolder = new Material();
         toplaegteHolder.setName("");
         toplaegteHolder.setComment("");
-        toplaegteHolder.setSize(0);
-        toplaegteHolder.setAmount(0);
+        toplaegteHolder.setSize(0); //available size - get it from DB
+        toplaegteHolder.setAmount(0); //call method in a variable + insert variable name in parameter
         pitchedRoofMaterials.add(toplaegteHolder);
 
+        //TagfodsLægte
+        Material tagfodsLaegte = new Material();
+        tagfodsLaegte.setName("");
+        tagfodsLaegte.setComment("");
+        tagfodsLaegte.setSize(0);
+        tagfodsLaegte.setAmount(0);
+        pitchedRoofMaterials.add(tagfodsLaegte);
+
         return pitchedRoofMaterials;
-
-
     }
 
 
@@ -295,6 +298,7 @@ public class PitchedRoofMaterialCalculator {
     private int numberOfToplaegteHolder ()
     {
         int spaer = constructionSizeCalculator.roofSpaerAmount(construction);
+        int toplaegteholder = 0;
 
         numberOfToplaegteHolder = toplaegteholder * spaer;
         return numberOfToplaegteHolder;
