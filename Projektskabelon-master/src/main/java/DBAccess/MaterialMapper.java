@@ -367,7 +367,7 @@ public class MaterialMapper {
     }
 
     public static String getColorByID(int variationID) throws LoginSampleException {
-        String color="";
+        String color = "";
         try {
             Connection con = Connector.connection();
             String SQL = "SELECT color FROM variations WHERE variationID=?";
@@ -387,5 +387,51 @@ public class MaterialMapper {
         }
     }
 
+    public static int getPackageSize(String name) throws LoginSampleException {
+        //TODO test it
+        int size = 0;
+        try {
+            Connection con = Connector.connection();
+            String SQL = "SELECT quantity FROM variations LEFT JOIN materials " +
+                    "ON materials.materialID=variations.materialID WHERE materials.name=?";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ps.setString(1, name);
+
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                size = rs.getInt(1);
+                return size;
+            } else {
+                throw new LoginSampleException("Fejl under læsning af pakkestørrelse fra DB");
+            }
+        } catch (ClassNotFoundException | SQLException ex) {
+            ex.printStackTrace();
+            throw new LoginSampleException(ex.getMessage());
+        }
+
+    }
+
+    public static ArrayList<Integer> getLengths(String name) throws LoginSampleException {
+        //TODO use DESC
+int length;
+        ArrayList<Integer> lengths = new ArrayList<>();
+        try {
+            Connection con = Connector.connection();
+            String SQL = "SELECT length FROM variations LEFT JOIN materials " +
+                    "ON materials.materialID=variations.materialID WHERE materials.name= ? ORDER BY length ASC";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ps.setString(1, name);
+
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                length = rs.getInt(1);
+               lengths.add(length);
+            }
+        } catch (ClassNotFoundException | SQLException ex) {
+            ex.printStackTrace();
+            throw new LoginSampleException("Fejl under læsning af længder fra DB");
+        }
+return lengths;
+    }
 }
 
