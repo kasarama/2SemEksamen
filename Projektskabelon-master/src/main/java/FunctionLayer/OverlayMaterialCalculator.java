@@ -253,17 +253,12 @@ public class OverlayMaterialCalculator {
 
 
     public static ArrayList<Material> allOverlayMaterialList(Construction construction, String overlayName) throws LoginSampleException {
-        System.out.println("In all overlay material list");
 
         ArrayList<Material> overlayMaterials = new ArrayList<>();
         ArrayList<Material> doorFraming = doorFraming(construction);
 
-        System.out.println("doorFraming list size: " + doorFraming.size());
-
         ArrayList<Wall> walls = construction.getWalls();
         construction.getWalls().addAll(construction.getShed().getWalls());
-
-        System.out.println("Constructions all wals size: "+ walls.size());
 
 
         if (walls.size()==0){
@@ -277,7 +272,6 @@ public class OverlayMaterialCalculator {
         }
         overlayMaterials.addAll(doorFraming);
         overlayMaterials.addAll(overlayMaterial(construction,overlayName));
-        System.out.println(" should return the list");
         return overlayMaterials;
     }
 }

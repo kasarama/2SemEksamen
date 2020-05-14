@@ -49,9 +49,7 @@
                     <select name="overlayName" class="form-control" id="overlay">
                         <option selected disabled>Vælg beklædning</option>
                         <c:forEach var="material" items="${applicationScope.overlayList}">
-
                             <option value="${material.name};${material.color}">${material.color} ${material.name}</option>
-
                         </c:forEach>
                     </select>
 
@@ -114,11 +112,10 @@
                     </select>
                     <input class="btn btn-primary mt-3" type="submit" name="noWalls" value="Kun carport, ingen vægge">
 
-                    <input class="btn btn-primary mt-3" type="submit" name="coverWalls" value="Videre med de valgte vægger">
                 </c:otherwise>
             </c:choose>
 
-
+            <input class="btn btn-primary mt-3" type="submit" name="coverWalls" value="Videre med de valgte vægger">
         </form>
         <!-- End of form -->
 
