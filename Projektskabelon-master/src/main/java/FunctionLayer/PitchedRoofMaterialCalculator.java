@@ -1,7 +1,5 @@
 package FunctionLayer;
 
-import DBAccess.MaterialMapper;
-
 import java.util.ArrayList;
 
 public class PitchedRoofMaterialCalculator {
@@ -57,6 +55,7 @@ public class PitchedRoofMaterialCalculator {
         ArrayList<Material> pitchedRoofMaterials = new ArrayList<>();
 
         // Todo: Set materials to the correct attributes and call amount methods where needed.
+        // Todo: gavlOverlay, tagplader
 
         //Toplægter
         Material toplaegter = new Material();
@@ -169,7 +168,7 @@ public class PitchedRoofMaterialCalculator {
         //Rygsten
         Material rygsten = new Material();
 
-        rygsten.setName(" " + rygsten.getThickness() + "x" + rygsten.getWidth());
+        rygsten.setName("RYGSTEN" + rygsten.getThickness() + "x" + rygsten.getWidth());
         rygsten.setCategory("Rejsning Konstruktion");
         rygsten.setUnit(LogicFacade.getUnitByName(rygsten.getName()));
         rygsten.setWidth(LogicFacade.getWidthByID(rygsten.getId(),rygsten.getName()));
@@ -207,28 +206,143 @@ public class PitchedRoofMaterialCalculator {
 
         //toplægteHolder
         Material toplaegteHolder = new Material();
-        toplaegteHolder.setName("TOPLÆGTEHOLDER");
-        toplaegteHolder.setComment("");
-        toplaegteHolder.setSize(0); //available size - get it from DB
-        toplaegteHolder.setAmount(0); //call method in a variable + insert variable name in parameter
+        toplaegteHolder.setName("TOPLÆGTEHOLDER" + toplaegteHolder.getThickness() + "x" + toplaegteHolder.getWidth());
+
+        int quantityOfToplaegteHolder = amountOfToplaegteHolder();
+        toplaegteHolder.setAmount(quantityOfToplaegteHolder);
+        toplaegteHolder.setComment("monteres på toppen af spæret af toplægte");
+        toplaegteHolder.setSize(0); //Længde fra DB - metode der henter længde fra DB i Mapper
+
         pitchedRoofMaterials.add(toplaegteHolder);
 
-
         //Taglægter skruer
-        //Vandbræt skruer
-        //toplægte skruer
-        //Vindskeder skruer
-        //toplægteHolder skruer
-        //Rygsten beslag
-        //spær
-        //Nakkekrog til tagsten
+        Material taglaegteSkruer = new Material();
+        taglaegteSkruer.setName("TAGLÆGTER SKRUER" + taglaegteSkruer.getThickness() + "x" + taglaegteSkruer.getWidth());
 
+        int quantityOfTaglaegteScrews = screwForTaglægterCalculated();
+        taglaegteSkruer.setAmount(quantityOfTaglaegteScrews);
+        taglaegteSkruer.setComment("Skruer til taglægter");
+
+        taglaegteSkruer.setSize(0); //Længde fra DB - metode der henter længde fra DB i Mapper
+        pitchedRoofMaterials.add(taglaegteSkruer);
+
+
+        //Vandbræt skruer
+        Material vandbraetSkruer = new Material();
+        vandbraetSkruer.setName("VANDBRÆT SKRUER" + vandbraetSkruer.getThickness() + "x" + vandbraetSkruer.getWidth());
+
+        int quantityOfVandbraerScrews = screwsForVandbrætCalculated();
+        vandbraetSkruer.setAmount(quantityOfVandbraerScrews);
+        vandbraetSkruer.setComment("Skruer til vandbræt");
+
+        vandbraetSkruer.setSize(0); //Længde fra DB - metode der henter længde fra DB i Mapper
+
+        pitchedRoofMaterials.add(vandbraetSkruer);
+
+        //toplægte skruer
+        Material toplaegteSkruer = new Material();
+        toplaegteSkruer.setName("TOPLÆGTER SKRUER" + toplaegteSkruer.getThickness() + "x" + toplaegteSkruer.getWidth());
+
+        int quantityOfToplaegteScrews = amountOfBeslagScrewsForToplægteCalculated();
+        toplaegteSkruer.setAmount(quantityOfToplaegteScrews);
+        toplaegteSkruer.setComment("Skruer til toplægter");
+
+        toplaegteSkruer.setSize(0); //Længde fra DB - metode der henter længde fra DB i Mapper
+
+        pitchedRoofMaterials.add(toplaegteSkruer);
+
+        //Vindskeder skruer
+        Material vindskederSkruer = new Material();
+        vindskederSkruer.setName("VINDSKEDER SKRUER" + vindskederSkruer.getThickness() + "x" + vindskederSkruer.getWidth());
+
+        int quantityOfVindskederScrews = screwsForVindskederCalculated();
+        toplaegteSkruer.setAmount(quantityOfVindskederScrews);
+        toplaegteSkruer.setComment("Skruer til vindskeder");
+
+        toplaegteSkruer.setSize(0); //Længde fra DB - metode der henter længde fra DB i Mapper
+
+        pitchedRoofMaterials.add(vindskederSkruer);
+
+        //toplægteHolder skruer
+        Material toplaegteHolderSkruer = new Material();
+        toplaegteHolderSkruer.setName("TOPLÆGTEHOLDER SKRUER" + toplaegteHolderSkruer.getThickness() + "x" + toplaegteHolderSkruer.getWidth());
+
+        int quantityOfToplaegteHolderScrews =  amountOfBeslagScrewsForToplægteCalculated();
+        toplaegteHolderSkruer.setAmount(quantityOfToplaegteHolderScrews);
+        toplaegteHolderSkruer.setComment("Skruer til toplægteholder");
+
+        toplaegteHolderSkruer.setSize(0); //Længde fra DB - metode der henter længde fra DB i Mapper
+
+        pitchedRoofMaterials.add(toplaegteHolderSkruer);
+
+
+        //Rygsten Beslag
+        Material rygstenBeslag = new Material();
+        rygstenBeslag.setName("RYGSTENBESLAG" + rygstenBeslag.getThickness() + "x" + rygstenBeslag.getWidth());
+
+        int quantityOfRygstenBeslag =  amoutOfRygstenBeslagCalculated()
+        rygstenBeslag.setAmount(quantityOfRygstenBeslag);
+        rygstenBeslag.setComment("Beslag til rygsten");
+
+        rygstenBeslag.setSize(0); //Længde fra DB - metode der henter længde fra DB i Mapper
+
+        pitchedRoofMaterials.add(rygstenBeslag);
+
+        //spær til tag
+        Material tagSpaer = new Material();
+        tagSpaer.setName("SPÆR"+ tagSpaer.getThickness() + "x" + tagSpaer.getWidth());
+
+        int quantityOfSpaer = spærFullQuantityOfPlanksTotal();
+        tagSpaer.setAmount(quantityOfSpaer);
+        tagSpaer.setComment("Spær til tag");
+
+        tagSpaer.setSize(0); //Længde fra DB - metode der henter længde fra DB i Mapper
+
+        pitchedRoofMaterials.add(tagSpaer);
+
+
+        //Nakkekrog til tagsten
+        Material tagstenNakkekroge = new Material();
+        tagstenNakkekroge.setName("TAGSTEN NAKKEKROGE" + tagstenNakkekroge.getThickness() + "x" + tagstenNakkekroge.getWidth());
+
+        int quantityOfNakkekrog = tagstenNakkekrogeCalculated();
+        tagstenNakkekroge.setAmount(quantityOfNakkekrog);
+        tagstenNakkekroge.setComment("Til montering af tagsten");
+
+        tagstenNakkekroge.setSize(0); //Længde fra DB - metode der henter længde fra DB i Mapper
+
+        pitchedRoofMaterials.add(tagstenNakkekroge);
+
+        //Bindere til tagsten
+        Material tagstenBindere = new Material();
+        tagstenBindere.setName("TAGSTEN BINDERE" + tagstenBindere.getThickness() + "x" + tagstenBindere.getWidth());
+
+        int quantityOfBindere = tagstenBindereCalculated();
+        tagstenBindere.setAmount(quantityOfBindere);
+        tagstenBindere.setComment("Til montering af tagsten");
+
+        tagstenBindere.setSize(0); //Længde fra DB - metode der henter længde fra DB i Mapper
+
+        pitchedRoofMaterials.add(tagstenBindere);
+
+
+        //Gavl - 0,0 i parameter?
+        Material gavlOverlay = new Material();
+        gavlOverlay.setName("GAVLOVERLAY" +  gavlOverlay.getThickness() + "x" +  gavlOverlay.getWidth());
+
+        int quantityOfGavlOverlay = gavlOverlayQuantity(0,0);
+        gavlOverlay.setAmount(quantityOfGavlOverlay);
+        gavlOverlay.setComment("Til montering af tagsten");
+
+        gavlOverlay.setSize(0); //Længde fra DB - metode der henter længde fra DB i Mapper
+
+        pitchedRoofMaterials.add(gavlOverlay);
 
         return pitchedRoofMaterials;
     }
 
 
-    //** Calculations **
+    //........ CALCULATIONS .........
 
     public int amoutOfRygstenBeslagCalculated() {
         rygstenBeslag = quantityRygsten();
@@ -264,7 +378,7 @@ public class PitchedRoofMaterialCalculator {
 
     public int screwForTaglægterCalculated(){
         //Vi antager der er er en skrue pr toplægteholder + samt et pr spær for at sætte toplægten fast
-        screwForTaglægter = numberOfToplaegteHolder() * SCREWSPERTAGLÆGTEHOLDER;
+        screwForTaglægter = amountOfToplaegteHolder() * SCREWSPERTAGLÆGTEHOLDER;
         return screwForTaglægter;
     }
 
@@ -308,7 +422,7 @@ public class PitchedRoofMaterialCalculator {
         return spærFullPlankLength;
     }
     //TODO beregning af ekstra spær (til sidst)
-    public int spærQuatity(){
+    public int spærQuantity(){
         int carportLength = construction.getCarportLength();
         int distanceBestweenSpær = 89;
         for (int i = 0; i < carportLength; i = 1 + distanceBestweenSpær) {
@@ -320,8 +434,8 @@ public class PitchedRoofMaterialCalculator {
         return spærAmount;
     }
 
-    public int spærFullQuatityOfPlanksTotal(){
-        spærFullQuatityOfPlanks = spærPlankLengthPerSpær()*spærQuatity();
+    public int spærFullQuantityOfPlanksTotal(){
+        spærFullQuatityOfPlanks = spærPlankLengthPerSpær()* spærQuantity();
         return spærFullQuatityOfPlanks;
     }
 
@@ -407,7 +521,7 @@ public class PitchedRoofMaterialCalculator {
     }
 
     //** Beregning af antal Toplægteholdere i forhold til spær (beslag)
-    private int numberOfToplaegteHolder ()
+    private int amountOfToplaegteHolder()
     {
         int spaer = constructionSizeCalculator.roofSpaerAmount(construction);
         int toplaegteholder = 0;
