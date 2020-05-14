@@ -41,7 +41,7 @@ To change this template use File | Settings | File Templates.
 
             <tr>
                 <td>Tagdækning:</td>
-                <td>${requestScope.attributeName}</td>
+                <td>${sessionScope.carportBase.roof.cover} ${sessionScope.carportBase.roof.color}</td>
             </tr>
 
             <td>Beklæd væg:</td>
@@ -102,9 +102,12 @@ To change this template use File | Settings | File Templates.
         </form>
 
 
+
+
     </div>
     <div class="col-md-4"></div>
 </div>
+
 <!-- row closing tag -->
 
 <%@include file="../includes/footer.inc" %>

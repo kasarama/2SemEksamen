@@ -14,6 +14,7 @@ public abstract class Roof {
     private String cover;
 
 
+
     public Roof(int height, int length, int width, int degree, boolean pitched, int tilt) {
         this.height = height;
         this.length = length;
@@ -100,6 +101,7 @@ public abstract class Roof {
     public String getCover() {
         return cover;
     }
+
 
     public void setCover(String cover) {
         this.cover = cover;

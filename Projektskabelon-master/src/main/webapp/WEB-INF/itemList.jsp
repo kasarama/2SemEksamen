@@ -68,7 +68,7 @@ todo should sho material.availablesize-->
             <c:forEach var="material" items="${requestScope.roofMaterials}">
                 <tr class="tr2">
                     <td>${material.name}</td>
-                    <td>${material.size}</td>
+                    <td>${material.size/10}</td>
                     <td>${material.antal}</td>
                     <td>${material.unit}</td>
                     <td>${material.comment}</td>

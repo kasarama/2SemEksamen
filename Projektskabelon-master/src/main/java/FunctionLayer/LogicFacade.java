@@ -55,6 +55,17 @@ public class LogicFacade {
         return MaterialMapper.getNameFromMaterialID(idMaterial);
     }
 
+    public static String getColorByMaterialID(int materialID) throws LoginSampleException{
+        return MaterialMapper.getColorByMaterialID(materialID);
+    }
+
+    public static String getColourByVariationID(int variationid) throws LoginSampleException{
+        return MaterialMapper.getColorByID(variationid);
+    }
+
+    public static Material getMaterialByNameColourAndSize(String name, int size, String color) throws LoginSampleException{
+        return MaterialMapper.getRoofFullMaterialBySizeColorAndName(name, size, color);
+    }
 
     //call the static method that gets the ROOF materials data from DB - static = can be called without creating an obj.
     public static List<Material> getAllPitchedRoofMaterials() throws LoginSampleException {
@@ -102,10 +113,17 @@ public class LogicFacade {
 
 
         //................Materials for roof...........//
-        //todo create ArrayList with materials for roof and set it on order.construction.roof
-
-        ArrayList<Material> roofMaterialList = new ArrayList<>(); // = call the method her
-       // order.getConstruction().getRoof().setTagMaterialList(roofMaterialList);
+        //todo create ArrayList with materials for roof and set it on order.construction.roof      Done !
+        boolean orderedCaportIsPitched = order.getConstruction().getRoof().getIsPitched();
+        ArrayList<Material> roofMaterialList = new ArrayList();
+        if (orderedCaportIsPitched) {
+            PitchedRoofMaterialCalculator pRMCalculator = new PitchedRoofMaterialCalculator(order.getConstruction());
+            roofMaterialList = pRMCalculator.pitchedRoofMaterialsList();
+        } else {
+            RoofMaterialCalculator rMCalculator = new RoofMaterialCalculator(order.getConstruction());
+            roofMaterialList = rMCalculator.getflatRoofMaterials();
+        }
+        order.getConstruction().getRoof().setRoofMaterialList(roofMaterialList);
 
 
         //................Materials for construction...........//

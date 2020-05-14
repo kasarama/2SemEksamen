@@ -197,7 +197,7 @@ public class MaterialMapper {
             //2. start the connection by calling ".connection()" method from the "Connector" class
             Connection con = Connector.connection();
             //3. create an SQL statement - select everything from only 'RejsningTag' from the 'material' table
-            String SQL = "SELECT * FROM fogdb.materials LEFT JOIN fogdb.variations " +
+            String SQL = "SELECT * FROM fogdb.materials JOIN fogdb.variations " +
                     "ON materials.materialID=variations.materialID WHERE materials.category=?;";
             //4. insert the SQL statement into the ".preparedStatement()" method - it sends the SQL statement to the DB
             PreparedStatement ps = con.prepareStatement(SQL);
@@ -219,11 +219,11 @@ public class MaterialMapper {
                 String unit = rs.getString("unit");
                 String keyword = rs.getString("keyword");
                 String category = rs.getString("category");
-                int length = rs.getInt("length");
                 String color = rs.getString("color");
+                int variationID = rs.getInt("variationID");
 
                 //create a new material obj of 'Material' class and pass the gotten data in it (materialID, name, size etc)
-                Material material = new Material(materialID, name, length, unit, keyword, category);// data gets stored in 'material'
+                Material material = new Material(materialID, name, unit, keyword, category, variationID);// data gets stored in 'material'
                 material.setColor(color);
                 //add the gotten 'info' data to the 'InfoList'
                 materialList.add(material);
@@ -236,75 +236,85 @@ public class MaterialMapper {
         // return the gotten 'material' data from the DB
         return materialList;
     }
-///////// version slut
 
-    public static List<Material> getAllRoofMaterialsByCategory(String roofType) throws LoginSampleException {
-        List<Material> materialList = null;
 
-        //try-catch block in case an error occurs.
+    public static Material getRoofFullMaterialBySizeColorAndName(String name, int size, String color) throws LoginSampleException {
+        Material material = null;
         try {
-            //2. start the connection by calling ".connection()" method from the "Connector" class
             Connection con = Connector.connection();
-            //3. create an SQL statement - select everything from only 'RejsningTag' from the 'material' table
-            String SQL = "SELECT materials.name FROM fogdb.materials LEFT JOIN fogdb.variations " +
-                    "ON materials.materialID=variations.materialID WHERE materials.category=?;";
-            //4. insert the SQL statement into the ".preparedStatement()" method - it sends the SQL statement to the DB
+            String SQL = "SELECT * FROM fogdb.materials RIGHT JOIN fogdb.variations ON " +
+                    "materials.materialID=variations.materialID WHERE materials.name=? AND " +
+                    "variations.length=? AND variations.color=?;";
             PreparedStatement ps = con.prepareStatement(SQL);
-            ps.setString(1, "\'"+roofType+"\'");
-            //5. call the ".executeQuery()" to execute the SQL statement and return the result (stored in ResultSet).
-            ResultSet rs = ps.executeQuery();//works with getters/setters from "Info" class
+            ps.setString(1, name);
+            ps.setInt(2, size);
+            ps.setString(3, color);
+            ResultSet rs = ps.executeQuery();
 
-            //6. while there is a next 'rs' (result i.e element) - do the following code
-            while (rs.next()) {
-
-                //if the 'materialList' is empty
-                if (materialList == null) {
-                    materialList = new ArrayList<>(); //design choice - to easily switch to ArrayList implementation
-                }
-
-                //get the data rows:
+            if (rs.next()) {
                 int materialID = rs.getInt("materialID");
-                String name = rs.getString("name");
                 String unit = rs.getString("unit");
                 String keyword = rs.getString("keyword");
                 String category = rs.getString("category");
-                int length = rs.getInt("length");
 
-                //create a new material obj of 'Material' class and pass the gotten data in it (materialID, name, size etc)
-                Material material = new Material(materialID, name, length, unit, keyword, category);// data gets stored in 'material'
-                //add the gotten 'info' data to the 'InfoList'
-                materialList.add(material);
+                material = new Material(materialID, name, size, unit, keyword, category);
             }
-        }
-        //catch the SQLException
-        catch (ClassNotFoundException | SQLException ex) {
+        } catch (ClassNotFoundException | SQLException ex) {
             throw new LoginSampleException(ex.getMessage()); //get the error message
         }
-        // return the gotten 'material' data from the DB
-        return materialList;
+        return material;
     }
+
+    public static String getColorByMaterialID(int materialID) throws LoginSampleException {
+        String color = "";
+        try {
+            Connection con = Connector.connection();
+            String SQL = "SELECT color FROM variations WHERE materialID=?";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ps.setInt(1, materialID);
+
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                color = rs.getString("materialID");
+                return color;
+            } else {
+                throw new LoginSampleException("Fejl under læsning af materialefarver fra DB");
+            }
+        } catch (ClassNotFoundException | SQLException ex) {
+            ex.printStackTrace();
+            throw new LoginSampleException(ex.getMessage());
+        }
+    }
+///////// Cath version slut
 
     public static List<Material> getAllFlatRoofMaterials() throws LoginSampleException {
         List<Material> materialList = null;
-
         try {
             Connection con = Connector.connection();
-            String SQL = "SELECT * FROM materials WHERE keyword = 'FladtTag'";
+            String SQL = "SELECT Distinct materials.materialID, name, unit, length, keyword, category, color FROM " +
+                    "fogdb.materials JOIN fogdb.variations ON materials.materialID = variations.materialID " +
+                    "WHERE materials.keyword=?;";
             PreparedStatement ps = con.prepareStatement(SQL);
+            ps.setString(1, "FladtTag");
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 if (materialList == null) {
                     materialList = new ArrayList<>();
                 }
                 int materialID = rs.getInt("materialID");
+                int length = rs.getInt("length");
                 String name = rs.getString("name");
                 String unit = rs.getString("unit");
                 String keyword = rs.getString("keyword");
                 String category = rs.getString("category");
+                String color = rs.getString("color");
 
-                Material material = new Material(materialID, name, 0, unit, keyword, category);
+                Material material = new Material(materialID, name, length, unit, keyword, category);
+                material.setColor(color);
                 materialList.add(material);
             }
+
+
         } catch (ClassNotFoundException | SQLException ex) {
             throw new LoginSampleException(ex.getMessage());
         }
@@ -464,14 +474,14 @@ public class MaterialMapper {
 
     //Cath
     public static ArrayList getLengthForMaterials(String materialName) throws LoginSampleException {
-        ArrayList <Integer> lengthViaMaterailName = null;
+        ArrayList<Integer> lengthViaMaterailName = null;
         try {
             Connection con = Connector.connection();
             String SQLRequest = "SELECT variations.length FROM fogdb.variations JOIN fogdb.materials ON materials.materialID = variations.materialID WHERE materials.name=?";
             PreparedStatement preparedStatement = con.prepareStatement(SQLRequest);
             preparedStatement.setString(1, materialName);
             ResultSet resultSet = preparedStatement.executeQuery();
-            while(resultSet.next()){
+            while (resultSet.next()) {
                 lengthViaMaterailName.add(resultSet.getInt("length"));
             }
         } catch (ClassNotFoundException e) {
@@ -487,7 +497,7 @@ public class MaterialMapper {
         String materialNameByID = null;
         try {
             Connection con = Connector.connection();
-            String SQLRequest = "SELECT materials.name FROM fogdb.materials WHERE materials.id=?";
+            String SQLRequest = "SELECT materials.name FROM fogdb.materials WHERE materials.materialID=?";
             PreparedStatement preparedStatement = con.prepareStatement(SQLRequest);
             preparedStatement.setInt(1, idMaterial);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -504,7 +514,7 @@ public class MaterialMapper {
     }
 
     public static String getColorByID(int variationID) throws LoginSampleException {
-        String color="";
+        String color = "";
         try {
             Connection con = Connector.connection();
             String SQL = "SELECT color FROM variations WHERE variationID=?";

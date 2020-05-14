@@ -14,6 +14,8 @@ public class Material {
     private String comment;
     private String keyword;
     private String category;
+
+    private int variationID;
     private String picture;
     private double spending; // bruges til beregninger af beklædning
     private String color;
@@ -50,6 +52,16 @@ public class Material {
         this.keyword = keyword;
         this.category = category;
 
+    }
+
+    public Material(int materialID, String name, String unit, String keyword, String category, int variationID) {
+        this.id = materialID;
+        this.name = name;
+        this.size = size;
+        this.unit = unit;
+        this.keyword = keyword;
+        this.category = category;
+        this.variationID = variationID;
     }
 
     public double getSpending() {
@@ -161,6 +173,10 @@ public class Material {
 
     public void setColor(String color) {
         this.color = color;
+    }
+
+    public int getVariationID() {
+        return variationID;
     }
 
     @Override

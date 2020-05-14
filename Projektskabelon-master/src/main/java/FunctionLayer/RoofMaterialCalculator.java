@@ -1,7 +1,5 @@
 package FunctionLayer;
 
-import PresentationLayer.Materials;
-
 import java.util.ArrayList;
 
 public class RoofMaterialCalculator {
@@ -35,22 +33,24 @@ public class RoofMaterialCalculator {
         this.roofLength = roofSizing.roofLengthSurface();
     }
 
-    public ArrayList<Material> setflatRoofMaterials() throws LoginSampleException {
-        construction.getRoof().setRoofMaterialList(flatRoofMaterialsInsert("BLÅTONET")); //TODO hente farve kunde på jsp-side
+    public ArrayList<Material> getflatRoofMaterials() throws LoginSampleException {
+
+        construction.getRoof().setRoofMaterialList(flatRoofMaterialsTrapezPlades(construction.getRoof().getColor()));
         return construction.getRoof().getRoofMaterialList();
     }
 
-    public ArrayList<Material> flatRoofMaterialsInsert(String trapezColourAndName) throws LoginSampleException { //TODO - TEST
+    public ArrayList<Material> flatRoofMaterialsTrapezPlades(String color) throws LoginSampleException { //TODO - TEST
         materialsList = new ArrayList();
         material = null;
 
         //TrapezPlader
-        material = LogicFacade.getMaterialBySizeName(T600ROOFPLADELENGTH, "");
-        material.setName(trapezColourAndName);
+        String nameTrapez = "TRAPEZPLADE";
+        material = LogicFacade.getMaterialByNameColourAndSize(nameTrapez, T600ROOFPLADELENGTH, color);
+        material.setName(nameTrapez);
         material.setUnit(LogicFacade.getUnitByName(material.getName()));
         material.setWidth(LogicFacade.getWidthByID(material.getId(), material.getName()));
         material.setThickness(LogicFacade.getThicknessByID(material.getId()));
-        material.setName("SPÆRTRÆ UBEHANDLET " + material.getThickness() + "x" + material.getWidth());
+        material.setName( nameTrapez + material.getThickness() + "x" + material.getWidth());
         material.setSize(T600ROOFPLADELENGTH);
         int quantityOfT600 = quantityOfT600ForRoof(material.getWidth());
         material.setAmount(quantityOfT600);
@@ -59,12 +59,12 @@ public class RoofMaterialCalculator {
         materialsList.add(material);
         material = new Material();
 
-        material = LogicFacade.getMaterialBySizeName(T300ROOFPLADELENGTH, "");
-        material.setName(trapezColourAndName);
+        material = LogicFacade.getMaterialByNameColourAndSize(nameTrapez, T600ROOFPLADELENGTH, color);
+        material.setName(nameTrapez);
         material.setUnit(LogicFacade.getUnitByName(material.getName()));
         material.setWidth(LogicFacade.getWidthByID(material.getId(), material.getName()));
         material.setThickness(LogicFacade.getThicknessByID(material.getId()));
-        material.setName("SPÆRTRÆ UBEHANDLET " + material.getThickness() + "x" + material.getWidth());
+        material.setName(nameTrapez + material.getThickness() + "x" + material.getWidth());
         material.setSize(T300ROOFPLADELENGTH);
         int quantityOfT300 = quantityOfT300ForRoof(material.getWidth());
         material.setAmount(quantityOfT300);

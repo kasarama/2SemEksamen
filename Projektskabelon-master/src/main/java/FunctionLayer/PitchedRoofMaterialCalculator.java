@@ -54,7 +54,7 @@ public class PitchedRoofMaterialCalculator {
         roof = construction.getRoof();
     }
 
-    public static ArrayList<Material> pitchedRoof (Construction construction) {
+    public ArrayList<Material> pitchedRoofMaterialsList () {
         ArrayList<Material> pitchedRoofMaterials = new ArrayList<>();
 
         //Toplægter

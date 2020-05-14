@@ -1,9 +1,6 @@
 package PresentationLayer;
 
-import FunctionLayer.Construction;
-import FunctionLayer.LoginSampleException;
-import FunctionLayer.Material;
-import FunctionLayer.OverlayMaterialCalculator;
+import FunctionLayer.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -27,10 +24,19 @@ public class ItemList  extends Command{
 
 
         //................Materials for roof...........//
-        //todo create ArrayList with materials for roof and set it on request
+        //todo create ArrayList with materials for roof and set it on request    Done?
+        Boolean roofIsPitched = construction.getRoof().getIsPitched();
+        ArrayList<Material> roofMaterialList = new ArrayList();
+        if (roofIsPitched) {
+            PitchedRoofMaterialCalculator pRMCalculator = new PitchedRoofMaterialCalculator(construction);
+            roofMaterialList = pRMCalculator.pitchedRoofMaterialsList();
+        }else{
+            RoofMaterialCalculator rmCalculator = new RoofMaterialCalculator(construction);
+            roofMaterialList = rmCalculator.getflatRoofMaterials();
+            //TODO Catch fejlmeddelse
+        }
+        request.setAttribute("roofMaterials", roofMaterialList);
 
-        ArrayList<Material> roofMaterialList = new ArrayList<>(); // = call the method her
-        request.setAttribute("roofMaterials", constructionMaterialList);
 
         //................Materials for overlay...........//
         String overlayName = construction.getOverlay();

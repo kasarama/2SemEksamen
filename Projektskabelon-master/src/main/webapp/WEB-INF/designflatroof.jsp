@@ -13,8 +13,8 @@
 
 <div class="container2">
     <div class="col-md-12">
-        <form name="makerequest" action="FrontController" method="post">
-            <input type="hidden" name="target" value="makerequest">
+        <form name="designflatroof" action="FrontController" method="post">
+            <input type="hidden" name="target" value="designflatroof">
             <br>
             <br>
             <h2>Fladt tag design</h2>
@@ -22,12 +22,12 @@
             <select class="form-control mt-3" name="flatroof" id="flatroof">
                 <option selected disabled>Vælg tagdækning</option>
                 <c:forEach var="roofMaterial" items="${applicationScope.flatMaterialList}">
-                    <option value="${roofMaterial.id}">${roofMaterial.name}</option>
+                    <option value="${roofMaterial.id}">${roofMaterial.name} ${roofMaterial.color}</option>
                 </c:forEach>
             </select>
+            <input class="btn btn-primary mt-3" type="submit" value="Videre til beklædning">
 
-            <br>
-            <a class="mt-3 btn btn-dark" href="FrontController?target=redirect&destination=overlay" role="button">Videre til beklædning</a>
+
         </form>
         <!-- End of form -->
 
