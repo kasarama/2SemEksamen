@@ -1,5 +1,7 @@
 package FunctionLayer;
 
+import DBAccess.MaterialMapper;
+
 import java.util.ArrayList;
 
 public class PitchedRoofMaterialCalculator {
@@ -12,10 +14,6 @@ public class PitchedRoofMaterialCalculator {
     private int numberOfTagfodsLaegte;
     private int numberOfVindskeder;
     private int numberOfVandbraet;
-
-    ConstructionSizeCalculator constructionSizeCalculator;
-    Construction construction;
-    Roof roof;
 
     //C
     RoofSizing roofSizing;
@@ -43,6 +41,10 @@ public class PitchedRoofMaterialCalculator {
 
     private int amountOfRygsten;
 
+    ConstructionSizeCalculator constructionSizeCalculator;
+    Construction construction;
+    Roof roof;
+
 
 
     public PitchedRoofMaterialCalculator(Construction construction) {
@@ -51,66 +53,176 @@ public class PitchedRoofMaterialCalculator {
         roof = construction.getRoof();
     }
 
-    public static ArrayList<Material> pitchedRoof (Construction construction) {
+    public ArrayList<Material> pitchedRoof (Construction construction) throws LoginSampleException {
         ArrayList<Material> pitchedRoofMaterials = new ArrayList<>();
 
         // Todo: Set materials to the correct attributes and call amount methods where needed.
 
         //Toplægter
-        Material toplægter = new Material();
-        toplægter.setName("");
-        toplægter.setComment("");
-        toplægter.setSize(0);
-        toplægter.setAmount(0);
-        pitchedRoofMaterials.add(toplægter);
+        Material toplaegter = new Material();
+
+        toplaegter.setName("TOPLÆGTE" + toplaegter.getThickness() + "x" + toplaegter.getWidth());
+        toplaegter.setCategory("Rejsning Konstruktion");
+        toplaegter.setUnit(LogicFacade.getUnitByName(toplaegter.getName()));
+        toplaegter.setWidth(LogicFacade.getWidthByID(toplaegter.getId(),toplaegter.getName()));
+        toplaegter.setThickness(LogicFacade.getThicknessByID(toplaegter.getId()));
+
+        int quantityOfToplaegter = amountOfT1_RygstenLength();
+        toplaegter.setAmount(quantityOfToplaegter);
+        toplaegter.setComment("Lægte til montering af rygsten - lægges i toplægte holder");
+
+        //todo: put 'getLengthForMaterials' method from Mapper in logicFacade..+ call it from there to get size (length)
+        toplaegter.setSize(0); //  Længde fra DB - metode der henter længde fra DB i Mapper
+
+        pitchedRoofMaterials.add(toplaegter);
 
         //Taglægter
         Material taglaegter = new Material();
-        taglaegter.setName("");
-        taglaegter.setComment("");
-        taglaegter.setSize(0);
-        taglaegter.setAmount(0);
+
+        taglaegter.setName("TAGLÆGTE" + taglaegter.getThickness() + "x" + taglaegter.getWidth());
+        taglaegter.setCategory("Rejsning Konstruktion");
+        taglaegter.setUnit(LogicFacade.getUnitByName(taglaegter.getName()));
+        taglaegter.setWidth(LogicFacade.getWidthByID(taglaegter.getId(),taglaegter.getName()));
+        taglaegter.setThickness(LogicFacade.getThicknessByID(taglaegter.getId()));
+
+        int quantityOfTaglaegter = amountOfT1_Spaer_Taglaegter();
+        taglaegter.setAmount(quantityOfTaglaegter);
+        taglaegter.setComment("Lægte til montering på spær");
+
+        taglaegter.setSize(0); //  Længde fra DB - metode der henter længde fra DB i Mapper
+
         pitchedRoofMaterials.add(taglaegter);
+
 
         //Sternbrædder
         Material stern = new Material();
-        stern.setName("");
-        stern.setComment("");
-        stern.setSize(0);
-        stern.setAmount(0);
+
+        stern.setName("STERNBRÆT" + stern.getThickness() + "x" + stern.getWidth());
+        stern.setCategory("Rejsning Konstruktion");
+        stern.setUnit(LogicFacade.getUnitByName(stern.getName()));
+        stern.setWidth(LogicFacade.getWidthByID(stern.getId(),stern.getName()));
+        stern.setThickness(LogicFacade.getThicknessByID(stern.getId()));
+
+        int quantityOfStern = amountOfStern();
+        stern.setAmount(quantityOfStern);
+        stern.setComment("Bræt påsømmes enderne af tagspærene - dækker og beskytter spærene");
+
+
+        stern.setSize(0); // Længde fra DB - metode der henter længde fra DB i Mapper
+
         pitchedRoofMaterials.add(stern);
 
         //Vandbræt
         Material vandbraet = new Material();
-        vandbraet.setName("");
-        vandbraet.setComment("");
-        vandbraet.setSize(0);
-        vandbraet.setAmount(0);
+
+        vandbraet.setName("VANDBRÆT" + vandbraet.getThickness() + "x" + vandbraet.getWidth());
+        vandbraet.setCategory("Rejsning Konstruktion");
+        vandbraet.setUnit(LogicFacade.getUnitByName(vandbraet.getName()));
+        vandbraet.setWidth(LogicFacade.getWidthByID(vandbraet.getId(),vandbraet.getName()));
+        vandbraet.setThickness(LogicFacade.getThicknessByID(vandbraet.getId()));
+
+        int quantityOfVandbraet = amountOfVandbraet();
+        vandbraet.setAmount(quantityOfStern);
+        vandbraet.setComment("Bræt til montering på vindskeder -  beskytter mod fugtfæld");
+
+        vandbraet.setSize(0); // Længde fra DB - metode der henter længde fra DB i Mapper
+
+
         pitchedRoofMaterials.add(vandbraet);
 
         //Vindskeder
         Material vindskeder = new Material();
-        vindskeder.setName("");
-        vindskeder.setComment("");
-        vindskeder.setSize(0);
-        vindskeder.setAmount(0);
+
+        vindskeder.setName("VINDSKEDER" + vindskeder.getThickness() + "x" + vindskeder.getWidth());
+        vindskeder.setCategory("Rejsning Konstruktion");
+        vindskeder.setUnit(LogicFacade.getUnitByName(vindskeder.getName()));
+        vindskeder.setWidth(LogicFacade.getWidthByID(vindskeder.getId(),vindskeder.getName()));
+        vindskeder.setThickness(LogicFacade.getThicknessByID(vindskeder.getId()));
+
+        int quantityOfVindskeder = amountOfVindskeder();
+        vindskeder.setAmount(quantityOfVindskeder);
+        vindskeder.setComment("Bræt til montering på tag rejsning som afslutning på tagpaptage");
+
+        vindskeder.setSize(0); // Længde fra DB - metode der henter længde fra DB i Mapper
+
         pitchedRoofMaterials.add(vindskeder);
+
+
+        //TagfodsLægte
+        Material tagfodsLaegte = new Material();
+
+        tagfodsLaegte.setName("TAGFODSLÆGTE" + tagfodsLaegte.getThickness() + "x" + tagfodsLaegte.getWidth());
+        tagfodsLaegte.setCategory("Rejsning Konstruktion");
+        tagfodsLaegte.setUnit(LogicFacade.getUnitByName(tagfodsLaegte.getName()));
+        tagfodsLaegte.setWidth(LogicFacade.getWidthByID(tagfodsLaegte.getId(),tagfodsLaegte.getName()));
+        tagfodsLaegte.setThickness(LogicFacade.getThicknessByID(tagfodsLaegte.getId()));
+
+        int quantityOfTagfodsLaegte = amountOfTagfodsLaegte();
+        tagfodsLaegte.setAmount(quantityOfTagfodsLaegte);
+        tagfodsLaegte.setComment("Lægte til tagfod");
+
+        tagfodsLaegte.setSize(0); // Længde fra DB - metode der henter længde fra DB i Mapper
+
+
+        pitchedRoofMaterials.add(tagfodsLaegte);
+
+        //Rygsten
+        Material rygsten = new Material();
+
+        rygsten.setName(" " + rygsten.getThickness() + "x" + rygsten.getWidth());
+        rygsten.setCategory("Rejsning Konstruktion");
+        rygsten.setUnit(LogicFacade.getUnitByName(rygsten.getName()));
+        rygsten.setWidth(LogicFacade.getWidthByID(rygsten.getId(),rygsten.getName()));
+        rygsten.setThickness(LogicFacade.getThicknessByID(rygsten.getId()));
+
+        int quantityOfRygsten = quantityRygsten();
+        rygsten.setAmount(quantityOfRygsten);
+        rygsten.setComment("Monteres på toplægte");
+
+        rygsten.setSize(0); // Længde fra DB - metode der henter længde fra DB i Mapper
+
+        pitchedRoofMaterials.add(rygsten);
+
+
+        //Tagsten /plader? - 3 typer med forskellife farver --> setName? setColor? ingen tykkelse, længde osv i db kunne ikke finde info
+        Material tagsten = new Material();
+
+        tagsten.setName(LogicFacade.getANameFromMaterialID(0)); //getNameFromMaterialID
+        tagsten.setColor(roof.getColor());
+
+        tagsten.setCategory("Rejsning Konstruktion");
+        tagsten.setUnit(LogicFacade.getUnitByName(tagsten.getName()));
+        tagsten.setWidth(LogicFacade.getWidthByID(tagsten.getId(),tagsten.getName()));
+        tagsten.setThickness(LogicFacade.getThicknessByID(tagsten.getId()));
+
+        int quantityOfTagsten = amountOfTagsten();
+        tagsten.setAmount(quantityOfTagsten);
+        tagsten.setComment("Monteres.. ");
+
+        tagsten.setSize(0); // Længde fra DB - metode der henter længde fra DB i Mapper
+
+        pitchedRoofMaterials.add(tagsten);
+
+        // ** Beslag **
 
         //toplægteHolder
         Material toplaegteHolder = new Material();
-        toplaegteHolder.setName("");
+        toplaegteHolder.setName("TOPLÆGTEHOLDER");
         toplaegteHolder.setComment("");
         toplaegteHolder.setSize(0); //available size - get it from DB
         toplaegteHolder.setAmount(0); //call method in a variable + insert variable name in parameter
         pitchedRoofMaterials.add(toplaegteHolder);
 
-        //TagfodsLægte
-        Material tagfodsLaegte = new Material();
-        tagfodsLaegte.setName("");
-        tagfodsLaegte.setComment("");
-        tagfodsLaegte.setSize(0);
-        tagfodsLaegte.setAmount(0);
-        pitchedRoofMaterials.add(tagfodsLaegte);
+
+        //Taglægter skruer
+        //Vandbræt skruer
+        //toplægte skruer
+        //Vindskeder skruer
+        //toplægteHolder skruer
+        //Rygsten beslag
+        //spær
+        //Nakkekrog til tagsten
+
 
         return pitchedRoofMaterials;
     }
@@ -262,9 +374,9 @@ public class PitchedRoofMaterialCalculator {
     //Vi antager at der herfra og ned er et slags materiale og derfor disse beregninger:
 
     //** Beregning af antal taglægter i forhold til tagets bredde - Remember: tilpas med t1_SpaerLength!? **
-    private int numberOfT1_Spaer_Taglaegter (int roofWidth)
+    private int amountOfT1_Spaer_Taglaegter()
     {
-        roofWidth = roof.getWidth();
+        int roofWidth = roof.getWidth();
         int T1_SpaerDistance = 307; // 307 mm mellem hvert lægte - dog ikke den første
         int topDistance = 30; // 30 mm på hver side dvs * 2
 
@@ -273,9 +385,9 @@ public class PitchedRoofMaterialCalculator {
     }
 
     // ** Beregning af antal sternbrædder i forhold til tagets længde - stern skal have samme længde som taget + 300 mm**
-    public int numberOfStern (int roofLength)
+    public int amountOfStern()
     {
-        roofLength = roof.getLength();
+        int roofLength = roof.getLength();
         int sternLength = roofLength + 300; //tag længde + 300mm lægte udhæng
 
         if (roofLength <= 600 ) //600 mm = 1 stern længde - if roofLength equal/smaller than 600
@@ -305,9 +417,9 @@ public class PitchedRoofMaterialCalculator {
     }
 
     //** Beregning af T1 toplægte (til rygsten) i forhold til tag længde **
-    public int numberOfT1_RygstenLength(int roofLength)
+    public int amountOfT1_RygstenLength()
     {
-        roofLength = roof.getLength();
+        int roofLength = roof.getLength();
 
         //int toplaegteLength = 420; // 420 mm = 1 toplægte længde
 
@@ -327,7 +439,7 @@ public class PitchedRoofMaterialCalculator {
     }
 
     //** Beregning af antal tagfodslægte i forhold til taget længde **
-    public int numberOfTagfodsLaegte ()
+    public int amountOfTagfodsLaegte ()
     {
         int roofLength = roof.getLength();
 
@@ -346,10 +458,10 @@ public class PitchedRoofMaterialCalculator {
     }
 
     //** Beregning af antal vindskeder i forhold til tagets længde og højde **
-    public int numberOfVindskeder (int roofLength, int roofHeight)
+    public int amountOfVindskeder ()
     {
-        roofLength = roof.getLength();
-        roofHeight = roof.getHeight();
+       int  roofLength = roof.getLength();
+       int  roofHeight = roof.getHeight();
 
         if (roofHeight < 100) //if roofHeight is less than 1 m - no vindskeder is needed
         {
@@ -371,7 +483,7 @@ public class PitchedRoofMaterialCalculator {
 
     //** Beregning af antal vandbræt i forhold til antal vindskider ** - skal monteres på vindskider
     //Note: antal vandbræt = antal vindskeder.
-    public  int numberOfVandbraet()
+    public  int amountOfVandbraet()
     {
         int roofLength = roof.getLength();
 
@@ -385,4 +497,5 @@ public class PitchedRoofMaterialCalculator {
         }
         return numberOfVandbraet;
     }
+
 }
