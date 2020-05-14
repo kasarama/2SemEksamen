@@ -1,19 +1,18 @@
 package FunctionLayer;
 
+import CarportUtil.ListFactory;
+
 import java.util.ArrayList;
 
 /**
  * @author Magdalena
  */
 public class OverlayMaterialCalculator {
-    //todo method that counts equal Materials on the list and make them into one with the propper amount of it
-    //todo what is misssing for the door??
 
     final private static int DOORHEIGHT = 2000;
     final private static int DOORWIDTH = 900;
     final private static int POSTWIDTH = 100;
     final private static int MAXGAPDOORROOF = 100;
-    final private static int SPLITSPAERINTO = 3;
     final private static int SCREWFORDOORELEMEN = 9;
     final private static int DOORMETALELEMENS = 3;
 
@@ -122,8 +121,9 @@ public class OverlayMaterialCalculator {
         ArrayList<Wall> carportWalls = construction.getWalls();
         ArrayList<Wall> shedWalls = construction.getShed().getWalls();
         ArrayList<Wall> allWalls = new ArrayList<>();
-        allWalls.addAll(carportWalls);
         allWalls.addAll(shedWalls);
+        allWalls.addAll(carportWalls);
+
 
         for (Wall wall :allWalls) {
             Material overlayScrew = screwForOverlayOneWall(wall, materialName);
@@ -253,8 +253,10 @@ public class OverlayMaterialCalculator {
 
 
     public static ArrayList<Material> allOverlayMaterialList(Construction construction, String overlayName) throws LoginSampleException {
+
         ArrayList<Material> overlayMaterials = new ArrayList<>();
         ArrayList<Material> doorFraming = doorFraming(construction);
+
         ArrayList<Wall> walls = construction.getWalls();
         construction.getWalls().addAll(construction.getShed().getWalls());
 
@@ -263,14 +265,30 @@ public class OverlayMaterialCalculator {
             return null;
         } else
 
-        for (Wall wall : walls) {
-            ArrayList<Material> oneWallMaterials = new ArrayList<>();
-            oneWallMaterials=wallFraming(wall);
-            overlayMaterials.addAll(oneWallMaterials);
-        }
+            for (Wall wall : walls) {
+                ArrayList<Material> oneWallMaterials = new ArrayList<>();
+                oneWallMaterials=wallFraming(wall);
+                overlayMaterials.addAll(oneWallMaterials);
+            }
         overlayMaterials.addAll(doorFraming);
+
         overlayMaterials.addAll(overlayMaterial(construction,overlayName));
-        return overlayMaterials;
+
+
+
+
+
+        //...........sorting of materials:............//
+        ArrayList<Material>[] splitMaterials= ListFactory.splitMaterialsByUnits(overlayMaterials);
+        ArrayList<Material> materialsByPackage = ListFactory.sortMaterialsUnitPackage(splitMaterials[0]);
+        ArrayList<Material> materialsByOther = ListFactory.sortMaterialsOtherUnit(splitMaterials[1]);
+
+        ArrayList<Material> sorted = new ArrayList<>();
+        sorted.addAll(materialsByPackage);
+        sorted.addAll(materialsByOther);
+
+
+        return sorted;
     }
 }
 
