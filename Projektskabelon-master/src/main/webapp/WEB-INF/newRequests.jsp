@@ -17,7 +17,7 @@
         <h2>Nye Forespørgsler</h2>
 
 
-        <form name="showequests" action="FrontController" method="POST">
+        <form name="showrequests" action="FrontController" method="POST">
             <input type="hidden" name="target" value="showrequests">
             <input type="hidden" name="origin" value="newRequests">
             <input class="mt-3 mb-4 btn btn-outline-dark" type="submit" name="newrequests" value="Opdater fra databasen">

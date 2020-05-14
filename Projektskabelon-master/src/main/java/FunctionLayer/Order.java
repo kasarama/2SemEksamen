@@ -14,6 +14,8 @@ public class Order {
     private Date date;
     private double coverage;
     private double transport;
+    final private double TAX=0.25;
+    final private double DEFAULTCOVERAGE=50.0;
 
 
     public Order() {
@@ -106,8 +108,8 @@ public class Order {
         return coverage;
     }
 
-    public void setCoverage() {
-        this.coverage = (this.salePrice - this.transport)/this.salePrice*100;
+    public void setCoverage(double coverage) {
+        this.coverage = coverage;
     }
 
     public double getTransport() {
@@ -116,6 +118,14 @@ public class Order {
 
     public void setTransport(double transport) {
         this.transport = transport;
+    }
+
+    public double getTAX() {
+        return TAX;
+    }
+
+    public double getDEFAULTCOVERAGE() {
+        return DEFAULTCOVERAGE;
     }
 
     public String coverageToString() {
