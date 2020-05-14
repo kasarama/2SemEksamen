@@ -16,12 +16,7 @@ import java.sql.*;
 
 public class MaterialMapper {
 
-    // Skal have fat i et materiale ud fra note
-
-    // Vi vil vide hvor meget materiale der skal bruges
-
-
-    // @author Mia
+    //.......................................Mia's Metoder.......................................................//
     // TODO join tables for at få et materiale frem - denne skal ikke slettes selvom den ikke virker
     public static Material getMaterialBySizeName(int length, String name) throws LoginSampleException {
         Material material; //= new Material();
@@ -105,8 +100,8 @@ public class MaterialMapper {
                 material.setWidth(width);
                 return material.getWidth();
             } else {
-                material.setUnit(null);
-                return material.getWidth();
+                System.out.println("Der skete en fejl");
+                return 0;
             }
         } catch (SQLException sql) {
             material.setUnit(null);
@@ -130,8 +125,8 @@ public class MaterialMapper {
                 material.setThickness(thickness);
                 return material.getThickness();
             } else {
-                material.setUnit(null);
-                return material.getThickness();
+                System.out.println("Der skete en fejl");
+                return 0;
             }
         } catch (SQLException sql) {
             material.setUnit(null);
@@ -140,6 +135,33 @@ public class MaterialMapper {
             throw new LoginSampleException(ex.getMessage());
         }
     }
+
+    public static double getPrices(int id) throws LoginSampleException {
+        Material material = new Material();
+        try {
+            Connection con = Connector.connection();
+            String SQL = "SELECT price FROM fogdb.materials WHERE materialID=?";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                double price = rs.getDouble("price");
+                material = new Material(id, price);
+                material.setPrice(price);
+                return material.getPrice();
+            } else {
+                System.out.println("Der skete en fejl");
+                return 0;
+            }
+        } catch (SQLException sql) {
+            material.setUnit(null);
+            return material.getThickness();
+        } catch (ClassNotFoundException ex) {
+            throw new LoginSampleException(ex.getMessage());
+        }
+    }
+
+    //.......................................Mia's Metoder SLUT.................................................//
 
 
 // This class Connects to DB and gets the "Roof material" data from it.

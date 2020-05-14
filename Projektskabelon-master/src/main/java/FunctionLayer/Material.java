@@ -34,13 +34,16 @@ public class Material {
         this.width = integer;
         this.thickness = integer;
     }
+    public Material(int id, double price) {
+        this.id = id;
+        this.price = price;
+    }
     public Material(int id, String name, int integer) {
         this.id = id;
         this.name = name;
         this.width = integer;
         this.thickness = integer;
     }
-
 
     public Material(int id, String name, int size, String unit, String keyword, String category) {
         this.id = id;
@@ -49,7 +52,6 @@ public class Material {
         this.unit = unit;
         this.keyword = keyword;
         this.category = category;
-
     }
 
     public double getSpending() {

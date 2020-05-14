@@ -105,6 +105,7 @@ public class ConstructionMaterialCalculator {
             rem.setThickness(LogicFacade.getThicknessByID(rem.getId()));
             rem.setName("SPÆRTRÆ UBEHANDLET " + rem.getThickness() + "x" + rem.getWidth());
             rem.setSize(remPiece);
+            rem.setPrice(LogicFacade.getPrice(rem.getId()));
             if (remPiece == rem.getSize()) {
                 counter++;
             }
