@@ -6,14 +6,11 @@ import java.util.ArrayList;
  * @author Magdalena
  */
 public class OverlayMaterialCalculator {
-    //todo method that counts equal Materials on the list and make them into one with the propper amount of it
-    //todo what is misssing for the door??
 
     final private static int DOORHEIGHT = 2000;
     final private static int DOORWIDTH = 900;
     final private static int POSTWIDTH = 100;
     final private static int MAXGAPDOORROOF = 100;
-    final private static int SPLITSPAERINTO = 3;
     final private static int SCREWFORDOORELEMEN = 9;
     final private static int DOORMETALELEMENS = 3;
 
@@ -122,8 +119,9 @@ public class OverlayMaterialCalculator {
         ArrayList<Wall> carportWalls = construction.getWalls();
         ArrayList<Wall> shedWalls = construction.getShed().getWalls();
         ArrayList<Wall> allWalls = new ArrayList<>();
-        allWalls.addAll(carportWalls);
         allWalls.addAll(shedWalls);
+        allWalls.addAll(carportWalls);
+
 
         for (Wall wall :allWalls) {
             Material overlayScrew = screwForOverlayOneWall(wall, materialName);
@@ -253,13 +251,12 @@ public class OverlayMaterialCalculator {
 
 
     public static ArrayList<Material> allOverlayMaterialList(Construction construction, String overlayName) throws LoginSampleException {
-        System.out.println("In all overlay material list");
+
         ArrayList<Material> overlayMaterials = new ArrayList<>();
         ArrayList<Material> doorFraming = doorFraming(construction);
-        System.out.println("doorFraming list size: " + doorFraming.size());
+
         ArrayList<Wall> walls = construction.getWalls();
         construction.getWalls().addAll(construction.getShed().getWalls());
-        System.out.println("Constructions all wals size: "+ walls.size());
 
 
         if (walls.size()==0){
@@ -272,8 +269,8 @@ public class OverlayMaterialCalculator {
             overlayMaterials.addAll(oneWallMaterials);
         }
         overlayMaterials.addAll(doorFraming);
+
         overlayMaterials.addAll(overlayMaterial(construction,overlayName));
-        System.out.println(" should return the list");
         return overlayMaterials;
     }
 }

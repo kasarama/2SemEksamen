@@ -13,6 +13,7 @@ import java.util.ArrayList;
 public class ItemList  extends Command{
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException {
+
         HttpSession session = request.getSession();
         Construction construction= (Construction) session.getAttribute("carportBase");
 
@@ -35,10 +36,9 @@ public class ItemList  extends Command{
         ArrayList<Material> ovarlayMaterialList = OverlayMaterialCalculator.allOverlayMaterialList(construction, overlayName);
         request.setAttribute("overlayMaterials", ovarlayMaterialList);
 
-
-
-
-
+        Order order = (Order) request.getServletContext().getAttribute("orderForValidation");
+        LogicFacade.setMaterialsForOrder(order);
+        request.getServletContext().setAttribute("orderForValidation", order);
         return "itemList";
     }
 }

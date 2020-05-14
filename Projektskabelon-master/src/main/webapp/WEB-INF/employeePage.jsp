@@ -21,7 +21,6 @@
                     ${requestScope.error}
                 </c:if>
                 <c:if test="${requestScope.orderMSG!= null}">
-                    <h2>Error ! </h2>
                     ${requestScope.orderMSG}
                 </c:if>
             </div>

@@ -25,6 +25,10 @@ public abstract class Roof {
 
     }
 
+    public String optionForFlatRoof(){
+        return "";
+    }
+
     public int getHeight() {
         return height;
     }

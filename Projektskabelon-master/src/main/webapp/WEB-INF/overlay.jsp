@@ -49,11 +49,7 @@
                     <select name="overlayName" class="form-control" id="overlay">
                         <option selected disabled>Vælg beklædning</option>
                         <c:forEach var="material" items="${applicationScope.overlayList}">
-<<<<<<< HEAD
-                            <option value="${material.name}">${material.color} ${material.name}</option>
-=======
                             <option value="${material.name};${material.color}">${material.color} ${material.name}</option>
->>>>>>> lifeOfOrder
                         </c:forEach>
                     </select>
 

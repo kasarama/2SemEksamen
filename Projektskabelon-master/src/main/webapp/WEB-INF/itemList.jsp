@@ -37,7 +37,7 @@ todo should sho material.availablesize-->
             <tbody>
 
 
-            <c:forEach var="material" items="${requestScope.constructionMaterials}">
+            <c:forEach var="material" items="${applicationScope.orderForValidation.construction.fundamentMaterials}">
                 <tr class="tr2">
                     <td>${material.name}</td>
                     <td>${material.amount}</td>
@@ -64,7 +64,7 @@ todo should sho material.availablesize-->
             <tbody>
 
 
-            <c:forEach var="material" items="${requestScope.roofMaterials}">
+            <c:forEach var="material" items="${applicationScope.orderForValidation.construction.roof.roofMaterialList}">
                 <tr class="tr2">
                     <td>${material.name}</td>
                     <td>${material.size}</td>
@@ -80,7 +80,7 @@ todo should sho material.availablesize-->
         <br>
 
 
-        <c:set var="list" value="${requestScope.overlayMaterials}"/>
+        <c:set var="list" value="${applicationScope.orderForValidation.construction.shed.materials}"/>
         <c:choose>
             <c:when test="${list.size() != 0}">
                 <table class="table table-striped ">
@@ -96,7 +96,7 @@ todo should sho material.availablesize-->
                     <tbody>
 
 
-                    <c:forEach var="material" items="${requestScope.overlayMaterials}">
+                    <c:forEach var="material" items="${list}">
                         <tr class="tr2">
                             <th>${material.name}</th>
                             <th>${material.size}</th>
@@ -111,7 +111,7 @@ todo should sho material.availablesize-->
             </c:when>
         </c:choose>
 
-        <a href="FrontController?target=redirect&destination=newOffer">tilbage til Ordre detaljer</a>
+        <a href="FrontController?target=redirect&destination=prepareOffer">tilbage til Ordre detaljer</a>
         <br>
 
     </div>

@@ -21,6 +21,31 @@ todo Return the same page with actial data ??
 <div class="container2">
     <div class="col-md-6">
 
+        <div class="col-md-6">
+
+            <form name="itemList" action="FrontController" method="POST" class="ml-lg-5 mr-lg-5">
+                <input type="hidden" name="origin" value="prepareOffer">
+                <input type="hidden" name="target" value="itemlist">
+                <div class="col-md-6 text-center mt-md-4">
+                    <input class="btn btn-dark mt-3" type="submit" name="itemlist" value="Vis Stykliste"
+                           role="button">
+                </div>
+            </form>
+        </div>
+
+
+
+        <div class="col-md-6">
+<!-- TODO Fix the form so it shows the drowings for employee -->
+            <form name="drawing" action="FrontController" method="POST" class="ml-lg-5 mr-lg-5">
+                <input type="hidden" name="origin" value="prepareOffer">
+                <input type="hidden" name="target" value="drawing">
+                <div class="col-md-6 text-center mt-md-4">
+                    <input class="btn btn-dark mt-3" type="submit" name="drawing" value="Tegning"
+                           role="button">
+                </div>
+            </form>
+        </div>
 
         <c:set var="order" value="${applicationScope.orderForValidation}"/>
         <c:choose>
@@ -46,7 +71,7 @@ todo Return the same page with actial data ??
                             <div class="form-group">
                                 <label>Salgspris - original : ${order.salePrice}</label>
                                 <input type="number" step="0.01" name="saleprice" class="form-control"
-                                       value=${order.construction.salePrice} min="${order.cost+order.transport}"
+                                       value=${order.salePrice} min="${order.cost+order.transport}"
                                        max="${(order.cost+order.transport)*5}">
                             </div>
 
@@ -59,13 +84,13 @@ todo Return the same page with actial data ??
 
 
                             <div class="col-md-6 text-center mt-md-4">
-                                <input class="btn btn-dark mt-3" type="submit" name="byPrice" value="Gem pris"
+                                <input class="btn btn-dark mt-3" type="submit" name="byPrice" value="Gem pris og send Tilbudet"
                                        role="button">
                             </div>
 
                             <div class="col-md-6 text-center mt-md-4">
                                 <input class="btn btn-dark mt-3" type="submit" name="byCoverage"
-                                       value="Gem dækningsgrad"
+                                       value="Gem dækningsgrad og send Tilbudet"
                                        role="button">
                             </div>
 
@@ -74,32 +99,6 @@ todo Return the same page with actial data ??
                 </form>
             </c:when>
         </c:choose>
-    </div>
-
-    <div class="col-md-6">
-
-        <form name="itemList" action="FrontController" method="POST" class="ml-lg-5 mr-lg-5">
-            <input type="hidden" name="origin" value="prepareOffer">
-            <input type="hidden" name="target" value="itemlist">
-            <div class="col-md-6 text-center mt-md-4">
-                <input class="btn btn-dark mt-3" type="submit" name="itemlist" value="Vis Stykliste"
-                       role="button">
-            </div>
-        </form>
-    </div>
-
-
-
-    <div class="col-md-6">
-
-        <form name="drawing" action="FrontController" method="POST" class="ml-lg-5 mr-lg-5">
-            <input type="hidden" name="origin" value="prepareOffer">
-            <input type="hidden" name="target" value="drawing">
-            <div class="col-md-6 text-center mt-md-4">
-                <input class="btn btn-dark mt-3" type="submit" name="drawing" value="Tegning"
-                       role="button">
-            </div>
-        </form>
     </div>
 
 

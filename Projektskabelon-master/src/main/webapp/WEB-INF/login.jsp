@@ -55,6 +55,7 @@
                     </div>
 
                     <div class="text-center">
+                        <!--- TODO - der skal ses på registrer da den laver en 404 fejl efter man trykker registrer -->
                         <button type="submit" class="btn btn-dark mt-3">Registrer</button>
                     </div>
                 </form>
@@ -68,12 +69,6 @@
 </div> <!-- /.container -->
 
 
-
-
-<c:if test = "${requestScope.error!= null}" >
-    <h2>Error ! </h2>
-    ${requestScope.error}
-</c:if>
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->

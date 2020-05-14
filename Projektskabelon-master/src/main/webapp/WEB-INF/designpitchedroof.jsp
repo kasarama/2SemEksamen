@@ -16,6 +16,7 @@ if (request.getServletContext().getAttribute("pitchedMaterialList") == null) {
 }
 
 if (request.getServletContext().getAttribute("MINPITCHDEGREEOPTION") == null) {
+    //TODO Må man dette?
             request.getServletContext().setAttribute("MINPITCHDEGREEOPTION", getMINPITCHDEGREEOPTION());
         }
 
@@ -36,7 +37,7 @@ if (request.getServletContext().getAttribute("MAXPITCHDEGREEOPTION") == null) {
             <select class="form-control mt-3" name="pitchedroof" id="pitchedroof">
                 <option selected disabled>Vælg tagdækning</option>
                 <c:forEach var="roofMaterial" items="${applicationScope.pitchedMaterialList}">
-                    <option value="${roofMaterial.id}">${roofMaterial.name}</option>
+                    <option value="${roofMaterial.id}">${roofMaterial.name} ${roofMaterial.color}</option>
                 </c:forEach>
             </select>
         <!--- </form> --->
@@ -52,7 +53,6 @@ if (request.getServletContext().getAttribute("MAXPITCHDEGREEOPTION") == null) {
             </select>
         </form>
         <!-- End of form -->
-        <input class="btn btn-primary mt-3" type="submit" value="Videre">
         <br>
         <a class="mt-3 btn btn-dark" href="FrontController?target=redirect&destination=overlay" role="button">Videre til beklædning</a>
 

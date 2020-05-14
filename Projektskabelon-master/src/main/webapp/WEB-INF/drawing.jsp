@@ -14,6 +14,14 @@
     <h1>Drawing page</h1>
     <br>
 
+    <a href="FrontController?target=redirect&destination=prepareOffer">tilbage til Ordre detaljer</a>
+    <br>
+
+    ${requestScope.svgFromAbove}
+<br>
+<br>
+<br>
+<br>
 ${requestScope.svgdrawing}
 </body>
 </html>
