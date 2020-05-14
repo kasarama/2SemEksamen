@@ -15,7 +15,7 @@ public class PitchedRoof extends Command {
         HttpSession session = request.getSession();
         Construction carportBase = (Construction) session.getAttribute("carportBase");
 
-        String temp = (String) request.getParameter("pitchedroofmaterial");
+        String temp = request.getParameter("pitchedroofmaterial");
         String[] tempMateriale = temp.split(";");
 
         int tagstenID = Integer.parseInt(tempMateriale[0]);

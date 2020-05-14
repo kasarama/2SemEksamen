@@ -275,7 +275,7 @@ public class MaterialMapper {
 
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                color = rs.getString("materialID");
+                color = rs.getString("color");
                 return color;
             } else {
                 throw new LoginSampleException("Fejl under læsning af materialefarver fra DB");
@@ -291,9 +291,9 @@ public class MaterialMapper {
         List<Material> materialList = null;
         try {
             Connection con = Connector.connection();
-            String SQL = "SELECT Distinct materials.materialID, name, unit, length, keyword, category, color FROM " +
+            String SQL = "SELECT Distinct materials.materialID, name, unit, keyword, category, color FROM " +
                     "fogdb.materials JOIN fogdb.variations ON materials.materialID = variations.materialID " +
-                    "WHERE materials.keyword=?;";
+                    "WHERE materials.category=?";
             PreparedStatement ps = con.prepareStatement(SQL);
             ps.setString(1, "FladtTag");
             ResultSet rs = ps.executeQuery();
@@ -302,14 +302,13 @@ public class MaterialMapper {
                     materialList = new ArrayList<>();
                 }
                 int materialID = rs.getInt("materialID");
-                int length = rs.getInt("length");
                 String name = rs.getString("name");
                 String unit = rs.getString("unit");
                 String keyword = rs.getString("keyword");
                 String category = rs.getString("category");
                 String color = rs.getString("color");
 
-                Material material = new Material(materialID, name, length, unit, keyword, category);
+                Material material = new Material(materialID, name, 0, unit, keyword, category);
                 material.setColor(color);
                 materialList.add(material);
             }
