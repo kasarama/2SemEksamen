@@ -25,20 +25,18 @@ public class EditOrderPrices extends Command {
         double transport = Double.parseDouble(request.getParameter("transport"));
 
 
-
         Order order = (Order) request.getServletContext().getAttribute("orderForValidation");
 
         order.getConstruction().setCarportLength(carportLength);
         order.getConstruction().setCarportWidth(carportWidth);
 
-        if(order.getConstruction().getShed().getDepth()>0){
+        if (order.getConstruction().getShed().getDepth() > 0) {
             order.getConstruction().getShed().setSide(shedSide);
             order.getConstruction().getShed().setDepth(shedDepth);
             ArrayList<Wall> shedWalls = WallBuilder.addShedWalls(order.getConstruction());
             order.getConstruction().getShed().setWalls(shedWalls);
 
         }
-
 
 
         order.getConstruction().setConstructionWidth();
@@ -54,11 +52,10 @@ public class EditOrderPrices extends Command {
 
         try {
             LogicFacade.setMaterialsForOrder(order);
-            System.out.println("Added materials to order - overlay has size: "+order.getConstruction().getShed().getMaterials().size());
+            System.out.println("Added materials to order - overlay has size: " + order.getConstruction().getShed().getMaterials().size());
         } catch (LoginSampleException e) {
             e.printStackTrace();
             throw new LoginSampleException(e.getMessage());
-
         }
 
         order.setCost(Economy.ordersCostPrice(order));
@@ -68,5 +65,6 @@ public class EditOrderPrices extends Command {
         request.getServletContext().setAttribute("orderForValidation", order);
 
         return "prepareOffer";
+
     }
 }

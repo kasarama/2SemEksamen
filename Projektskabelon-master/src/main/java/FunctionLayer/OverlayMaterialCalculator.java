@@ -1,5 +1,7 @@
 package FunctionLayer;
 
+import CarportUtil.ListFactory;
+
 import java.util.ArrayList;
 
 /**
@@ -263,15 +265,28 @@ public class OverlayMaterialCalculator {
             return null;
         } else
 
-        for (Wall wall : walls) {
-            ArrayList<Material> oneWallMaterials = new ArrayList<>();
-            oneWallMaterials=wallFraming(wall);
-            overlayMaterials.addAll(oneWallMaterials);
-        }
+            for (Wall wall : walls) {
+                ArrayList<Material> oneWallMaterials = new ArrayList<>();
+                oneWallMaterials=wallFraming(wall);
+                overlayMaterials.addAll(oneWallMaterials);
+            }
         overlayMaterials.addAll(doorFraming);
 
         overlayMaterials.addAll(overlayMaterial(construction,overlayName));
-        return overlayMaterials;
+
+
+        //...........sorting of materials:............//
+        ArrayList<Material>[] splitMaterials= ListFactory.splitMaterialsByUnits(overlayMaterials);
+        ArrayList<Material> materialsByPackage = ListFactory.sortMaterialsUnitPackage(splitMaterials[0]);
+        ArrayList<Material> materialsByOther = ListFactory.sortMaterialsOtherUnit(splitMaterials[1]);
+
+        ArrayList<Material> sorted = new ArrayList<>();
+        sorted.addAll(materialsByPackage);
+        sorted.addAll(materialsByOther);
+
+
+        return sorted;
+
     }
 }
 

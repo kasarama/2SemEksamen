@@ -124,7 +124,7 @@ public class OrderMapper {
         try {
             Connection con = Connector.connection();
             String SQL = "SELECT * FROM orderdetails LEFT JOIN orders ON orderdetails.orderID=orders.orderID " +
-                    "WHERE status=? ORDER BY 'date' DESC";
+                    "WHERE status=? ORDER BY 'date' ASC";
             PreparedStatement ps = con.prepareStatement(SQL);
             ps.setString(1, status);
             ResultSet rs = ps.executeQuery();
