@@ -19,9 +19,9 @@
         <c:set var="order" value="${applicationScope.orderForValidation}"/>
         <c:choose>
             <c:when test="${order!=null}">
-                <form name="showedit" action="FrontController" method="POST" class="ml-lg-5 mr-lg-5">
+                <form name="editprice" action="FrontController" method="POST" class="ml-lg-5 mr-lg-5">
                     <input type="hidden" name="origin" value="validateRequest">
-                    <input type="hidden" name="target" value="showedit">
+                    <input type="hidden" name="target" value="editprice">
                     <br>
                     <br>
                     <h2>Ordre nr. ${order.orderID}</h2>
@@ -33,19 +33,26 @@
                             <div class="form-group">
                                 <label>Vælg carportens længde i mm - original : ${order.construction.carportLength}</label>
                                 <input type="number" name="carportLength" class="form-control"
-                                       value=${order.construction.carportLength} min="240" max="7500">
+                                       value=${order.construction.carportLength} min="2400" max="7500">
                             </div>
 
                             <div class="form-group">
                                 <label>Vælg carportens bredde i mm - original : ${order.construction.carportWidth}</label>
                                 <input type="number" name="carportWidth" class="form-control"
-                                       value=${order.construction.carportWidth} min="240" max="7500">
+                                       value=${order.construction.carportWidth} min="2400" max="7500">
                             </div>
 
                             <c:set var="shed" value="${order.construction.shed}"/>
                             <c:choose>
                                 <c:when test="${shed.depth!=0}">
                                     <div class="form-group">
+
+                                        <div class="form-group">
+                                            <label>Vælg redskansrummet bredde i mm - original : ${shed.depth}</label>
+                                            <input type="number" name="shedDepth" class="form-control"
+                                                   value=${shed.depth} min="1200" max="3500">
+                                        </div>
+
                                         <label>Vælg siden til redksbsrummet - original : ${shed.danishSide()}</label>
                                         <select name="shedSide" class="form-control">
                                             <option value="right">højre</option>

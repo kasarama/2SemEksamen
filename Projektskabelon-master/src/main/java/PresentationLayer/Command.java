@@ -26,7 +26,7 @@ abstract class Command {
         commands.put("itemlist", new ItemList());
         commands.put("showrequests", new ShowRequests());
         commands.put("validate", new Validate());
-        commands.put("showedit", new ShowEditedConstruction());
+        commands.put("editprice", new EditOrderPrices());
         commands.put("sendoffer", new SendNewOffer());
 
     }

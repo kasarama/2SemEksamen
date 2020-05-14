@@ -13,6 +13,11 @@ import java.util.ArrayList;
 public class ItemList  extends Command{
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException {
+
+        Order order = (Order) request.getServletContext().getAttribute("orderForValidation");
+        LogicFacade.setMaterialsForOrder(order);
+        request.getServletContext().setAttribute("orderForValidation", order);
+
         HttpSession session = request.getSession();
         Construction construction= (Construction) session.getAttribute("carportBase");
 
@@ -31,7 +36,7 @@ public class ItemList  extends Command{
         if (roofIsPitched) {
             PitchedRoofMaterialCalculator pRMCalculator = new PitchedRoofMaterialCalculator(construction);
             roofMaterialList = pRMCalculator.pitchedRoofMaterialsList();
-        }else {
+        } else {
             RoofMaterialCalculator rmCalculator = new RoofMaterialCalculator(construction);
             roofMaterialList = rmCalculator.getflatRoofMaterials();
             //TODO Catch fejlmeddelse
@@ -41,7 +46,6 @@ public class ItemList  extends Command{
             String overlayName = construction.getOverlay();
             ArrayList<Material> ovarlayMaterialList = OverlayMaterialCalculator.allOverlayMaterialList(construction, overlayName);
             request.setAttribute("overlayMaterials", ovarlayMaterialList);
-
 
         }
         return "itemList";
