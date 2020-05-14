@@ -25,28 +25,25 @@ public class ItemList  extends Command{
 
         //................Materials for roof...........//
         //todo create ArrayList with materials for roof and set it on request    Done?
+
         Boolean roofIsPitched = construction.getRoof().getIsPitched();
         ArrayList<Material> roofMaterialList = new ArrayList();
         if (roofIsPitched) {
             PitchedRoofMaterialCalculator pRMCalculator = new PitchedRoofMaterialCalculator(construction);
             roofMaterialList = pRMCalculator.pitchedRoofMaterialsList();
-        }else{
+        }else {
             RoofMaterialCalculator rmCalculator = new RoofMaterialCalculator(construction);
             roofMaterialList = rmCalculator.getflatRoofMaterials();
             //TODO Catch fejlmeddelse
+
+
+            //................Materials for overlay...........//
+            String overlayName = construction.getOverlay();
+            ArrayList<Material> ovarlayMaterialList = OverlayMaterialCalculator.allOverlayMaterialList(construction, overlayName);
+            request.setAttribute("overlayMaterials", ovarlayMaterialList);
+
+
         }
-        request.setAttribute("roofMaterials", roofMaterialList);
-
-
-        //................Materials for overlay...........//
-        String overlayName = construction.getOverlay();
-        ArrayList<Material> ovarlayMaterialList = OverlayMaterialCalculator.allOverlayMaterialList(construction, overlayName);
-        request.setAttribute("overlayMaterials", ovarlayMaterialList);
-
-
-
-
-
         return "itemList";
     }
 }
