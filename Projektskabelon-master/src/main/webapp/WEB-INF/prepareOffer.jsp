@@ -33,10 +33,6 @@ todo Return the same page with actial data ??
             </form>
         </div>
 
-        <a href="FrontController?target=redirect&destination=drawing">Tegning</a>
-
-
-
         <div class="col-md-6">
             <!-- TODO Fix the form so it shows the drowings for employee -->
             <form name="drawing" action="FrontController" method="POST" class="ml-lg-5 mr-lg-5">
