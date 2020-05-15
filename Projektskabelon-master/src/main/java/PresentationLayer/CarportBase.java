@@ -30,7 +30,7 @@ public class CarportBase extends Command {
         constructionBase.setConstructionHeight(constructionHeight);
         constructionBase.setCarportLength(carportLength);
         constructionBase.setCarportWidth(carportWidth);
-        constructionBase.setConstructionWidth();
+        constructionBase.setCarportLength();
 
         Roof roofBase;
         if (roofType == 1) {

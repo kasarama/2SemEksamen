@@ -41,8 +41,8 @@ public class EditOrderPrices extends Command {
 
 
 
-        order.getConstruction().setConstructionWidth();
-        order.getConstruction().setConstructionLength();
+        order.getConstruction().setCarportLength();
+        order.getConstruction().setCarportWidth();
         order.getConstruction().getRoof().setDegree(angle);
         order.getConstruction().getRoof().setTilt(tilt);
         order.setTransport(transport);

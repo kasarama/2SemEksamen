@@ -20,21 +20,23 @@ public class PitchedRoof extends Command {
 
         int tagstenID = Integer.parseInt(tempMateriale[0]);
         int variationID = Integer.parseInt(tempMateriale[1]);
-        //int variationID = Integer.parseInt(request.getParameter("pitchedroofmaterial"));
+
         String color = LogicFacade.getColourByVariationID(variationID);
         String materialName = LogicFacade.getANameFromMaterialID(tagstenID);
 
-        int degree = Integer.parseInt(request.getParameter("pitchedroofdegree"));
-
         carportBase.getRoof().setColor(color);
         carportBase.getRoof().setCover(materialName);
-        carportBase.getRoof().setDegree(degree);
 
+        int degree = Integer.parseInt(request.getParameter("pitchedroofdegree"));
+        System.out.println("Graden er: " + degree);
+
+        carportBase.getRoof().setDegree(degree);
+        System.out.println("Er der rejsning? " + carportBase.getRoof().getIsPitched());
+        System.out.println("Actual degree= " + carportBase.getRoof().getDegree());
 
         session.setAttribute("carportBase", carportBase);
 
         //todo læs data fra designpitchedroof.jsp og brug dem for t designe tag med rejsning
-        // (gælder også materiale)
 
         return "overlay";
     }

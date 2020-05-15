@@ -38,8 +38,7 @@ public abstract class Roof {
         this.height = height;
     }
 
-    public int setDegree(int degree) {
-        return degree;
+    public void setDegree(int degree) { this.degree = degree;
     }
 
     public void setRoofMaterialList(ArrayList<Material> roofMaterialList) {

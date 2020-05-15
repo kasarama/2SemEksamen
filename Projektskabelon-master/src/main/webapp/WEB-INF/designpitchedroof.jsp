@@ -45,7 +45,7 @@ if (request.getServletContext().getAttribute("MAXPITCHDEGREEOPTION") == null) {
             <br>
             <label>Vælg hældningsgrad:</label>
             <br>
-            <select name="tiltOptions" class="form-control" name="pitchedroofdegree" id="pitchedroofdegree">
+            <select class="form-control" name="pitchedroofdegree" id="pitchedroofdegree">
                 <c:forEach var="degree" begin="${applicationScope.MINPITCHDEGREEOPTION}" end="${applicationScope.MAXPITCHDEGREEOPTION}" step="5">
                     <option value="${degree}">${degree}</option>
                 </c:forEach>

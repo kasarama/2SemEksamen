@@ -26,8 +26,8 @@ public class ConstructionSizeCalculatorTest {
 
         pitchedRoof.setDegree(3);
         construction.setRoof(pitchedRoof);
-        construction.setConstructionWidth();
-        construction.setConstructionLength();
+        construction.setCarportLength();
+        construction.setCarportWidth();
 
 
 ////.......................SETUP FOR MAGDA'S TEST:....................../////

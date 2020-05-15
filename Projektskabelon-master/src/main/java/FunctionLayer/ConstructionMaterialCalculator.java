@@ -13,6 +13,7 @@ public class ConstructionMaterialCalculator {
     public ConstructionSizeCalculator constructionSizeCalculator = new ConstructionSizeCalculator();
     public Construction construction = new Construction();
     public ArrayList<Material> constructionMaterials = construction.getFundamentMaterials();
+    private int INGROUND = 90;
 
     //.......................All the materials for construction.............................//
     public ArrayList<Material> constructionMaterialList(Construction construction) throws LoginSampleException {
@@ -26,14 +27,12 @@ public class ConstructionMaterialCalculator {
         return constructionMaterials;
     }
 
-    //................................wood materials............................//
-    public ArrayList<Material> woodMaterials(Construction construction) throws LoginSampleException {
-        ArrayList<Material> woodMaterials = new ArrayList<>();
-
-        // Stolper
+    public ArrayList<Material> postsQuatity(Construction construction) throws LoginSampleException {
+        // Stolper (uden skur)
         //TODO: sæt stolper i den rigtige størrelse ind i woodMaterials listen
-        //Beregning er uden stolper til skur
-        //TODO - 90cm skal tilføjes pr nedsat stolpe
+        ArrayList<Material> posts = new ArrayList();
+
+        int roofHeight = construction.getRoof().getHeight();
         double constructionMinHeight = construction.getConstructionHeight() - construction.getRoof().getHeight();
         ArrayList<Integer> actualHeightsOfPostsForConstruction = new ArrayList();
 
@@ -41,10 +40,10 @@ public class ConstructionMaterialCalculator {
                 construction.getRoof().getTilt());
         int quantityOfCarportPostsRows = postRows(construction.getCarportWidth());
         Integer[] heightsOfPostsPerRow = postsHeights(carportMinHeight, construction.getRoof().getDegree(),
-                construction.getConstructionWidth());
+                construction.getConstructionWidth()) ;
         for (int i = 0; i < quantityOfCarportPostsRows - 1; i++) {
             for (int postHeight : heightsOfPostsPerRow) {
-                actualHeightsOfPostsForConstruction.add(postHeight);
+                actualHeightsOfPostsForConstruction.add(postHeight+ INGROUND);
             }
         }
 
@@ -52,12 +51,10 @@ public class ConstructionMaterialCalculator {
         ArrayList<Material> tempPostsMaterails = new ArrayList<>();
         int restOfAvalibleMaterial = 0;
         int countPosts = 1;
-        Material post = null;
+        Material post;
 
         for (int avaliblePostMaterialLength : postsMaterialsAvalibleLenghts) {
-            post = LogicFacade.getMaterialBySizeName(avaliblePostMaterialLength, "");
-            post.setName("TRYKIMPRENERET STOLPE");
-            post.setUnit(LogicFacade.getUnitByName(post.getName()));
+            post = LogicFacade.getMaterialBySizeName(avaliblePostMaterialLength, "TRYKIMPRENERET STOLPE");
             post.setWidth(LogicFacade.getWidthByID(post.getId(), post.getName()));
             post.setThickness(LogicFacade.getThicknessByID(post.getId()));
             post.setName("TRYKIMPRENERET STOLPE" + post.getThickness() + "x" + post.getWidth());
@@ -75,15 +72,23 @@ public class ConstructionMaterialCalculator {
                         tempPost.setAmount(tempQuatityPostsTypePlusOneEkstra);
                     }
 
-                    post.setAmount(countPosts);
-                post.setComment("(skriv noget herinde om materialet)");
+                post.setAmount(countPosts);
+                post.setComment("Træ til stolper - skal 90 cm i jorden");
                 tempPostsMaterails.add(post);
             }
         }
         System.out.println(tempPostsMaterails.toString());
-        woodMaterials.addAll(tempPostsMaterails);
+        posts.addAll(tempPostsMaterails);
+        System.out.println("Her er listen af stolper: " + posts.toString() );
 
-        // Rem
+        return posts;
+    }
+
+    //................................wood materials............................//
+    public ArrayList<Material> woodMaterials(Construction construction) throws LoginSampleException {
+        ArrayList<Material> woodMaterials = new ArrayList<>();
+
+         // Rem
         int[] remPieces = constructionSizeCalculator.remPieces(construction);
         int counter = 0;
         Material rem = null;

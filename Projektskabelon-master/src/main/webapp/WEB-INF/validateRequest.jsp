@@ -52,12 +52,7 @@
                                             <input type="number" name="shedDepth" class="form-control"
                                                    value=${shed.depth} min="1200" max="3500">
                                         </div>
-
-                                        <label>Vælg siden til redksbsrummet - original : ${shed.danishSide()}</label>
-                                        <select name="shedSide" class="form-control">
-                                            <option value="right">højre</option>
-                                            <option value="left">venstre</option>
-                                        </select>
+                                        
                                     </div>
                                 </c:when>
                             </c:choose>

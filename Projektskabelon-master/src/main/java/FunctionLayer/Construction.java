@@ -48,7 +48,7 @@ public class Construction {
         return constructionLength;
     }
 
-    public void setConstructionLength() {
+    public void setCarportWidth() {
         if(this.shed.getDepth()==0){
             this.constructionLength=this.carportLength;
         } else
@@ -59,7 +59,7 @@ public class Construction {
         return constructionWidth;
     }
 
-    public void setConstructionWidth() {
+    public void setCarportLength() {
         this.constructionWidth = this.carportWidth+150;
     }
 

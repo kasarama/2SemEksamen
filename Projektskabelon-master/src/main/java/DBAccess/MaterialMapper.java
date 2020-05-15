@@ -22,26 +22,29 @@ public class MaterialMapper {
 
 
     // @author Mia
-    // TODO join tables for at få et materiale frem - denne skal ikke slettes selvom den ikke virker
     public static Material getMaterialBySizeName(int length, String name) throws LoginSampleException {
         Material material; //= new Material();
         try {
             Connection con = Connector.connection();
-            String SQL = "SELECT materials.name, variations.length FROM fogdb.materials LEFT JOIN fogdb.variations " +
-                    "ON variations.materialID = materials.materialID WHERE variations.length=?;";
+            String SQL = "SELECT * FROM fogdb.materials LEFT JOIN fogdb.variations " +
+                    "ON variations.materialID = materials.materialID WHERE materials.name=? and variations.length=?";
             PreparedStatement ps = con.prepareStatement(SQL);
-            ps.setInt(1, length);
+            ps.setString(1, name);
+            ps.setInt(2, length);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                int materialID = rs.getInt("materialID");
-                material = new Material(materialID, length);
+                int id = rs.getInt("materialID");
+                String unit = rs.getString("unit");
+                String keyword = rs.getString("keyword");
+                String category = rs.getString("category");
+                material = new Material(id, name, length, unit, keyword, category);
+                return material;
             } else {
                 return null;
             }//todo handle null object there where method is being used;
         } catch (ClassNotFoundException | SQLException ex) {
             throw new LoginSampleException(ex.getMessage());
         }
-        return material;
     }
 
     public static Material getMaterialByID(int id) throws LoginSampleException {
@@ -523,17 +526,19 @@ public class MaterialMapper {
 
 
     //Cath
-    public static ArrayList getLengthForMaterials(String materialName) throws LoginSampleException {
-        ArrayList<Integer> lengthViaMaterailName = null;
+    public static ArrayList<Integer> getLengthForMaterials(String materialName) throws LoginSampleException {
+        ArrayList<Integer> lengthViaMaterailName = new ArrayList();
         try {
             Connection con = Connector.connection();
-            String SQLRequest = "SELECT variations.length FROM fogdb.variations JOIN fogdb.materials ON materials.materialID = variations.materialID WHERE materials.name=?";
+            String SQLRequest = "SELECT DISTINCT variations.length FROM fogdb.variations JOIN fogdb.materials ON materials.materialID = variations.materialID WHERE materials.name=?";
             PreparedStatement preparedStatement = con.prepareStatement(SQLRequest);
             preparedStatement.setString(1, materialName);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                lengthViaMaterailName.add(resultSet.getInt("length"));
+                int materialLength = resultSet.getInt("length");
+                lengthViaMaterailName.add(materialLength*10);
             }
+
         } catch (ClassNotFoundException e) {
             return null;
         } catch (SQLException e) {
@@ -573,7 +578,7 @@ public class MaterialMapper {
 
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                color = rs.getString("variationID");
+                color = rs.getString("color");
                 return color;
             } else {
                 throw new LoginSampleException("Fejl under læsning af materialefarver fra DB");
