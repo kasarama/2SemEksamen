@@ -128,9 +128,7 @@ public class OrderMapper {
             PreparedStatement ps = con.prepareStatement(SQL);
             ps.setString(1, status);
             ResultSet rs = ps.executeQuery();
-            int count = 0;
             while (rs.next()) {
-                count++;
                 int orderID = rs.getInt(1);
                 int constructionHeight = rs.getInt(2);
                 int carportWidth = rs.getInt(3);
