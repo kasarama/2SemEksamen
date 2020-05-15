@@ -35,10 +35,12 @@ public class ConstructionMaterialCalculator {
         System.out.println("Test 1");
         ArrayList<Material> woodMaterials = new ArrayList<>();
         System.out.println("Test 2");
+        /*
         // Stolper
         //TODO: sæt stolper i den rigtige størrelse ind i woodMaterials listen
         //Beregning er uden stolper til skur
         //TODO - 90cm skal tilføjes pr nedsat stolpe
+        System.out.println(construction.getRoof().getHeight());
         double constructionMinHeight = construction.getConstructionHeight() - construction.getRoof().getHeight();
         ArrayList<Integer> actualHeightsOfPostsForConstruction = new ArrayList();
         System.out.println("Test 3");
@@ -92,7 +94,7 @@ public class ConstructionMaterialCalculator {
         }
         System.out.println(tempPostsMaterails.toString());
         woodMaterials.addAll(tempPostsMaterails);
-
+*/
         // Rem
         int[] remPieces = constructionSizeCalculator.remPieces(construction);
         int counter = 0;

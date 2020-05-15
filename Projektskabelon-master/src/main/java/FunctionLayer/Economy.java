@@ -8,42 +8,66 @@ import java.util.ArrayList;
  * and of the whole construction
  */
 public class Economy {
-
-    // TODO 1.) Hent priser og antal fra DB (orders?)
-    // TODO 2.) Udregn cost
-
+    // Indkøbspris
     public static double ordersCostPrice(Order order) throws LoginSampleException {
-        //TODO implement thismethod (all materials together
         // Søg efter materiales pris via id
         // Hent prisen fra db og set pris i materialCalculator klasserne
         // Looper igennem arraylisten og får fat på hver materiales pris og antal
 
         ArrayList<Material> temp = ConstructionMaterialCalculator.woodMaterials(order.getConstruction());
+        //double[] prices = {};
+        double[] totalPrices = {};
 
-        Material rem = temp.get(1);
-        System.out.println(rem.getId() + ", " + rem.getPrice());
-        //rem.getPrice();
+        /*
+        Material rem = temp.get(0);
+        for (Material material: temp){
+            prices = new double[(int) material.getPrice()];
+        }
 
-        double cost = 234.5;
+         */
+        for (int i = 0; i < temp.size(); i++){
+            //prices = new double[(int) temp.get(i).getPrice()];
+            totalPrices = new double[(int) (temp.get(i).getPrice()*temp.get(i).getAmount())];
+        }
+        double cost = 0;
+        for (double i : totalPrices) {
+            cost += i;
+            System.out.println("The sum is " + cost);
+        }
         return  cost;
-
     }
 
-    public static double setCoverage(Order order) {
-        //TODO implement this method so it vil return coverage that depends on transport, tax and cost price
-        double coverage = 65.0;
+    // Salgsprisen
+    public static double ordersSalePrice(Order order) throws LoginSampleException {
+
+        // Salgspris = (Indkøbspris + Fragt)* 25 % skat
+
+        double transport = order.getTransport(); // Transport udgift
+        double tax = order.getTAX(); // 0,25
+
+        double salesPriceNoTax = ordersCostPrice(order) + transport;
+
+        double salesPrice = salesPriceNoTax + salesPriceNoTax*tax;
+
+        return salesPrice;
+    }
+
+    // Dækningsbidrag og dækningsgrad i %
+    public static double setCoverage(Order order) throws LoginSampleException {
+
+        double transport = order.getTransport(); // Transport udgift
+        double tax = order.getTAX(); // 0,25
+        double cost = ordersCostPrice(order);
+        double salesPrice = ordersSalePrice(order);
+
+        // Dækningsbidrag = Salgspris - (Indkøbspris+Fragt) skat?
+        double coverageContribution = salesPrice - ((salesPrice*tax)+cost+transport);
+
+        // Dækningsgrad = ( Dækningsbidrag / cost ) * 100
+        double coverage = (coverageContribution/cost)*100;
+
         return coverage;
     }
 
-    public static double ordersSalePrice(Order order) {
-        //TODO implement thismethod
-        // so it returns saleprace that depends on cost, coverage, tax and transport
-        // there is a nice konstant in Order: order.getTAX and it's value is 0.25.
-        // You can use it for tax calculation if it makes sense
-
-
-        double salePrice = 1234.50;
-        return salePrice;
-    }
 
 }

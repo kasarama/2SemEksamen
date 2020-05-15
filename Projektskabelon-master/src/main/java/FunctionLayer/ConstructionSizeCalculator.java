@@ -133,8 +133,8 @@ public class ConstructionSizeCalculator {
          */
         //todo in ConstrucionMaterialCalculator implement the method that will return Material object for each of pieces
         int[] remPieces = new int[0];
-        int constructionLength = (construction.getCarportLength() + construction.getShedDepth());
         int carportLength = construction.getCarportLength();
+        int constructionLength = construction.getConstructionLength();
         int constructionWidth = construction.getConstructionWidth();
         int shedDept = construction.getShedDepth();
         int tmpRem = possibleRems(construction);
