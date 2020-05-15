@@ -13,8 +13,8 @@
 
 <div class="container2">
     <div class="col-md-12">
-        <form name="makerequest" action="FrontController" method="post">
-            <input type="hidden" name="target" value="makerequest">
+        <form name="designflatroof" action="FrontController" method="post">
+            <input type="hidden" name="target" value="designflatroof">
             <br>
             <br>
             <h2>Fladt tag design</h2>

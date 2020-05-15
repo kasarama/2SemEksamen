@@ -1,33 +1,80 @@
 package FunctionLayer;
 
+import java.util.ArrayList;
+
 /**
  * @author  Mia
  * The purpose of this class is to calculate prices and cost of different elements of a construction
  * and of the whole construction
  */
 public class Economy {
+    // Indkøbspris
+    public static double ordersCostPrice(Order order, Construction construction) throws LoginSampleException {
+        // Søg efter materiales pris via id
+        // Hent prisen fra db og set pris i materialCalculator klasserne
+        // Looper igennem arraylisten og får fat på hver materiales pris og antal
 
-    public static double ordersSalePrice(Order order) {
-        //TODO implement thismethod
-        // so it returns saleprace that depends on cost, coverage, tax and transport
-        // there is a nice konstant in Order: order.getTAX and it's value is 0.25.
-        // You can use it for tax calculation if it makes sense
+        ArrayList<Material> temp = new ArrayList<>();
+        temp.addAll(ConstructionMaterialCalculator.constructionMaterialList(construction));
+        // TODO sæt roofmateriallisten ind her:
+        //temp.addAll()
+        // TODO sæt overlaymateriallisten ind her:
+        //temp.addAll()
 
+        //double[] prices = {};
+        double[] totalPrices = {};
 
-        double salePrice = 1234.50;
-        return salePrice;
-    }
+        /*
+        Material rem = temp.get(0);
+        for (Material material: temp){
+            prices = new double[(int) material.getPrice()];
+        }
 
-    public static double ordersCostPrice(Order order) {
-        //TODO implement thismethod (all materials together
-        double cost = 234.5;
+         */
+
+        for (int i = 0; i < temp.size(); i++){
+            //prices = new double[(int) temp.get(i).getPrice()];
+            totalPrices = new double[(int) (temp.get(i).getPrice()*temp.get(i).getAmount())];
+        }
+        double cost = 0;
+        for (double i : totalPrices) {
+            cost += i;
+            System.out.println("The sum is " + cost);
+        }
         return  cost;
-
     }
 
-    public static double setCoverage(Order order) {
-        //TODO implement this method so it vil return coverage that depends on transport, tax and cost price
-        double coverage = 65.0;
+    // Salgsprisen
+    public static double ordersSalePrice(Order order, Construction construction) throws LoginSampleException {
+
+        // Salgspris = (Indkøbspris + Fragt)* 25 % skat
+
+        double transport = order.getTransport(); // Transport udgift
+        double tax = order.getTAX(); // 0,25
+
+        double salesPriceNoTax = ordersCostPrice(order, construction) + transport;
+
+        double salesPrice = salesPriceNoTax + salesPriceNoTax*tax;
+
+        return salesPrice;
+    }
+
+    // Dækningsbidrag og dækningsgrad i %
+    public static double setCoverage(Order order, Construction construction) throws LoginSampleException {
+
+        double transport = order.getTransport(); // Transport udgift
+        double tax = order.getTAX(); // 0,25
+        double cost = ordersCostPrice(order, construction);
+        double salesPrice = ordersSalePrice(order, construction);
+
+        // Dækningsbidrag = Salgspris - (Indkøbspris+Fragt) skat?
+        double coverageContribution = salesPrice - ((salesPrice*tax)+cost+transport);
+
+        // Dækningsgrad = ( Dækningsbidrag / cost ) * 100
+        double coverage = (coverageContribution/cost)*100;
+
         return coverage;
     }
+
+
 }

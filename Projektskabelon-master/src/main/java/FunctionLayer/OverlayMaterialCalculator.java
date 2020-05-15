@@ -27,7 +27,6 @@ public class OverlayMaterialCalculator {
         spaer.setAmount(quantity);
         spaer.setSize(size);
         spaer.setComment("Horizontal framing");
-
         return spaer;
     }
 

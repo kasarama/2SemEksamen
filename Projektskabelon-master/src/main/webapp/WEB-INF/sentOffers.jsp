@@ -53,8 +53,7 @@
 
     </tbody>
 </table>
-</div>
-</div>
+
 
 <a href="FrontController?target=redirect&destination=employeePage">Tilbage</a>
 
