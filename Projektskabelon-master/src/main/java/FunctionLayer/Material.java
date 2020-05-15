@@ -1,5 +1,7 @@
 package FunctionLayer;
 
+import java.util.Objects;
+
 public class Material {
 
     private int id;
@@ -52,6 +54,33 @@ public class Material {
         this.unit = unit;
         this.keyword = keyword;
         this.category = category;
+    }
+    //...........Constructor for Magda's Test.................................//
+    public Material(String name, int size, int availablesize, String unit, int amount, String comment) {
+        this.name = name;
+        this.size = size;
+        this.availablesize = availablesize;
+        this.unit = unit;
+        this.amount = amount;
+        this.comment = comment;
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Material)) return false;
+        Material material = (Material) o;
+
+        return
+                getAvailablesize() == material.getAvailablesize() &&
+                getName().equals(material.getName()) &&
+                getUnit().equals(material.getUnit());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getName(), getAvailablesize(), getUnit());
     }
 
     public double getSpending() {
@@ -165,13 +194,26 @@ public class Material {
         this.color = color;
     }
 
-    @Override
+  /*  @Override
     public String toString() {
         return "Material{" +
                 "name='" + name + '\'' +
                 ", size=" + size +
                 ", comment=" + comment +
                 ", amount=" + amount + " " +unit +
+                '}';
+    }
+*/
+
+    @Override
+    public String toString() {
+        return "Material{" +
+                "name='" + name + '\'' +
+                ", size=" + size +
+                ", availablesize=" + availablesize +
+                ", unit='" + unit + '\'' +
+                ", amount=" + amount +
+                ", comment='" + comment + '\'' +
                 '}';
     }
 

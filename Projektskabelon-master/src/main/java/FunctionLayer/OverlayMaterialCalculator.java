@@ -1,5 +1,8 @@
 package FunctionLayer;
 
+import CarportUtil.ListFactory;
+import DBAccess.MaterialMapper;
+
 import java.util.ArrayList;
 
 /**
@@ -13,8 +16,6 @@ public class OverlayMaterialCalculator {
     final private static int MAXGAPDOORROOF = 100;
     final private static int SCREWFORDOORELEMEN = 9;
     final private static int DOORMETALELEMENS = 3;
-
-
 
 
     //......................SPAER......................//
@@ -37,7 +38,7 @@ public class OverlayMaterialCalculator {
         screwSpaer.setName("5X80 MM RUST FRI SKRUER");
         screwSpaer.setComment("til montering af horizontal framing");
         screwSpaer.setSize(screwSpaerQuantity);
-        screwSpaer.setAmount(1);
+        screwSpaer.setAmount(0);
 
         return screwSpaer;
     }
@@ -72,7 +73,7 @@ public class OverlayMaterialCalculator {
 
 
     //..............SCREWS FOR OVERLAY........................//
-    public  static Material screwForOverlayOneWall ( Wall wall, String overlayName) throws LoginSampleException {
+    public static Material screwForOverlayOneWall(Wall wall, String overlayName) throws LoginSampleException {
         Material screwOverlay = new Material();
         if (overlayName.equals("HARDIEPLANK 180X3600X8MM")) {
             screwOverlay.setName("FACADESKRUE TIL HARDIEPLANK");
@@ -82,14 +83,13 @@ public class OverlayMaterialCalculator {
         int size = OverlaySizeCalculator.overlayScrewOneWall(wall, overlayName);
         screwOverlay.setSize(size);
         screwOverlay.setComment("til montering af beklædningsplanke");
-        screwOverlay.setAmount(1);
+        screwOverlay.setAmount(0);
 
 
         return screwOverlay;
 
 
     }
-
 
 
     //.......................returns LIST OF ALL MATERIALS NEEDED FOR FRAMING chosen wall.................//
@@ -112,7 +112,7 @@ public class OverlayMaterialCalculator {
 
 
     //....................................MATERIALS FOR OVERLAY....................................//
-    public static ArrayList<Material> overlayMaterial(Construction construction, String materialName) throws LoginSampleException {
+    public static ArrayList<Material> overlayMaterial(Construction construction, String overlayName) throws LoginSampleException {
         ArrayList<Material> overlayMaterials = new ArrayList<>();
 
         ArrayList<Wall> carportWalls = construction.getWalls();
@@ -122,28 +122,29 @@ public class OverlayMaterialCalculator {
         allWalls.addAll(carportWalls);
 
 
-        for (Wall wall :allWalls) {
-            Material overlayScrew = screwForOverlayOneWall(wall, materialName);
+        for (Wall wall : allWalls) {
+            Material overlayScrew = screwForOverlayOneWall(wall, overlayName);
             overlayMaterials.add(overlayScrew);
         }
 
 
         double wholeAreal = OverlaySizeCalculator.allWallsArea(construction);
-        double amount=OverlaySizeCalculator.overlaySpending(materialName, wholeAreal);
-        int quantity =(int)Math.round(amount);
+        double amount = OverlaySizeCalculator.overlaySpending(overlayName, wholeAreal);
+        int quantity = (int) Math.round(amount);
 
-        if (quantity<amount){
-            quantity=quantity+1;
+        if (quantity < amount) {
+            quantity = quantity + 1;
         }
 
         Material overlay = new Material();
-        overlay.setName(materialName);
+        overlay.setName(overlayName);
         overlay.setSize(3600);
+        overlay.setAvailablesize(3600);
         overlay.setAmount(quantity);
         overlay.setComment("Beklædning");
         if (quantity == 0) {
             throw new LoginSampleException("Vi kunne ikke beregne beklædning: "
-                    + materialName + ". Prøv at vælge noget andet til beklædning");
+                    + overlayName + ". Prøv at vælge noget andet til beklædning");
         }
         overlayMaterials.add(overlay);
 
@@ -202,6 +203,7 @@ public class OverlayMaterialCalculator {
         greb.setName("Stalddørsgreb 50x75");
         greb.setComment("Greb til skurdør");
         greb.setSize(1);
+        greb.setAvailablesize(1);
         greb.setAmount(1);
         doorMaterials.add(greb);
 
@@ -210,6 +212,7 @@ public class OverlayMaterialCalculator {
         hinge.setName("T-Hængsel 390 mm");
         hinge.setAmount(2);
         hinge.setSize(1);
+        hinge.setAvailablesize(1);
         doorMaterials.add(hinge);
 
 
@@ -234,7 +237,7 @@ public class OverlayMaterialCalculator {
 
         Material screwFyrDoor = new Material();
         screwFyrDoor.setName("BASIC SKRUE 5,0X40MM");
-        screwFyrDoor.setSize(SCREWFORDOORELEMEN*DOORMETALELEMENS); //for the door - always the same size of the door
+        screwFyrDoor.setSize(SCREWFORDOORELEMEN * DOORMETALELEMENS); //for the door - always the same size of the door
         screwFyrDoor.setComment("Til montering af vertical framing-dør");
         doorMaterials.add(screwFyrDoor);
 
@@ -249,7 +252,7 @@ public class OverlayMaterialCalculator {
     }
 
 
-    public static ArrayList<Material> allOverlayMaterialList(Construction construction, String overlayName) throws LoginSampleException {
+    public static String allOverlayMaterialList(Construction construction, String overlayName) throws LoginSampleException {
 
         ArrayList<Material> overlayMaterials = new ArrayList<>();
         ArrayList<Material> doorFraming = doorFraming(construction);
@@ -258,19 +261,44 @@ public class OverlayMaterialCalculator {
         construction.getWalls().addAll(construction.getShed().getWalls());
 
 
-        if (walls.size()==0){
+        if (walls.size() == 0) {
             return null;
         } else
 
-        for (Wall wall : walls) {
-            ArrayList<Material> oneWallMaterials = new ArrayList<>();
-            oneWallMaterials=wallFraming(wall);
-            overlayMaterials.addAll(oneWallMaterials);
-        }
+            for (Wall wall : walls) {
+                ArrayList<Material> oneWallMaterials = new ArrayList<>();
+                oneWallMaterials = wallFraming(wall);
+                overlayMaterials.addAll(oneWallMaterials);
+            }
         overlayMaterials.addAll(doorFraming);
+        try {
+            overlayMaterials.addAll(overlayMaterial(construction, overlayName));
 
-        overlayMaterials.addAll(overlayMaterial(construction,overlayName));
-        return overlayMaterials;
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new LoginSampleException(e.getMessage());
+        }
+        for (Material material : overlayMaterials) {
+            MaterialMapper.setUnitFromDB(material);
+        }
+
+        //...........sorting of materials:............//
+        ArrayList<Material>[] splitMaterials = ListFactory.splitMaterialsByUnits(overlayMaterials);
+
+        ArrayList<Material> materialsByPackage = ListFactory.sortMaterialsUnitPackage(splitMaterials[0]);
+
+
+        String msg = ListFactory.setLengths(splitMaterials[1]);
+        ArrayList<Material> materialsByOther = ListFactory.sortMaterialsOtherUnit(splitMaterials[1]);
+
+        ArrayList<Material> sorted = new ArrayList<>();
+        sorted.addAll(materialsByPackage);
+        sorted.addAll(materialsByOther);
+
+        construction.getShed().setMaterials(sorted);
+
+        return msg;
+
     }
 }
 

@@ -16,11 +16,18 @@
         <br>
         <h2>Stykliste for ordre nr. ${requestScope.orderForValidation.orderID}</h2>
         <br>
-<!-- todo adjust tables  so they contain needed data
-todo should sho material.availablesize-->
+
+        <!-- todo adjust tables  so they contain needed data
+        todo should sho material.availablesize-->
+
         <br>
         <br>
-        <a href="FrontController?target=redirect&destination=newOffer">tilbage til Ordre detaljer</a>
+        <div class="col-md-6">
+            <div class="col-md-6 text-center mt-md-4">
+                <a class="btn btn-dark mt-3" href="FrontController?target=redirect&destination=prepareOffer">
+                    Tilbage til Ordre detaljer</a>
+            </div>
+        </div>
 
         <br>
 
@@ -99,7 +106,7 @@ todo should sho material.availablesize-->
                     <c:forEach var="material" items="${list}">
                         <tr class="tr2">
                             <th>${material.name}</th>
-                            <th>${material.size}</th>
+                            <th>${material.availablesize}</th>
                             <th>${material.amount}</th>
                             <th>${material.unit}</th>
                             <th>${material.comment}</th>

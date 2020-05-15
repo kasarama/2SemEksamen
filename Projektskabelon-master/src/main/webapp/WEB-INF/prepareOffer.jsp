@@ -34,9 +34,8 @@ todo Return the same page with actial data ??
         </div>
 
 
-
         <div class="col-md-6">
-<!-- TODO Fix the form so it shows the drowings for employee -->
+            <!-- TODO Fix the form so it shows the drowings for employee -->
             <form name="drawing" action="FrontController" method="POST" class="ml-lg-5 mr-lg-5">
                 <input type="hidden" name="origin" value="prepareOffer">
                 <input type="hidden" name="target" value="drawing">
@@ -46,6 +45,8 @@ todo Return the same page with actial data ??
                 </div>
             </form>
         </div>
+
+
 
         <c:set var="order" value="${applicationScope.orderForValidation}"/>
         <c:choose>
@@ -84,7 +85,8 @@ todo Return the same page with actial data ??
 
 
                             <div class="col-md-6 text-center mt-md-4">
-                                <input class="btn btn-dark mt-3" type="submit" name="byPrice" value="Gem pris og send Tilbudet"
+                                <input class="btn btn-dark mt-3" type="submit" name="byPrice"
+                                       value="Gem pris og send Tilbudet"
                                        role="button">
                             </div>
 
@@ -100,8 +102,6 @@ todo Return the same page with actial data ??
             </c:when>
         </c:choose>
     </div>
-
-
 
 </div>
 

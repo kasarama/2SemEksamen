@@ -137,10 +137,8 @@ public class WallBuilder {
                 }
             }
 
-            System.out.println("Wall builder zwraca "+ carportWalls.size()+"sciany:") ;
             for (Wall wa :
                     carportWalls) {
-                System.out.println(wa.getSide());
             }
             return carportWalls;
         }

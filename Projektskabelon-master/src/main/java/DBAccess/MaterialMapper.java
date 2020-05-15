@@ -266,7 +266,7 @@ public class MaterialMapper {
                     "ON materials.materialID=variations.materialID WHERE materials.category=?;";
             //4. insert the SQL statement into the ".preparedStatement()" method - it sends the SQL statement to the DB
             PreparedStatement ps = con.prepareStatement(SQL);
-            ps.setString(1, "\'"+roofType+"\'");
+            ps.setString(1, "\'" + roofType + "\'");
             //5. call the ".executeQuery()" to execute the SQL statement and return the result (stored in ResultSet).
             ResultSet rs = ps.executeQuery();//works with getters/setters from "Info" class
 
@@ -479,7 +479,6 @@ public class MaterialMapper {
     }
 
     public static int getPackageSize(String name) throws LoginSampleException {
-        //TODO test it
         int size = 0;
         try {
             Connection con = Connector.connection();
@@ -515,7 +514,7 @@ public class MaterialMapper {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 length = rs.getInt(1);
-                lengths.add(length);
+                lengths.add(length*10);
             }
         } catch (ClassNotFoundException | SQLException ex) {
             ex.printStackTrace();
@@ -524,21 +523,41 @@ public class MaterialMapper {
         return lengths;
     }
 
+    public static void setUnitFromDB(Material material) throws LoginSampleException {
+        String name = material.getName();
+        try {
+            Connection con = Connector.connection();
+            String SQL = "SELECT unit FROM fogdb.materials WHERE name=?";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ps.setString(1, name);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                String unit = rs.getString("unit");
+                material.setUnit(unit);
+
+            } else {
+                throw new LoginSampleException("Material: "+material.getName() + " mangler unit verdi i databasen");
+            }
+
+        } catch (SQLException | ClassNotFoundException ex) {
+            throw new LoginSampleException(ex.getMessage());
+
+        }
+    }
+
     //....................................End of Magda's......................................//
-
-
 
 
     //Cath
     public static ArrayList getLengthForMaterials(String materialName) throws LoginSampleException {
-        ArrayList <Integer> lengthViaMaterailName = null;
+        ArrayList<Integer> lengthViaMaterailName = null;
         try {
             Connection con = Connector.connection();
             String SQLRequest = "SELECT variations.length FROM fogdb.variations JOIN fogdb.materials ON materials.materialID = variations.materialID WHERE materials.name=?";
             PreparedStatement preparedStatement = con.prepareStatement(SQLRequest);
             preparedStatement.setString(1, materialName);
             ResultSet resultSet = preparedStatement.executeQuery();
-            while(resultSet.next()){
+            while (resultSet.next()) {
                 lengthViaMaterailName.add(resultSet.getInt("length"));
             }
         } catch (ClassNotFoundException e) {
@@ -571,7 +590,7 @@ public class MaterialMapper {
     }
 
     public static String getColorByID(int variationID) throws LoginSampleException {
-        String color="";
+        String color = "";
         try {
             Connection con = Connector.connection();
             String SQL = "SELECT color FROM variations WHERE variationID=?";

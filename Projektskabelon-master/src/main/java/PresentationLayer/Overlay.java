@@ -35,9 +35,7 @@ public class Overlay extends Command {
             System.out.println("Data om beklædning fra request: "+overlayComponents);
             overlayName=components[0];
             color=components[1];
-            if (color.equals("standard")){
-                color=null;
-            }
+           
         }
 
 
