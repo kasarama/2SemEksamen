@@ -1,3 +1,4 @@
+
 <%--
 Created by IntelliJ IDEA.
 User: monajakobmeshal
@@ -36,6 +37,7 @@ To change this template use File | Settings | File Templates.
             </tr>
             <tr>
                 <td>Tagtype:</td>
+                <td>${requestScope.attributeName}</td>
                 <td>${sessionScope.carportBase.roof.optionForFlatRoof()}</td>
             </tr>
 
@@ -78,7 +80,8 @@ To change this template use File | Settings | File Templates.
         <form name="sendnewrequest" action="FrontController" method="POST">
             <input type="hidden" name="target" value="sendnewrequest">
             <input type="hidden" name="origin" value="customerChoiceResult">
-            <input class="mt-3 mb-4 btn btn-outline-dark" type="submit" name="sendnewrequest" value="Send forespørgelse">
+            <input class="mt-3 mb-4 btn btn-outline-dark" type="submit" name="sendnewrequest"
+                   value="Send forespørgelse">
         </form>
 
 
@@ -88,10 +91,10 @@ To change this template use File | Settings | File Templates.
             <input class="mt-3 mb-4 btn btn-outline-dark" type="submit" name="newrequest" value="Start forfra">
         </form>
 
-        <form name="svg" action="FrontController" method="POST">
-            <input type="hidden" name="target" value="svg">
+        <form name="drawing" action="FrontController" method="POST">
+            <input type="hidden" name="target" value="drawing">
             <input type="hidden" name="origin" value="customerChoiceResult">
-            <input class="btn btn-primary mt-3" type="submit" name="svgSketch" value="See Caport tegning?">
+            <input class="btn btn-primary mt-3" type="submit" name="svgSketch" value="Se din caport">
         </form>
 
 
@@ -101,4 +104,3 @@ To change this template use File | Settings | File Templates.
 <!-- row closing tag -->
 
 <%@include file="../includes/footer.inc" %>
-

@@ -10,10 +10,7 @@ import java.util.Date;
 
 import java.util.List;
 
-/**
- * The purpose of LogicFacade is to...
- * @author kasper
- */
+
 public class LogicFacade {
 
     public static User login( String email, String password ) throws LoginSampleException {
@@ -26,13 +23,15 @@ public class LogicFacade {
         return user;
     }
 
+    /**
+     * @author Mia
+     */
     public static Material getMaterialBySizeName(int size, String name) throws LoginSampleException {
         return MaterialMapper.getMaterialBySizeName(size, name);
     }
     public static Material getMaterialByID(int id) throws LoginSampleException {
         return MaterialMapper.getMaterialByID(id);
     }
-
     public static String getUnitByName(String name) throws LoginSampleException {
         String unit = MaterialMapper.getUnitByName(name);
         return unit;
@@ -45,9 +44,14 @@ public class LogicFacade {
         int thickness = MaterialMapper.getThicknessByID(id);
         return thickness;
     }
+    public static double getPrice(int id) throws LoginSampleException {
+        double price = MaterialMapper.getPrices(id);
+        return price;
+    }
+
 
     public static ArrayList<Integer> getLengthForMaterials(String nameMaterial) throws LoginSampleException {
-        ArrayList<Integer> lengthForMaterials = MaterialMapper.getLengthForMaterials(nameMaterial);
+        ArrayList lengthForMaterials = MaterialMapper.getLengthForMaterials(nameMaterial);
         return lengthForMaterials;
     }
 

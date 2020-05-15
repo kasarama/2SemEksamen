@@ -6,24 +6,25 @@ import FunctionLayer.Svg;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 public class Drawing extends Command{
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        Construction con = new Construction();
-     //   con.setConstructionLength(7800);
-      //  con.setConstructionWidth(6000);
+
+        HttpSession session = request.getSession();
+
+        Construction con = (Construction) session.getAttribute("carportBase");
 
         int width = (con.getConstructionLength()/10);
-        System.out.println("Test 1");
         int height = (con.getConstructionWidth()/10);
-        System.out.println("Test 2");
+
         // Grundet tegningens størrelses, deles width og height med 2 så tegningen ikke bliver for stor
         if (width>500 || height>500){
             width = width/2;
             height = height/2;
         }
-        System.out.println("Test 3");
+
         String viewBox2 = "-50, -10, " + (width+100) + ", " + (height+50);
         Svg svg = new Svg(width+100, height+50, viewBox2, 0, 0);
 
@@ -36,6 +37,7 @@ public class Drawing extends Command{
         if (height > 600){
             svg.addRect(0,height/2,3,width);
         }
+
         // Spær:
             // metode roofSpaerAmount  --  hvordan skal jeg køre metoden roofSpaerAmount gange?
             // Længde/roofSpaerAmount = mellemrum
@@ -45,6 +47,7 @@ public class Drawing extends Command{
         for (int i = 0; i < ConstructionSizeCalculator.roofSpaerAmount(con); i++){
             svg.addRect(space*i, 0, height, 3);
         }
+
         svg.addRect(width,0,height,3);
         // Stolper:
         int spacePosts = ConstructionSizeCalculator.postDistanceMax3000(width);
@@ -52,6 +55,7 @@ public class Drawing extends Command{
             svg.addRect(spacePosts*i, height-31, 7, 7);
             svg.addRect(spacePosts*i, 28, 7, 7);
         }
+
         svg.addRect(width-5, 28, 7, 7);
         svg.addRect(width-5, height-31, 7, 7);
         // Hulbånd:
@@ -61,6 +65,7 @@ public class Drawing extends Command{
         // width og height skal ganges med 2, da hvis de er over 500 så deles de længere oppe ad hensyn til størrelsen af tegningen
         String text1 = "";
         String text2 = "";
+
         if (height>500){
             text1 = height *2 + " cm";
         } else {
@@ -71,16 +76,19 @@ public class Drawing extends Command{
         } else {
             text2 = width + " cm";
         }
+
         svg.addArrows(-25, 0, -25, height, -35, height/2, -90, text1);
         svg.addArrows(0, height+25, width, height+25, width/2, height+40, 0, text2);
 
         // Hvis taget er pitched:
+        /*
         if (con.getRoof().getIsPitched()){
+            System.out.println("Her?");
             svg.addRect(0,height/2,5,width);
         }
 
+         */
         request.setAttribute("svgdrawing", svg.toString());
-        System.out.println("Test 210");
         return "drawing";
     }
 }

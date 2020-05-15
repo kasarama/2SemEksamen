@@ -19,6 +19,7 @@
 
         <!-- todo adjust tables  so they contain needed data
         todo should sho material.availablesize-->
+
         <br>
         <br>
         <div class="col-md-6">

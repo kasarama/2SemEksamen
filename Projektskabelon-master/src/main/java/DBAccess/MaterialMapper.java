@@ -16,32 +16,30 @@ import java.sql.*;
 
 public class MaterialMapper {
 
-    // Skal have fat i et materiale ud fra note
-
-    // Vi vil vide hvor meget materiale der skal bruges
-
-
-    // @author Mia
-    // TODO join tables for at få et materiale frem - denne skal ikke slettes selvom den ikke virker
+    //.......................................Mia's Metoder.......................................................//
     public static Material getMaterialBySizeName(int length, String name) throws LoginSampleException {
         Material material; //= new Material();
         try {
             Connection con = Connector.connection();
-            String SQL = "SELECT materials.name, variations.length FROM fogdb.materials LEFT JOIN fogdb.variations " +
-                    "ON variations.materialID = materials.materialID WHERE variations.length=?;";
+            String SQL = "SELECT * FROM fogdb.materials LEFT JOIN fogdb.variations " +
+                    "ON variations.materialID = materials.materialID WHERE materials.name=? and variations.length=?";
             PreparedStatement ps = con.prepareStatement(SQL);
-            ps.setInt(1, length);
+            ps.setString(1, name);
+            ps.setInt(2, length);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                int materialID = rs.getInt("materialID");
-                material = new Material(materialID, length);
+                int id = rs.getInt("materialID");
+                String unit = rs.getString("unit");
+                String keyword = rs.getString("keyword");
+                String category = rs.getString("category");
+                material = new Material(id, name, length, unit, keyword, category);
+                return material;
             } else {
                 return null;
             }//todo handle null object there where method is being used;
         } catch (ClassNotFoundException | SQLException ex) {
             throw new LoginSampleException(ex.getMessage());
         }
-        return material;
     }
 
     public static Material getMaterialByID(int id) throws LoginSampleException {
@@ -99,21 +97,18 @@ public class MaterialMapper {
             ps.setInt(1, id);
             ps.setString(2, name);
             ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
+            while (rs.next()) {
                 int width = rs.getInt("width");
                 material = new Material(id, name, width);
                 material.setWidth(width);
-                return material.getWidth();
-            } else {
-                material.setUnit(null);
-                return material.getWidth();
+                //return material.getWidth();
             }
         } catch (SQLException sql) {
-            material.setUnit(null);
-            return material.getWidth();
+            System.out.println("Der skete en fejl 1");
         } catch (ClassNotFoundException ex) {
             throw new LoginSampleException(ex.getMessage());
         }
+        return material.getWidth();
     }
 
     public static int getThicknessByID(int id) throws LoginSampleException {
@@ -124,22 +119,43 @@ public class MaterialMapper {
             PreparedStatement ps = con.prepareStatement(SQL);
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
+            while (rs.next()) {
                 int thickness = rs.getInt("thickness");
                 material = new Material(id, thickness);
                 material.setThickness(thickness);
-                return material.getThickness();
-            } else {
-                material.setUnit(null);
-                return material.getThickness();
+                //return material.getThickness();
             }
         } catch (SQLException sql) {
-            material.setUnit(null);
-            return material.getThickness();
+            System.out.println("Der skete en fejl 2");
         } catch (ClassNotFoundException ex) {
             throw new LoginSampleException(ex.getMessage());
         }
+        return material.getThickness();
     }
+
+    public static double getPrices(int id) throws LoginSampleException {
+        Material material = new Material();
+        try {
+            Connection con = Connector.connection();
+            String SQL = "SELECT price FROM fogdb.materials WHERE materialID=?";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                double price = rs.getDouble("price");
+                material = new Material();
+                material.setPrice(price);
+                //return material.getPrice();
+            }
+        } catch (SQLException sql) {
+            System.out.println("Der skete en fejl 3");
+        } catch (ClassNotFoundException ex) {
+            throw new LoginSampleException(ex.getMessage());
+        }
+        return material.getPrice();
+    }
+
+    //.......................................Mia's Metoder SLUT.................................................//
 
 
 // This class Connects to DB and gets the "Roof material" data from it.

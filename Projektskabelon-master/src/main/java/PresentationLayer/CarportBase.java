@@ -30,7 +30,6 @@ public class CarportBase extends Command {
         constructionBase.setConstructionHeight(constructionHeight);
         constructionBase.setCarportLength(carportLength);
         constructionBase.setCarportWidth(carportWidth);
-        constructionBase.setConstructionWidth();
 
         Roof roofBase;
         if (roofType == 1) {
@@ -68,13 +67,15 @@ public class CarportBase extends Command {
             constructionBase.setShed(shed);
         }
 
+        constructionBase.setConstructionWidth();
+        constructionBase.setConstructionLength();
 
         //Roof roofBase;
         if (roofType == 1) {
-            roofBase = new RoofPitched(0, carportLength + shedDepth - POSTWIDTH, carportWidth, 0);
+            roofBase = new RoofPitched(0, constructionBase.getConstructionLength(), constructionBase.getConstructionWidth(), 0);
             roofBase.setPitched(true);
         } else {
-            roofBase = new RoofFlat(0, carportLength + shedDepth - POSTWIDTH, carportWidth, RAISING);
+            roofBase = new RoofFlat(0, constructionBase.getConstructionLength(), constructionBase.getConstructionWidth(), RAISING);
         }
         constructionBase.setRoof(roofBase);
 
