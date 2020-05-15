@@ -120,7 +120,7 @@ public class LogicFacade {
         //................Materials for construction...........//
         //todo create ArrayList with materials for construction and set it on order.construction
 
-        ArrayList<Material> constructionMaterialList = new ArrayList<>(); // = call the method here
+        ArrayList<Material> constructionMaterialList = ConstructionMaterialCalculator.constructionMaterialList(order.getConstruction());
         order.getConstruction().setFundamentMaterials(constructionMaterialList);
 
 

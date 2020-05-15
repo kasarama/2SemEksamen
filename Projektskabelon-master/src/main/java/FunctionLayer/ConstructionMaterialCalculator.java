@@ -115,10 +115,8 @@ public class ConstructionMaterialCalculator {
             }
             rem.setAmount(counter);
             rem.setComment("Remme skal monteres på stolper");
-
-            woodMaterials.add(rem);
         }
-
+        woodMaterials.add(rem);
         // Spær
         int amount = ConstructionSizeCalculator.roofSpaerAmount(construction);
         int size = ConstructionSizeCalculator.roofSpaerLength(construction);
@@ -134,15 +132,15 @@ public class ConstructionMaterialCalculator {
             spær.setAmount(amount);
             spær.setPrice(LogicFacade.getPrice(spær.getId()));
             spær.setComment("Spær skal moteres på remme");
-            woodMaterials.add(spær);
         }
+        woodMaterials.add(spær);
         // Understern
         int[] understernPieces = ConstructionSizeCalculator.underSternPieces(construction);
         int counter2 = 0;
         Material underStern = null;
         for (int underSternObject : understernPieces) {
-            underStern = LogicFacade.getMaterialBySizeName(underSternObject, "TRYKIMPRENERET BRÆDT");
-            underStern.setName("TRYKIMPRENERET BRÆDT");
+            underStern = LogicFacade.getMaterialBySizeName(underSternObject, "TRYKIMPRENERET BRÆDT 200");
+            underStern.setName("TRYKIMPRENERET BRÆDT 200");
             underStern.setUnit(LogicFacade.getUnitByName(underStern.getName()));
             underStern.setId(2);
             underStern.setWidth(LogicFacade.getWidthByID(underStern.getId(), underStern.getName()));
@@ -155,23 +153,30 @@ public class ConstructionMaterialCalculator {
             }
             underStern.setAmount(counter2);
             underStern.setComment("Understern skal monteres på spær");
-            woodMaterials.add(underStern);
         }
+        woodMaterials.add(underStern);
         // Overstern
         int[] oversternPieces = ConstructionSizeCalculator.overSternPieces(construction);
+        int counter3 = 0;
+        Material overStern = null;
         for (int overSternObject : oversternPieces) {
-            Material overStern = LogicFacade.getMaterialBySizeName(overSternObject, "TRYKIMPRENERET BRÆDT");
-            overStern.setName("TRYKIMPRENERET BRÆDT");
+            overStern = LogicFacade.getMaterialBySizeName(overSternObject, "TRYKIMPRENERET BRÆDT 125");
+            overStern.setName("TRYKIMPRENERET BRÆDT 125");
             overStern.setUnit(LogicFacade.getUnitByName(overStern.getName()));
             overStern.setId(3);
             overStern.setWidth(LogicFacade.getWidthByID(overStern.getId(), overStern.getName()));
             overStern.setThickness(LogicFacade.getThicknessByID(overStern.getId()));
             overStern.setName("TRYKIMPRENERET BRÆDT " + overStern.getThickness() + "x" + overStern.getWidth());
             overStern.setSize(overSternObject);
-            overStern.setComment("Overstern skal monteres på understern");
             overStern.setPrice(LogicFacade.getPrice(overStern.getId()));
-            woodMaterials.add(overStern);
+            if (overSternObject == overStern.getSize()) {
+                counter3++;
+            }
+            overStern.setAmount(counter2);
+            overStern.setComment("Overstern skal monteres på understern");
+
         }
+        woodMaterials.add(overStern);
         return woodMaterials;
     }
 

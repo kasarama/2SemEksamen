@@ -47,6 +47,7 @@
             <c:forEach var="material" items="${applicationScope.orderForValidation.construction.fundamentMaterials}">
                 <tr class="tr2">
                     <td>${material.name}</td>
+                    <td>${material.size}</td>
                     <td>${material.amount}</td>
                     <td>${material.unit}</td>
                     <td>${material.comment}</td>
