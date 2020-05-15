@@ -1,6 +1,9 @@
 package PresentationLayer;
 
-import FunctionLayer.*;
+import FunctionLayer.Construction;
+import FunctionLayer.LoginSampleException;
+import FunctionLayer.Material;
+import FunctionLayer.OverlayMaterialCalculator;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,10 +16,31 @@ import java.util.ArrayList;
 public class ItemList  extends Command{
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException {
+        HttpSession session = request.getSession();
+        Construction construction= (Construction) session.getAttribute("carportBase");
 
-        Order order = (Order) request.getServletContext().getAttribute("orderForValidation");
-        LogicFacade.setMaterialsForOrder(order);
-        request.getServletContext().setAttribute("orderForValidation", order);
+        //................Materials for construction...........//
+        //todo create ArrayList with materials for  construction and set it on request
+
+        ArrayList<Material> constructionMaterialList = new ArrayList<>(); // = call the method her
+        request.setAttribute("constructionMaterials", constructionMaterialList);
+
+
+        //................Materials for roof...........//
+        //todo create ArrayList with materials for roof and set it on request
+
+        ArrayList<Material> roofMaterialList = new ArrayList<>(); // = call the method her
+        request.setAttribute("roofMaterials", constructionMaterialList);
+
+        //................Materials for overlay...........//
+        String overlayName = construction.getOverlay();
+        ArrayList<Material> ovarlayMaterialList = OverlayMaterialCalculator.allOverlayMaterialList(construction, overlayName);
+        request.setAttribute("overlayMaterials", ovarlayMaterialList);
+
+
+
+
+
         return "itemList";
     }
 }

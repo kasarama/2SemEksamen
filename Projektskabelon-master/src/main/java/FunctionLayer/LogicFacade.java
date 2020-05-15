@@ -93,13 +93,12 @@ public class LogicFacade {
      * The purpose of setMaterialsForOrder is to generate ArrayLists for each element of Construction
      * objekt and to return an Order object with that Construction object
      */
-    public static void setMaterialsForOrder(Order order) throws LoginSampleException {
+    public static Order setMaterialsForOrder(Order order) throws LoginSampleException {
 
 
         ArrayList<Material> ovarlayMaterialList = OverlayMaterialCalculator.allOverlayMaterialList(
                 order.getConstruction(), order.getConstruction().getOverlay());
         order.getConstruction().getShed().setMaterials(ovarlayMaterialList);
-        System.out.println("Materials saved for Shed in Logic facade:" +order.getConstruction().getShed().getMaterials().size());
 
 
         //................Materials for roof...........//
@@ -114,10 +113,12 @@ public class LogicFacade {
 
         ArrayList<Material> constructionMaterialList = new ArrayList<>(); // = call the method here
         order.getConstruction().setFundamentMaterials(constructionMaterialList);
+        Order order1 = order; //probably not necessary but not tested jet
 
+        return order1;
     }
 
-    public static void sendOffer(Order order) throws LoginSampleException {
+    public static void sendOffer(Order order) {
         Date nowDate = new Date();
         long timestamp = nowDate.getTime();
 
