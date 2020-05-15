@@ -55,7 +55,7 @@ public class Construction {
     }
 
     public void setConstructionWidth() {
-        this.constructionWidth = this.carportWidth+150;
+        this.constructionWidth = this.carportWidth+300;
     }
 
     public void setFundamentMaterials(ArrayList<Material> fundamentMaterials) {
