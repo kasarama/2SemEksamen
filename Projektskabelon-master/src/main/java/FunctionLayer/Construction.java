@@ -11,8 +11,6 @@ public class Construction {
     private Roof roof;
     private int constructionHeight;
     private ArrayList<Material> fundamentMaterials; // stolper, rem, spær, over- og under- stern plus de metal elementer
-    private double cost; //samlet pris på hver material fra hver liste
-    private double salePrice; //cost pris plus VAT eller + det employee vil tilføje eller give som rabat
     private ArrayList<Wall> walls;
     private String overlay;
     private ArrayList<String> wallSides;
@@ -21,8 +19,7 @@ public class Construction {
 
 
     public Construction(int carportWidth, int carportLength, int constructionLength, int constructionWidth,
-                        Shed shed, Roof roof, int constructionHeight, double cost, double salePrice,
-                        String overlay, ArrayList<String> wallSides, String color) {
+                        Shed shed, Roof roof, int constructionHeight, String overlay, ArrayList<String> wallSides, String color) {
         this.carportWidth = carportWidth;
         this.carportLength = carportLength;
         this.constructionLength = constructionLength;
@@ -30,8 +27,6 @@ public class Construction {
         this.shed = shed;
         this.roof = roof;
         this.constructionHeight = constructionHeight;
-        this.cost = cost;
-        this.salePrice = salePrice;
         this.overlay = overlay;
         this.wallSides = wallSides;
         this.color = color;
@@ -77,22 +72,6 @@ public class Construction {
 
     public void setConstructionHeight(int constructionHeight) {
         this.constructionHeight = constructionHeight;
-    }
-
-    public double getCost() {
-        return cost;
-    }
-
-    public void setCost(double cost) {
-        this.cost = cost;
-    }
-
-    public double getSalePrice() {
-        return salePrice;
-    }
-
-    public void setSalePrice(double salePrice) {
-        this.salePrice = salePrice;
     }
 
     public int getCarportWidth() {

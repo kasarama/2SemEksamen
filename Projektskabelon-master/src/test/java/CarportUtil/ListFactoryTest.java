@@ -1,5 +1,6 @@
 package CarportUtil;
 
+import FunctionLayer.LoginSampleException;
 import FunctionLayer.Material;
 import org.junit.Before;
 import org.junit.Test;
@@ -74,7 +75,7 @@ Material m13 = new Material("dog", 25,0, "pk.",0,"wall" );
 
 
     @Test
-    public void sortMaterialsPackage() {
+    public void sortMaterialsPackage() throws LoginSampleException {
 
         splited=ListFactory.splitMaterialsByUnits(materialList);
         ArrayList<Material> justPackages=splited[0];
@@ -87,7 +88,7 @@ Material m13 = new Material("dog", 25,0, "pk.",0,"wall" );
     }
 
     @Test
-    public void sortMaterialsOtherUnit() {
+    public void sortMaterialsOtherUnit() throws LoginSampleException {
 materialList.add(new Material("horse", 10,0, "ss.",10,"door"));
 materialList.add(new Material("horse", 10,0, "ss.",10,"roof"));
 materialList.add(new Material("horse", 10,0, "ss.",10,"wall"));

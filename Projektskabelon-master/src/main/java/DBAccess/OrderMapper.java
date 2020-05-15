@@ -148,7 +148,10 @@ public class OrderMapper {
                 boolean ispitched = rs.getBoolean(15);
                 int tilt = rs.getInt(16);
                 String wallSides = rs.getString(17);
-                String overlayColor = rs.getString(18);
+                String overlayColor ="standard";
+                if (rs.getString(18)!=null) {
+                    overlayColor = rs.getString(18);
+                }
                 String roofColor = rs.getString(19);
                 String roofCover = rs.getString(20);
                 orderID = rs.getInt(21);
@@ -179,8 +182,7 @@ public class OrderMapper {
                     }
                 }
                 Construction construction = new Construction(carportWidth, carportLength, constructionLength,
-                        constructionWidth, shed, roof, constructionHeight, cost, salePrice,
-                        overlay, wallsides, overlayColor);
+                        constructionWidth, shed, roof, constructionHeight, overlay, wallsides, overlayColor);
 
                 construction.setShed(shed);
                 construction.setRoof(roof);

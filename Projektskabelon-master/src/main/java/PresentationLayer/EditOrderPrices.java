@@ -14,9 +14,7 @@ public class EditOrderPrices extends Command {
 
         int carportWidth = Integer.parseInt(request.getParameter("carportWidth"));
 
-        String shedSide = request.getParameter("shedSide");
 
-        int shedDepth = Integer.parseInt(request.getParameter("shedDepth"));
 
         int angle = Integer.parseInt(request.getParameter("angle"));
 
@@ -31,6 +29,8 @@ public class EditOrderPrices extends Command {
         order.getConstruction().setCarportWidth(carportWidth);
 
         if (order.getConstruction().getShed().getDepth() > 0) {
+            String shedSide = request.getParameter("shedSide");
+            int shedDepth = Integer.parseInt(request.getParameter("shedDepth"));
             order.getConstruction().getShed().setSide(shedSide);
             order.getConstruction().getShed().setDepth(shedDepth);
             ArrayList<Wall> shedWalls = WallBuilder.addShedWalls(order.getConstruction());
@@ -49,14 +49,11 @@ public class EditOrderPrices extends Command {
         order.getConstruction().setWalls(costructionWalls);
         order.setCoverage(order.getDEFAULTCOVERAGE());
 
+        System.out.println("is about to call for adding all  materials");
 
-        try {
             LogicFacade.setMaterialsForOrder(order);
             System.out.println("Added materials to order - overlay has size: " + order.getConstruction().getShed().getMaterials().size());
-        } catch (LoginSampleException e) {
-            e.printStackTrace();
-            throw new LoginSampleException(e.getMessage());
-        }
+
 
         order.setCost(Economy.ordersCostPrice(order));
         order.setSalePrice(Economy.ordersSalePrice(order));

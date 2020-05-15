@@ -1,6 +1,7 @@
 package FunctionLayer;
 
 import CarportUtil.ListFactory;
+import DBAccess.MaterialMapper;
 
 import java.util.ArrayList;
 
@@ -40,7 +41,7 @@ public class OverlayMaterialCalculator {
         screwSpaer.setName("5X80 MM RUST FRI SKRUER");
         screwSpaer.setComment("til montering af horizontal framing");
         screwSpaer.setSize(screwSpaerQuantity);
-        screwSpaer.setAmount(1);
+        screwSpaer.setAmount(0);
 
         return screwSpaer;
     }
@@ -85,7 +86,7 @@ public class OverlayMaterialCalculator {
         int size = OverlaySizeCalculator.overlayScrewOneWall(wall, overlayName);
         screwOverlay.setSize(size);
         screwOverlay.setComment("til montering af beklædningsplanke");
-        screwOverlay.setAmount(1);
+        screwOverlay.setAmount(0);
 
 
         return screwOverlay;
@@ -142,6 +143,7 @@ public class OverlayMaterialCalculator {
         Material overlay = new Material();
         overlay.setName(materialName);
         overlay.setSize(3600);
+        overlay.setAvailablesize(3600);
         overlay.setAmount(quantity);
         overlay.setComment("Beklædning");
         if (quantity == 0) {
@@ -205,6 +207,7 @@ public class OverlayMaterialCalculator {
         greb.setName("Stalddørsgreb 50x75");
         greb.setComment("Greb til skurdør");
         greb.setSize(1);
+        greb.setAvailablesize(1);
         greb.setAmount(1);
         doorMaterials.add(greb);
 
@@ -213,6 +216,7 @@ public class OverlayMaterialCalculator {
         hinge.setName("T-Hængsel 390 mm");
         hinge.setAmount(2);
         hinge.setSize(1);
+        hinge.setAvailablesize(1);
         doorMaterials.add(hinge);
 
 
@@ -252,7 +256,7 @@ public class OverlayMaterialCalculator {
     }
 
 
-    public static ArrayList<Material> allOverlayMaterialList(Construction construction, String overlayName) throws LoginSampleException {
+    public static String allOverlayMaterialList(Construction construction, String overlayName) throws LoginSampleException {
 
         ArrayList<Material> overlayMaterials = new ArrayList<>();
         ArrayList<Material> doorFraming = doorFraming(construction);
@@ -274,18 +278,26 @@ public class OverlayMaterialCalculator {
 
         overlayMaterials.addAll(overlayMaterial(construction,overlayName));
 
+        for (Material material: overlayMaterials) {
+            MaterialMapper.setUnitFromDB(material);
+        }
 
         //...........sorting of materials:............//
         ArrayList<Material>[] splitMaterials= ListFactory.splitMaterialsByUnits(overlayMaterials);
+
         ArrayList<Material> materialsByPackage = ListFactory.sortMaterialsUnitPackage(splitMaterials[0]);
+
+
+        String msg = ListFactory.setLengths(splitMaterials[1]);
         ArrayList<Material> materialsByOther = ListFactory.sortMaterialsOtherUnit(splitMaterials[1]);
 
         ArrayList<Material> sorted = new ArrayList<>();
         sorted.addAll(materialsByPackage);
         sorted.addAll(materialsByOther);
 
+        construction.getShed().setMaterials(sorted);
 
-        return sorted;
+        return msg;
 
     }
 }

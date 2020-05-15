@@ -6,10 +6,8 @@ import FunctionLayer.Material;
 
 import java.io.*;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Scanner;
+import java.sql.SQLOutput;
+import java.util.*;
 
 /**
  * @author Magdalena
@@ -101,6 +99,7 @@ public class ListFactory {
     }
 
     public static ArrayList<Material>[] splitMaterialsByUnits(ArrayList<Material> materialList) {
+
         ArrayList[] splitedLists = new ArrayList[2];
         ArrayList<Material> packages = new ArrayList<>();
         ArrayList<Material> other = new ArrayList<>();
@@ -116,7 +115,7 @@ public class ListFactory {
     }
 
 
-    public static ArrayList<Material> sortMaterialsUnitPackage(ArrayList<Material> materialsByPackage) {
+    public static ArrayList<Material> sortMaterialsUnitPackage(ArrayList<Material> materialsByPackage) throws LoginSampleException {
         ArrayList<Material> sorted = new ArrayList<>();
         Material[] matArr = new Material[materialsByPackage.size()];
 
@@ -181,11 +180,15 @@ public class ListFactory {
             material.setComment(newComment);
 
         }
+        setPackages(sorted);
+        for (Material material : sorted) {
+
+        }
 
         return sorted;
     }
 
-    public static ArrayList<Material> sortMaterialsOtherUnit(ArrayList<Material> materialsByOtherUnit) {
+    public static ArrayList<Material> sortMaterialsOtherUnit(ArrayList<Material> materialsByOtherUnit) throws LoginSampleException {
         ArrayList<Material> sorted = new ArrayList<>();
         Material[] matArr = new Material[materialsByOtherUnit.size()];
 
@@ -251,6 +254,7 @@ public class ListFactory {
 
         }
 
+
         return sorted;
     }
 
@@ -269,42 +273,82 @@ public class ListFactory {
                 quantity = (size - rest) / availableSize + 1;
             }
             material.setAmount(quantity);
-            material.setAvailablesize(1);
+            material.setAvailablesize(availableSize);
         }
 
     }
 
 
     public static String setLengths(ArrayList<Material> materials) throws LoginSampleException {
-        String msg1 = "Følgende: ";
-        String msg2 = " findes ikke i databasen, som er langt nok. " +
-                "Du kan bestille en ekstra funktionalitet for kun 500 kr for at kunne tilføje vare til databasen."
-                + "Indtil videre den tilgængelig længde er lige med den du skal bruge. Hilsen, IT folk";
+
+        HashMap <String, ArrayList<Integer> >materialLengths = new HashMap<>();
+        ArrayList<Material> meters = new ArrayList<>();
+
         for (Material material : materials) {
-
-            ArrayList<Integer> availableSizesFromDB = MaterialMapper.getLengths(material.getName());
-
-
-            int size = material.getSize();
-
-            if (material.getSize() > availableSizesFromDB.get(availableSizesFromDB.size() - 1)) {
-                material.setAvailablesize(material.getSize());
-                msg1 = msg1 + material.getName() + ", ";
-            } else if (size < availableSizesFromDB.get(0)) {
-                material.setAvailablesize(availableSizesFromDB.get(0));
-            } else
-
-                for (int i = 0; i < availableSizesFromDB.size(); i++) {
-                    if (size >= availableSizesFromDB.get(i) && size < availableSizesFromDB.get(i + 1)) {
-                        material.setAvailablesize(availableSizesFromDB.get(i));
-                        break;
-                    } else i++;
-                }
+            if (material.getUnit().equals("m")){
+                meters.add(material);
+            }
         }
-        if (msg1.equals("Følgende: ")) {
+
+        for (Material material : meters) {
+
+            if (!materialLengths.containsKey(material.getName()) ){
+
+                materialLengths.put(material.getName(), new ArrayList<Integer>());
+            }
+        } 
+
+
+        for ( String name : materialLengths.keySet()) {
+            materialLengths.put( name, MaterialMapper.getLengths(name) );
+
+            Collections.sort(materialLengths.get(name));
+
+            for (Integer i :materialLengths.get(name)) {
+
+
+            }
+        }
+
+        String msg1 = "Følgende";
+        String msg3 = ": ";
+        String msg2 = " findes ikke i databasen, som er langt nok. " +
+                "Du kan bestille en ekstra funktionalitet for kun 500 kr for at kunne tilføje vare til databasen. "
+                + "Indtil videre den tilgængelig længde er lige med den du skal bruge. Hilsen, IT folk";
+
+
+        for (Material material : meters) {
+
+                int size = material.getSize();
+
+                String name = material.getName();
+                int index = materialLengths.get(name).size()-1;
+
+
+                if (size > materialLengths.get(name).get(index) ) {
+
+                    material.setAvailablesize(material.getSize());
+
+                    msg3 = msg3 + material.getName() + ", ";
+
+                } else if (size < materialLengths.get(name).get(0)) {
+                    material.setAvailablesize(materialLengths.get(name).get(0));
+
+
+                } else
+                    for (int i = 0; i < materialLengths.get(name).size(); i++) {
+                        if (size >= materialLengths.get(name).get(i) && size < materialLengths.get(name).get(i + 1)) {
+                            material.setAvailablesize(materialLengths.get(name).get(i));
+
+                        }
+                    }
+
+            }
+
+        if (msg3.equals(": ")) {
             return "Beregning af den tilgængelig længde til hver material lykkedes";
         } else
-            return msg1 + msg2;
+            return msg1 + msg3 + msg2;
     }
 
 

@@ -66,7 +66,7 @@
                             <c:choose>
                                 <c:when test="${roof.isPitched}">
                                     <div class="form-group">
-                                        <label>Vælg vinkel for tag med ${roof.typeToString()}</label>
+                                        <label>Vælg vinkel for tag ${roof.typeToString()}</label>
                                         <input type="hidden" name="tilt" value=0>
                                         <input type="number" name="angle" class="form-control"
                                                value=${roof.degree} min="0" max="45">

@@ -95,10 +95,13 @@ public class LogicFacade {
      */
     public static void setMaterialsForOrder(Order order) throws LoginSampleException {
 
+        System.out.println("Is about to set materials for overlay\n" +
+                "Needed data to proceed construction selv and overlay. overlay: "+ order.getConstruction().getOverlay());
 
-        ArrayList<Material> ovarlayMaterialList = OverlayMaterialCalculator.allOverlayMaterialList(
+        String msg = OverlayMaterialCalculator.allOverlayMaterialList(
                 order.getConstruction(), order.getConstruction().getOverlay());
-        order.getConstruction().getShed().setMaterials(ovarlayMaterialList);
+        System.out.println(msg);
+       // order.getConstruction().getShed().setMaterials(ovarlayMaterialList);
         System.out.println("Materials saved for Shed in Logic facade:" +order.getConstruction().getShed().getMaterials().size());
 
 
