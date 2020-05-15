@@ -42,6 +42,7 @@ public class PitchedRoofMaterialCalculator {
         roof = construction.getRoof();
     }
 
+    //........Pitched Roof Material list.......
     public ArrayList<Material> pitchedRoof (Construction construction) throws LoginSampleException {
         ArrayList<Material> pitchedRoofMaterials = new ArrayList<>();
 
