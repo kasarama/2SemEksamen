@@ -54,6 +54,7 @@ public class RoofMaterialCalculator {
         material.setSize(T600ROOFPLADELENGTH);
         int quantityOfT600 = quantityOfT600ForRoof(material.getWidth());
         material.setAmount(quantityOfT600);
+        material.setPrice(LogicFacade.getPrice(material.getId()));
         material.setComment("tagplader monteres på spær");
 
         materialsList.add(material);
@@ -68,6 +69,7 @@ public class RoofMaterialCalculator {
         material.setSize(T300ROOFPLADELENGTH);
         int quantityOfT300 = quantityOfT300ForRoof(material.getWidth());
         material.setAmount(quantityOfT300);
+        material.setPrice(LogicFacade.getPrice(material.getId()));
         material.setComment("tagplader monteres på spær");
 
         materialsList.add(material);

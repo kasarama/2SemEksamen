@@ -89,6 +89,7 @@ public class ConstructionMaterialCalculator {
 
                     post.setAmount(countPosts);
                 post.setComment("(skriv noget herinde om materialet)");
+                post.setPrice(LogicFacade.getPrice(post.getId()));
                 tempPostsMaterails.add(post);
             }
         }
@@ -130,7 +131,7 @@ public class ConstructionMaterialCalculator {
             spær.setName("SPÆRTRÆ UBEHANDLET " + spær.getThickness() + "x" + spær.getWidth());
             spær.setSize(size);
             spær.setAmount(amount);
-
+            spær.setPrice(LogicFacade.getPrice(spær.getId()));
             spær.setComment("Spær skal moteres på remme");
             woodMaterials.add(spær);
         }
@@ -147,7 +148,7 @@ public class ConstructionMaterialCalculator {
             underStern.setThickness(LogicFacade.getThicknessByID(underStern.getId()));
             underStern.setName("TRYKIMPRENERET BRÆDT " + underStern.getThickness() + "x" + underStern.getWidth());
             underStern.setSize(underSternObject);
-
+            underStern.setPrice(LogicFacade.getPrice(underStern.getId()));
             if (underSternObject == underStern.getSize()) {
                 counter2++;
             }
@@ -167,6 +168,7 @@ public class ConstructionMaterialCalculator {
             overStern.setName("TRYKIMPRENERET BRÆDT " + overStern.getThickness() + "x" + overStern.getWidth());
             overStern.setSize(overSternObject);
             overStern.setComment("Overstern skal monteres på understern");
+            overStern.setPrice(LogicFacade.getPrice(overStern.getId()));
             woodMaterials.add(overStern);
         }
         return woodMaterials;
@@ -186,6 +188,7 @@ public class ConstructionMaterialCalculator {
         bræddebolt.setThickness(LogicFacade.getThicknessByID(bræddebolt.getId()));
         bræddebolt.setName("BRÆDDEBOLT " + bræddebolt.getThickness() + "x" + bræddebolt.getWidth());
         bræddebolt.setComment("Til montering af rem på stolper");
+        bræddebolt.setPrice(LogicFacade.getPrice(bræddebolt.getId()));
         metalMaterials.add(bræddebolt);
         // Firkantskriver
         Material firkantskriver = LogicFacade.getMaterialByID(17);
@@ -197,6 +200,7 @@ public class ConstructionMaterialCalculator {
         firkantskriver.setThickness(LogicFacade.getThicknessByID(firkantskriver.getId()));
         firkantskriver.setName("FIRKANTSKIVER " + firkantskriver.getThickness() + "x" + firkantskriver.getWidth());
         firkantskriver.setComment("Til montering af rem på stolper");
+        firkantskriver.setPrice(LogicFacade.getPrice(firkantskriver.getId()));
         metalMaterials.add(firkantskriver);
         // Hulbånd
         Material hulbånd = LogicFacade.getMaterialByID(12);
@@ -208,6 +212,7 @@ public class ConstructionMaterialCalculator {
         hulbånd.setThickness(LogicFacade.getThicknessByID(hulbånd.getId()));
         hulbånd.setName("HULBÅND 10 M " + hulbånd.getThickness() + "x" + hulbånd.getWidth());
         hulbånd.setComment("Til vindkryds på spær");
+        hulbånd.setPrice(LogicFacade.getPrice(hulbånd.getId()));
         metalMaterials.add(hulbånd);
         // Beslagskruer til hulbånd og spær
         Material beslagskruer = LogicFacade.getMaterialByID(15);
@@ -219,6 +224,7 @@ public class ConstructionMaterialCalculator {
         beslagskruer.setThickness(LogicFacade.getThicknessByID(beslagskruer.getId()));
         beslagskruer.setName("BESLAGSKRUER " + beslagskruer.getThickness() + "x" + beslagskruer.getWidth());
         beslagskruer.setComment("Til montering af universalbeslag + hulbånd");
+        beslagskruer.setPrice(LogicFacade.getPrice(beslagskruer.getId()));
         metalMaterials.add(beslagskruer);
         // Universalbeslag Højre
         Material universalbeslagHøjre = LogicFacade.getMaterialByID(13);
@@ -229,6 +235,7 @@ public class ConstructionMaterialCalculator {
         universalbeslagHøjre.setWidth(LogicFacade.getWidthByID(universalbeslagHøjre.getId(), universalbeslagHøjre.getName()));
         universalbeslagHøjre.setName("UNIVERSALBESLAG " + universalbeslagHøjre.getWidth() + " MM. Højre");
         universalbeslagHøjre.setComment("Til montering af spær på rem");
+        universalbeslagHøjre.setPrice(LogicFacade.getPrice(universalbeslagHøjre.getId()));
         metalMaterials.add(universalbeslagHøjre);
         // Universalbeslag Venstre
         Material universalbeslagVenstre = LogicFacade.getMaterialByID(13);
@@ -239,6 +246,7 @@ public class ConstructionMaterialCalculator {
         universalbeslagVenstre.setWidth(LogicFacade.getWidthByID(universalbeslagVenstre.getId(), universalbeslagVenstre.getName()));
         universalbeslagVenstre.setName("UNIVERSALBESLAG " + universalbeslagVenstre.getWidth() + " MM. Venstre");
         universalbeslagVenstre.setComment("Til montering af spær på rem");
+        universalbeslagVenstre.setPrice(LogicFacade.getPrice(universalbeslagVenstre.getId()));
         metalMaterials.add(universalbeslagVenstre);
         // Skruer til stern og vandbræt
         Material skruer = LogicFacade.getMaterialByID(14);
@@ -250,6 +258,7 @@ public class ConstructionMaterialCalculator {
         skruer.setThickness(LogicFacade.getThicknessByID(skruer.getId()));
         skruer.setName("SKRUER " + skruer.getThickness() + "x" + skruer.getWidth());
         skruer.setComment("Til montering af stern&vandbrædt");
+        skruer.setPrice(LogicFacade.getPrice(skruer.getId()));
         metalMaterials.add(skruer);
 
         return metalMaterials;

@@ -18,7 +18,7 @@ public class OverlayMaterialCalculator {
 
 
     //......................SPAER......................//
-    public static Material spaerOneWall(Wall wall) {
+    public static Material spaerOneWall(Wall wall) throws LoginSampleException {
         Material spaer = new Material();
         int quantity = OverlaySizeCalculator.spaerOnOneWall(wall);
         int size = OverlaySizeCalculator.spaerLengthOneWall(wall);
@@ -26,12 +26,12 @@ public class OverlayMaterialCalculator {
         spaer.setAmount(quantity);
         spaer.setSize(size);
         spaer.setComment("Horizontal framing");
-
+        spaer.setPrice(LogicFacade.getPrice(spaer.getId()));
         return spaer;
     }
 
     //..................SCREWS FOR SPAER......................//
-    public static Material screwSparOneWall(Wall wall) {
+    public static Material screwSparOneWall(Wall wall) throws LoginSampleException {
         Material screwSpaer = new Material();
         int spaerAmount = OverlaySizeCalculator.spaerOnOneWall(wall);
         int screwSpaerQuantity = OverlaySizeCalculator.screwSpaer(spaerAmount);
@@ -39,12 +39,12 @@ public class OverlayMaterialCalculator {
         screwSpaer.setComment("til montering af horizontal framing");
         screwSpaer.setSize(screwSpaerQuantity);
         screwSpaer.setAmount(1);
-
+        screwSpaer.setPrice(LogicFacade.getPrice(screwSpaer.getId()));
         return screwSpaer;
     }
 
     //........................FYR......................//
-    public static ArrayList<Material> fyrOneWall(Wall wall) {
+    public static ArrayList<Material> fyrOneWall(Wall wall) throws LoginSampleException {
         ArrayList<Material> fyrs = new ArrayList<>();
 
         ArrayList<Integer> fyrHeights = OverlaySizeCalculator.fyrLengthsOneWall(wall);
@@ -54,13 +54,14 @@ public class OverlayMaterialCalculator {
             fyr.setComment("Vertical framing");
             fyr.setSize(height);
             fyr.setAmount(1);
+            fyr.setPrice(LogicFacade.getPrice(fyr.getId()));
             fyrs.add(fyr);
         }
         return fyrs;
     }
 
     //..................SCREWS FOR FYR......................//
-    public static Material screwFYROneWall(Wall wall) {
+    public static Material screwFYROneWall(Wall wall) throws LoginSampleException {
         Material screwFyr = new Material();
         screwFyr.setName("BASIC SKRUE 5,0X40MM");
         int fyrQuantity = OverlaySizeCalculator.fyrQuantityOnWall(wall);
@@ -68,6 +69,7 @@ public class OverlayMaterialCalculator {
         screwFyr.setSize(OverlaySizeCalculator.screwFyr(fyrQuantity, spaerQuantity));
         screwFyr.setComment("Til montering af vertical framing");
         screwFyr.setAmount(1);
+        screwFyr.setPrice(LogicFacade.getPrice(screwFyr.getId()));
         return screwFyr;
     }
 
@@ -84,7 +86,7 @@ public class OverlayMaterialCalculator {
         screwOverlay.setSize(size);
         screwOverlay.setComment("til montering af beklædningsplanke");
         screwOverlay.setAmount(1);
-
+        screwOverlay.setPrice(LogicFacade.getPrice(screwOverlay.getId()));
 
         return screwOverlay;
 
@@ -94,7 +96,7 @@ public class OverlayMaterialCalculator {
 
 
     //.......................returns LIST OF ALL MATERIALS NEEDED FOR FRAMING chosen wall.................//
-    public static ArrayList<Material> wallFraming(Wall wall) {
+    public static ArrayList<Material> wallFraming(Wall wall) throws LoginSampleException {
         ArrayList<Material> wallFraming = new ArrayList<>();
 
         Material spaerOneWall = spaerOneWall(wall);
@@ -142,6 +144,7 @@ public class OverlayMaterialCalculator {
         overlay.setSize(3600);
         overlay.setAmount(quantity);
         overlay.setComment("Beklædning");
+        overlay.setPrice(LogicFacade.getPrice(overlay.getId()));
         if (quantity == 0) {
             throw new LoginSampleException("Vi kunne ikke beregne beklædning: "
                     + materialName + ". Prøv at vælge noget andet til beklædning");
@@ -154,7 +157,7 @@ public class OverlayMaterialCalculator {
 
 
     //..................door Framing..........................//
-    public static ArrayList<Material> doorFraming(Construction construction) {
+    public static ArrayList<Material> doorFraming(Construction construction) throws LoginSampleException {
         ArrayList<Material> doorMaterials = new ArrayList<>();
         /*
 
@@ -177,6 +180,7 @@ public class OverlayMaterialCalculator {
             fyr.setComment("Vertical framing-dør");
             fyr.setSize(fyrLengths[i]);
             fyr.setAmount(1);
+            fyr.setPrice(LogicFacade.getPrice(fyr.getId()));
             doorMaterials.add(fyr);
         }
 
@@ -189,6 +193,7 @@ public class OverlayMaterialCalculator {
             overDoorSpaer.setComment("Horizontal framing-dør");
             overDoorSpaer.setSize(DOORWIDTH + (int) 1.5 * POSTWIDTH);
             overDoorSpaer.setAmount(overDoorSpearQuantity);
+            overDoorSpaer.setPrice(LogicFacade.getPrice(overDoorSpaer.getId()));
             doorMaterials.add(overDoorSpaer);
         }
         Material doorSpaer = new Material();
@@ -196,6 +201,7 @@ public class OverlayMaterialCalculator {
         doorSpaer.setComment("Horizontal framing-dør");
         doorSpaer.setSize(doorSpaerToSplit);
         doorSpaer.setAmount(1);
+        doorSpaer.setPrice(LogicFacade.getPrice(doorSpaer.getId()));
         doorMaterials.add(doorSpaer);
 
 
@@ -204,6 +210,7 @@ public class OverlayMaterialCalculator {
         greb.setComment("Greb til skurdør");
         greb.setSize(1);
         greb.setAmount(1);
+        greb.setPrice(LogicFacade.getPrice(greb.getId()));
         doorMaterials.add(greb);
 
         Material hinge = new Material();
@@ -211,6 +218,7 @@ public class OverlayMaterialCalculator {
         hinge.setName("T-Hængsel 390 mm");
         hinge.setAmount(2);
         hinge.setSize(1);
+        hinge.setPrice(LogicFacade.getPrice(hinge.getId()));
         doorMaterials.add(hinge);
 
 
@@ -231,18 +239,21 @@ public class OverlayMaterialCalculator {
         screwFyr.setName("BASIC SKRUE 5,0X40MM");
         screwFyr.setSize(screwFyrQuantity); //for the door - always the same size of the door
         screwFyr.setComment("Til montering af vertical framing-dør");
+        screwFyr.setPrice(LogicFacade.getPrice(screwFyr.getId()));
         doorMaterials.add(screwFyr);
 
         Material screwFyrDoor = new Material();
         screwFyrDoor.setName("BASIC SKRUE 5,0X40MM");
         screwFyrDoor.setSize(SCREWFORDOORELEMEN*DOORMETALELEMENS); //for the door - always the same size of the door
         screwFyrDoor.setComment("Til montering af vertical framing-dør");
+        screwFyrDoor.setPrice(LogicFacade.getPrice(screwFyrDoor.getId()));
         doorMaterials.add(screwFyrDoor);
 
         Material screwSpaer = new Material();
         screwSpaer.setName("5X80 MM RUST FRI SKRUER");
         screwSpaer.setComment("til montering af horizontal framing-dør");
         screwSpaer.setSize(screwSpaerQuantity); //for the door - always the same sioze of the door
+        screwSpaer.setPrice(LogicFacade.getPrice(screwSpaer.getId()));
         doorMaterials.add(screwSpaer);
 
 
