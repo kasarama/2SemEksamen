@@ -1,5 +1,6 @@
 package PresentationLayer;
 
+import FunctionLayer.Construction;
 import FunctionLayer.Economy;
 import FunctionLayer.LogicFacade;
 import FunctionLayer.Order;
@@ -24,15 +25,16 @@ public class SendNewOffer extends Command {
         System.out.println("Coverage read from prepareOffer.jsp: "+coverage);
 
         Order order = (Order) request.getServletContext().getAttribute("orderForValidation");
+        Construction construction = order.getConstruction();
 
         if (request.getParameter("byPrice")!=null){
             order.setSalePrice(saleprice);
-            order.setCoverage(Economy.setCoverage(order));
+            order.setCoverage(Economy.setCoverage(order, construction));
         }
 
         if (request.getParameter("byCoverage")!=null){
             order.setCoverage(coverage);
-            order.setSalePrice(Economy.ordersSalePrice(order));
+            order.setSalePrice(Economy.ordersSalePrice(order, construction));
         }
 
         LogicFacade.sendOffer(order);

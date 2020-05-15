@@ -19,9 +19,7 @@ public class ItemList  extends Command{
 
         //................Materials for construction...........//
         //todo create ArrayList with materials for  construction and set it on request
-        System.out.println("1");
         ArrayList<Material> constructionMaterialList = ConstructionMaterialCalculator.constructionMaterialList(construction);
-        System.out.println("2");
         request.setAttribute("constructionMaterials", constructionMaterialList);
 
 
@@ -35,6 +33,9 @@ public class ItemList  extends Command{
         String overlayName = construction.getOverlay();
         ArrayList<Material> ovarlayMaterialList = OverlayMaterialCalculator.allOverlayMaterialList(construction, overlayName);
         request.setAttribute("overlayMaterials", ovarlayMaterialList);
+
+        //................Total pris...........//
+
 
         Order order = (Order) request.getServletContext().getAttribute("orderForValidation");
         LogicFacade.setMaterialsForOrder(order);

@@ -9,12 +9,18 @@ import java.util.ArrayList;
  */
 public class Economy {
     // Indkøbspris
-    public static double ordersCostPrice(Order order) throws LoginSampleException {
+    public static double ordersCostPrice(Order order, Construction construction) throws LoginSampleException {
         // Søg efter materiales pris via id
         // Hent prisen fra db og set pris i materialCalculator klasserne
         // Looper igennem arraylisten og får fat på hver materiales pris og antal
 
-        ArrayList<Material> temp = ConstructionMaterialCalculator.woodMaterials(order.getConstruction());
+        ArrayList<Material> temp = new ArrayList<>();
+        temp.addAll(ConstructionMaterialCalculator.constructionMaterialList(construction));
+        // TODO sæt roofmateriallisten ind her:
+        //temp.addAll()
+        // TODO sæt overlaymateriallisten ind her:
+        //temp.addAll()
+
         //double[] prices = {};
         double[] totalPrices = {};
 
@@ -38,14 +44,14 @@ public class Economy {
     }
 
     // Salgsprisen
-    public static double ordersSalePrice(Order order) throws LoginSampleException {
+    public static double ordersSalePrice(Order order, Construction construction) throws LoginSampleException {
 
         // Salgspris = (Indkøbspris + Fragt)* 25 % skat
 
         double transport = order.getTransport(); // Transport udgift
         double tax = order.getTAX(); // 0,25
 
-        double salesPriceNoTax = ordersCostPrice(order) + transport;
+        double salesPriceNoTax = ordersCostPrice(order, construction) + transport;
 
         double salesPrice = salesPriceNoTax + salesPriceNoTax*tax;
 
@@ -53,12 +59,12 @@ public class Economy {
     }
 
     // Dækningsbidrag og dækningsgrad i %
-    public static double setCoverage(Order order) throws LoginSampleException {
+    public static double setCoverage(Order order, Construction construction) throws LoginSampleException {
 
         double transport = order.getTransport(); // Transport udgift
         double tax = order.getTAX(); // 0,25
-        double cost = ordersCostPrice(order);
-        double salesPrice = ordersSalePrice(order);
+        double cost = ordersCostPrice(order, construction);
+        double salesPrice = ordersSalePrice(order, construction);
 
         // Dækningsbidrag = Salgspris - (Indkøbspris+Fragt) skat?
         double coverageContribution = salesPrice - ((salesPrice*tax)+cost+transport);

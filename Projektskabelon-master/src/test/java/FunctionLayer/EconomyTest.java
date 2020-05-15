@@ -41,7 +41,7 @@ public class EconomyTest {
 
     @Test
     public void ordersCostPrice2() throws LoginSampleException {
-        double actual = Economy.ordersCostPrice(order);
+        double actual = Economy.ordersCostPrice(order, order.getConstruction());
         double expected = 1000;
         assertEquals(expected, actual, 2);
     }

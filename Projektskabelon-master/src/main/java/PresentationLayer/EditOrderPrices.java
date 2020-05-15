@@ -61,8 +61,8 @@ public class EditOrderPrices extends Command {
 
         }
 
-        order.setCost(Economy.ordersCostPrice(order));
-        order.setSalePrice(Economy.ordersSalePrice(order));
+        order.setCost(Economy.ordersCostPrice(order, order.getConstruction()));
+        order.setSalePrice(Economy.ordersSalePrice(order, order.getConstruction()));
 
 
         request.getServletContext().setAttribute("orderForValidation", order);
