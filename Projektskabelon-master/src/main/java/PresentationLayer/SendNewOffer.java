@@ -27,12 +27,12 @@ public class SendNewOffer extends Command {
 
         if (request.getParameter("byPrice")!=null){
             order.setSalePrice(saleprice);
-            order.setCoverage(Economy.setCoverage(order, construction));
+            order.setCoverage(Economy.setCoverage(order));
         }
 
         if (request.getParameter("byCoverage")!=null){
             order.setCoverage(coverage);
-            order.setSalePrice(Economy.ordersSalePrice(order, construction));
+            order.setSalePrice(Economy.ordersSalePrice(order));
         }
 
         LogicFacade.sendOffer(order);

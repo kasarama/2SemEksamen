@@ -55,8 +55,9 @@ public class EditOrderPrices extends Command {
             System.out.println("Added materials to order - overlay has size: " + order.getConstruction().getShed().getMaterials().size());
 
 
-        order.setCost(Economy.ordersCostPrice(order, order.getConstruction()));
-        order.setSalePrice(Economy.ordersSalePrice(order, order.getConstruction()));
+        order.setCost(Math.round(Economy.ordersCostPrice(order) * 100.0) / 100.0);
+        order.setSalePrice(Math.round(Economy.ordersSalePrice(order) * 100.0) / 100.0);
+        order.setCoverage(Math.round(Economy.setCoverage(order) * 100.0) / 100.0);
 
 
         request.getServletContext().setAttribute("orderForValidation", order);
