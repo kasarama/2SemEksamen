@@ -74,11 +74,11 @@ public class Drawing extends Command{
         svg.addArrows(-25, 0, -25, height, -35, height/2, -90, text1);
         svg.addArrows(0, height+25, width, height+25, width/2, height+40, 0, text2);
 
-        // Hvis taget er pitched:
+     /*   // Hvis taget er pitched:
         if (con.getRoof().getIsPitched()){
             svg.addRect(0,height/2,5,width);
         }
-
+*/
         request.setAttribute("svgdrawing", svg.toString());
         System.out.println("Test 210");
         return "drawing";
