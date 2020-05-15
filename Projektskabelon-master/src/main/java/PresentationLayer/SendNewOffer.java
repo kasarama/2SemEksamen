@@ -1,6 +1,5 @@
 package PresentationLayer;
 
-import FunctionLayer.Economy;
 import FunctionLayer.LogicFacade;
 import FunctionLayer.LoginSampleException;
 import FunctionLayer.Order;
@@ -22,18 +21,8 @@ public class SendNewOffer extends Command {
 
 
         Order order = (Order) request.getServletContext().getAttribute("orderForValidation");
-
-        if (request.getParameter("byPrice")!=null){
-            order.setSalePrice(saleprice);
-            order.setCoverage(Economy.setCoverage(order));
-        }
-
-        if (request.getParameter("byCoverage")!=null){
-            order.setCoverage(coverage);
-            order.setSalePrice(Economy.ordersSalePrice(order));
-        }
-
         LogicFacade.sendOffer(order);
+
 
         request.setAttribute("orderMSG","Tilbud er blevet sendt til "+ order.getEmail()+"" +
                 "Salgspris: "+ order.getSalePrice()+", dækningsgrad: "+order.getCoverage());
@@ -46,7 +35,9 @@ public class SendNewOffer extends Command {
         }
 
 
+
         request.getServletContext().setAttribute("orderForValidation",null);
+        request.setAttribute("orderMSG","Tilbud er blevet sendt til "+ order.getEmail());
 
         return "employeePage";
     }
