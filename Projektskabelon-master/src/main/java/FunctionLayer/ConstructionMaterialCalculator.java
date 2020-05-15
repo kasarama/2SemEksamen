@@ -11,7 +11,7 @@ import static FunctionLayer.LogicFacade.sendOffer;
 
 public class ConstructionMaterialCalculator {
     public static ConstructionSizeCalculator constructionSizeCalculator = new ConstructionSizeCalculator();
-    public Construction construction = new Construction();
+    //public Construction construction = new Construction();
 
     //.......................All the materials for construction.............................//
     public static ArrayList<Material> constructionMaterialList(Construction construction) throws LoginSampleException {
@@ -97,11 +97,12 @@ public class ConstructionMaterialCalculator {
         woodMaterials.addAll(tempPostsMaterails);
 */
         // Rem
-        int[] remPieces = constructionSizeCalculator.remPieces(construction);
+        int[] remPieces = ConstructionSizeCalculator.remPieces(construction);
         int counter = 0;
         Material rem = null;
         for (int remPiece : remPieces) {
-            rem = LogicFacade.getMaterialBySizeName(remPiece, "");
+            // TODO find material mapper
+            rem = LogicFacade.getMaterialBySizeName(remPiece, "SPÆRTRÆ UBEHANDLET");
             rem.setName("SPÆRTRÆ UBEHANDLET");
             rem.setUnit(LogicFacade.getUnitByName(rem.getName()));
             rem.setWidth(LogicFacade.getWidthByID(rem.getId(), rem.getName()));
@@ -119,11 +120,11 @@ public class ConstructionMaterialCalculator {
         }
 
         // Spær
-        int amount = constructionSizeCalculator.roofSpaerAmount(construction);
-        int size = constructionSizeCalculator.roofSpaerLength(construction);
+        int amount = ConstructionSizeCalculator.roofSpaerAmount(construction);
+        int size = ConstructionSizeCalculator.roofSpaerLength(construction);
         Material spær = null;
         for (int i = 0; i < amount; i++) {
-            spær = LogicFacade.getMaterialBySizeName(size, "");
+            spær = LogicFacade.getMaterialBySizeName(size, "SPÆRTRÆ UBEHANDLET");
             spær.setName("SPÆRTRÆ UBEHANDLET");
             spær.setUnit(LogicFacade.getUnitByName(spær.getName()));
             spær.setWidth(LogicFacade.getWidthByID(spær.getId(), spær.getName()));
@@ -136,11 +137,11 @@ public class ConstructionMaterialCalculator {
             woodMaterials.add(spær);
         }
         // Understern
-        int[] understernPieces = constructionSizeCalculator.underSternPieces(construction);
+        int[] understernPieces = ConstructionSizeCalculator.underSternPieces(construction);
         int counter2 = 0;
         Material underStern = null;
         for (int underSternObject : understernPieces) {
-            underStern = LogicFacade.getMaterialBySizeName(underSternObject, "");
+            underStern = LogicFacade.getMaterialBySizeName(underSternObject, "TRYKIMPRENERET BRÆDT");
             underStern.setName("TRYKIMPRENERET BRÆDT");
             underStern.setUnit(LogicFacade.getUnitByName(underStern.getName()));
             underStern.setId(2);
@@ -157,9 +158,9 @@ public class ConstructionMaterialCalculator {
             woodMaterials.add(underStern);
         }
         // Overstern
-        int[] oversternPieces = constructionSizeCalculator.overSternPieces(construction);
+        int[] oversternPieces = ConstructionSizeCalculator.overSternPieces(construction);
         for (int overSternObject : oversternPieces) {
-            Material overStern = LogicFacade.getMaterialBySizeName(overSternObject, "");
+            Material overStern = LogicFacade.getMaterialBySizeName(overSternObject, "TRYKIMPRENERET BRÆDT");
             overStern.setName("TRYKIMPRENERET BRÆDT");
             overStern.setUnit(LogicFacade.getUnitByName(overStern.getName()));
             overStern.setId(3);
@@ -181,7 +182,7 @@ public class ConstructionMaterialCalculator {
         // Bræddebolte
         Material bræddebolt = LogicFacade.getMaterialByID(16);
         bræddebolt.setName("BRÆDDEBOLT");
-        bræddebolt.setAmount(constructionSizeCalculator.remBoltAmount(construction));
+        bræddebolt.setAmount(ConstructionSizeCalculator.remBoltAmount(construction));
         bræddebolt.setUnit(LogicFacade.getUnitByName(bræddebolt.getName()));
         bræddebolt.setId(16);
         bræddebolt.setWidth(LogicFacade.getWidthByID(bræddebolt.getId(), bræddebolt.getName()));
@@ -193,7 +194,7 @@ public class ConstructionMaterialCalculator {
         // Firkantskriver
         Material firkantskriver = LogicFacade.getMaterialByID(17);
         firkantskriver.setName("FIRKANTSKIVER");
-        firkantskriver.setAmount(constructionSizeCalculator.remSquaresAmount(construction));
+        firkantskriver.setAmount(ConstructionSizeCalculator.remSquaresAmount(construction));
         firkantskriver.setUnit(LogicFacade.getUnitByName(firkantskriver.getName()));
         firkantskriver.setId(17);
         firkantskriver.setWidth(LogicFacade.getWidthByID(firkantskriver.getId(), firkantskriver.getName()));
@@ -205,7 +206,7 @@ public class ConstructionMaterialCalculator {
         // Hulbånd
         Material hulbånd = LogicFacade.getMaterialByID(12);
         hulbånd.setName("HULBÅND");
-        hulbånd.setAmount(constructionSizeCalculator.perforatedBandRolls(construction));
+        hulbånd.setAmount(ConstructionSizeCalculator.perforatedBandRolls(construction));
         hulbånd.setUnit(LogicFacade.getUnitByName(hulbånd.getName()));
         hulbånd.setId(12);
         hulbånd.setWidth(LogicFacade.getWidthByID(hulbånd.getId(), hulbånd.getName()));
@@ -217,7 +218,7 @@ public class ConstructionMaterialCalculator {
         // Beslagskruer til hulbånd og spær
         Material beslagskruer = LogicFacade.getMaterialByID(15);
         beslagskruer.setName("BESLAGSKRUER");
-        beslagskruer.setAmount(constructionSizeCalculator.bracketScrews(construction));
+        beslagskruer.setAmount(ConstructionSizeCalculator.bracketScrews(construction));
         beslagskruer.setUnit(LogicFacade.getUnitByName(beslagskruer.getName()));
         beslagskruer.setId(15);
         beslagskruer.setWidth(LogicFacade.getWidthByID(beslagskruer.getId(), beslagskruer.getName()));
@@ -229,7 +230,7 @@ public class ConstructionMaterialCalculator {
         // Universalbeslag Højre
         Material universalbeslagHøjre = LogicFacade.getMaterialByID(13);
         universalbeslagHøjre.setName("UNIVERSALBESLAG");
-        universalbeslagHøjre.setAmount(constructionSizeCalculator.universalBracketsRight(construction));
+        universalbeslagHøjre.setAmount(ConstructionSizeCalculator.universalBracketsRight(construction));
         universalbeslagHøjre.setUnit(LogicFacade.getUnitByName(universalbeslagHøjre.getName()));
         universalbeslagHøjre.setId(13);
         universalbeslagHøjre.setWidth(LogicFacade.getWidthByID(universalbeslagHøjre.getId(), universalbeslagHøjre.getName()));
@@ -240,7 +241,7 @@ public class ConstructionMaterialCalculator {
         // Universalbeslag Venstre
         Material universalbeslagVenstre = LogicFacade.getMaterialByID(13);
         universalbeslagVenstre.setName("UNIVERSALBESLAG");
-        universalbeslagVenstre.setAmount(constructionSizeCalculator.universalBracketsLeft(construction));
+        universalbeslagVenstre.setAmount(ConstructionSizeCalculator.universalBracketsLeft(construction));
         universalbeslagVenstre.setUnit(LogicFacade.getUnitByName(universalbeslagVenstre.getName()));
         universalbeslagVenstre.setId(13);
         universalbeslagVenstre.setWidth(LogicFacade.getWidthByID(universalbeslagVenstre.getId(), universalbeslagVenstre.getName()));
@@ -251,7 +252,7 @@ public class ConstructionMaterialCalculator {
         // Skruer til stern og vandbræt
         Material skruer = LogicFacade.getMaterialByID(14);
         skruer.setName("SKRUER");
-        skruer.setAmount(constructionSizeCalculator.screwAmount);
+        skruer.setAmount(ConstructionSizeCalculator.screwAmount);
         skruer.setUnit(LogicFacade.getUnitByName(skruer.getName()));
         skruer.setId(14);
         skruer.setWidth(LogicFacade.getWidthByID(skruer.getId(), skruer.getName()));

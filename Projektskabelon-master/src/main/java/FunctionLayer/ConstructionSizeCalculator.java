@@ -277,12 +277,12 @@ public class ConstructionSizeCalculator {
     }
 
     // Universalbeslag Højre
-    public int universalBracketsRight(Construction construction){
+    public static int universalBracketsRight(Construction construction){
         int universalBracketsRight = roofSpaerAmount(construction);
         return universalBracketsRight;
     }
     // Universalbeslag Venstre
-    public int universalBracketsLeft(Construction construction){
+    public static int universalBracketsLeft(Construction construction){
         int universalBracketsLeft = roofSpaerAmount(construction);
         return universalBracketsLeft;
     }

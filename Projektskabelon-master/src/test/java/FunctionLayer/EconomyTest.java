@@ -25,6 +25,11 @@ public class EconomyTest {
         construction.setCarportLength(5000);
         construction.setCarportWidth(4200);
         construction.setConstructionHeight(2000);
+        construction.setShed(new Shed(0,0, ""));
+        construction.setConstructionLength();
+        construction.setConstructionWidth();
+
+        order.setConstruction(construction);
     }
 
     @Test
