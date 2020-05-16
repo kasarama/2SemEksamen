@@ -15,18 +15,26 @@ public class ConstructionMaterialCalculator {
 
     //.......................All the materials for construction.............................//
     public static ArrayList<Material> constructionMaterialList(Construction construction) throws LoginSampleException {
+        System.out.println("3");
         ArrayList<Material> woodMaterials = woodMaterials(construction);
+        System.out.println("4");
         ArrayList<Material> metalMaterials = metalMaterials(construction);
+        System.out.println("5");
         ArrayList<Material> constructionMaterials = new ArrayList<>();
+        System.out.println("6");
         constructionMaterials.addAll(woodMaterials);
+        System.out.println("7");
         constructionMaterials.addAll(metalMaterials);
+        System.out.println("8");
 
         return constructionMaterials;
     }
 
     //................................wood materials............................//
     public static ArrayList<Material> woodMaterials(Construction construction) throws LoginSampleException {
+        System.out.println("Test 1");
         ArrayList<Material> woodMaterials = new ArrayList<>();
+        System.out.println("Test 2");
         /*
         // Stolper
         //TODO: sæt stolper i den rigtige størrelse ind i woodMaterials listen

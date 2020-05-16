@@ -2,7 +2,6 @@ package PresentationLayer;
 
 import FunctionLayer.Construction;
 import FunctionLayer.ConstructionSizeCalculator;
-import FunctionLayer.Order;
 import FunctionLayer.Svg;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,10 +12,12 @@ public class Drawing extends Command{
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-        Order order = (Order) request.getServletContext().getAttribute("orderForValidation");
+        HttpSession session = request.getSession();
 
-        int width = (order.getConstruction().getConstructionLength()/10);
-        int height = (order.getConstruction().getConstructionLength()/10);
+        Construction con = (Construction) session.getAttribute("carportBase");
+
+        int width = (con.getConstructionLength()/10);
+        int height = (con.getConstructionWidth()/10);
 
         // Grundet tegningens størrelses, deles width og height med 2 så tegningen ikke bliver for stor
         if (width>500 || height>500){
@@ -40,10 +41,10 @@ public class Drawing extends Command{
         // Spær:
             // metode roofSpaerAmount  --  hvordan skal jeg køre metoden roofSpaerAmount gange?
             // Længde/roofSpaerAmount = mellemrum
-        int space = width/(ConstructionSizeCalculator.roofSpaerAmount(order.getConstruction()));
+        int space = width/(ConstructionSizeCalculator.roofSpaerAmount(con));
         svg.addRect(0,0,height,3);
         // Der skal sættes et spær for hvert mellemrum: space, space*2, space*3, indtil man når antallet af stopler
-        for (int i = 0; i < ConstructionSizeCalculator.roofSpaerAmount(order.getConstruction()); i++){
+        for (int i = 0; i < ConstructionSizeCalculator.roofSpaerAmount(con); i++){
             svg.addRect(space*i, 0, height, 3);
         }
 
