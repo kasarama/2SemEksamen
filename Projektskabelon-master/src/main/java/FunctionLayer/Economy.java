@@ -29,7 +29,6 @@ public class Economy {
         double cost = 0;
         for (double i : totalPrices) {
             cost += i;
-            System.out.println("The sum is " + cost);
         }
         return  cost;
     }
